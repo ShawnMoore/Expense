@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Landing View Controller-->
@@ -15,7 +16,20 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eXpenseLogoGray" translatesAutoresizingMaskIntoConstraints="NO" id="8UX-bX-enx">
+                                <rect key="frame" x="154" y="262" width="292" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="nbR-XS-aGt"/>
+                                    <constraint firstAttribute="width" secondItem="8UX-bX-enx" secondAttribute="height" multiplier="292:75" id="q4H-bJ-XnQ"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.14509803921568629" green="0.69803921568627447" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="8UX-bX-enx" secondAttribute="centerY" constant="0.5" id="AJq-L9-t0Y"/>
+                            <constraint firstAttribute="centerX" secondItem="8UX-bX-enx" secondAttribute="centerX" id="fFH-UG-2X4"/>
+                        </constraints>
                     </view>
                     <connections>
                         <segue destination="2ET-6P-rhL" kind="show" id="h8j-w9-YNM"/>
@@ -193,6 +207,9 @@
             <point key="canvasLocation" x="1861" y="387"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="eXpenseLogoGray" width="1004" height="273"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yKM-fV-2Cm"/>
         <segue reference="h8j-w9-YNM"/>
