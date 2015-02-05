@@ -8,11 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		293F447C1A84073000A43234 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F447B1A84073000A43234 /* AppDelegate.swift */; };
-		293F447E1A84073000A43234 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F447D1A84073000A43234 /* ViewController.swift */; };
 		293F44811A84073000A43234 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 293F447F1A84073000A43234 /* Main.storyboard */; };
 		293F44831A84073000A43234 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 293F44821A84073000A43234 /* Images.xcassets */; };
 		293F44861A84073000A43234 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 293F44841A84073000A43234 /* LaunchScreen.xib */; };
 		293F44921A84073000A43234 /* eXpenseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44911A84073000A43234 /* eXpenseTests.swift */; };
+		293F44A11A840F8800A43234 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44A01A840F8800A43234 /* LandingViewController.swift */; };
+		293F44A31A840FA700A43234 /* TouchIDLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44A21A840FA700A43234 /* TouchIDLoginViewController.swift */; };
+		293F44A51A840FC100A43234 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44A41A840FC100A43234 /* LoginViewController.swift */; };
+		293F44A71A840FEB00A43234 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44A61A840FEB00A43234 /* SignUpViewController.swift */; };
+		293F44A91A84109200A43234 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44A81A84109200A43234 /* DashboardViewController.swift */; };
+		293F44AD1A8412B300A43234 /* NewOneTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44AC1A8412B300A43234 /* NewOneTimeViewController.swift */; };
+		293F44AF1A8412CD00A43234 /* NewTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44AE1A8412CD00A43234 /* NewTripViewController.swift */; };
+		293F44B11A84137700A43234 /* TripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44B01A84137700A43234 /* TripsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +36,20 @@
 		293F44761A84073000A43234 /* eXpense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eXpense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		293F447A1A84073000A43234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		293F447B1A84073000A43234 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		293F447D1A84073000A43234 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		293F44801A84073000A43234 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		293F44821A84073000A43234 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		293F44851A84073000A43234 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		293F448B1A84073000A43234 /* eXpenseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = eXpenseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		293F44901A84073000A43234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		293F44911A84073000A43234 /* eXpenseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eXpenseTests.swift; sourceTree = "<group>"; };
+		293F44A01A840F8800A43234 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LandingViewController.swift; path = ViewControllers/LandingViewController.swift; sourceTree = "<group>"; };
+		293F44A21A840FA700A43234 /* TouchIDLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchIDLoginViewController.swift; path = ViewControllers/TouchIDLoginViewController.swift; sourceTree = "<group>"; };
+		293F44A41A840FC100A43234 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ViewControllers/LoginViewController.swift; sourceTree = "<group>"; };
+		293F44A61A840FEB00A43234 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpViewController.swift; path = ViewControllers/SignUpViewController.swift; sourceTree = "<group>"; };
+		293F44A81A84109200A43234 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = ViewControllers/DashboardViewController.swift; sourceTree = "<group>"; };
+		293F44AC1A8412B300A43234 /* NewOneTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewOneTimeViewController.swift; path = ViewControllers/NewOneTimeViewController.swift; sourceTree = "<group>"; };
+		293F44AE1A8412CD00A43234 /* NewTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewTripViewController.swift; path = ViewControllers/NewTripViewController.swift; sourceTree = "<group>"; };
+		293F44B01A84137700A43234 /* TripsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripsViewController.swift; path = ViewControllers/TripsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +91,8 @@
 		293F44781A84073000A43234 /* eXpense */ = {
 			isa = PBXGroup;
 			children = (
-				293F447B1A84073000A43234 /* AppDelegate.swift */,
-				293F447D1A84073000A43234 /* ViewController.swift */,
+				293F449D1A840EF700A43234 /* ViewControllers */,
 				293F447F1A84073000A43234 /* Main.storyboard */,
-				293F44821A84073000A43234 /* Images.xcassets */,
-				293F44841A84073000A43234 /* LaunchScreen.xib */,
 				293F44791A84073000A43234 /* Supporting Files */,
 			);
 			path = eXpense;
@@ -90,6 +101,9 @@
 		293F44791A84073000A43234 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				293F44821A84073000A43234 /* Images.xcassets */,
+				293F44841A84073000A43234 /* LaunchScreen.xib */,
+				293F447B1A84073000A43234 /* AppDelegate.swift */,
 				293F447A1A84073000A43234 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -110,6 +124,21 @@
 				293F44901A84073000A43234 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		293F449D1A840EF700A43234 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				293F44AC1A8412B300A43234 /* NewOneTimeViewController.swift */,
+				293F44A21A840FA700A43234 /* TouchIDLoginViewController.swift */,
+				293F44A01A840F8800A43234 /* LandingViewController.swift */,
+				293F44A41A840FC100A43234 /* LoginViewController.swift */,
+				293F44A61A840FEB00A43234 /* SignUpViewController.swift */,
+				293F44A81A84109200A43234 /* DashboardViewController.swift */,
+				293F44AE1A8412CD00A43234 /* NewTripViewController.swift */,
+				293F44B01A84137700A43234 /* TripsViewController.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,8 +241,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				293F447E1A84073000A43234 /* ViewController.swift in Sources */,
+				293F44A51A840FC100A43234 /* LoginViewController.swift in Sources */,
+				293F44A91A84109200A43234 /* DashboardViewController.swift in Sources */,
+				293F44AD1A8412B300A43234 /* NewOneTimeViewController.swift in Sources */,
+				293F44B11A84137700A43234 /* TripsViewController.swift in Sources */,
+				293F44A11A840F8800A43234 /* LandingViewController.swift in Sources */,
+				293F44A31A840FA700A43234 /* TouchIDLoginViewController.swift in Sources */,
 				293F447C1A84073000A43234 /* AppDelegate.swift in Sources */,
+				293F44AF1A8412CD00A43234 /* NewTripViewController.swift in Sources */,
+				293F44A71A840FEB00A43234 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
