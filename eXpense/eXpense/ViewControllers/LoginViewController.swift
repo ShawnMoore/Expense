@@ -7,13 +7,23 @@
 //
 
 import UIKit
+import QuartzCore
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        emailTextField.layer.borderWidth = 1.0
+        emailTextField.layer.borderColor = UIColor.whiteColor().CGColor
+        emailTextField.layer.cornerRadius = 5.0
+        
+        passwordTextField.layer.borderWidth = 1.0
+        passwordTextField.layer.borderColor = UIColor.whiteColor().CGColor
+        passwordTextField.layer.cornerRadius = 5.0
     }
 
     override func didReceiveMemoryWarning() {
