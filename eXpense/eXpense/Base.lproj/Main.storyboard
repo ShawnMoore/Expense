@@ -292,8 +292,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+<<<<<<< Updated upstream
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="agn-Eg-CFM">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+=======
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="agn-Eg-CFM">
+                                <rect key="frame" x="-33" y="0.0" width="600" height="600"/>
+>>>>>>> Stashed changes
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="expense_cells" selectionStyle="default" indentationWidth="10" reuseIdentifier="expense_cells" id="Xus-0P-0GR">
@@ -304,9 +309,17 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Gxr-qE-Nen" id="zHS-XW-jfP"/>
+                                    <outlet property="delegate" destination="Gxr-qE-Nen" id="Mx3-Pn-hqo"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="agn-Eg-CFM" firstAttribute="leading" secondItem="SKA-j5-ZY7" secondAttribute="leading" id="aFv-dA-i40"/>
+                            <constraint firstItem="agn-Eg-CFM" firstAttribute="top" secondItem="SKA-j5-ZY7" secondAttribute="top" constant="10" id="v6e-CF-aQB"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="56j-up-bUC">
                         <barButtonItem key="rightBarButtonItem" title="New Expense" style="plain" id="Me4-vw-8lD">
