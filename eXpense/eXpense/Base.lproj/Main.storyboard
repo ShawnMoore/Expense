@@ -19,18 +19,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eXpenseLogoGray" translatesAutoresizingMaskIntoConstraints="NO" id="8UX-bX-enx">
-                                <rect key="frame" x="154" y="262" width="292" height="75"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDv-lg-RTc">
+                                <rect key="frame" x="0.0" y="555" width="300" height="45"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="nbR-XS-aGt"/>
-                                    <constraint firstAttribute="width" secondItem="8UX-bX-enx" secondAttribute="height" multiplier="292:75" id="q4H-bJ-XnQ"/>
+                                    <constraint firstAttribute="height" constant="45" id="PSc-DN-4DV"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="SIGN UP">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CoZ-15-sXF">
+                                <rect key="frame" x="300" y="555" width="300" height="45"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.79607843137254897" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="LOGIN">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="eXpenseLogoGray" translatesAutoresizingMaskIntoConstraints="NO" id="aAg-LB-g4v">
+                                <rect key="frame" x="26" y="88" width="548" height="149"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="aAg-LB-g4v" secondAttribute="height" multiplier="548:149" id="ZKD-Hg-Vo2"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ZKD-Hg-Vo2"/>
+                                    </mask>
+                                </variation>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.14509803921568629" green="0.69803921568627447" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="8UX-bX-enx" secondAttribute="centerY" constant="0.5" id="AJq-L9-t0Y"/>
-                            <constraint firstAttribute="centerX" secondItem="8UX-bX-enx" secondAttribute="centerX" id="fFH-UG-2X4"/>
+                            <constraint firstItem="aAg-LB-g4v" firstAttribute="width" secondItem="aAg-LB-g4v" secondAttribute="height" multiplier="548:149" id="50f-5O-5IM"/>
+                            <constraint firstItem="CoZ-15-sXF" firstAttribute="leading" secondItem="xDv-lg-RTc" secondAttribute="trailing" id="Gk4-45-A03"/>
+                            <constraint firstItem="xDv-lg-RTc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="O8u-qV-zGZ"/>
+                            <constraint firstAttribute="bottom" secondItem="xDv-lg-RTc" secondAttribute="bottom" id="a2d-Wy-vDI"/>
+                            <constraint firstItem="xDv-lg-RTc" firstAttribute="width" secondItem="CoZ-15-sXF" secondAttribute="width" id="czO-j3-QLP"/>
+                            <constraint firstItem="CoZ-15-sXF" firstAttribute="height" secondItem="xDv-lg-RTc" secondAttribute="height" id="dnk-SB-n4b"/>
+                            <constraint firstAttribute="bottom" secondItem="CoZ-15-sXF" secondAttribute="bottom" id="iWw-Vy-GnA"/>
+                            <constraint firstAttribute="trailing" secondItem="CoZ-15-sXF" secondAttribute="trailing" id="lV2-Vt-BVf"/>
                         </constraints>
                     </view>
                     <connections>
@@ -126,9 +157,14 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="kZ3-yt-Br0"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="LOGIN">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginAction:" destination="2ET-6P-rhL" eventType="touchUpInside" id="Tx8-90-5sH"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.14509803921568629" green="0.69803921568627447" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -218,7 +254,7 @@
                         <outlet property="emailTextField" destination="CYe-f3-b1T" id="6oN-d9-SLV"/>
                         <outlet property="loginButton" destination="dgD-L6-Ap0" id="6Zp-qA-RzF"/>
                         <outlet property="passwordTextField" destination="fAd-Xh-Y9S" id="mQH-gM-pLu"/>
-                        <segue destination="w6M-zI-J89" kind="show" id="Ke5-W9-vH6"/>
+                        <segue destination="w6M-zI-J89" kind="show" identifier="loginToDashboard" id="Ke5-W9-vH6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K0J-c0-kVS" userLabel="First Responder" sceneMemberID="firstResponder"/>
