@@ -10,9 +10,13 @@ import UIKit
 
 class DashboardViewController: UIViewController {
 
+    
+    /*Array of Fake data until Duncan gets on his shit*/
+    var data_array = ["New Orleans","Hookers","Cocaine","Alcohol","Marijuana"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
 
@@ -31,5 +35,25 @@ class DashboardViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return data_array.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let row_cell = "expense_cells"
+        let cell = tableView.dequeueReusableCellWithIdentifier(row_cell) as UITableViewCell
+        
+        cell.textLabel?.text = "Row #\(indexPath.row)"
+        cell.detailTextLabel?.text = "Subtitle #\(indexPath.row)"
+        
+        return cell
+        
+    }
+
+    
+    
+    
+    
 
 }
