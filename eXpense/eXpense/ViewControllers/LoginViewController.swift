@@ -14,6 +14,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var loginButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +27,8 @@ class LoginViewController: UIViewController {
         passwordTextField.layer.borderWidth = 1.0
         passwordTextField.layer.borderColor = UIColor.whiteColor().CGColor
         passwordTextField.layer.cornerRadius = 5.0
+        
+        loginButton.layer.cornerRadius = 2.0
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,14 +37,5 @@ class LoginViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
