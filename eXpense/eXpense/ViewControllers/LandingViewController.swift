@@ -32,4 +32,8 @@ class LandingViewController: UIViewController {
     }
     */
 
+    @IBAction func loginButton(sender: AnyObject) {
+        performSegueWithIdentifier("splashToLogin", sender: self)
+    }
+    
 }
