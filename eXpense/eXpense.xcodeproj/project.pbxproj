@@ -20,6 +20,7 @@
 		293F44AD1A8412B300A43234 /* NewOneTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44AC1A8412B300A43234 /* NewOneTimeViewController.swift */; };
 		293F44AF1A8412CD00A43234 /* NewTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44AE1A8412CD00A43234 /* NewTripViewController.swift */; };
 		293F44B11A84137700A43234 /* TripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44B01A84137700A43234 /* TripsViewController.swift */; };
+		299E5E741A978566007A4A2E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E5E731A978566007A4A2E /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		293F44AC1A8412B300A43234 /* NewOneTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewOneTimeViewController.swift; path = ViewControllers/NewOneTimeViewController.swift; sourceTree = "<group>"; };
 		293F44AE1A8412CD00A43234 /* NewTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewTripViewController.swift; path = ViewControllers/NewTripViewController.swift; sourceTree = "<group>"; };
 		293F44B01A84137700A43234 /* TripsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripsViewController.swift; path = ViewControllers/TripsViewController.swift; sourceTree = "<group>"; };
+		299E5E731A978566007A4A2E /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = "untitled folder/Model.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				293F449D1A840EF700A43234 /* ViewControllers */,
 				293F447F1A84073000A43234 /* Main.storyboard */,
 				293F44791A84073000A43234 /* Supporting Files */,
+				299E5E751A978572007A4A2E /* Model */,
 			);
 			path = eXpense;
 			sourceTree = "<group>";
@@ -139,6 +142,14 @@
 				293F44B01A84137700A43234 /* TripsViewController.swift */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		299E5E751A978572007A4A2E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				299E5E731A978566007A4A2E /* Model.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +257,7 @@
 				293F44AD1A8412B300A43234 /* NewOneTimeViewController.swift in Sources */,
 				293F44B11A84137700A43234 /* TripsViewController.swift in Sources */,
 				293F44A11A840F8800A43234 /* LandingViewController.swift in Sources */,
+				299E5E741A978566007A4A2E /* Model.swift in Sources */,
 				293F44A31A840FA700A43234 /* TouchIDLoginViewController.swift in Sources */,
 				293F447C1A84073000A43234 /* AppDelegate.swift in Sources */,
 				293F44AF1A8412CD00A43234 /* NewTripViewController.swift in Sources */,
@@ -443,6 +455,7 @@
 				293F44971A84073000A43234 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		293F44981A84073000A43234 /* Build configuration list for PBXNativeTarget "eXpenseTests" */ = {
 			isa = XCConfigurationList;
@@ -451,6 +464,7 @@
 				293F449A1A84073000A43234 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
