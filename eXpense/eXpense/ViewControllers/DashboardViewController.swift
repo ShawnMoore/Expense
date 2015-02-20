@@ -12,19 +12,16 @@ class DashboardViewController: UIViewController {
 
     @IBOutlet weak var locationsTable: UITableView!
     
-    //Retrieves the model from the app delegate
-    let delegate = UIApplication.sharedApplication().delegate as AppDelegate
-    
-    
-    
-    /*Array of Fake data until Duncan gets on his shit*/
-    var data_array = ["New Orleans","Hookers","Cocaine","Alcohol","Marijuana"]
+    var model: Model?
     
     let prototypeCellIdentifier = "expense_cells"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        model = appDelegate.getModel()
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,7 +30,7 @@ class DashboardViewController: UIViewController {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return data_array.count
+        return 25
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

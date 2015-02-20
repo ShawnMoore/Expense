@@ -16,9 +16,14 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     
+    var model: Model?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        model = appDelegate.getModel()
 
         emailTextField.layer.borderWidth = 1.0
         emailTextField.layer.borderColor = UIColor.whiteColor().CGColor
