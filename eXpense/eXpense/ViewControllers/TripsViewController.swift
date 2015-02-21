@@ -18,6 +18,10 @@ class TripsViewController: UIViewController {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         
         model = appDelegate.getModel()
+        
+        self.navigationController!.navigationBar.translucent = false
+        self.navigationController!.navigationBar.barTintColor = UIColor(red: 37/255, green: 178/255, blue: 74/255, alpha: 1)
+        
     }
 
     override func didReceiveMemoryWarning() {

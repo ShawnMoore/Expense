@@ -20,6 +20,7 @@
 		293F44AD1A8412B300A43234 /* NewOneTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44AC1A8412B300A43234 /* NewOneTimeViewController.swift */; };
 		293F44AF1A8412CD00A43234 /* NewTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44AE1A8412CD00A43234 /* NewTripViewController.swift */; };
 		293F44B11A84137700A43234 /* TripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44B01A84137700A43234 /* TripsViewController.swift */; };
+		299359871A97DF4D0091259A /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299359861A97DF4D0091259A /* TransitionManager.swift */; };
 		299E5E741A978566007A4A2E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E5E731A978566007A4A2E /* Model.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		293F44AC1A8412B300A43234 /* NewOneTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewOneTimeViewController.swift; path = ViewControllers/NewOneTimeViewController.swift; sourceTree = "<group>"; };
 		293F44AE1A8412CD00A43234 /* NewTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewTripViewController.swift; path = ViewControllers/NewTripViewController.swift; sourceTree = "<group>"; };
 		293F44B01A84137700A43234 /* TripsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripsViewController.swift; path = ViewControllers/TripsViewController.swift; sourceTree = "<group>"; };
+		299359861A97DF4D0091259A /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		299E5E731A978566007A4A2E /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = "untitled folder/Model.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 				293F44821A84073000A43234 /* Images.xcassets */,
 				293F44841A84073000A43234 /* LaunchScreen.xib */,
 				293F447B1A84073000A43234 /* AppDelegate.swift */,
+				299359861A97DF4D0091259A /* TransitionManager.swift */,
 				293F447A1A84073000A43234 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -262,6 +265,7 @@
 				293F447C1A84073000A43234 /* AppDelegate.swift in Sources */,
 				293F44AF1A8412CD00A43234 /* NewTripViewController.swift in Sources */,
 				293F44A71A840FEB00A43234 /* SignUpViewController.swift in Sources */,
+				299359871A97DF4D0091259A /* TransitionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,9 @@ import UIKit
 
 class LandingViewController: UIViewController {
 
+    let transitionManager = TransitionManager()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,6 +26,17 @@ class LandingViewController: UIViewController {
     
     @IBAction func loginButton(sender: AnyObject) {
         performSegueWithIdentifier("splashToLogin", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let toViewController = segue.destinationViewController as UIViewController
+        
+        toViewController.transitioningDelegate = self.transitionManager
+        
+    }
+    
+    @IBAction func unwindSegue(sender: UIStoryboardSegue) {
+        
     }
     
 }

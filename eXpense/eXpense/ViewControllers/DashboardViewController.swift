@@ -8,20 +8,35 @@
 
 import UIKit
 
-class DashboardViewController: UIViewController {
-
-    @IBOutlet weak var locationsTable: UITableView!
+class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    // MARK: Class Variables
     var model: Model?
-    
     let prototypeCellIdentifier = "expense_cells"
     
+    // MARK: Class Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //retrieve the model from the AppDelegate
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        
         model = appDelegate.getModel()
+        
+        //Get the Navigation Bar from the Navigation Controller
+        let navBar = self.navigationController!.navigationBar
+        
+        //Set the title attributes for the Navigation Bar
+        let titleTextAttributes = [
+            NSForegroundColorAttributeName: UIColor.whiteColor(),
+            NSFontAttributeName: UIFont(name: "Avenir", size: 30)!
+        ]
+        
+        //Set Navigation Bar properties from the Navigation Controller's Navigation bar
+        navBar.translucent = false
+        navBar.barStyle = UIBarStyle.Black
+        navBar.barTintColor = UIColor(red: 37/255, green: 178/255, blue: 74/255, alpha: 1)
+        navBar.titleTextAttributes = titleTextAttributes
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -29,8 +44,9 @@ class DashboardViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Table View Data Source
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 25
+        return 31
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
