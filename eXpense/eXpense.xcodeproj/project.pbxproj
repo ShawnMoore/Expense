@@ -22,6 +22,7 @@
 		293F44B11A84137700A43234 /* TripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44B01A84137700A43234 /* TripsViewController.swift */; };
 		299359871A97DF4D0091259A /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299359861A97DF4D0091259A /* TransitionManager.swift */; };
 		299E5E741A978566007A4A2E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E5E731A978566007A4A2E /* Model.swift */; };
+		29AE1D401A990FFF003C6142 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE1D3F1A990FFF003C6142 /* Authentication.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +54,8 @@
 		293F44AE1A8412CD00A43234 /* NewTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewTripViewController.swift; path = ViewControllers/NewTripViewController.swift; sourceTree = "<group>"; };
 		293F44B01A84137700A43234 /* TripsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripsViewController.swift; path = ViewControllers/TripsViewController.swift; sourceTree = "<group>"; };
 		299359861A97DF4D0091259A /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
-		299E5E731A978566007A4A2E /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = "untitled folder/Model.swift"; sourceTree = "<group>"; };
+		299E5E731A978566007A4A2E /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = Model/Model.swift; sourceTree = "<group>"; };
+		29AE1D3F1A990FFF003C6142 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authentication.swift; path = Model/Authentication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				299E5E731A978566007A4A2E /* Model.swift */,
+				29AE1D3F1A990FFF003C6142 /* Authentication.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				293F44AF1A8412CD00A43234 /* NewTripViewController.swift in Sources */,
 				293F44A71A840FEB00A43234 /* SignUpViewController.swift in Sources */,
 				299359871A97DF4D0091259A /* TransitionManager.swift in Sources */,
+				29AE1D401A990FFF003C6142 /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

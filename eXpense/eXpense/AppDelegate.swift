@@ -14,9 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     var model:Model = Model()
+    var authenticationModel:Authentication = Authentication()
     
     func getModel() -> Model {
         return model
+    }
+    
+    func getAuthenticationModel() -> Authentication {
+        return authenticationModel
     }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
