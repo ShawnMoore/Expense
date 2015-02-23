@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     
     var model: Model?
+    var authModel: Authentication?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class LoginViewController: UIViewController {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         
         model = appDelegate.getModel()
+        authModel = appDelegate.getAuthenticationModel()
 
         emailTextField.layer.borderWidth = 1.0
         emailTextField.layer.borderColor = UIColor.whiteColor().CGColor
@@ -34,6 +36,7 @@ class LoginViewController: UIViewController {
         passwordTextField.layer.cornerRadius = 5.0
         
         loginButton.layer.cornerRadius = 2.0
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,6 +45,50 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginAction(sender: AnyObject) {
-        performSegueWithIdentifier("loginToDashboard", sender: self)
+        
+        let boolResults = authModel?.authenticate(emailTextField.text, password: passwordTextField.text)
+        
+        if boolResults!
+        {
+            performSegueWithIdentifier("loginToDashboard", sender: self)
+        }
+        else
+        {
+            let animation = CABasicAnimation(keyPath: "position")
+            let view = self.view.layer
+            animation.duration = 0.085
+            animation.repeatCount = 1
+            animation.autoreverses = true
+            animation.fromValue = NSValue(CGPoint: CGPointMake(self.view.center.x - 9, self.view.center.y))
+            animation.toValue = NSValue(CGPoint: CGPointMake(self.view.center.x + 9, self.view.center.y))
+            view.addAnimation(animation, forKey: "position")
+            
+            passwordTextField.text = ""
+        }
+        
+    }
+    
+    @IBAction func dismissKeyboard(sender: AnyObject) {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
+    
+    @IBAction func dismissKeyboardBySwiping(sender: AnyObject) {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        return true
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return 0
     }
 }

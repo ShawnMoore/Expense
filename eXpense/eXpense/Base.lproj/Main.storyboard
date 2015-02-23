@@ -202,27 +202,33 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="2ET-6P-rhL" id="rl4-v2-uDM"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fAd-Xh-Y9S">
                                 <rect key="frame" x="46" y="304" width="508" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="2ET-6P-rhL" id="iAl-AK-cUQ"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="LOGIN TO YOUR ACCOUNT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmQ-Z4-bAv">
-                                <rect key="frame" x="189" y="225" width="221" height="21"/>
+                                <rect key="frame" x="189" y="225" width="221" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -273,6 +279,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.14509803921568629" green="0.69803921568627447" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="dgD-L6-Ap0" firstAttribute="top" secondItem="e47-LC-fZB" secondAttribute="bottom" constant="140" id="4ap-Ha-yMs">
                                 <variation key="heightClass=compact" constant="10"/>
@@ -393,6 +400,10 @@
                                 <include reference="lCW-IR-cwF"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Pbw-NM-SpN" appends="YES" id="OLM-b2-ji6"/>
+                            <outletCollection property="gestureRecognizers" destination="91M-Mp-meK" appends="YES" id="Nk7-OF-rED"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="CYe-f3-b1T" id="6oN-d9-SLV"/>
@@ -403,6 +414,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K0J-c0-kVS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Pbw-NM-SpN">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="2ET-6P-rhL" id="MZZ-sh-Chl"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="91M-Mp-meK">
+                    <connections>
+                        <action selector="dismissKeyboardBySwiping:" destination="2ET-6P-rhL" id="JS1-pM-AjM"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1082" y="363"/>
         </scene>
