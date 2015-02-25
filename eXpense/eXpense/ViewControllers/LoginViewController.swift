@@ -37,6 +37,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         loginButton.layer.cornerRadius = 2.0
         
+        var username = authModel?.retrieveUsername()
+        
+        if (username?.errorCode == authModel?.errSecItemNotFound) {
+            println("Item not found")
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,6 +88,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         return true
+    }
+    
+    @IBAction func forgotPassword(sender: AnyObject) {
+
     }
     
     override func shouldAutorotate() -> Bool {

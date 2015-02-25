@@ -20,6 +20,10 @@ class Authentication: NSObject {
     
     let context = LAContext()
     
+    //MARK: Error Codes
+    let errSecSuccess = 0               //No error
+    let errSecItemNotFound = -25300     //The item cannot be found
+    
     
     //MARK: Keychain Functions
     /**

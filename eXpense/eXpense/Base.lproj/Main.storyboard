@@ -251,6 +251,9 @@
                                 <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="137" y="359" width="126" height="30"/>
                                 </variation>
+                                <connections>
+                                    <action selector="forgotPassword:" destination="2ET-6P-rhL" eventType="touchUpInside" id="ufA-H0-m5x"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgD-L6-Ap0">
                                 <rect key="frame" x="225" y="414" width="150" height="30"/>
@@ -443,7 +446,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="expense_cells" textLabel="hjS-HF-zjR" detailTextLabel="ZZS-aR-i0I" style="IBUITableViewCellStyleSubtitle" id="1i5-c5-6Ly">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="expense_cells" textLabel="hjS-HF-zjR" detailTextLabel="ZZS-aR-i0I" style="IBUITableViewCellStyleSubtitle" id="1i5-c5-6Ly">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1i5-c5-6Ly" id="yga-IH-ZmH">
@@ -480,7 +483,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Expenses" id="56j-up-bUC">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="9g8-5J-v9P"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="9g8-5J-v9P">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="faR-bf-uRw" kind="show" id="8IX-jb-WGm"/>

@@ -28,7 +28,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         //Set the title attributes for the Navigation Bar
         let titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.whiteColor(),
-            NSFontAttributeName: UIFont(name: "Avenir", size: 30)!
+            NSFontAttributeName: UIFont(name: "GujaratiSangamMN", size: 30)!
         ]
         
         //Set Navigation Bar properties from the Navigation Controller's Navigation bar
