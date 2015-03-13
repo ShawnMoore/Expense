@@ -792,9 +792,9 @@
         <image name="eXpenseLogoGray" width="1004" height="273"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Jr8-k9-r8S"/>
         <segue reference="TiS-en-l7X"/>
         <segue reference="h8j-w9-YNM"/>
-        <segue reference="DBN-2N-pvE"/>
+        <segue reference="Jr8-k9-r8S"/>
+        <segue reference="3Nd-qh-I5o"/>
     </inferredMetricsTieBreakers>
 </document>
