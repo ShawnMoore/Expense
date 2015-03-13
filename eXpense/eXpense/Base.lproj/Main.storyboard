@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="w6M-zI-J89">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="w6M-zI-J89">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -19,9 +19,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eQE-cP-dgi">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xn9-gm-l33">
+                                <rect key="frame" x="0.0" y="534" width="600" height="66"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDv-lg-RTc">
-                                <rect key="frame" x="0.0" y="535" width="300" height="65"/>
-                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="535" width="299.5" height="65"/>
+                                <color key="backgroundColor" red="0.13725490196078433" green="0.61960784313725492" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="PSc-DN-4DV"/>
                                 </constraints>
@@ -32,8 +39,8 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CoZ-15-sXF">
-                                <rect key="frame" x="300" y="535" width="300" height="65"/>
-                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.79607843137254897" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="300" y="535" width="299.5" height="65"/>
+                                <color key="backgroundColor" red="0.13725490196078433" green="0.61960784313725492" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="LOGIN">
                                     <color key="titleColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -60,16 +67,22 @@
                             <constraint firstItem="aAg-LB-g4v" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="68" id="3GP-0V-Xxz">
                                 <variation key="heightClass=compact" constant="10"/>
                             </constraint>
+                            <constraint firstAttribute="bottom" secondItem="eQE-cP-dgi" secondAttribute="bottom" id="4Cz-9D-3V3"/>
+                            <constraint firstItem="eQE-cP-dgi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4i5-sT-n3J"/>
+                            <constraint firstItem="Xn9-gm-l33" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4xu-Oo-YE2"/>
                             <constraint firstItem="aAg-LB-g4v" firstAttribute="width" secondItem="aAg-LB-g4v" secondAttribute="height" multiplier="548:149" id="50f-5O-5IM"/>
-                            <constraint firstItem="CoZ-15-sXF" firstAttribute="leading" secondItem="xDv-lg-RTc" secondAttribute="trailing" id="Gk4-45-A03"/>
+                            <constraint firstItem="CoZ-15-sXF" firstAttribute="leading" secondItem="xDv-lg-RTc" secondAttribute="trailing" constant="1" id="Gk4-45-A03"/>
                             <constraint firstItem="xDv-lg-RTc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="O8u-qV-zGZ"/>
                             <constraint firstItem="aAg-LB-g4v" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="Vkt-R7-Y8R">
                                 <variation key="heightClass=compact" constant="125"/>
                             </constraint>
+                            <constraint firstItem="CoZ-15-sXF" firstAttribute="top" secondItem="Xn9-gm-l33" secondAttribute="top" constant="1" id="WZI-Ww-1hE"/>
                             <constraint firstAttribute="bottom" secondItem="xDv-lg-RTc" secondAttribute="bottom" id="a2d-Wy-vDI"/>
+                            <constraint firstAttribute="trailing" secondItem="Xn9-gm-l33" secondAttribute="trailing" id="aqU-wj-By5"/>
                             <constraint firstItem="xDv-lg-RTc" firstAttribute="width" secondItem="CoZ-15-sXF" secondAttribute="width" id="czO-j3-QLP"/>
                             <constraint firstItem="CoZ-15-sXF" firstAttribute="height" secondItem="xDv-lg-RTc" secondAttribute="height" id="dnk-SB-n4b"/>
                             <constraint firstAttribute="bottom" secondItem="CoZ-15-sXF" secondAttribute="bottom" id="iWw-Vy-GnA"/>
+                            <constraint firstAttribute="trailing" secondItem="eQE-cP-dgi" secondAttribute="trailing" id="jPX-bV-EsC"/>
                             <constraint firstAttribute="trailing" secondItem="CoZ-15-sXF" secondAttribute="trailing" id="lV2-Vt-BVf"/>
                             <constraint firstAttribute="centerX" secondItem="aAg-LB-g4v" secondAttribute="centerX" constant="-100" id="luw-vR-utu">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -79,6 +92,8 @@
                                 <variation key="heightClass=regular-widthClass=compact" constant="124"/>
                             </constraint>
                             <constraint firstAttribute="centerX" secondItem="aAg-LB-g4v" secondAttribute="centerX" id="oIX-ps-5KH"/>
+                            <constraint firstItem="eQE-cP-dgi" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="wZP-Kk-3aG"/>
+                            <constraint firstAttribute="bottom" secondItem="Xn9-gm-l33" secondAttribute="bottom" id="xm9-8G-N26"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -113,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-33" y="363.75"/>
+            <point key="canvasLocation" x="-33" y="363"/>
         </scene>
         <!--TouchID Login View Controller-->
         <scene sceneID="KWR-vF-WIa">
