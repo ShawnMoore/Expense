@@ -236,6 +236,19 @@ class Authentication: NSObject {
         return (foundExisting, deleted)
     }
     
+    /**
+        To be used upon correct verification, 
+        adds or updates username in keychain access
+    
+        :returns: tuple of error code based on completion.
+    */
+    func correctLogin(username: String, password: String) -> (usernameStatus: Int, passwordStatus: Int)
+    {
+        
+        
+        return (0, 0);
+    }
+    
     //MARK: Touch ID Functions
     /**
         Returns wether or not the device can use touchID
