@@ -19,6 +19,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var model: Model?
     var authModel: Authentication?
     
+    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var backgroudImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,10 +42,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         var username = authModel?.retrieveUsername()
         
-        if (username?.errorCode == authModel?.errSecItemNotFound) {
-            println("Item not found")
+        if (username?.errorCode == authModel?.errSecSuccess) {
+           emailTextField.text = username!.value
         }
         
+        dispatch_async(dispatch_get_main_queue(), {
+            self.logoImageView.image = UIImage(named: "eXpenseLogoGray")
+            self.backgroudImageView.image = UIImage(named: "eXpenseBackgroundFaded")
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,8 +92,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        emailTextField.resignFirstResponder()
-        passwordTextField.resignFirstResponder()
+        if textField == emailTextField {
+            passwordTextField.becomeFirstResponder()
+        }
+        
+        if textField == passwordTextField {
+            self.loginAction(self)
+            passwordTextField.resignFirstResponder()
+        }
+            
         return true
     }
     

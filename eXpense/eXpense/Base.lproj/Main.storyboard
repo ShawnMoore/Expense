@@ -122,7 +122,7 @@
                     </view>
                     <connections>
                         <segue destination="2ET-6P-rhL" kind="custom" identifier="splashToLogin" id="h8j-w9-YNM"/>
-                        <segue destination="kB2-EA-ibv" kind="show" id="uY9-uU-ERv"/>
+                        <segue destination="kB2-EA-ibv" kind="custom" identifier="splashToTouch" id="uY9-uU-ERv"/>
                         <segue destination="AK5-ID-fGf" kind="show" id="TiS-en-l7X"/>
                     </connections>
                 </viewController>
@@ -199,8 +199,8 @@
                         </variation>
                     </view>
                     <connections>
-                        <segue destination="2ET-6P-rhL" kind="show" id="kdt-Xn-gbr"/>
-                        <segue destination="w6M-zI-J89" kind="show" id="yKM-fV-2Cm"/>
+                        <segue destination="2ET-6P-rhL" kind="show" identifier="touchToLogin" id="kdt-Xn-gbr"/>
+                        <segue destination="w6M-zI-J89" kind="show" identifier="touchToDashboard" id="yKM-fV-2Cm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4y4-Lw-Xlv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -222,21 +222,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eXpenseBackgroundFaded" translatesAutoresizingMaskIntoConstraints="NO" id="oJT-Jm-le0">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="youremail@mail.com" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CYe-f3-b1T">
-                                <rect key="frame" x="46" y="266" width="508" height="30"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
-                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outlet property="delegate" destination="2ET-6P-rhL" id="rl4-v2-uDM"/>
-                                </connections>
-                            </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fAd-Xh-Y9S">
                                 <rect key="frame" x="46" y="304" width="508" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -305,6 +290,21 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="youremail@mail.com" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CYe-f3-b1T">
+                                <rect key="frame" x="46" y="266" width="508" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="2ET-6P-rhL" id="rl4-v2-uDM"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.14509803921568629" green="0.69803921568627447" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -438,8 +438,10 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="backgroudImageView" destination="oJT-Jm-le0" id="Jl3-0h-9ll"/>
                         <outlet property="emailTextField" destination="CYe-f3-b1T" id="6oN-d9-SLV"/>
                         <outlet property="loginButton" destination="dgD-L6-Ap0" id="6Zp-qA-RzF"/>
+                        <outlet property="logoImageView" destination="aeQ-8t-Dha" id="79c-fc-PlI"/>
                         <outlet property="passwordTextField" destination="fAd-Xh-Y9S" id="mQH-gM-pLu"/>
                         <segue destination="w6M-zI-J89" kind="show" identifier="loginToDashboard" id="Ke5-W9-vH6"/>
                         <segue destination="AK5-ID-fGf" kind="show" id="UHR-pL-Vta"/>
@@ -792,9 +794,9 @@
         <image name="eXpenseLogoGray" width="1004" height="273"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TiS-en-l7X"/>
-        <segue reference="h8j-w9-YNM"/>
-        <segue reference="Jr8-k9-r8S"/>
+        <segue reference="UHR-pL-Vta"/>
+        <segue reference="kdt-Xn-gbr"/>
+        <segue reference="Ke5-W9-vH6"/>
         <segue reference="3Nd-qh-I5o"/>
     </inferredMetricsTieBreakers>
 </document>

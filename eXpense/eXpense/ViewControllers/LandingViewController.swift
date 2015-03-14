@@ -11,10 +11,14 @@ import UIKit
 class LandingViewController: UIViewController {
 
     let transitionManager = TransitionManager()
-    
+    var authModel: Authentication?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        authModel = appDelegate.getAuthenticationModel()
 
         // Do any additional setup after loading the view.
     }
@@ -25,6 +29,19 @@ class LandingViewController: UIViewController {
     }
     
     @IBAction func loginButton(sender: AnyObject) {
+        
+        if authModel != nil
+        {
+            if authModel!.isTouchIDAvaiable().avaiable
+            {
+                if authModel!.keychainUsernameAndPasswordExist()
+                {
+                    performSegueWithIdentifier("splashToTouch", sender: self)
+                }
+            }
+            
+        }
+        
         performSegueWithIdentifier("splashToLogin", sender: self)
     }
     

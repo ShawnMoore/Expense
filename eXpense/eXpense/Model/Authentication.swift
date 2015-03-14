@@ -21,9 +21,19 @@ class Authentication: NSObject {
     let context = LAContext()
     
     //MARK: Error Codes
-    let errSecSuccess = 0               //No error
-    let errSecItemNotFound = -25300     //The item cannot be found
+    let errSecSuccess = 0                       //No error
+    let errSecItemNotFound = -25300             //The item cannot be found
+    let errSecUnimplemented = -4                //Function or operation not implemented
+    let errSecParam = -50                       //One or more parameters passed to the function were not valid.
+    let errSecAllocate = -108                   //Failed to allocate memory
+    let errSecNotAvailable = -25291             //No trust results are avialable
+    let errSecAuthFailed = -25293               //Authorization/Authentication failed
+    let errSecDuplicateItem = -25299            //The item already exists
+    let errSecInteractionNotAllowed = -25308    //Interaction with the Security Server is not allowed.
+    let errSecDecode = -26275                   //Unable to decode the provided data.
     
+    //MARK: Self Error Codes
+    let errUnknown = -1                         //Unknown error
     
     //MARK: Keychain Functions
     /**
@@ -209,8 +219,8 @@ class Authentication: NSObject {
     /**
         Deletes the Password from the Device's Keychain
     
-    :returns: - foundStatus: Int value of the error code returned from the keychain api when locating the password
-              - deleteStatus: Possible Int value of the error code returned from the keychain api when deleting the password
+        :returns: - foundStatus: Int value of the error code returned from the keychain api when locating the password
+                  - deleteStatus: Possible Int value of the error code returned from the keychain api when deleting the password
     */
     func deletePassword() -> (foundStatus: Int, deleteStatus: Int?)
     {
@@ -244,9 +254,39 @@ class Authentication: NSObject {
     */
     func correctLogin(username: String, password: String) -> (usernameStatus: Int, passwordStatus: Int)
     {
+        var usernameStatus = errUnknown
+        var passwordStatus = errUnknown
         
+        let (usernameInsertStatus, usernameUpdateStatus) = insertUsername(username)
+        usernameStatus = usernameInsertStatus
+        if usernameStatus == Int(errSecDuplicateItem)
+        {
+            usernameStatus = usernameUpdateStatus!
+        }
         
-        return (0, 0);
+        let (passwordInsertStatus, passwordUpdateStatus) = insertPassword(password)
+        passwordStatus = passwordInsertStatus
+        if passwordStatus == Int(errSecDuplicateItem)
+        {
+            passwordStatus = passwordUpdateStatus!
+        }
+        
+        return (usernameStatus, passwordStatus);
+    }
+    
+    func keychainUsernameAndPasswordExist() -> Bool
+    {
+        var results = false
+        
+        let (_, usernameStatus) = retrieveUsername()
+        let (_, passwordStatus) = retrievePassword()
+        
+        if (usernameStatus == errSecSuccess) && (passwordStatus == errSecSuccess)
+        {
+            results = true
+        }
+        
+        return results
     }
     
     //MARK: Touch ID Functions
@@ -287,6 +327,7 @@ class Authentication: NSObject {
     }
     
     //MARK: Server Authentication Functions
+    
     /**
         Authenticates the information the user typed in with the server
     
@@ -303,6 +344,14 @@ class Authentication: NSObject {
         let correctPassword = "password1"
         
         results = ((correctUsername == username) && (correctPassword == password)) ? true : false
+        
+        if results == true
+        {
+            correctLogin(username, password: password)
+        } else {
+            deleteUsername()
+            deletePassword()
+        }
         
         return results
     }
