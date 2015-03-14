@@ -45,6 +45,10 @@ class LandingViewController: UIViewController {
         performSegueWithIdentifier("splashToLogin", sender: self)
     }
     
+    @IBAction func signUpButton(sender: AnyObject) {
+        performSegueWithIdentifier("spashToSignUp", sender: self)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let toViewController = segue.destinationViewController as UIViewController
         
