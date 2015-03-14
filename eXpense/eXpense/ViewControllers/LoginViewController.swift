@@ -19,6 +19,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var model: Model?
     var authModel: Authentication?
     
+    let transitionManager = TransitionManager()
+    
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var backgroudImageView: UIImageView!
     
@@ -81,6 +83,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    @IBAction func createAccountAction(sender: AnyObject) {
+        performSegueWithIdentifier("loginToSignUp", sender: self)
+    }
+    
+    @IBAction func forgotPassword(sender: AnyObject) {
+        
+    }
+    
     @IBAction func dismissKeyboard(sender: AnyObject) {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
@@ -104,10 +114,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    @IBAction func forgotPassword(sender: AnyObject) {
-
-    }
-    
     override func shouldAutorotate() -> Bool {
         return false
     }
@@ -115,4 +121,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func supportedInterfaceOrientations() -> Int {
         return 0
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+        if segue.identifier! == "loginToSignUp"
+        {
+            let toViewController = segue.destinationViewController as UIViewController
+    
+            toViewController.transitioningDelegate = self.transitionManager
+        }
+    }
+    
+    
 }

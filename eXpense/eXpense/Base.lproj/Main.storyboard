@@ -37,6 +37,9 @@
                                     <color key="titleColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="signUpButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IDJ-UN-j1I"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CoZ-15-sXF">
                                 <rect key="frame" x="300" y="535" width="299.5" height="65"/>
@@ -123,7 +126,7 @@
                     <connections>
                         <segue destination="2ET-6P-rhL" kind="custom" identifier="splashToLogin" id="h8j-w9-YNM"/>
                         <segue destination="kB2-EA-ibv" kind="custom" identifier="splashToTouch" id="uY9-uU-ERv"/>
-                        <segue destination="AK5-ID-fGf" kind="show" id="TiS-en-l7X"/>
+                        <segue destination="AK5-ID-fGf" kind="custom" identifier="spashToSignUp" id="TiS-en-l7X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -199,7 +202,7 @@
                         </variation>
                     </view>
                     <connections>
-                        <segue destination="2ET-6P-rhL" kind="show" identifier="touchToLogin" id="kdt-Xn-gbr"/>
+                        <segue destination="2ET-6P-rhL" kind="custom" identifier="touchToLogin" id="kdt-Xn-gbr"/>
                         <segue destination="w6M-zI-J89" kind="show" identifier="touchToDashboard" id="yKM-fV-2Cm"/>
                     </connections>
                 </viewController>
@@ -289,13 +292,16 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="createAccountAction:" destination="2ET-6P-rhL" eventType="touchUpInside" id="ynT-k6-ttt"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="youremail@mail.com" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CYe-f3-b1T">
                                 <rect key="frame" x="46" y="266" width="508" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -444,7 +450,7 @@
                         <outlet property="logoImageView" destination="aeQ-8t-Dha" id="79c-fc-PlI"/>
                         <outlet property="passwordTextField" destination="fAd-Xh-Y9S" id="mQH-gM-pLu"/>
                         <segue destination="w6M-zI-J89" kind="show" identifier="loginToDashboard" id="Ke5-W9-vH6"/>
-                        <segue destination="AK5-ID-fGf" kind="show" id="UHR-pL-Vta"/>
+                        <segue destination="AK5-ID-fGf" kind="custom" identifier="loginToSignUp" id="UHR-pL-Vta"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K0J-c0-kVS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -835,59 +841,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="eXpenseLogoGray" translatesAutoresizingMaskIntoConstraints="NO" id="Z7I-y0-OcB">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="75"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Z7I-y0-OcB" secondAttribute="height" multiplier="548:149" id="4n5-Ym-yeK"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="4n5-Ym-yeK"/>
-                                    </mask>
-                                </variation>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Register New Account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5Y-0U-Mfk">
-                                <rect key="frame" x="122" y="83" width="357" height="21"/>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qr1-wc-LUD">
-                                <rect key="frame" x="106" y="140" width="388" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name " minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PZ2-Y9-pxc">
-                                <rect key="frame" x="106" y="189" width="388" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email " minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xrs-sQ-COa">
-                                <rect key="frame" x="106" y="240" width="388" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q6a-La-zCj">
-                                <rect key="frame" x="106" y="292" width="388" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fl2-D3-b9r">
-                                <rect key="frame" x="507" y="140" width="30" height="30"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f4g-Lu-Imu">
-                                <rect key="frame" x="507" y="189" width="30" height="30"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sdE-8s-0lE">
-                                <rect key="frame" x="507" y="240" width="30" height="30"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UBc-5M-cly">
-                                <rect key="frame" x="507" y="292" width="30" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eXpenseBackgroundFaded" translatesAutoresizingMaskIntoConstraints="NO" id="gzb-dq-NIp">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.14509803921568629" green="0.69803921568627447" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gzb-dq-NIp" secondAttribute="trailing" id="Ciy-6a-Uwy"/>
+                            <constraint firstAttribute="bottom" secondItem="gzb-dq-NIp" secondAttribute="bottom" id="aZP-hw-54b"/>
+                            <constraint firstItem="gzb-dq-NIp" firstAttribute="top" secondItem="KDO-80-6Y6" secondAttribute="top" id="oQz-kK-Qta"/>
+                            <constraint firstItem="gzb-dq-NIp" firstAttribute="leading" secondItem="KDO-80-6Y6" secondAttribute="leading" id="qvK-lG-6Qo"/>
+                        </constraints>
                     </view>
                     <connections>
                         <segue destination="w6M-zI-J89" kind="show" id="Jr8-k9-r8S"/>
@@ -924,7 +889,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="h8j-w9-YNM"/>
         <segue reference="UHR-pL-Vta"/>
-        <segue reference="Ke5-W9-vH6"/>
-        <segue reference="DBN-2N-pvE"/>
+        <segue reference="3Nd-qh-I5o"/>
     </inferredMetricsTieBreakers>
 </document>
