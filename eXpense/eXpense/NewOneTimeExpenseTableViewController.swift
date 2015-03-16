@@ -8,13 +8,22 @@
 
 import UIKit
 
-class NewOneTimeExpenseTableViewController: UITableViewController {
+class NewOneTimeExpenseTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var descriptionView: UITextView!
+    @IBOutlet weak var recieptPhotoButton: UIButton!
+    @IBOutlet weak var categoryPicker: UIPickerView!
     
+    let pickerData = ["Entertainment","Lodging","Meals","Personal","Transportation","Other"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        categoryPicker.dataSource = self
+        categoryPicker.delegate = self
+        
+        categoryPicker.selectRow(2, inComponent: 0, animated: false)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -31,7 +40,36 @@ class NewOneTimeExpenseTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    var imagePicker: UIImagePickerController!
+    
+    @IBAction func takeReceiptPhoto(sender: AnyObject) {
+        
+        var alert = UIAlertController(title: "Take Photo", message: "This is the button we will use to take a photo of a reciept", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
+    //MARK: - Delegates and data sources
+    //MARK: Data Sources
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    //MARK: Delegates
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return pickerData[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+    }
 
+    
     // MARK: - Table view data source
 
 //    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

@@ -59,5 +59,11 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         return cell
         
     }
-
+    
+    @IBAction func addNewExpense(sender: AnyObject) {
+        
+        performSegueWithIdentifier("showExpense", sender: self)
+    
+    }
+    
 }
