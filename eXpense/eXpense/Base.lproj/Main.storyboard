@@ -126,7 +126,7 @@
                     <connections>
                         <segue destination="2ET-6P-rhL" kind="custom" identifier="splashToLogin" id="h8j-w9-YNM"/>
                         <segue destination="kB2-EA-ibv" kind="custom" identifier="splashToTouch" id="uY9-uU-ERv"/>
-                        <segue destination="AK5-ID-fGf" kind="custom" identifier="spashToSignUp" id="TiS-en-l7X"/>
+                        <segue destination="7qJ-yQ-C8N" kind="custom" identifier="splashToSignUp" id="KbD-mm-Utt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -450,7 +450,7 @@
                         <outlet property="logoImageView" destination="aeQ-8t-Dha" id="79c-fc-PlI"/>
                         <outlet property="passwordTextField" destination="fAd-Xh-Y9S" id="mQH-gM-pLu"/>
                         <segue destination="w6M-zI-J89" kind="show" identifier="loginToDashboard" id="Ke5-W9-vH6"/>
-                        <segue destination="AK5-ID-fGf" kind="custom" identifier="loginToSignUp" id="UHR-pL-Vta"/>
+                        <segue destination="7qJ-yQ-C8N" kind="custom" identifier="loginToSignUp" id="18Y-Cv-tx3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K0J-c0-kVS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -466,6 +466,86 @@
                 </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1082" y="363"/>
+        </scene>
+        <!--Sign Up View Controller-->
+        <scene sceneID="QEC-VL-UAi">
+            <objects>
+                <viewController id="7qJ-yQ-C8N" customClass="SignUpViewController" customModule="eXpense" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jc7-Te-HR5"/>
+                        <viewControllerLayoutGuide type="bottom" id="o4g-ma-C3u"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QKW-Ru-P3Z">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YvI-2L-nME">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aY4-OQ-k4G">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <subviews>
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eXpenseBackgroundFaded" translatesAutoresizingMaskIntoConstraints="NO" id="sGb-uO-QkW">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="jA8-mg-6xw" appends="YES" id="TMH-VI-wab"/>
+                                                </connections>
+                                            </imageView>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wR5-Xi-tj9">
+                                                <rect key="frame" x="213" y="464" width="175" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="175" id="xF9-F6-e9P"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="7qJ-yQ-C8N" id="4zG-N0-15V"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.1450980392" green="0.69803921570000005" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstItem="sGb-uO-QkW" firstAttribute="leading" secondItem="aY4-OQ-k4G" secondAttribute="leading" id="3ya-3V-rC0"/>
+                                            <constraint firstAttribute="trailing" secondItem="sGb-uO-QkW" secondAttribute="trailing" id="Cd4-Nj-lnq"/>
+                                            <constraint firstItem="sGb-uO-QkW" firstAttribute="top" secondItem="aY4-OQ-k4G" secondAttribute="top" id="NQT-Ip-HZr"/>
+                                            <constraint firstItem="sGb-uO-QkW" firstAttribute="centerX" secondItem="wR5-Xi-tj9" secondAttribute="centerX" constant="-0.5" id="lUj-Eh-f4I"/>
+                                            <constraint firstAttribute="bottom" secondItem="sGb-uO-QkW" secondAttribute="bottom" id="rsa-LZ-stT"/>
+                                            <constraint firstItem="sGb-uO-QkW" firstAttribute="centerY" secondItem="wR5-Xi-tj9" secondAttribute="centerY" constant="-179" id="wRS-Bv-wIp"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="aY4-OQ-k4G" firstAttribute="top" secondItem="YvI-2L-nME" secondAttribute="top" id="3TL-Dq-iVx"/>
+                                    <constraint firstItem="aY4-OQ-k4G" firstAttribute="leading" secondItem="YvI-2L-nME" secondAttribute="leading" id="Dyd-ED-zRg"/>
+                                    <constraint firstAttribute="trailing" secondItem="aY4-OQ-k4G" secondAttribute="trailing" id="Lgy-V8-BZO"/>
+                                    <constraint firstAttribute="bottom" secondItem="aY4-OQ-k4G" secondAttribute="bottom" id="nFQ-wf-be8"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YvI-2L-nME" firstAttribute="leading" secondItem="QKW-Ru-P3Z" secondAttribute="leading" id="5Wr-ko-Bya"/>
+                            <constraint firstItem="aY4-OQ-k4G" firstAttribute="height" secondItem="QKW-Ru-P3Z" secondAttribute="height" id="CgU-Ko-dpS"/>
+                            <constraint firstAttribute="trailing" secondItem="YvI-2L-nME" secondAttribute="trailing" id="J5I-sb-rnr"/>
+                            <constraint firstAttribute="bottom" secondItem="YvI-2L-nME" secondAttribute="bottom" id="LO5-aS-nUA"/>
+                            <constraint firstItem="aY4-OQ-k4G" firstAttribute="width" secondItem="QKW-Ru-P3Z" secondAttribute="width" id="Y9N-nS-obN"/>
+                            <constraint firstItem="YvI-2L-nME" firstAttribute="top" secondItem="QKW-Ru-P3Z" secondAttribute="top" id="aEL-fw-Rcb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scrollView" destination="YvI-2L-nME" id="Wnk-Cq-exK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8xL-40-e5p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="jA8-mg-6xw">
+                    <connections>
+                        <action selector="dismissKeyboardTapGesture:" destination="7qJ-yQ-C8N" id="JHE-Pd-DVt"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1082" y="1107"/>
         </scene>
         <!--Expenses-->
         <scene sceneID="aPD-JB-G1x">
@@ -733,39 +813,6 @@
             </objects>
             <point key="canvasLocation" x="2597" y="1216"/>
         </scene>
-        <!--Sign Up View Controller-->
-        <scene sceneID="fiM-bC-1dh">
-            <objects>
-                <viewController id="AK5-ID-fGf" customClass="SignUpViewController" customModule="eXpense" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="N7z-uq-pNE"/>
-                        <viewControllerLayoutGuide type="bottom" id="L3r-T7-TYf"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="KDO-80-6Y6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eXpenseBackgroundFaded" translatesAutoresizingMaskIntoConstraints="NO" id="gzb-dq-NIp">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.14509803921568629" green="0.69803921568627447" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="gzb-dq-NIp" secondAttribute="trailing" id="Ciy-6a-Uwy"/>
-                            <constraint firstAttribute="bottom" secondItem="gzb-dq-NIp" secondAttribute="bottom" id="aZP-hw-54b"/>
-                            <constraint firstItem="gzb-dq-NIp" firstAttribute="top" secondItem="KDO-80-6Y6" secondAttribute="top" id="oQz-kK-Qta"/>
-                            <constraint firstItem="gzb-dq-NIp" firstAttribute="leading" secondItem="KDO-80-6Y6" secondAttribute="leading" id="qvK-lG-6Qo"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <segue destination="w6M-zI-J89" kind="show" id="Jr8-k9-r8S"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hy7-xH-pNg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1082" y="1107"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="9UW-Uk-HsP">
             <objects>
@@ -791,9 +838,9 @@
         <image name="eXpenseLogoGray" width="1004" height="273"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ke5-W9-vH6"/>
-        <segue reference="h8j-w9-YNM"/>
-        <segue reference="UHR-pL-Vta"/>
+        <segue reference="kdt-Xn-gbr"/>
+        <segue reference="KbD-mm-Utt"/>
+        <segue reference="yKM-fV-2Cm"/>
         <segue reference="3Nd-qh-I5o"/>
     </inferredMetricsTieBreakers>
 </document>
