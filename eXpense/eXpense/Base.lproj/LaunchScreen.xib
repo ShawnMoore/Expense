@@ -31,7 +31,7 @@
                 <constraint firstAttribute="trailing" secondItem="kQm-Hy-JYr" secondAttribute="trailing" id="UUk-jh-eoR"/>
                 <constraint firstItem="kQm-Hy-JYr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dSp-GS-NhC"/>
                 <constraint firstItem="kQm-Hy-JYr" firstAttribute="leading" secondItem="DPS-f2-xYb" secondAttribute="leading" constant="10" id="yRi-Jj-qzH">
-                    <variation key="heightClass=regular-widthClass=compact" constant="-25"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="-26"/>
                 </constraint>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

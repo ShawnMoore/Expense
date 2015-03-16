@@ -14,10 +14,26 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet var textFields: [UITextField]!
+    
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var companyTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var rcPasswordTextField: UITextField!
+    
+    let transitionManager = TransitionManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         registerForKeyboardNotifications()
+        scrollView.keyboardDismissMode = .Interactive
+        
+        for textField in textFields {
+            textField.layer.borderWidth = 1.0
+            textField.layer.borderColor = UIColor.whiteColor().CGColor
+            textField.layer.cornerRadius = 5.0
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,24 +58,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     func keyboardWasShown(aNotification: NSNotification) {
-        var kbSize: CGSize;
-        
         if let info = aNotification.userInfo {
             var kbSize: CGSize = (info[UIKeyboardFrameBeginUserInfoKey] as NSValue).CGRectValue().size
             
             let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0)
             scrollView.contentInset = contentInsets
             scrollView.scrollIndicatorInsets = contentInsets
-            
-            /*
-            //Turns out that this doesn't do anything
-            
-            var aRect: CGRect = self.view.frame;
-            aRect.size.height -= kbSize.height;
-            if (!CGRectContainsPoint(aRect, activeField!.frame.origin))
-            {
-                scrollView.scrollRectToVisible(activeField!.frame, animated: true)
-            }*/
         }
     }
     
@@ -73,4 +77,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         activeField?.resignFirstResponder()
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+            let toViewController = segue.destinationViewController as UIViewController
+            
+            toViewController.transitioningDelegate = self.transitionManager
+    }
 }

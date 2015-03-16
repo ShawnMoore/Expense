@@ -80,4 +80,8 @@ class TouchIDLoginViewController: UIViewController {
         
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
 }

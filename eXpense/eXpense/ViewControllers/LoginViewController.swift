@@ -132,5 +132,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
     
 }
