@@ -24,6 +24,7 @@ class TouchIDLoginViewController: UIViewController {
         authModel = appDelegate.getAuthenticationModel()
     }
     
+    //FIXME: Change this logic to after the screen has been displayed. Showing TouchID when user goes from splash to login to signup because of the unwind.
     override func viewDidAppear(animated: Bool) {
         if authModel != nil
         {
