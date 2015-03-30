@@ -22,10 +22,7 @@ class TouchIDLoginViewController: UIViewController {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         
         authModel = appDelegate.getAuthenticationModel()
-    }
-    
-    //FIXME: Change this logic to after the screen has been displayed. Showing TouchID when user goes from splash to login to signup because of the unwind.
-    override func viewDidAppear(animated: Bool) {
+        
         if authModel != nil
         {
             let (usernameValue, usernameErrorCode) = authModel!.retrieveUsername()
@@ -46,16 +43,24 @@ class TouchIDLoginViewController: UIViewController {
                             {
                                 dispatch_async(dispatch_get_main_queue(), {
                                     self.performSegueWithIdentifier("touchToDashboard", sender: self)
-                                    })
+                                })
                             } else {
                                 dispatch_async(dispatch_get_main_queue(), {
                                     self.performSegueWithIdentifier("touchToLogin", sender: self)
                                 })
                             }
                         } else {
-                            dispatch_async(dispatch_get_main_queue(), {
-                                self.performSegueWithIdentifier("touchToLogin", sender: self)
-                            })
+                            
+                            if evalPolicyError?.code == LAError.UserCancel.rawValue {
+                                println("Canceled by user")
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    self.performSegueWithIdentifier("backToLanding", sender: self)
+                                })
+                            } else {
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    self.performSegueWithIdentifier("touchToLogin", sender: self)
+                                })
+                            }
                         }
                     })]
                 } else {
@@ -67,8 +72,9 @@ class TouchIDLoginViewController: UIViewController {
         } else {
             performSegueWithIdentifier("touchToLogin", sender: self)
         }
-    }
 
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

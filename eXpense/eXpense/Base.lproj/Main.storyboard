@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -204,9 +204,11 @@
                     <connections>
                         <segue destination="2ET-6P-rhL" kind="custom" identifier="touchToLogin" id="kdt-Xn-gbr"/>
                         <segue destination="w6M-zI-J89" kind="show" identifier="touchToDashboard" id="yKM-fV-2Cm"/>
+                        <segue destination="TDN-at-9D7" kind="unwind" identifier="backToLanding" unwindAction="unwindSegue:" id="XrY-hs-r1H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4y4-Lw-Xlv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="TDN-at-9D7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1082" y="-385"/>
         </scene>
@@ -515,7 +517,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -528,8 +530,9 @@
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ttk-2p-Oiu">
                                                 <rect key="frame" x="30" y="331" width="540" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -542,8 +545,9 @@
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LhM-Gg-HBi">
                                                 <rect key="frame" x="30" y="377" width="540" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -556,8 +560,9 @@
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Reconfirm Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Imu-Ho-Hux">
                                                 <rect key="frame" x="30" y="423" width="540" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -590,7 +595,7 @@
                                                 </variation>
                                                 <connections>
                                                     <action selector="forgotPassword:" destination="2ET-6P-rhL" eventType="touchUpInside" id="ems-CX-TGx"/>
-                                                    <segue destination="ZM1-Jj-rFu" kind="unwind" unwindAction="unwindSegue:" id="iQS-uJ-tLf"/>
+                                                    <segue destination="ZM1-Jj-rFu" kind="unwind" identifier="backToLanding" unwindAction="unwindSegue:" id="cHx-GY-W3c"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -620,7 +625,9 @@
                                             </constraint>
                                             <constraint firstItem="sGb-uO-QkW" firstAttribute="centerX" secondItem="c5v-VJ-hiw" secondAttribute="centerX" id="cv1-Ug-ZD9"/>
                                             <constraint firstItem="LyU-cL-u9d" firstAttribute="centerX" secondItem="sGb-uO-QkW" secondAttribute="centerX" constant="-4" id="eRX-UQ-y2B"/>
-                                            <constraint firstItem="sGb-uO-QkW" firstAttribute="centerY" secondItem="wR5-Xi-tj9" secondAttribute="centerY" id="h60-G2-DBg"/>
+                                            <constraint firstItem="sGb-uO-QkW" firstAttribute="centerY" secondItem="wR5-Xi-tj9" secondAttribute="centerY" id="h60-G2-DBg">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                            </constraint>
                                             <constraint firstItem="Vaf-ZV-kW7" firstAttribute="trailing" secondItem="sGb-uO-QkW" secondAttribute="trailing" constant="-10" id="i4A-19-bpF"/>
                                             <constraint firstItem="BxF-Uu-hzv" firstAttribute="centerX" secondItem="sGb-uO-QkW" secondAttribute="centerX" id="orF-jD-Dc9"/>
                                             <constraint firstAttribute="bottom" secondItem="sGb-uO-QkW" secondAttribute="bottom" id="rsa-LZ-stT"/>
@@ -667,6 +674,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="centerYConstraint" destination="h60-G2-DBg" id="HjL-He-aop"/>
                         <outlet property="companyTextField" destination="ttk-2p-Oiu" id="ALV-mc-bxb"/>
                         <outlet property="passwordTextField" destination="LhM-Gg-HBi" id="kOy-II-Z29"/>
                         <outlet property="rcPasswordTextField" destination="Imu-Ho-Hux" id="khU-ei-DkY"/>
@@ -984,7 +992,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KjM-qo-Slx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3314" y="381"/>
+            <point key="canvasLocation" x="3643" y="1307"/>
         </scene>
         <!--New Trip-->
         <scene sceneID="ChN-Ib-CM5">
@@ -1027,7 +1035,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UNa-mA-XnM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3999" y="363"/>
+            <point key="canvasLocation" x="4923" y="1215.75"/>
         </scene>
         <!--Trips View Controller-->
         <scene sceneID="Cp3-bF-0xH">
@@ -1075,9 +1083,9 @@
         <image name="eXpenseLogoGray" width="1004" height="273"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ke5-W9-vH6"/>
-        <segue reference="h8j-w9-YNM"/>
-        <segue reference="KbD-mm-Utt"/>
+        <segue reference="kdt-Xn-gbr"/>
+        <segue reference="yKM-fV-2Cm"/>
+        <segue reference="18Y-Cv-tx3"/>
         <segue reference="3Nd-qh-I5o"/>
     </inferredMetricsTieBreakers>
 </document>

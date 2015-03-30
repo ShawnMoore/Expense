@@ -21,6 +21,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rcPasswordTextField: UITextField!
     
+    @IBOutlet weak var centerYConstraint: NSLayoutConstraint!
+    var centerYConstraintConstant: CGFloat? = nil
+    let textfieldOffset:CGFloat = 25
+    
     let transitionManager = TransitionManager()
     
     override func viewDidLoad() {
@@ -34,6 +38,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             textField.layer.borderColor = UIColor.whiteColor().CGColor
             textField.layer.cornerRadius = 5.0
         }
+        
+        centerYConstraintConstant = centerYConstraint.constant
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,6 +70,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0)
             scrollView.contentInset = contentInsets
             scrollView.scrollIndicatorInsets = contentInsets
+            
+            //FIXME: CHECK if textfield is blocked by the keyboard before applying offset
+            if let currentConstant = centerYConstraintConstant {
+                centerYConstraint.constant = currentConstant + textfieldOffset
+            }
         }
     }
     
@@ -71,6 +82,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         let contentInsets = UIEdgeInsetsZero
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
+        
+        if let originalConstant = centerYConstraintConstant {
+            centerYConstraint.constant = originalConstant
+        }
     }
     
     @IBAction func dismissKeyboardTapGesture(sender: AnyObject) {
@@ -86,5 +101,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             let toViewController = segue.destinationViewController as UIViewController
             
             toViewController.transitioningDelegate = self.transitionManager
-    }
+        
+            //self.dismissViewControllerAnimated(false, completion: nil)
+    }    
+    
 }
