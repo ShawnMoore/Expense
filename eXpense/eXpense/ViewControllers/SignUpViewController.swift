@@ -20,6 +20,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var companyTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rcPasswordTextField: UITextField!
+    @IBOutlet weak var createAccountButton: UIButton!
     
     @IBOutlet weak var centerYConstraint: NSLayoutConstraint!
     var centerYConstraintConstant: CGFloat? = nil
@@ -40,6 +41,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         }
         
         centerYConstraintConstant = centerYConstraint.constant
+        
+        createAccountButton.layer.cornerRadius = 5.0
     }
 
     override func didReceiveMemoryWarning() {

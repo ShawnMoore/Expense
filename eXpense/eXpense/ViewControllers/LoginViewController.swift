@@ -40,7 +40,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.layer.borderColor = UIColor.whiteColor().CGColor
         passwordTextField.layer.cornerRadius = 5.0
         
-        loginButton.layer.cornerRadius = 2.0
+        loginButton.layer.cornerRadius = 5.0
         
         var username = authModel?.retrieveUsername()
         
