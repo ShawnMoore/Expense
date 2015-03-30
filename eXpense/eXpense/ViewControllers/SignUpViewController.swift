@@ -71,9 +71,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             scrollView.contentInset = contentInsets
             scrollView.scrollIndicatorInsets = contentInsets
             
-            //FIXME: CHECK if textfield is blocked by the keyboard before applying offset
-            if let currentConstant = centerYConstraintConstant {
-                centerYConstraint.constant = currentConstant + textfieldOffset
+            var aRect: CGRect = self.view.frame;
+            aRect.size.height -= kbSize.height
+            
+            if(!CGRectContainsPoint(aRect, activeField!.frame.origin)){
+                if let currentConstant = centerYConstraintConstant {
+                    centerYConstraint.constant = currentConstant + textfieldOffset
+                }
             }
         }
     }
@@ -101,8 +105,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             let toViewController = segue.destinationViewController as UIViewController
             
             toViewController.transitioningDelegate = self.transitionManager
-        
-            //self.dismissViewControllerAnimated(false, completion: nil)
+
     }    
     
 }
