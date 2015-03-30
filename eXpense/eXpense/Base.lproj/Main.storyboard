@@ -557,7 +557,7 @@
                                                     <outlet property="delegate" destination="7qJ-yQ-C8N" id="FJ7-co-OhT"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Reconfirm Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Imu-Ho-Hux">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Imu-Ho-Hux">
                                                 <rect key="frame" x="30" y="423" width="540" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -655,6 +655,7 @@
                                         </variation>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="aY4-OQ-k4G" firstAttribute="top" secondItem="YvI-2L-nME" secondAttribute="top" id="3TL-Dq-iVx"/>
                                     <constraint firstItem="aY4-OQ-k4G" firstAttribute="leading" secondItem="YvI-2L-nME" secondAttribute="leading" id="Dyd-ED-zRg"/>
@@ -663,7 +664,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="YvI-2L-nME" firstAttribute="leading" secondItem="QKW-Ru-P3Z" secondAttribute="leading" id="5Wr-ko-Bya"/>
                             <constraint firstItem="aY4-OQ-k4G" firstAttribute="height" secondItem="QKW-Ru-P3Z" secondAttribute="height" id="CgU-Ko-dpS"/>
