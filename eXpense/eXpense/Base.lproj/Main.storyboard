@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -512,7 +512,7 @@
                                                     <action selector="loginAction:" destination="2ET-6P-rhL" eventType="touchUpInside" id="hXm-JA-F1A"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Desired Username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wR5-Xi-tj9">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wR5-Xi-tj9">
                                                 <rect key="frame" x="30" y="285" width="540" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -520,14 +520,14 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
-                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="value" red="1" green="1" blue="1" alpha="0.55000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="delegate" destination="7qJ-yQ-C8N" id="4zG-N0-15V"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ttk-2p-Oiu">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ttk-2p-Oiu">
                                                 <rect key="frame" x="30" y="331" width="540" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -535,7 +535,7 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
-                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="value" red="1" green="1" blue="1" alpha="0.55000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -550,7 +550,7 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
-                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="value" red="1" green="1" blue="1" alpha="0.55000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -565,7 +565,7 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
-                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="value" red="1" green="1" blue="1" alpha="0.55000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -676,16 +676,16 @@
                     </view>
                     <connections>
                         <outlet property="centerYConstraint" destination="h60-G2-DBg" id="HjL-He-aop"/>
-                        <outlet property="companyTextField" destination="ttk-2p-Oiu" id="ALV-mc-bxb"/>
+                        <outlet property="confirmTextField" destination="Imu-Ho-Hux" id="0Fg-dP-iyj"/>
                         <outlet property="createAccountButton" destination="BxF-Uu-hzv" id="uIF-K7-A5h"/>
+                        <outlet property="emailTextField" destination="ttk-2p-Oiu" id="ozv-fi-hyS"/>
+                        <outlet property="nameTextField" destination="wR5-Xi-tj9" id="p0x-P3-Fpl"/>
                         <outlet property="passwordTextField" destination="LhM-Gg-HBi" id="kOy-II-Z29"/>
-                        <outlet property="rcPasswordTextField" destination="Imu-Ho-Hux" id="khU-ei-DkY"/>
                         <outlet property="scrollView" destination="YvI-2L-nME" id="Wnk-Cq-exK"/>
-                        <outlet property="usernameTextField" destination="wR5-Xi-tj9" id="d4g-hu-mkq"/>
-                        <outletCollection property="textFields" destination="wR5-Xi-tj9" collectionClass="NSMutableArray" id="0HS-Iq-Itg"/>
-                        <outletCollection property="textFields" destination="ttk-2p-Oiu" collectionClass="NSMutableArray" id="jox-Vf-ZMR"/>
-                        <outletCollection property="textFields" destination="LhM-Gg-HBi" collectionClass="NSMutableArray" id="F1i-hD-4DK"/>
-                        <outletCollection property="textFields" destination="Imu-Ho-Hux" collectionClass="NSMutableArray" id="ICj-Ae-FdX"/>
+                        <outletCollection property="textFields" destination="wR5-Xi-tj9" collectionClass="NSMutableArray" id="0vB-1w-ZFu"/>
+                        <outletCollection property="textFields" destination="ttk-2p-Oiu" collectionClass="NSMutableArray" id="u04-PW-wzo"/>
+                        <outletCollection property="textFields" destination="LhM-Gg-HBi" collectionClass="NSMutableArray" id="IcM-MZ-seT"/>
+                        <outletCollection property="textFields" destination="Imu-Ho-Hux" collectionClass="NSMutableArray" id="ujQ-y2-xqi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8xL-40-e5p" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -789,7 +789,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="95" y="55" width="492" height="29.5"/>
+                                                        <rect key="frame" x="95" y="55" width="492" height="30"/>
                                                     </variation>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purpose:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwd-sL-y6A">
@@ -847,7 +847,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kN-Xc-qcC">
-                                                    <rect key="frame" x="18" y="11" width="41" height="21.5"/>
+                                                    <rect key="frame" x="18" y="11" width="41" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -953,7 +953,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="18" y="38" width="564" height="119.5"/>
+                                                        <rect key="frame" x="18" y="38" width="564" height="120"/>
                                                     </variation>
                                                     <connections>
                                                         <outlet property="delegate" destination="uCm-Wc-KTA" id="NJd-SF-Kkb"/>
@@ -1072,13 +1072,13 @@
                                                     <exclude reference="vrC-D0-5Vn"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="nvu-5l-l4I"/>
-                                                    <exclude reference="rGb-7K-9aS"/>
-                                                    <exclude reference="srF-py-1mM"/>
                                                     <exclude reference="Aya-6s-zkP"/>
                                                     <exclude reference="GDx-6o-0YT"/>
                                                     <exclude reference="lUw-En-CIe"/>
                                                     <exclude reference="web-nG-aDj"/>
+                                                    <exclude reference="nvu-5l-l4I"/>
+                                                    <exclude reference="rGb-7K-9aS"/>
+                                                    <exclude reference="srF-py-1mM"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -1087,13 +1087,13 @@
                                                     <include reference="vrC-D0-5Vn"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="nvu-5l-l4I"/>
-                                                    <include reference="rGb-7K-9aS"/>
-                                                    <include reference="srF-py-1mM"/>
                                                     <include reference="Aya-6s-zkP"/>
                                                     <include reference="GDx-6o-0YT"/>
                                                     <include reference="lUw-En-CIe"/>
                                                     <include reference="web-nG-aDj"/>
+                                                    <include reference="nvu-5l-l4I"/>
+                                                    <include reference="rGb-7K-9aS"/>
+                                                    <include reference="srF-py-1mM"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

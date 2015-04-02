@@ -16,15 +16,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var textFields: [UITextField]!
     
-    @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var companyTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var rcPasswordTextField: UITextField!
+    @IBOutlet weak var confirmTextField: UITextField!
     @IBOutlet weak var createAccountButton: UIButton!
     
     @IBOutlet weak var centerYConstraint: NSLayoutConstraint!
     var centerYConstraintConstant: CGFloat? = nil
-    let textfieldOffset:CGFloat = 25
+    let textfieldOffset:CGFloat = 15
     
     let transitionManager = TransitionManager()
     
@@ -39,8 +39,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             textField.layer.borderColor = UIColor.whiteColor().CGColor
             textField.layer.cornerRadius = 5.0
         }
-        
-        centerYConstraintConstant = centerYConstraint.constant
         
         createAccountButton.layer.cornerRadius = 5.0
     }
@@ -66,7 +64,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
+    
+    
     func keyboardWasShown(aNotification: NSNotification) {
+        centerYConstraintConstant = centerYConstraint.constant
+        
         if let info = aNotification.userInfo {
             var kbSize: CGSize = (info[UIKeyboardFrameBeginUserInfoKey] as NSValue).CGRectValue().size
             
@@ -90,9 +92,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
         
-        if let originalConstant = centerYConstraintConstant {
-            centerYConstraint.constant = originalConstant
-        }
+        centerYConstraint.constant = centerYConstraintConstant!
     }
     
     @IBAction func dismissKeyboardTapGesture(sender: AnyObject) {
