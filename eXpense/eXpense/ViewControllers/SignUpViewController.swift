@@ -64,8 +64,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
-    
-    
     func keyboardWasShown(aNotification: NSNotification) {
         centerYConstraintConstant = centerYConstraint.constant
         

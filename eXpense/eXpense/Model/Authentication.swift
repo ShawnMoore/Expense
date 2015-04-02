@@ -17,6 +17,8 @@ class Authentication: NSObject {
     let usernameKey = "Username"
     /// The keychain key to the Password
     let passwordKey = "Password"
+    /// The keychain key to the Bearer
+    let bearerKey = "Bearer"
     
     let context = LAContext()
     
@@ -81,6 +83,40 @@ class Authentication: NSObject {
         var value: NSString? = nil
         
         let keyToSearchFor = passwordKey
+        
+        let query = [
+            kSecClass as NSString :
+                kSecClassGenericPassword as NSString,
+            kSecAttrService as NSString : service,
+            kSecAttrAccount as NSString : keyToSearchFor,
+            kSecReturnData as NSString : kCFBooleanTrue
+            ] as NSDictionary
+        
+        var returnedData: Unmanaged<AnyObject>? = nil
+        let results = Int(SecItemCopyMatching(query, &returnedData))
+        
+        if results == Int(errSecSuccess){
+            
+            let data = returnedData!.takeRetainedValue() as NSData
+            
+            value = NSString(data: data, encoding: NSUTF8StringEncoding)
+            
+        }
+        
+        return (value, results)
+    }
+    
+    /**
+        Retrieves the Bearer from the Device's Keychain
+    
+        :returns: - value: The optional value of the returned bearer
+                  - errorCode: Int value of the error code returned from the keychain api
+    */
+    func retrieveBearer() -> (value: NSString?, errorCode: Int)
+    {
+        var value: NSString? = nil
+        
+        let keyToSearchFor = bearerKey
         
         let query = [
             kSecClass as NSString :
@@ -187,6 +223,47 @@ class Authentication: NSObject {
     }
     
     /**
+        Inserts or updates the bearer within the Device's Keychain
+    
+        :param: bearerValue The string value of the bearer to be inserted
+    
+        :returns: - insertStatus: Int value of the error code returned from the keychain api when inserting the bear
+                  - errorCode: Possible Int value of the error code returned from the keychain api when updating the bearer
+    */
+    func insertBearer(bearerValue: String) -> (insertStatus: Int, updateStatus: Int?)
+    {
+        let key = bearerKey
+        
+        let value = bearerValue
+        let valueData = value.dataUsingEncoding(NSUTF8StringEncoding,
+            allowLossyConversion: false)
+        
+        let secItem = [
+            kSecClass as NSString :
+                kSecClassGenericPassword as NSString,
+            kSecAttrService as NSString : service,
+            kSecAttrAccount as NSString : key,
+            kSecValueData as NSString : valueData!
+            ] as NSDictionary
+        
+        var result: Unmanaged<AnyObject>? = nil
+        let insertStatus = Int(SecItemAdd(secItem, &result))
+        var updateStatus:Int? = nil
+        
+        if insertStatus == Int(errSecDuplicateItem)
+        {
+            let update = [
+                kSecValueData as NSString : valueData!,
+                kSecAttrComment as NSString : "Updated Bearer"
+                ] as NSDictionary
+            
+            updateStatus = Int(SecItemUpdate(secItem, update))
+        }
+        
+        return (insertStatus, updateStatus)
+    }
+    
+    /**
         Deletes the Username from the Device's Keychain
     
         :returns: - foundStatus: Int value of the error code returned from the keychain api when locating the username
@@ -199,7 +276,6 @@ class Authentication: NSObject {
         let query = [
             kSecClass as NSString :
                 kSecClassGenericPassword as NSString,
-            
             kSecAttrService as NSString : service,
             kSecAttrAccount as NSString : keyToSearchFor,
             ] as NSDictionary
@@ -229,7 +305,6 @@ class Authentication: NSObject {
         let query = [
             kSecClass as NSString :
                 kSecClassGenericPassword as NSString,
-            
             kSecAttrService as NSString : service,
             kSecAttrAccount as NSString : keyToSearchFor,
             ] as NSDictionary
@@ -247,7 +322,36 @@ class Authentication: NSObject {
     }
     
     /**
-        To be used upon correct verification, 
+        Deletes the Bearer from the Device's Keychain
+    
+        :returns: - foundStatus: Int value of the error code returned from the keychain api when locating the bearer
+                  - deleteStatus: Possible Int value of the error code returned from the keychain api when deleting the bearer
+    */
+    func deleteBearer() -> (foundStatus: Int, deleteStatus: Int?)
+    {
+        let keyToSearchFor = bearerKey
+        
+        let query = [
+            kSecClass as NSString :
+                kSecClassGenericPassword as NSString,
+            kSecAttrService as NSString : service,
+            kSecAttrAccount as NSString : keyToSearchFor,
+            ] as NSDictionary
+        
+        
+        var result: Unmanaged<AnyObject>? = nil
+        let foundExisting = Int(SecItemCopyMatching(query, &result))
+        var deleted: Int? = nil
+        
+        if foundExisting == Int(errSecSuccess){
+            deleted = Int(SecItemDelete(query))
+        }
+        
+        return (foundExisting, deleted)
+    }
+    
+    /**
+        To be used upon correct verification,
         adds or updates username in keychain access
     
         :returns: tuple of error code based on completion.
@@ -274,6 +378,11 @@ class Authentication: NSObject {
         return (usernameStatus, passwordStatus);
     }
     
+    /**
+        Checks whether or not the username and password exists in the keychain
+    
+        :returns: bool value
+    */
     func keychainUsernameAndPasswordExist() -> Bool
     {
         var results = false

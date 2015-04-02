@@ -788,9 +788,6 @@
                                                     <rect key="frame" x="92" y="55" width="495" height="29.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="95" y="55" width="492" height="30"/>
-                                                    </variation>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purpose:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwd-sL-y6A">
                                                     <rect key="frame" x="18" y="55" width="69" height="29.5"/>
@@ -952,9 +949,6 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="18" y="38" width="564" height="120"/>
-                                                    </variation>
                                                     <connections>
                                                         <outlet property="delegate" destination="uCm-Wc-KTA" id="NJd-SF-Kkb"/>
                                                     </connections>
@@ -1012,12 +1006,12 @@
                         <outlet property="categoryPicker" destination="Gzx-Ae-Nx6" id="Zi0-Ko-0Ru"/>
                         <outlet property="descriptionView" destination="9sx-aq-nvB" id="obZ-xi-f9Y"/>
                         <outlet property="recieptPhotoButton" destination="ZFs-vJ-Suj" id="BdJ-I0-4Wa"/>
-                        <segue destination="cA8-T6-HUA" kind="show" id="9mP-JV-fr8"/>
+                        <segue destination="cA8-T6-HUA" kind="show" identifier="newOneTimeToNewTrip" id="9mP-JV-fr8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KjM-qo-Slx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3642" y="1306.5"/>
+            <point key="canvasLocation" x="3690" y="363"/>
         </scene>
         <!--New Trip-->
         <scene sceneID="ChN-Ib-CM5">
@@ -1395,7 +1389,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UNa-mA-XnM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4684.5" y="1306.5"/>
+            <point key="canvasLocation" x="4918.5" y="363"/>
         </scene>
         <!--Trips View Controller-->
         <scene sceneID="Cp3-bF-0xH">
@@ -1411,7 +1405,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="uCm-Wc-KTA" kind="show" id="DBN-2N-pvE"/>
+                        <segue destination="uCm-Wc-KTA" kind="show" identifier="tripToNewOneTime" id="DBN-2N-pvE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2DQ-XX-zBP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1443,9 +1437,9 @@
         <image name="eXpenseLogoGray" width="1004" height="273"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ke5-W9-vH6"/>
+        <segue reference="18Y-Cv-tx3"/>
         <segue reference="h8j-w9-YNM"/>
-        <segue reference="KbD-mm-Utt"/>
+        <segue reference="Ke5-W9-vH6"/>
         <segue reference="3Nd-qh-I5o"/>
     </inferredMetricsTieBreakers>
 </document>
