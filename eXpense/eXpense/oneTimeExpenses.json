@@ -1,0 +1,32 @@
+[
+  {
+    "Id": 1,
+    "Name": "sample string 2",
+    "Amount": 3.1,
+    "Date": "2015-04-03T02:14:46.6757124+00:00",
+    "Location": "sample string 5",
+    "Description": "sample string 6",
+    "PhotoURI": "sample string 7",
+    "UserId": 8,
+    "TripId": 1,
+    "LastSeen": "2015-04-03T02:14:46.6913299+00:00",
+    "CreatedAt": "2015-04-03T02:14:46.6913299+00:00",
+    "UpdatedAt": "2015-04-03T02:14:46.6913299+00:00",
+    "Deleted": true
+  },
+  {
+    "Id": 1,
+    "Name": "sample string 2",
+    "Amount": 3.1,
+    "Date": "2015-04-03T02:14:46.6757124+00:00",
+    "Location": "sample string 5",
+    "Description": "sample string 6",
+    "PhotoURI": "sample string 7",
+    "UserId": 8,
+    "TripId": 1,
+    "LastSeen": "2015-04-03T02:14:46.6913299+00:00",
+    "CreatedAt": "2015-04-03T02:14:46.6913299+00:00",
+    "UpdatedAt": "2015-04-03T02:14:46.6913299+00:00",
+    "Deleted": true
+  }
+]
