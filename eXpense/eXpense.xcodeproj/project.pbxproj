@@ -19,6 +19,9 @@
 		293F44A91A84109200A43234 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44A81A84109200A43234 /* DashboardViewController.swift */; };
 		293F44AD1A8412B300A43234 /* NewOneTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44AC1A8412B300A43234 /* NewOneTimeViewController.swift */; };
 		293F44B11A84137700A43234 /* TripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44B01A84137700A43234 /* TripsViewController.swift */; };
+		295B83191AD8963B0032B9B4 /* OneTimeExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295B83181AD8963B0032B9B4 /* OneTimeExpense.swift */; };
+		295B831B1AD8C42A0032B9B4 /* TripExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295B831A1AD8C42A0032B9B4 /* TripExpense.swift */; };
+		298EC4151ACF331900764B54 /* oneTimeExpenses.json in Resources */ = {isa = PBXBuildFile; fileRef = 298EC4141ACF331900764B54 /* oneTimeExpenses.json */; };
 		299359871A97DF4D0091259A /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299359861A97DF4D0091259A /* TransitionManager.swift */; };
 		299E5E741A978566007A4A2E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E5E731A978566007A4A2E /* Model.swift */; };
 		29AE1D401A990FFF003C6142 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE1D3F1A990FFF003C6142 /* Authentication.swift */; };
@@ -53,6 +56,9 @@
 		293F44A81A84109200A43234 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = ViewControllers/DashboardViewController.swift; sourceTree = "<group>"; };
 		293F44AC1A8412B300A43234 /* NewOneTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewOneTimeViewController.swift; path = ViewControllers/NewOneTimeViewController.swift; sourceTree = "<group>"; };
 		293F44B01A84137700A43234 /* TripsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripsViewController.swift; path = ViewControllers/TripsViewController.swift; sourceTree = "<group>"; };
+		295B83181AD8963B0032B9B4 /* OneTimeExpense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OneTimeExpense.swift; path = Model/OneTimeExpense.swift; sourceTree = "<group>"; };
+		295B831A1AD8C42A0032B9B4 /* TripExpense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripExpense.swift; path = Model/TripExpense.swift; sourceTree = "<group>"; };
+		298EC4141ACF331900764B54 /* oneTimeExpenses.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = oneTimeExpenses.json; sourceTree = "<group>"; };
 		299359861A97DF4D0091259A /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		299E5E731A978566007A4A2E /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = Model/Model.swift; sourceTree = "<group>"; };
 		29AE1D3F1A990FFF003C6142 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authentication.swift; path = Model/Authentication.swift; sourceTree = "<group>"; };
@@ -139,6 +145,7 @@
 		293F449D1A840EF700A43234 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				C19767AA1AC9FBD2007B4D85 /* newTripTableViewController.swift */,
 				293F44AC1A8412B300A43234 /* NewOneTimeViewController.swift */,
 				293F44A21A840FA700A43234 /* TouchIDLoginViewController.swift */,
 				293F44A01A840F8800A43234 /* LandingViewController.swift */,
@@ -147,16 +154,42 @@
 				293F44A81A84109200A43234 /* DashboardViewController.swift */,
 				293F44B01A84137700A43234 /* TripsViewController.swift */,
 				C1C83EE61AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift */,
-				C19767AA1AC9FBD2007B4D85 /* newTripTableViewController.swift */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		295B831E1AD996CB0032B9B4 /* Local JSON */ = {
+			isa = PBXGroup;
+			children = (
+				298EC4141ACF331900764B54 /* oneTimeExpenses.json */,
+			);
+			name = "Local JSON";
+			sourceTree = "<group>";
+		};
+		295B831F1AD9971B0032B9B4 /* Model Classes */ = {
+			isa = PBXGroup;
+			children = (
+				299E5E731A978566007A4A2E /* Model.swift */,
+				29AE1D3F1A990FFF003C6142 /* Authentication.swift */,
+			);
+			name = "Model Classes";
+			sourceTree = "<group>";
+		};
+		295B83201AD9995A0032B9B4 /* Custom Data Classes */ = {
+			isa = PBXGroup;
+			children = (
+				295B831A1AD8C42A0032B9B4 /* TripExpense.swift */,
+				295B83181AD8963B0032B9B4 /* OneTimeExpense.swift */,
+			);
+			name = "Custom Data Classes";
 			sourceTree = "<group>";
 		};
 		299E5E751A978572007A4A2E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				299E5E731A978566007A4A2E /* Model.swift */,
-				29AE1D3F1A990FFF003C6142 /* Authentication.swift */,
+				295B831E1AD996CB0032B9B4 /* Local JSON */,
+				295B831F1AD9971B0032B9B4 /* Model Classes */,
+				295B83201AD9995A0032B9B4 /* Custom Data Classes */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -241,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				298EC4151ACF331900764B54 /* oneTimeExpenses.json in Resources */,
 				293F44811A84073000A43234 /* Main.storyboard in Resources */,
 				293F44861A84073000A43234 /* LaunchScreen.xib in Resources */,
 				293F44831A84073000A43234 /* Images.xcassets in Resources */,
@@ -261,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				295B83191AD8963B0032B9B4 /* OneTimeExpense.swift in Sources */,
 				293F44A51A840FC100A43234 /* LoginViewController.swift in Sources */,
 				293F44A91A84109200A43234 /* DashboardViewController.swift in Sources */,
 				C1C83EE71AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift in Sources */,
@@ -268,6 +303,7 @@
 				C19767AB1AC9FBD2007B4D85 /* newTripTableViewController.swift in Sources */,
 				293F44B11A84137700A43234 /* TripsViewController.swift in Sources */,
 				293F44A11A840F8800A43234 /* LandingViewController.swift in Sources */,
+				295B831B1AD8C42A0032B9B4 /* TripExpense.swift in Sources */,
 				299E5E741A978566007A4A2E /* Model.swift in Sources */,
 				293F44A31A840FA700A43234 /* TouchIDLoginViewController.swift in Sources */,
 				293F447C1A84073000A43234 /* AppDelegate.swift in Sources */,
