@@ -10,7 +10,6 @@ import UIKit
 
 class NewOneTimeExpenseTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
-    @IBOutlet weak var costTextField: UITextField!
     @IBOutlet weak var descriptionView: UITextView!
     @IBOutlet weak var recieptPhotoButton: UIButton!
     @IBOutlet weak var categoryPicker: UIPickerView!
@@ -34,6 +33,7 @@ class NewOneTimeExpenseTableViewController: UITableViewController, UIPickerViewD
         descriptionView.layer.cornerRadius = 5
         descriptionView.layer.borderColor = UIColor.grayColor().CGColor
         descriptionView.layer.borderWidth = 0.2
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,14 +43,6 @@ class NewOneTimeExpenseTableViewController: UITableViewController, UIPickerViewD
     
     var imagePicker: UIImagePickerController!
     
-    @IBAction func appendDollarSign(sender: AnyObject) {
-        var userCost = costTextField.text
-        let array = Array(userCost)
-        if array[0] != "$" {
-            costTextField.text = "$" + userCost
-
-        }
-    }
     @IBAction func takeReceiptPhoto(sender: AnyObject) {
         
         var alert = UIAlertController(title: "Take Photo", message: "This is the button we will use to take a photo of a reciept", preferredStyle: UIAlertControllerStyle.Alert)
