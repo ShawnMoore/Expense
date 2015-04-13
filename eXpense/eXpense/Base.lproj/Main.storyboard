@@ -1424,9 +1424,9 @@
         <image name="eXpenseLogoGray" width="1004" height="273"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="3Nd-qh-I5o"/>
         <segue reference="Ke5-W9-vH6"/>
         <segue reference="h8j-w9-YNM"/>
-        <segue reference="KbD-mm-Utt"/>
-        <segue reference="3Nd-qh-I5o"/>
+        <segue reference="18Y-Cv-tx3"/>
     </inferredMetricsTieBreakers>
 </document>
