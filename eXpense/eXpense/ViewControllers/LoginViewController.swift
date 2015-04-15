@@ -27,7 +27,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         model = appDelegate.getModel()
         authModel = appDelegate.getAuthenticationModel()
@@ -45,7 +45,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         var username = authModel?.retrieveUsername()
         
         if (username?.errorCode == authModel?.errSecSuccess) {
-           emailTextField.text = username!.value
+           emailTextField.text = username!.value as! String
         }
         
         dispatch_async(dispatch_get_main_queue(), {
@@ -114,19 +114,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    override func shouldAutorotate() -> Bool {
-        return false
-    }
-    
-    override func supportedInterfaceOrientations() -> Int {
-        return 0
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
         if segue.identifier! == "loginToSignUp"
         {
-            let toViewController = segue.destinationViewController as UIViewController
+            let toViewController = segue.destinationViewController as! UIViewController
     
             toViewController.transitioningDelegate = self.transitionManager
         }

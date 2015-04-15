@@ -24,7 +24,7 @@ class Model: NSObject {
                         completionHandler(self, error.localizedDescription)
                     })
                 } else {
-                    self.parseOneTimeExpenses(data, completionHandler)
+                    self.parseOneTimeExpenses(data, completionHandler: completionHandler)
                 }
             })
             
@@ -49,7 +49,7 @@ class Model: NSObject {
                             completionHandler(self, error.localizedDescription)
                         })
                     } else {
-                        self.parseOneTimeExpenses(data, completionHandler)
+                        self.parseOneTimeExpenses(data, completionHandler: completionHandler)
                     }
                 })
                 
@@ -141,7 +141,7 @@ class Model: NSObject {
                         completionHandler(self, error.localizedDescription)
                     })
                 } else {
-                    self.parseTripExpenses(data, completionHandler)
+                    self.parseTripExpenses(data, completionHandler: completionHandler)
                 }
             })
             
@@ -166,7 +166,7 @@ class Model: NSObject {
                             completionHandler(self, error.localizedDescription)
                         })
                     } else {
-                        self.parseTripExpenses(data, completionHandler)
+                        self.parseTripExpenses(data, completionHandler: completionHandler)
                     }
                 })
                 
@@ -223,7 +223,7 @@ class Model: NSObject {
                                                     tripObject["LastSeen"] = tripLastSeen
                                                 }
                                                 
-                                                if let tripUpdatedAt = tripData["UpdatedAt"] as NSString? {
+                                                if let tripUpdatedAt = tripData["UpdatedAt"] as! NSString? {
                                                     tripObject["UpdatedAt"] = tripUpdatedAt
                                                 }
                                                 

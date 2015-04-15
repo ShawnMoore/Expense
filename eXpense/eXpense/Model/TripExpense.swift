@@ -56,17 +56,17 @@ class TripExpense: NSObject {
     
     init(dict: Dictionary<String, Any>)
     {
-        self.tripId = dict["Id"] as Int
-        self.name = dict["Name"] as String
-        self.startDate = dict["StartDate"] as String
+        self.tripId = dict["Id"] as! Int
+        self.name = dict["Name"] as! String
+        self.startDate = dict["StartDate"] as! String
         self.endDate = dict["EndDate"] as? String
         self.location = dict["Location"] as? String
         self.expenseDescription = dict["Description"] as? String
         self.lastSeen = dict["LastSeen"] as? String
-        self.createdAt = dict["CreatedAt"] as String
+        self.createdAt = dict["CreatedAt"] as! String
         self.updatedAt = dict["UpdatedAt"] as? String
-        self.deleted = dict["Deleted"] as Bool
-        self.userId = dict["UserId"] as Int
-        self.isComplete = dict["IsComplete"] as Bool
+        self.deleted = dict["Deleted"] as! Bool
+        self.userId = dict["UserId"] as! Int
+        self.isComplete = dict["IsComplete"] as! Bool
     }
 }

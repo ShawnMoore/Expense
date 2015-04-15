@@ -63,7 +63,7 @@ class Authentication: NSObject {
         
         if results == Int(errSecSuccess){
             
-            let data = returnedData!.takeRetainedValue() as NSData
+            let data = returnedData!.takeRetainedValue() as! NSData
             
             value = NSString(data: data, encoding: NSUTF8StringEncoding)
             
@@ -97,7 +97,7 @@ class Authentication: NSObject {
         
         if results == Int(errSecSuccess){
             
-            let data = returnedData!.takeRetainedValue() as NSData
+            let data = returnedData!.takeRetainedValue() as! NSData
             
             value = NSString(data: data, encoding: NSUTF8StringEncoding)
             
@@ -131,7 +131,7 @@ class Authentication: NSObject {
         
         if results == Int(errSecSuccess){
             
-            let data = returnedData!.takeRetainedValue() as NSData
+            let data = returnedData!.takeRetainedValue() as! NSData
             
             value = NSString(data: data, encoding: NSUTF8StringEncoding)
             

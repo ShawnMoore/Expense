@@ -16,7 +16,7 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         authModel = appDelegate.getAuthenticationModel()
 
@@ -50,7 +50,7 @@ class LandingViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let toViewController = segue.destinationViewController as UIViewController
+        let toViewController = segue.destinationViewController as! UIViewController
         
         toViewController.transitioningDelegate = self.transitionManager
         

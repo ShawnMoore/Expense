@@ -68,7 +68,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         centerYConstraintConstant = centerYConstraint.constant
         
         if let info = aNotification.userInfo {
-            var kbSize: CGSize = (info[UIKeyboardFrameBeginUserInfoKey] as NSValue).CGRectValue().size
+            var kbSize: CGSize = (info[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue().size
             
             let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0)
             scrollView.contentInset = contentInsets
@@ -103,7 +103,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-            let toViewController = segue.destinationViewController as UIViewController
+            let toViewController = segue.destinationViewController as! UIViewController
             
             toViewController.transitioningDelegate = self.transitionManager
 

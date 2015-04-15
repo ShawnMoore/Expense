@@ -19,7 +19,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         
         //retrieve the model from the AppDelegate
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         model = appDelegate.getModel()
         
 //        techCompanies.load(urlString) {
@@ -66,7 +66,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(prototypeCellIdentifier) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(prototypeCellIdentifier) as! UITableViewCell
         
         cell.textLabel?.text = "Row #\(indexPath.row)"
         cell.detailTextLabel?.text = "Subtitle #\(indexPath.row)"

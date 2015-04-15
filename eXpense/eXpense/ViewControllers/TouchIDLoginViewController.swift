@@ -19,7 +19,7 @@ class TouchIDLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         authModel = appDelegate.getAuthenticationModel()
         
@@ -39,7 +39,7 @@ class TouchIDLoginViewController: UIViewController {
                     [context .evaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, localizedReason: reason, reply: { (success: Bool, evalPolicyError: NSError?) -> Void in
                         if success
                         {
-                            if self.authModel!.authenticate(usernameValue!, password: passwordValue!)
+                            if self.authModel!.authenticate(usernameValue as! String, password: passwordValue as! String)
                             {
                                 dispatch_async(dispatch_get_main_queue(), {
                                     self.performSegueWithIdentifier("touchToDashboard", sender: self)
@@ -81,7 +81,7 @@ class TouchIDLoginViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let toViewController = segue.destinationViewController as UIViewController
+        let toViewController = segue.destinationViewController as! UIViewController
         
         toViewController.transitioningDelegate = self.transitionManager
         

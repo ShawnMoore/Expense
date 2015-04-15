@@ -70,17 +70,17 @@ class OneTimeExpense: NSObject {
     
     init(dict: Dictionary<String, Any>)
     {
-        self.name = dict["Name"] as String
-        self.amount = dict["Amount"] as Double
-        self.date = dict["Date"] as String
+        self.name = dict["Name"] as! String
+        self.amount = dict["Amount"] as! Double
+        self.date = dict["Date"] as! String
         self.location = dict["Location"] as? String
         self.expenseDescription = dict["Description"] as? String
         self.photoURI = dict["PhotoURI"] as? String
         self.userId = dict["UserId"] as? Int
         self.tripId = dict["TripId"] as? Int
         self.lastSeen = dict["LastSeen"] as? String
-        self.createdAt = dict["CreatedAt"] as String
+        self.createdAt = dict["CreatedAt"] as! String
         self.updatedAt = dict["UpdatedAt"] as? String
-        self.deleted = dict["Deleted"] as Bool
+        self.deleted = dict["Deleted"] as! Bool
     }
 }

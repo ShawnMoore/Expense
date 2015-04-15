@@ -15,7 +15,7 @@ class TripsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         model = appDelegate.getModel()
         
