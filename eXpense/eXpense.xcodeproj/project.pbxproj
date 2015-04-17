@@ -21,6 +21,8 @@
 		293F44B11A84137700A43234 /* TripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F44B01A84137700A43234 /* TripsViewController.swift */; };
 		295B83191AD8963B0032B9B4 /* OneTimeExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295B83181AD8963B0032B9B4 /* OneTimeExpense.swift */; };
 		295B831B1AD8C42A0032B9B4 /* TripExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295B831A1AD8C42A0032B9B4 /* TripExpense.swift */; };
+		297A3C761AE000CC0070C8D2 /* tripExpenses.json in Resources */ = {isa = PBXBuildFile; fileRef = 297A3C751AE000CC0070C8D2 /* tripExpenses.json */; };
+		297A3CA61AE0A4580070C8D2 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297A3CA51AE0A4580070C8D2 /* Expense.swift */; };
 		298EC4151ACF331900764B54 /* oneTimeExpenses.json in Resources */ = {isa = PBXBuildFile; fileRef = 298EC4141ACF331900764B54 /* oneTimeExpenses.json */; };
 		299359871A97DF4D0091259A /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299359861A97DF4D0091259A /* TransitionManager.swift */; };
 		299E5E741A978566007A4A2E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E5E731A978566007A4A2E /* Model.swift */; };
@@ -58,6 +60,8 @@
 		293F44B01A84137700A43234 /* TripsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripsViewController.swift; path = ViewControllers/TripsViewController.swift; sourceTree = "<group>"; };
 		295B83181AD8963B0032B9B4 /* OneTimeExpense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OneTimeExpense.swift; path = Model/OneTimeExpense.swift; sourceTree = "<group>"; };
 		295B831A1AD8C42A0032B9B4 /* TripExpense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripExpense.swift; path = Model/TripExpense.swift; sourceTree = "<group>"; };
+		297A3C751AE000CC0070C8D2 /* tripExpenses.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tripExpenses.json; sourceTree = "<group>"; };
+		297A3CA51AE0A4580070C8D2 /* Expense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Expense.swift; path = Model/Expense.swift; sourceTree = "<group>"; };
 		298EC4141ACF331900764B54 /* oneTimeExpenses.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = oneTimeExpenses.json; sourceTree = "<group>"; };
 		299359861A97DF4D0091259A /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		299E5E731A978566007A4A2E /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = Model/Model.swift; sourceTree = "<group>"; };
@@ -105,10 +109,10 @@
 		293F44781A84073000A43234 /* eXpense */ = {
 			isa = PBXGroup;
 			children = (
-				293F449D1A840EF700A43234 /* ViewControllers */,
 				293F447F1A84073000A43234 /* Main.storyboard */,
-				293F44791A84073000A43234 /* Supporting Files */,
 				299E5E751A978572007A4A2E /* Model */,
+				293F44791A84073000A43234 /* Supporting Files */,
+				293F449D1A840EF700A43234 /* ViewControllers */,
 			);
 			path = eXpense;
 			sourceTree = "<group>";
@@ -162,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				298EC4141ACF331900764B54 /* oneTimeExpenses.json */,
+				297A3C751AE000CC0070C8D2 /* tripExpenses.json */,
 			);
 			name = "Local JSON";
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				295B831A1AD8C42A0032B9B4 /* TripExpense.swift */,
+				297A3CA51AE0A4580070C8D2 /* Expense.swift */,
 				295B83181AD8963B0032B9B4 /* OneTimeExpense.swift */,
 			);
 			name = "Custom Data Classes";
@@ -274,6 +280,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				297A3C761AE000CC0070C8D2 /* tripExpenses.json in Resources */,
 				298EC4151ACF331900764B54 /* oneTimeExpenses.json in Resources */,
 				293F44811A84073000A43234 /* Main.storyboard in Resources */,
 				293F44861A84073000A43234 /* LaunchScreen.xib in Resources */,
@@ -295,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				297A3CA61AE0A4580070C8D2 /* Expense.swift in Sources */,
 				295B83191AD8963B0032B9B4 /* OneTimeExpense.swift in Sources */,
 				293F44A51A840FC100A43234 /* LoginViewController.swift in Sources */,
 				293F44A91A84109200A43234 /* DashboardViewController.swift in Sources */,

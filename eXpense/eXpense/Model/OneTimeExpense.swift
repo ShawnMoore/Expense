@@ -5,7 +5,7 @@
 //  Created by Shawn Moore on 4/10/15.
 //  Copyright (c) 2015 BoardPaq LLC. All rights reserved.
 //
-
+//  \SAMPLE JSON OUTPUT
 //  "Id": 1,
 //  "Name": "sample string 2",
 //  "Amount": 3.1,
@@ -23,6 +23,7 @@
 import UIKit
 
 class OneTimeExpense: NSObject {
+    var id: Int
     var name: String
     var amount: Double
     var date: String
@@ -36,9 +37,10 @@ class OneTimeExpense: NSObject {
     var updatedAt: String?
     var deleted: Bool
     
-    init(forName: String, amount: Double, date: String, createdAt: String, deleted: Bool)
+    init(forID: Int, name: String, amount: Double, date: String, createdAt: String, deleted: Bool)
     {
-        self.name = forName
+        self.id = forID
+        self.name = name
         self.amount = amount
         self.date = date
         self.location = nil
@@ -52,9 +54,10 @@ class OneTimeExpense: NSObject {
         self.deleted = deleted
     }
     
-    init(forName: String, amount: Double, date: String, createdAt: String, deleted: Bool, location: String, description: String, photoURI: String, userId: Int, tripId: Int, lastSeen: String, updatedAt: String)
+    init(forID: Int, name: String, amount: Double, date: String, createdAt: String, deleted: Bool, location: String, description: String, photoURI: String, userId: Int, tripId: Int, lastSeen: String, updatedAt: String)
     {
-        self.name = forName
+        self.id = forID
+        self.name = name
         self.amount = amount
         self.date = date
         self.location = location
@@ -70,6 +73,7 @@ class OneTimeExpense: NSObject {
     
     init(dict: Dictionary<String, Any>)
     {
+        self.id = dict["Id"] as! Int
         self.name = dict["Name"] as! String
         self.amount = dict["Amount"] as! Double
         self.date = dict["Date"] as! String

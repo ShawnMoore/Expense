@@ -74,46 +74,45 @@ class Model: NSObject {
         if let jsonResult = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: &jsonError) as? NSArray {
             if (jsonResult.count > 0) {
                 for expenseData in jsonResult {
-                    if let expenseName = expenseData["Name"] as? NSString {
-                        if let expenseAmount = expenseData["Amount"] as? Double {
-                            if let expenseDate = expenseData["Date"] as? NSString {
-                                if let expenseCreatedDate = expenseData["CreatedAt"] as? NSString {
-                                    if let expenseDeleted = expenseData["Deleted"] as? Bool{
-                                        
-                                        oneTimeObject["Name"] = expenseName
-                                        oneTimeObject["Amount"] = expenseAmount
-                                        oneTimeObject["Date"] = expenseDate
-                                        oneTimeObject["CreatedAt"] = expenseCreatedDate
-                                        oneTimeObject["Deleted"] = expenseDeleted
-                                        
-                                        if let expenseLocation = expenseData["Location"] as? NSString {
-                                            oneTimeObject["Location"] = expenseLocation
-                                        }
-                                        if let expenseDescription = expenseData["Description"] as? NSString {
-                                            oneTimeObject["Description"] = expenseDescription
-                                        }
-                                        if let expensePhotoURI = expenseData["PhotoURI"] as? NSString {
-                                            oneTimeObject["PhotoURI"] = expensePhotoURI
-                                        }
-                                        if let expenseUserId = expenseData["UserId"] as? Int {
-                                            oneTimeObject["UserId"] = expenseUserId
-                                        }
-                                        if let expenseTripId = expenseData["TripId"] as? Int {
-                                            oneTimeObject["TripId"] = expenseTripId
-                                        }
-                                        if let expenseLastSeen = expenseData["LastSeen"] as? NSString {
-                                            oneTimeObject["LastSeen"] = expenseLastSeen
-                                        }
-                                        if let expenseUpdatedAt = expenseData["UpdatedAt"] as? NSString {
-                                            oneTimeObject["UpdatedAt"] = expenseUpdatedAt
-                                        }
-                                        
-                                        oneTimeExpenses.append(OneTimeExpense(dict: oneTimeObject))
-                                    }
+                    if let expenseId           = expenseData["Id"] as? Int,
+                           expenseName         = expenseData["Name"] as? NSString,
+                           expenseAmount       = expenseData["Amount"] as? Double,
+                           expenseDate         = expenseData["Date"] as? NSString,
+                           expenseCreatedDate  = expenseData["CreatedAt"] as? NSString,
+                           expenseDeleted      = expenseData["Deleted"] as? Bool {
+                            
+                                oneTimeObject["Id"] = expenseId
+                                oneTimeObject["Name"] = expenseName
+                                oneTimeObject["Amount"] = expenseAmount
+                                oneTimeObject["Date"] = expenseDate
+                                oneTimeObject["CreatedAt"] = expenseCreatedDate
+                                oneTimeObject["Deleted"] = expenseDeleted
+
+                                if let expenseLocation = expenseData["Location"] as? NSString {
+                                    oneTimeObject["Location"] = expenseLocation
                                 }
-                            }
-                        }
+                                if let expenseDescription = expenseData["Description"] as? NSString {
+                                    oneTimeObject["Description"] = expenseDescription
+                                }
+                                if let expensePhotoURI = expenseData["PhotoURI"] as? NSString {
+                                    oneTimeObject["PhotoURI"] = expensePhotoURI
+                                }
+                                if let expenseUserId = expenseData["UserId"] as? Int {
+                                    oneTimeObject["UserId"] = expenseUserId
+                                }
+                                if let expenseTripId = expenseData["TripId"] as? Int {
+                                    oneTimeObject["TripId"] = expenseTripId
+                                }
+                                if let expenseLastSeen = expenseData["LastSeen"] as? NSString {
+                                    oneTimeObject["LastSeen"] = expenseLastSeen
+                                }
+                                if let expenseUpdatedAt = expenseData["UpdatedAt"] as? NSString {
+                                    oneTimeObject["UpdatedAt"] = expenseUpdatedAt
+                                }
+                                
+                                oneTimeExpenses.append(OneTimeExpense(dict: oneTimeObject))
                     }
+
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     completionHandler(self, nil)
@@ -191,49 +190,45 @@ class Model: NSObject {
         if let jsonResult = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: &jsonError) as? NSArray {
             if (jsonResult.count > 0) {
                 for tripData in jsonResult {
-                    if let tripId = tripData["Id"] as? NSString {
-                        if let tripName = tripData["Name"] as? NSString {
-                            if let tripStartDate = tripData["StartDate"] as? NSString {
-                                if let tripCreatedAt = tripData["CreatedAt"] as? NSString {
-                                    if let tripDeleted = tripData["Deleted"] as? Bool {
-                                        if let tripUserId = tripData["UserId"] as? Int {
-                                            if let tripIsComplete = tripData["IsComplete"] as? Bool {
-                                                
-                                                tripObject["Id"] = tripId
-                                                tripObject["Name"] = tripName
-                                                tripObject["StartDate"] = tripStartDate
-                                                tripObject["CreatedAt"] = tripCreatedAt
-                                                tripObject["Deleted"] = tripDeleted
-                                                tripObject["UserId"] = tripUserId
-                                                tripObject["IsComplete"] = tripIsComplete
-                                                
-                                                if let tripEndDate = tripData["EndDate"] as? NSString {
-                                                    tripObject["EndDate"] = tripEndDate
-                                                }
-                                                
-                                                if let tripLocation = tripData["Location"] as? NSString {
-                                                    tripObject["Location"] = tripLocation
-                                                }
-                                                
-                                                if let tripDescription = tripData["Description"] as? NSString {
-                                                    tripObject["Description"] = tripDescription
-                                                }
-                                                
-                                                if let tripLastSeen = tripData["LastSeen"] as? NSString {
-                                                    tripObject["LastSeen"] = tripLastSeen
-                                                }
-                                                
-                                                if let tripUpdatedAt = tripData["UpdatedAt"] as! NSString? {
-                                                    tripObject["UpdatedAt"] = tripUpdatedAt
-                                                }
-                                                
-                                                tripExpenses.append(TripExpense(dict: tripObject))
-                                            }
-                                        }
-                                    }
+                    
+                    if let tripId = tripData["Id"] as? Int,
+                           tripName = tripData["Name"] as? NSString,
+                           tripStartDate = tripData["StartDate"] as? NSString,
+                           tripCreatedAt = tripData["CreatedAt"] as? NSString,
+                           tripDeleted = tripData["Deleted"] as? Bool,
+                           tripUserId = tripData["UserId"] as? Int,
+                           tripIsComplete = tripData["IsComplete"] as? Bool {
+                            
+                                tripObject["Id"] = tripId
+                                tripObject["Name"] = tripName
+                                tripObject["StartDate"] = tripStartDate
+                                tripObject["CreatedAt"] = tripCreatedAt
+                                tripObject["Deleted"] = tripDeleted
+                                tripObject["UserId"] = tripUserId
+                                tripObject["IsComplete"] = tripIsComplete
+                                
+                                if let tripEndDate = tripData["EndDate"] as? NSString {
+                                    tripObject["EndDate"] = tripEndDate
                                 }
-                            }
-                        }
+                                
+                                if let tripLocation = tripData["Location"] as? NSString {
+                                    tripObject["Location"] = tripLocation
+                                }
+                                
+                                if let tripDescription = tripData["Description"] as? NSString {
+                                    tripObject["Description"] = tripDescription
+                                }
+                                
+                                if let tripLastSeen = tripData["LastSeen"] as? NSString {
+                                    tripObject["LastSeen"] = tripLastSeen
+                                }
+                                
+                                if let tripUpdatedAt = tripData["UpdatedAt"] as! NSString? {
+                                    tripObject["UpdatedAt"] = tripUpdatedAt
+                                }
+                                
+                                tripExpenses.append(TripExpense(dict: tripObject))
+                            
                     }
                 }
                 dispatch_async(dispatch_get_main_queue(), {
