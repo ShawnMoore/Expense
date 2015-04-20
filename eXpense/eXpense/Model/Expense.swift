@@ -8,37 +8,42 @@
 
 import UIKit
 
-//Trip Expense
-//
-//var tripId: Int
-//var name: String
-//var startDate: String
-//var endDate: String?
-//var location: String?
-//var expenseDescription: String?
-//var lastSeen: String?
-//var createdAt: String
-//var updatedAt: String?
-//var deleted: Bool
-//var userId: Int
-//var isComplete: Bool
-
-//One time expense
-//
-//var name: String
-//var amount: Double
-//var date: String
-//var location: String?
-//var expenseDescription: String?
-//var photoURI: String?
-//var userId: Int?
-//var tripId: Int?
-//var lastSeen: String?
-//var createdAt: String
-//var updatedAt: String?
-//var deleted: Bool
-
-
 class Expense: NSObject {
-   
+    
+    var id: Int
+    var name: String
+    var date: NSDate              //startDate for TRIPS, date for ONE TIME
+    var location: String?
+    var expenseDescription: String?
+    var deleted: Bool
+    var lastSeen: NSDate?
+    var createdAt: NSDate
+    var updatedAt: NSDate?
+    var userId: Int
+    
+    init(forId: Int, name: String, date: NSDate, deleted: Bool, createdAt: NSDate, userId: Int) {
+        self.id = forId
+        self.name = name
+        self.date = date
+        self.location = nil
+        self.expenseDescription = nil
+        self.deleted = deleted
+        self.lastSeen = nil
+        self.createdAt = createdAt
+        self.updatedAt = nil
+        self.userId = userId
+    }
+    
+    init(forId: Int, name: String, date: NSDate, location: String?, description: String?, deleted: Bool, lastSeen: NSDate?, createdAt: NSDate, updatedAt: NSDate?, userId: Int) {
+        self.id = forId
+        self.name = name
+        self.date = date
+        self.location = location
+        self.expenseDescription = description
+        self.deleted = deleted
+        self.lastSeen = lastSeen
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.userId = userId
+    }
 }

@@ -22,20 +22,20 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         model = appDelegate.getModel()
 
-        model?.loadOneTimeExpensesFromURLString("http://dalemusser.com/test/json/test.json") {
-            (object, error) -> Void in
-            println("Success")
-        }
+//        model?.loadOneTimeExpensesFromURLString("http://dalemusser.com/test/json/test.json") {
+//            (object, error) -> Void in
+//            println("Success")
+//        }
         
 //        model?.loadOneTimeExpensesFromLocalFile("oneTimeExpenses") {
 //            (object, error) -> Void in
 //            println("Success")
 //        }
         
-        model?.loadTripExpensesFromLocalFile("tripExpenses", completionHandler: {
-            (object, error) -> Void in
-            println("Success")
-        })
+//        model?.loadTripExpensesFromLocalFile("tripExpenses", completionHandler: {
+//            (object, error) -> Void in
+//            println("Success")
+//        })
         
         //Get the Navigation Bar from the Navigation Controller
         let navBar = self.navigationController!.navigationBar

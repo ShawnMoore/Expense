@@ -12,6 +12,14 @@ class Model: NSObject {
     var oneTimeExpenses: Array<NSObject> = Array<NSObject>()
     var tripExpenses: Array<NSObject> = Array<NSObject>()
     
+    private var dateFormatter: NSDateFormatter = NSDateFormatter()
+    private var dateFormatString = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSzzzzz"
+    
+    override init() {
+        dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = dateFormatString
+    }
+    
     func loadOneTimeExpensesFromURLString(fromURLString: String, completionHandler: (NSObject, String?) -> Void) {
         oneTimeExpenses = Array<NSObject>()
         if let url = NSURL(string: fromURLString) {
@@ -79,14 +87,16 @@ class Model: NSObject {
                            expenseAmount       = expenseData["Amount"] as? Double,
                            expenseDate         = expenseData["Date"] as? NSString,
                            expenseCreatedDate  = expenseData["CreatedAt"] as? NSString,
-                           expenseDeleted      = expenseData["Deleted"] as? Bool {
+                           expenseDeleted      = expenseData["Deleted"] as? Bool,
+                           expenseUserId       = expenseData["UserId"] as? Int {
                             
                                 oneTimeObject["Id"] = expenseId
                                 oneTimeObject["Name"] = expenseName
                                 oneTimeObject["Amount"] = expenseAmount
-                                oneTimeObject["Date"] = expenseDate
-                                oneTimeObject["CreatedAt"] = expenseCreatedDate
+                                oneTimeObject["Date"] = dateFormatter.dateFromString(expenseDate as String)!
+                                oneTimeObject["CreatedAt"] = dateFormatter.dateFromString(expenseCreatedDate as String)!
                                 oneTimeObject["Deleted"] = expenseDeleted
+                                oneTimeObject["UserId"] = expenseUserId
 
                                 if let expenseLocation = expenseData["Location"] as? NSString {
                                     oneTimeObject["Location"] = expenseLocation
@@ -97,17 +107,14 @@ class Model: NSObject {
                                 if let expensePhotoURI = expenseData["PhotoURI"] as? NSString {
                                     oneTimeObject["PhotoURI"] = expensePhotoURI
                                 }
-                                if let expenseUserId = expenseData["UserId"] as? Int {
-                                    oneTimeObject["UserId"] = expenseUserId
-                                }
                                 if let expenseTripId = expenseData["TripId"] as? Int {
                                     oneTimeObject["TripId"] = expenseTripId
                                 }
                                 if let expenseLastSeen = expenseData["LastSeen"] as? NSString {
-                                    oneTimeObject["LastSeen"] = expenseLastSeen
+                                    oneTimeObject["LastSeen"] = dateFormatter.dateFromString(expenseLastSeen as String)!
                                 }
                                 if let expenseUpdatedAt = expenseData["UpdatedAt"] as? NSString {
-                                    oneTimeObject["UpdatedAt"] = expenseUpdatedAt
+                                    oneTimeObject["UpdatedAt"] = dateFormatter.dateFromString(expenseUpdatedAt as String)!
                                 }
                                 
                                 oneTimeExpenses.append(OneTimeExpense(dict: oneTimeObject))
@@ -201,14 +208,14 @@ class Model: NSObject {
                             
                                 tripObject["Id"] = tripId
                                 tripObject["Name"] = tripName
-                                tripObject["StartDate"] = tripStartDate
-                                tripObject["CreatedAt"] = tripCreatedAt
+                                tripObject["StartDate"] = dateFormatter.dateFromString(tripStartDate as String)!
+                                tripObject["CreatedAt"] = dateFormatter.dateFromString(tripCreatedAt as String)!
                                 tripObject["Deleted"] = tripDeleted
                                 tripObject["UserId"] = tripUserId
                                 tripObject["IsComplete"] = tripIsComplete
                                 
                                 if let tripEndDate = tripData["EndDate"] as? NSString {
-                                    tripObject["EndDate"] = tripEndDate
+                                    tripObject["EndDate"] = dateFormatter.dateFromString(tripEndDate as String)
                                 }
                                 
                                 if let tripLocation = tripData["Location"] as? NSString {
@@ -220,15 +227,14 @@ class Model: NSObject {
                                 }
                                 
                                 if let tripLastSeen = tripData["LastSeen"] as? NSString {
-                                    tripObject["LastSeen"] = tripLastSeen
+                                    tripObject["LastSeen"] = dateFormatter.dateFromString(tripLastSeen as String)
                                 }
                                 
-                                if let tripUpdatedAt = tripData["UpdatedAt"] as! NSString? {
-                                    tripObject["UpdatedAt"] = tripUpdatedAt
+                                if let tripUpdatedAt = tripData["UpdatedAt"] as? NSString {
+                                    tripObject["UpdatedAt"] = dateFormatter.dateFromString(tripUpdatedAt as String)
                                 }
-                                
-                                tripExpenses.append(TripExpense(dict: tripObject))
                             
+                                tripExpenses.append(TripExpense(dict: tripObject))
                     }
                 }
                 dispatch_async(dispatch_get_main_queue(), {
