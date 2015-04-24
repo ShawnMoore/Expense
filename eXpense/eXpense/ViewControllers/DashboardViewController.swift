@@ -37,6 +37,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 //            println("Success")
 //        })
         
+        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses")
+        
         //Get the Navigation Bar from the Navigation Controller
         let navBar = self.navigationController!.navigationBar
         

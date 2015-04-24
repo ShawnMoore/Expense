@@ -11,6 +11,7 @@ import UIKit
 class TripExpense: Expense {
     var endDate: NSDate?
     var isComplete: Bool
+    var oneTimeExpenses: [OneTimeExpense] = [OneTimeExpense]()
     
     init(forName: String, id: Int, startDate: NSDate, createdAt: NSDate, deleted: Bool, userId: Int, isComplete: Bool)
     {

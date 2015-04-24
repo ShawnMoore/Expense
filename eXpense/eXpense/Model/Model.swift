@@ -9,8 +9,10 @@
 import UIKit
 
 class Model: NSObject {
-    var oneTimeExpenses: Array<NSObject> = Array<NSObject>()
-    var tripExpenses: Array<NSObject> = Array<NSObject>()
+    var totalExpenses: Array<Expense> = Array<Expense>()
+    
+    var oneTimeExpenses: Array<OneTimeExpense> = Array<OneTimeExpense>()
+    var tripExpenses: [Int: TripExpense] = [Int: TripExpense]()
     
     private var dateFormatter: NSDateFormatter = NSDateFormatter()
     private var dateFormatString = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSzzzzz"
@@ -20,8 +22,24 @@ class Model: NSObject {
         dateFormatter.dateFormat = dateFormatString
     }
     
+    func loadAllLocalExpenses(oneTimeFilename: String, tripFilename: String) {
+
+                loadTripExpensesFromLocalFile(tripFilename) {
+                    (object, error) -> Void in
+                    
+                        self.loadOneTimeExpensesFromLocalFile(oneTimeFilename) {
+                            (object, error) -> Void in
+                            println("Success")
+                            
+                            self.totalExpenses = self.oneTimeExpenses
+                            
+                            //self.tripExpenses.
+                        }
+                }
+    }
+    
     func loadOneTimeExpensesFromURLString(fromURLString: String, completionHandler: (NSObject, String?) -> Void) {
-        oneTimeExpenses = Array<NSObject>()
+        oneTimeExpenses = Array<OneTimeExpense>()
         if let url = NSURL(string: fromURLString) {
             let urlRequest = NSMutableURLRequest(URL: url)
             let session = NSURLSession.sharedSession()
@@ -45,7 +63,7 @@ class Model: NSObject {
     }
     
     func loadOneTimeExpensesFromLocalFile(filename: String, completionHandler: (NSObject, String?) -> Void) {
-        oneTimeExpenses = Array<NSObject>()
+        oneTimeExpenses = Array<OneTimeExpense>()
         if let filePath = NSBundle.mainBundle().pathForResource(filename, ofType: "json") {
             if let url = NSURL(fileURLWithPath: filePath) {
                 let urlRequest = NSMutableURLRequest(URL: url)
@@ -136,7 +154,7 @@ class Model: NSObject {
     }
     
     func loadTripExpensesFromURLString(fromURLString: String, completionHandler: (NSObject, String?) -> Void) {
-        oneTimeExpenses = Array<NSObject>()
+        tripExpenses = [Int: TripExpense]()
         if let url = NSURL(string: fromURLString) {
             let urlRequest = NSMutableURLRequest(URL: url)
             let session = NSURLSession.sharedSession()
@@ -160,7 +178,7 @@ class Model: NSObject {
     }
     
     func loadTripExpensesFromLocalFile(filename: String, completionHandler: (NSObject, String?) -> Void) {
-        oneTimeExpenses = Array<NSObject>()
+        tripExpenses = [Int: TripExpense]()
         if let filePath = NSBundle.mainBundle().pathForResource(filename, ofType: "json") {
             if let url = NSURL(fileURLWithPath: filePath) {
                 let urlRequest = NSMutableURLRequest(URL: url)
@@ -234,7 +252,7 @@ class Model: NSObject {
                                     tripObject["UpdatedAt"] = dateFormatter.dateFromString(tripUpdatedAt as String)
                                 }
                             
-                                tripExpenses.append(TripExpense(dict: tripObject))
+                                tripExpenses[tripId] = (TripExpense(dict: tripObject))
                     }
                 }
                 dispatch_async(dispatch_get_main_queue(), {
