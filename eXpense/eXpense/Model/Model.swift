@@ -24,18 +24,19 @@ class Model: NSObject {
     
     func loadAllLocalExpenses(oneTimeFilename: String, tripFilename: String) {
 
-                loadTripExpensesFromLocalFile(tripFilename) {
-                    (object, error) -> Void in
-                    
-                        self.loadOneTimeExpensesFromLocalFile(oneTimeFilename) {
-                            (object, error) -> Void in
-                            println("Success")
-                            
-                            self.totalExpenses = self.oneTimeExpenses
-                            
-                            //self.tripExpenses.
-                        }
-                }
+            loadTripExpensesFromLocalFile(tripFilename) {
+                (object, error) -> Void in
+                
+                    self.loadOneTimeExpensesFromLocalFile(oneTimeFilename) {
+                        (object, error) -> Void in
+                        
+                        self.totalExpenses = self.totalExpenses + self.oneTimeExpenses
+                        
+                        self.totalExpenses = self.totalExpenses + self.tripExpenses.values.array
+                        
+                        self.totalExpenses = sorted(self.totalExpenses) { $0.0.date.compare($1.date) == NSComparisonResult.OrderedDescending }
+                    }
+            }
     }
     
     func loadOneTimeExpensesFromURLString(fromURLString: String, completionHandler: (NSObject, String?) -> Void) {
@@ -125,17 +126,26 @@ class Model: NSObject {
                                 if let expensePhotoURI = expenseData["PhotoURI"] as? NSString {
                                     oneTimeObject["PhotoURI"] = expensePhotoURI
                                 }
-                                if let expenseTripId = expenseData["TripId"] as? Int {
-                                    oneTimeObject["TripId"] = expenseTripId
-                                }
                                 if let expenseLastSeen = expenseData["LastSeen"] as? NSString {
                                     oneTimeObject["LastSeen"] = dateFormatter.dateFromString(expenseLastSeen as String)!
                                 }
                                 if let expenseUpdatedAt = expenseData["UpdatedAt"] as? NSString {
                                     oneTimeObject["UpdatedAt"] = dateFormatter.dateFromString(expenseUpdatedAt as String)!
                                 }
-                                
-                                oneTimeExpenses.append(OneTimeExpense(dict: oneTimeObject))
+                            
+                                if let expenseTripId = expenseData["TripId"] as? Int {
+                                    oneTimeObject["TripId"] = expenseTripId
+                                    
+                                    if let trip = tripExpenses[expenseTripId] {
+                                        trip.oneTimeExpenses.append(OneTimeExpense(dict: oneTimeObject))
+                                    } else {
+                                        oneTimeExpenses.append(OneTimeExpense(dict: oneTimeObject))
+                                    }
+                                    
+                                } else {
+                                    oneTimeExpenses.append(OneTimeExpense(dict: oneTimeObject))
+                                }
+                            
                     }
 
                 }
