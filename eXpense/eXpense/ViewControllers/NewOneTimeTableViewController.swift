@@ -13,9 +13,14 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     var datePickerOn: Bool = false
     var categoryPickerOn: Bool = false
     
+    var model: Model?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        model = appDelegate.getModel()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
