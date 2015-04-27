@@ -15,6 +15,9 @@ enum Category: String {
     case Other = "Other"
     case Personal = "Personal"
     case Transportation = "Transportation"
+    
+    static let allValues = [Entertainment, Lodging, Meals, Personal, Transportation, Other]
+    
 }
 
 class OneTimeExpense: Expense {

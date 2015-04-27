@@ -13,7 +13,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     var datePickerOn: Bool = false
     var categoryPickerOn: Bool = false
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,7 +72,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             case 1:
                 cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
                 cell?.textLabel?.text = "Category:"
-                cell?.detailTextLabel?.text = "NOT DONE YET"
+                cell?.detailTextLabel?.text = Category.Other.rawValue
             case 2:
                 if categoryPickerOn {
                     let catPickerCell = tableView.dequeueReusableCellWithIdentifier("categoryPickerCell", forIndexPath: indexPath) as? PickerViewTableViewCell
@@ -180,17 +179,20 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         return 1
     }
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 5
+        return Category.allValues.count
     }
     
     //MARK: Delegates
-    /*func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        
-        return pickerData[row]
-    }*/
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        var pickerData = Category.allValues
+        return pickerData[row].rawValue
+    }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+        let cell = tableView(tableView, cellForRowAtIndexPath: NSIndexPath(forRow: 1, inSection: 0))
+        print(Category.allValues[row].rawValue)
+        cell.detailTextLabel?.text = Category.allValues[row].rawValue
+
     }
     /*
     // Override to support conditional editing of the table view.
