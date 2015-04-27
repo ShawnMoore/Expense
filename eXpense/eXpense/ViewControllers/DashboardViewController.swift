@@ -78,14 +78,17 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         cell.titleLabel.text = "\(dataExpense.name) - ID: \(dataExpense.id)"
         
-        if let location = dataExpense.location {
-            cell.detailLabel.text = "\(dateFormatter.stringFromDate(dataExpense.date)) | \(location)"
-        } else {
-            cell.detailLabel.text = "\(dateFormatter.stringFromDate(dataExpense.date))"
-        }
+        var detailString = dateFormatter.stringFromDate(dataExpense.date)
         
         if( dataExpense is TripExpense ) {
             cell.cellImage.image = UIImage(named: "TripIcon")
+            
+            if let endDate = (dataExpense as! TripExpense).endDate {
+                detailString += " - \(dateFormatter.stringFromDate(endDate))"
+            } else {
+                detailString += " - On Going"
+            }
+            
         } else if( dataExpense is OneTimeExpense ) {
             
             let oneTimeData: OneTimeExpense = dataExpense as! OneTimeExpense
@@ -105,7 +108,14 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                 cell.cellImage.image = UIImage(named: "OtherIcon3")
             }
             
+            if let location = oneTimeData.location {
+                detailString += " | \(location)"
+            }
+            
         }
+        
+        
+        cell.detailLabel.text = "\(detailString)"
         
         return cell
         
