@@ -11,10 +11,9 @@ import UIKit
 class TripsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var model: Model?
-    var tripIndex: Int?
+    var tripData: TripExpense?
     
     private let prototypeCellIdentifier = "expense_cells"
-    private var tripData: TripExpense?
     
     private var dateFormatter: NSDateFormatter = NSDateFormatter()
     private var dateFormatString = "MMM dd"
@@ -28,13 +27,7 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         dateFormatter.dateFormat = dateFormatString
         
-        if let index = tripIndex {
-            tripData = (model!.totalExpenses[index] as! TripExpense)
-            
-            self.navigationItem.title = tripData?.name
-        }
-        
-        
+        self.navigationItem.title = tripData!.name
         
 //        self.navigationController!.navigationBar.translucent = false
 //        self.navigationController!.navigationBar.barTintColor = UIColor(red: 37/255, green: 178/255, blue: 74/255, alpha: 1)

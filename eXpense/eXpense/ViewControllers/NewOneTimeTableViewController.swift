@@ -32,6 +32,12 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        self.navigationController?.setToolbarHidden(false, animated: false)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.setToolbarHidden(true, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -208,7 +214,9 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     func textViewDidChange(textView: UITextView) {
         tableView.beginUpdates()
+        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         tableView.endUpdates()
+        
     }
     /*
     // Override to support conditional editing of the table view.

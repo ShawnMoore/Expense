@@ -821,6 +821,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="999-oN-Ia6" id="bAe-qP-sUY"/>
                         <segue destination="aDd-Cr-JKl" kind="show" identifier="showTripDetail" id="LaN-Qo-Pse"/>
@@ -954,6 +955,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="uCm-Wc-KTA" kind="show" identifier="showExpense" id="pwk-Aa-pg0"/>
                     </connections>
@@ -965,9 +967,9 @@
         <!--New Expense-->
         <scene sceneID="lCs-H1-351">
             <objects>
-                <tableViewController id="uCm-Wc-KTA" customClass="NewOneTimeTableViewController" customModule="eXpense" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="uCm-Wc-KTA" customClass="NewOneTimeTableViewController" customModule="eXpense" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="QIt-aj-XxK">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="645"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -1168,11 +1170,14 @@
                             <outlet property="delegate" destination="uCm-Wc-KTA" id="8rY-hp-BnD"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="79w-9b-ApW"/>
+                        <barButtonItem title="Submit" id="0AZ-DP-fA8"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="New Expense" id="9kQ-AV-hry">
                         <barButtonItem key="backBarButtonItem" title=" " id="HiB-94-lRn"/>
                     </navigationItem>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="645"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="cA8-T6-HUA" kind="show" identifier="newOneTimeToNewTrip" id="9mP-JV-fr8"/>
                     </connections>
@@ -1186,7 +1191,7 @@
             <objects>
                 <tableViewController id="cA8-T6-HUA" customClass="newTripTableViewController" customModule="eXpense" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="e44-sc-QCx">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="645"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1528,13 +1533,16 @@
         <!--Navigation Controller-->
         <scene sceneID="9UW-Uk-HsP">
             <objects>
-                <navigationController id="w6M-zI-J89" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="w6M-zI-J89" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iR6-6K-cYJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="xEG-lM-JeF">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Gxr-qE-Nen" kind="relationship" relationship="rootViewController" id="CO6-rn-04c"/>
                     </connections>
@@ -1550,9 +1558,9 @@
         <image name="eXpenseLogoGray" width="1004" height="273"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KbD-mm-Utt"/>
-        <segue reference="h8j-w9-YNM"/>
         <segue reference="Ke5-W9-vH6"/>
-        <segue reference="a76-9a-u6n"/>
+        <segue reference="h8j-w9-YNM"/>
+        <segue reference="KbD-mm-Utt"/>
+        <segue reference="pwk-Aa-pg0"/>
     </inferredMetricsTieBreakers>
 </document>

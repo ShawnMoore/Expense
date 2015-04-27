@@ -9,7 +9,16 @@
 import UIKit
 
 class Model: NSObject {
-    var totalExpenses: Array<Expense> = Array<Expense>()
+    var totalExpenses: Array<Expense> {
+        get {
+            var array: Array<Expense> = Array<Expense>()
+            
+            array = array + self.oneTimeExpenses
+            array = array + self.tripExpenses.values.array
+            
+            return sorted(array) { $0.0.date.compare($0.1.date) == NSComparisonResult.OrderedDescending }
+        }
+    }
     
     var oneTimeExpenses: Array<OneTimeExpense> = Array<OneTimeExpense>()
     var tripExpenses: [Int: TripExpense] = [Int: TripExpense]()
@@ -30,13 +39,7 @@ class Model: NSObject {
                     self.loadOneTimeExpensesFromLocalFile(oneTimeFilename) {
                         (object, error) -> Void in
                         
-                        self.totalExpenses = self.totalExpenses + self.oneTimeExpenses
-                        
-                        self.totalExpenses = self.totalExpenses + self.tripExpenses.values.array
-                        
-                        self.totalExpenses = sorted(self.totalExpenses) { $0.0.date.compare($0.1.date) == NSComparisonResult.OrderedDescending }
-                        
-                        completionHandler()
+                            completionHandler()
                     }
             }
     }

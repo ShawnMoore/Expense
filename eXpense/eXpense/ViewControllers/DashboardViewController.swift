@@ -18,6 +18,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
     private let prototypeCellIdentifier = "expense_cells"
     private var selectedIndex: Int?
+    private var sortedArray: Array<Expense> = Array<Expense>()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -37,6 +38,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 //        }
         
         model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
+            self.sortedArray = self.sortedArray + self.model!.totalExpenses
             self.tableView.reloadData()
         })
         
@@ -56,6 +58,14 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         navBar.titleTextAttributes = titleTextAttributes
         navBar.tintColor = UIColor.whiteColor()
         
+        self.navigationController?.setToolbarHidden(true, animated: false)
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        println("Tap Tap")
+        sortedArray = Array<Expense>() + model!.totalExpenses
+        tableView.reloadData()
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -69,12 +79,12 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: Table View Data Source
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return model!.totalExpenses.count
+        return sortedArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(prototypeCellIdentifier) as! DashboardTableViewCell
-        let dataExpense = model!.totalExpenses[indexPath.row]
+        let dataExpense = self.sortedArray[indexPath.row]
 
         cell.cellImage.contentMode = UIViewContentMode.Center
         
@@ -116,7 +126,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             
         }
         
-        
         cell.detailLabel.text = "\(detailString)"
         
         return cell
@@ -127,11 +136,11 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         
         
-        if model!.totalExpenses[indexPath.row] is OneTimeExpense {
+        if self.sortedArray[indexPath.row] is OneTimeExpense {
             
             performSegueWithIdentifier("showExpense", sender: self)
             
-        } else if model!.totalExpenses[indexPath.row] is TripExpense {
+        } else if self.sortedArray[indexPath.row] is TripExpense {
             
             selectedIndex = indexPath.row
             
@@ -151,7 +160,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showTripDetail" {
-            (segue.destinationViewController as! TripsViewController).tripIndex = selectedIndex!
+            (segue.destinationViewController as! TripsViewController).tripData = sortedArray[selectedIndex!] as? TripExpense
         }
     }
     
