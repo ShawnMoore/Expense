@@ -12,10 +12,12 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: Class Variables
     var model: Model?
-    let prototypeCellIdentifier = "expense_cells"
     
     private var dateFormatter: NSDateFormatter = NSDateFormatter()
     private var dateFormatString = "MMM dd"
+    
+    private let prototypeCellIdentifier = "expense_cells"
+    private var selectedIndex: Int?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -121,10 +123,36 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        
+        if model!.totalExpenses[indexPath.row] is OneTimeExpense {
+            
+            performSegueWithIdentifier("showExpense", sender: self)
+            
+        } else if model!.totalExpenses[indexPath.row] is TripExpense {
+            
+            selectedIndex = indexPath.row
+            
+            performSegueWithIdentifier("showTripDetail", sender: self)
+            
+        }
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        
+    }
+    
     @IBAction func addNewExpense(sender: AnyObject) {
         
         performSegueWithIdentifier("showExpense", sender: self)
+        
+    }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showTripDetail" {
+            (segue.destinationViewController as! TripsViewController).tripIndex = selectedIndex!
+        }
     }
     
 }
