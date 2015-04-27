@@ -13,6 +13,8 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     var datePickerOn: Bool = false
     var categoryPickerOn: Bool = false
     
+    var expenseModel: OneTimeExpense?
+    
     var model: Model?
     
     override func viewDidLoad() {
@@ -198,7 +200,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         let cell = tableView(tableView, cellForRowAtIndexPath: NSIndexPath(forRow: 1, inSection: 0))
         print(Category.allValues[row].rawValue)
         cell.detailTextLabel?.text = Category.allValues[row].rawValue
-
+        tableView.reloadData()
     }
     /*
     // Override to support conditional editing of the table view.

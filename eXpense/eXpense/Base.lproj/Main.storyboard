@@ -1004,8 +1004,8 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g2m-2U-SGO">
-                                            <rect key="frame" x="74" y="52" width="423" height="102"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2m-2U-SGO">
+                                            <rect key="frame" x="8" y="29" width="584" height="133"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1053,7 +1053,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GEe-Za-rQL">
-                                            <rect key="frame" x="8" y="-2" width="584" height="162"/>
+                                            <rect key="frame" x="8" y="-1.5" width="584" height="162"/>
                                             <connections>
                                                 <outlet property="dataSource" destination="uCm-Wc-KTA" id="a6A-dP-EIS"/>
                                                 <outlet property="delegate" destination="uCm-Wc-KTA" id="iqQ-fU-OHr"/>
@@ -1536,6 +1536,6 @@
         <segue reference="KbD-mm-Utt"/>
         <segue reference="h8j-w9-YNM"/>
         <segue reference="Ke5-W9-vH6"/>
-        <segue reference="pwk-Aa-pg0"/>
+        <segue reference="a76-9a-u6n"/>
     </inferredMetricsTieBreakers>
 </document>
