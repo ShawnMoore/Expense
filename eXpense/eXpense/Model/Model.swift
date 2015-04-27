@@ -35,8 +35,6 @@ class Model: NSObject {
                         self.totalExpenses = self.totalExpenses + self.tripExpenses.values.array
                         
                         self.totalExpenses = sorted(self.totalExpenses) { $0.0.date.compare($0.1.date) == NSComparisonResult.OrderedDescending }
-                        
-                        println("")
                     }
             }
     }

@@ -80,7 +80,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         case 3:
             cell.cellImage.image = UIImage(named: "EntertainmentIcon")
         case 4:
-            cell.cellImage.image = UIImage(named: "OtherIcon")
+            cell.cellImage.image = UIImage(named: "OtherIcon2")
         case 5:
             cell.cellImage.image = UIImage(named: "PersonalIcon")
         default:

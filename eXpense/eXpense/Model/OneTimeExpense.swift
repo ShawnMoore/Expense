@@ -8,21 +8,33 @@
 
 import UIKit
 
+enum Category: String {
+    case Entertainment = "Entertainment"
+    case Lodging = "Lodging"
+    case Meals = "Meals"
+    case Other = "Other"
+    case Personal = "Personal"
+    case Travel = "Travel"
+}
+
 class OneTimeExpense: Expense {
     
     var amount: Double
+    var category: Category
     var photoURI: String?
     var tripId: Int?
     
-    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, userId: Int)
+    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, userId: Int, category: String)
     {
         self.amount = amount
+        self.category = Category(rawValue: category)!
         super.init(forId: forID, name: name, date: date, deleted: deleted, createdAt: createdAt, userId: userId)
     }
     
-    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, location: String?, description: String?, photoURI: String?, userId: Int, tripId: Int?, lastSeen: NSDate?, updatedAt: NSDate?)
+    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, location: String?, description: String?, photoURI: String?, userId: Int, tripId: Int?, lastSeen: NSDate?, updatedAt: NSDate?, category: Category)
     {
         self.amount = amount
+        self.category = category
         self.photoURI = photoURI
         self.tripId = tripId
         super.init(forId: forID, name: name, date: date, location: location, description: description, deleted: deleted, lastSeen: lastSeen, createdAt: createdAt, updatedAt: updatedAt, userId: userId)
