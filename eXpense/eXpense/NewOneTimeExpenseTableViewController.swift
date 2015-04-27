@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+import MobileCoreServices
 
 class NewOneTimeExpenseTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
@@ -14,6 +16,11 @@ class NewOneTimeExpenseTableViewController: UITableViewController, UIPickerViewD
     @IBOutlet weak var descriptionView: UITextView!
     @IBOutlet weak var recieptPhotoButton: UIButton!
     @IBOutlet weak var categoryPicker: UIPickerView!
+    @IBOutlet weak var receiptImageView: UIImageView!
+    
+    var receiptImage:UIImage?
+    var isFirstPhoto = 0
+    var imagePicker: UIImagePickerController!
     
     let pickerData = ["Entertainment","Lodging","Meals","Personal","Transportation","Other"]
 
@@ -41,8 +48,6 @@ class NewOneTimeExpenseTableViewController: UITableViewController, UIPickerViewD
         // Dispose of any resources that can be recreated.
     }
     
-    var imagePicker: UIImagePickerController!
-    
     @IBAction func appendDollarSign(sender: AnyObject) {
         var userCost = costTextField.text
         let array = Array(userCost)
@@ -52,10 +57,53 @@ class NewOneTimeExpenseTableViewController: UITableViewController, UIPickerViewD
         }
     }
     @IBAction func takeReceiptPhoto(sender: AnyObject) {
+        if isFirstPhoto == 0 {
+            //camera detected
+            if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
+                var picker = UIImagePickerController()
+                picker.delegate = self
+                picker.sourceType = UIImagePickerControllerSourceType.Camera
+                var mediaTypes: Array<AnyObject> = [kUTTypeImage]
+                picker.mediaTypes = mediaTypes
+                picker.allowsEditing = false
+                self.presentViewController(picker, animated: true, completion: nil)
+            }
+                
+                //no camera detected
+            else{
+                var alert = UIAlertController(title: "No Camera", message: "Your device must have a camera to take a picture of your reciepts", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
+        else if isFirstPhoto == 1 {
+            performSegueWithIdentifier("showReceipt", sender: self)
+        }
         
-        var alert = UIAlertController(title: "Take Photo", message: "This is the button we will use to take a photo of a reciept", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showReceipt" {
+            let destViewController = segue.destinationViewController as! ReceiptViewController
+            destViewController.receiptImage = receiptImage
+            destViewController.previousViewController = self
+            navigationItem.title = nil
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        let mediaType = info[UIImagePickerControllerMediaType] as! String
+        print(mediaType)
+        
+        //set image
+        receiptImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        
+        receiptImageView.image = receiptImage
+        recieptPhotoButton.setTitle("", forState: UIControlState.Normal)
+        isFirstPhoto = 1
+        
+        //dismiss camera view
+        picker.dismissViewControllerAnimated(true, completion: nil)
         
     }
     
@@ -77,6 +125,12 @@ class NewOneTimeExpenseTableViewController: UITableViewController, UIPickerViewD
         
     }
 
+    override func viewDidAppear(animated: Bool) {
+        navigationItem.title = "New Expense"
+        if receiptImage != nil {
+            receiptImageView.image = receiptImage
+        }
+    }
     
     // MARK: - Table view data source
 
