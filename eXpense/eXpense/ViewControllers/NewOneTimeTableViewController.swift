@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate {
     
     var datePickerOn: Bool = false
     var categoryPickerOn: Bool = false
@@ -23,6 +23,9 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         model = appDelegate.getModel()
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 67.0
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -201,6 +204,11 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         print(Category.allValues[row].rawValue)
         cell.detailTextLabel?.text = Category.allValues[row].rawValue
         tableView.reloadData()
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     /*
     // Override to support conditional editing of the table view.

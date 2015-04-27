@@ -864,10 +864,10 @@
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
+                                                            <exclude reference="70T-cK-UtR"/>
                                                             <exclude reference="FdW-MD-BuD"/>
                                                             <exclude reference="MfI-ZP-pif"/>
                                                             <exclude reference="zUA-Tn-Uqt"/>
-                                                            <exclude reference="70T-cK-UtR"/>
                                                         </mask>
                                                     </variation>
                                                 </imageView>
@@ -916,9 +916,9 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="Lns-Gs-9cs"/>
                                                     <exclude reference="sCW-dm-g3A"/>
                                                     <exclude reference="unK-Ih-AWb"/>
-                                                    <exclude reference="Lns-Gs-9cs"/>
                                                     <exclude reference="0dD-YS-RWQ"/>
                                                     <exclude reference="G8Q-gL-W70"/>
                                                     <exclude reference="nlw-ug-1Ni"/>
@@ -967,7 +967,7 @@
             <objects>
                 <tableViewController id="uCm-Wc-KTA" customClass="NewOneTimeTableViewController" customModule="eXpense" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="QIt-aj-XxK">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="645"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -978,6 +978,7 @@
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dCi-mr-28p">
                                             <rect key="frame" x="8" y="8" width="584" height="27"/>
+                                            <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
@@ -993,30 +994,36 @@
                                     <outlet property="cellTextField" destination="dCi-mr-28p" id="oDK-xx-5he"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="textAreaCell" rowHeight="171" id="von-CJ-j5H" customClass="TextAreaTableViewCell" customModule="eXpense" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="textAreaCell" rowHeight="67" id="von-CJ-j5H" customClass="TextAreaTableViewCell" customModule="eXpense" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="von-CJ-j5H" id="yPa-YN-3Ah">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gft-I6-pXf">
-                                            <rect key="frame" x="8" y="8" width="584" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="11" y="8" width="581" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="tO6-GB-NBh"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2m-2U-SGO">
-                                            <rect key="frame" x="8" y="29" width="584" height="133"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2m-2U-SGO">
+                                            <rect key="frame" x="8" y="29" width="584" height="29"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="uCm-Wc-KTA" id="cV3-ei-yfO"/>
+                                            </connections>
                                         </textView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="gft-I6-pXf" firstAttribute="top" secondItem="yPa-YN-3Ah" secondAttribute="topMargin" id="GeY-Ds-4RG"/>
                                         <constraint firstItem="g2m-2U-SGO" firstAttribute="leading" secondItem="yPa-YN-3Ah" secondAttribute="leadingMargin" id="Zav-T0-1Z6"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="g2m-2U-SGO" secondAttribute="trailing" id="etY-EX-qDW"/>
-                                        <constraint firstItem="gft-I6-pXf" firstAttribute="leading" secondItem="yPa-YN-3Ah" secondAttribute="leadingMargin" id="jez-Wd-eZW"/>
+                                        <constraint firstItem="gft-I6-pXf" firstAttribute="leading" secondItem="yPa-YN-3Ah" secondAttribute="leadingMargin" constant="3" id="jez-Wd-eZW"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="g2m-2U-SGO" secondAttribute="bottom" id="llc-mt-bJY"/>
                                         <constraint firstItem="g2m-2U-SGO" firstAttribute="top" secondItem="gft-I6-pXf" secondAttribute="bottom" id="qg9-Xt-nWU"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="gft-I6-pXf" secondAttribute="trailing" id="tMB-p1-04F"/>
@@ -1047,13 +1054,13 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryPickerCell" rowHeight="160" id="xaf-WA-cME" customClass="PickerViewTableViewCell" customModule="eXpense" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryPickerCell" rowHeight="150" id="xaf-WA-cME" customClass="PickerViewTableViewCell" customModule="eXpense" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xaf-WA-cME" id="RdJ-Mc-oKi">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GEe-Za-rQL">
-                                            <rect key="frame" x="8" y="-1.5" width="584" height="162"/>
+                                            <rect key="frame" x="8" y="-6.5" width="584" height="162"/>
                                             <connections>
                                                 <outlet property="dataSource" destination="uCm-Wc-KTA" id="a6A-dP-EIS"/>
                                                 <outlet property="delegate" destination="uCm-Wc-KTA" id="iqQ-fU-OHr"/>
@@ -1062,10 +1069,20 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="GEe-Za-rQL" secondAttribute="trailing" id="FDD-zc-YNq"/>
+                                        <constraint firstAttribute="bottom" secondItem="GEe-Za-rQL" secondAttribute="bottom" id="H9x-Ap-opU"/>
+                                        <constraint firstAttribute="bottom" secondItem="GEe-Za-rQL" secondAttribute="bottom" constant="20" symbolic="YES" id="Nvh-mJ-0SZ"/>
                                         <constraint firstItem="GEe-Za-rQL" firstAttribute="top" secondItem="RdJ-Mc-oKi" secondAttribute="topMargin" id="X7j-bG-rab"/>
                                         <constraint firstItem="GEe-Za-rQL" firstAttribute="bottom" secondItem="RdJ-Mc-oKi" secondAttribute="bottomMargin" id="XuF-Y0-ijD"/>
                                         <constraint firstItem="GEe-Za-rQL" firstAttribute="leading" secondItem="RdJ-Mc-oKi" secondAttribute="leadingMargin" id="mbE-x6-FZI"/>
+                                        <constraint firstItem="GEe-Za-rQL" firstAttribute="top" secondItem="RdJ-Mc-oKi" secondAttribute="top" id="qF0-9p-rFk"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Nvh-mJ-0SZ"/>
+                                            <exclude reference="X7j-bG-rab"/>
+                                            <exclude reference="XuF-Y0-ijD"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="Picker" destination="GEe-Za-rQL" id="9el-fz-GvL"/>
@@ -1155,7 +1172,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="HiB-94-lRn"/>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="1000"/>
+                    <size key="freeformSize" width="600" height="645"/>
                     <connections>
                         <segue destination="cA8-T6-HUA" kind="show" identifier="newOneTimeToNewTrip" id="9mP-JV-fr8"/>
                     </connections>
@@ -1169,7 +1186,7 @@
             <objects>
                 <tableViewController id="cA8-T6-HUA" customClass="newTripTableViewController" customModule="eXpense" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="e44-sc-QCx">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="645"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
