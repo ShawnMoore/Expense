@@ -28,6 +28,12 @@
 		299359871A97DF4D0091259A /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299359861A97DF4D0091259A /* TransitionManager.swift */; };
 		299E5E741A978566007A4A2E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E5E731A978566007A4A2E /* Model.swift */; };
 		29AE1D401A990FFF003C6142 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE1D3F1A990FFF003C6142 /* Authentication.swift */; };
+		44241A691AEDE224003C7DAF /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A681AEDE224003C7DAF /* TextFieldTableViewCell.swift */; };
+		44241A6B1AEDE2AA003C7DAF /* TextAreaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A6A1AEDE2AA003C7DAF /* TextAreaTableViewCell.swift */; };
+		44241A6D1AEDE303003C7DAF /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A6C1AEDE303003C7DAF /* PickerViewTableViewCell.swift */; };
+		44241A6F1AEDE370003C7DAF /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A6E1AEDE370003C7DAF /* DatePickerTableViewCell.swift */; };
+		44241A711AEDE40C003C7DAF /* NewOneTimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A701AEDE40C003C7DAF /* NewOneTimeTableViewController.swift */; };
+		44241A731AEDE9A4003C7DAF /* PhotoCaptureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A721AEDE9A4003C7DAF /* PhotoCaptureTableViewCell.swift */; };
 		C19767AB1AC9FBD2007B4D85 /* newTripTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19767AA1AC9FBD2007B4D85 /* newTripTableViewController.swift */; };
 		C1C83EE71AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C83EE61AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -68,6 +74,12 @@
 		299359861A97DF4D0091259A /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		299E5E731A978566007A4A2E /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = Model/Model.swift; sourceTree = "<group>"; };
 		29AE1D3F1A990FFF003C6142 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authentication.swift; path = Model/Authentication.swift; sourceTree = "<group>"; };
+		44241A681AEDE224003C7DAF /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextFieldTableViewCell.swift; path = Model/TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		44241A6A1AEDE2AA003C7DAF /* TextAreaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextAreaTableViewCell.swift; path = Model/TextAreaTableViewCell.swift; sourceTree = "<group>"; };
+		44241A6C1AEDE303003C7DAF /* PickerViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PickerViewTableViewCell.swift; path = Model/PickerViewTableViewCell.swift; sourceTree = "<group>"; };
+		44241A6E1AEDE370003C7DAF /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerTableViewCell.swift; path = Model/DatePickerTableViewCell.swift; sourceTree = "<group>"; };
+		44241A701AEDE40C003C7DAF /* NewOneTimeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewOneTimeTableViewController.swift; path = ViewControllers/NewOneTimeTableViewController.swift; sourceTree = "<group>"; };
+		44241A721AEDE9A4003C7DAF /* PhotoCaptureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCaptureTableViewCell.swift; path = Model/PhotoCaptureTableViewCell.swift; sourceTree = "<group>"; };
 		C19767AA1AC9FBD2007B4D85 /* newTripTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newTripTableViewController.swift; sourceTree = "<group>"; };
 		C1C83EE61AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOneTimeExpenseTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +106,11 @@
 			isa = PBXGroup;
 			children = (
 				290B81631AEC352000E6AEF5 /* DashboardTableViewCell.swift */,
+				44241A681AEDE224003C7DAF /* TextFieldTableViewCell.swift */,
+				44241A6A1AEDE2AA003C7DAF /* TextAreaTableViewCell.swift */,
+				44241A6C1AEDE303003C7DAF /* PickerViewTableViewCell.swift */,
+				44241A6E1AEDE370003C7DAF /* DatePickerTableViewCell.swift */,
+				44241A721AEDE9A4003C7DAF /* PhotoCaptureTableViewCell.swift */,
 			);
 			name = "Custom TableView Cells";
 			sourceTree = "<group>";
@@ -169,6 +186,7 @@
 				293F44A81A84109200A43234 /* DashboardViewController.swift */,
 				293F44B01A84137700A43234 /* TripsViewController.swift */,
 				C1C83EE61AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift */,
+				44241A701AEDE40C003C7DAF /* NewOneTimeTableViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -318,8 +336,10 @@
 				293F44A51A840FC100A43234 /* LoginViewController.swift in Sources */,
 				290B81641AEC352000E6AEF5 /* DashboardTableViewCell.swift in Sources */,
 				293F44A91A84109200A43234 /* DashboardViewController.swift in Sources */,
+				44241A6F1AEDE370003C7DAF /* DatePickerTableViewCell.swift in Sources */,
 				C1C83EE71AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift in Sources */,
 				293F44AD1A8412B300A43234 /* NewOneTimeViewController.swift in Sources */,
+				44241A711AEDE40C003C7DAF /* NewOneTimeTableViewController.swift in Sources */,
 				C19767AB1AC9FBD2007B4D85 /* newTripTableViewController.swift in Sources */,
 				293F44B11A84137700A43234 /* TripsViewController.swift in Sources */,
 				293F44A11A840F8800A43234 /* LandingViewController.swift in Sources */,
@@ -328,8 +348,12 @@
 				293F44A31A840FA700A43234 /* TouchIDLoginViewController.swift in Sources */,
 				293F447C1A84073000A43234 /* AppDelegate.swift in Sources */,
 				293F44A71A840FEB00A43234 /* SignUpViewController.swift in Sources */,
+				44241A691AEDE224003C7DAF /* TextFieldTableViewCell.swift in Sources */,
+				44241A6D1AEDE303003C7DAF /* PickerViewTableViewCell.swift in Sources */,
 				299359871A97DF4D0091259A /* TransitionManager.swift in Sources */,
 				29AE1D401A990FFF003C6142 /* Authentication.swift in Sources */,
+				44241A731AEDE9A4003C7DAF /* PhotoCaptureTableViewCell.swift in Sources */,
+				44241A6B1AEDE2AA003C7DAF /* TextAreaTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
