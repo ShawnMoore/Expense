@@ -107,7 +107,8 @@ class Model: NSObject {
                            expenseDate         = expenseData["Date"] as? NSString,
                            expenseCreatedDate  = expenseData["CreatedAt"] as? NSString,
                            expenseDeleted      = expenseData["Deleted"] as? Bool,
-                           expenseUserId       = expenseData["UserId"] as? Int {
+                           expenseUserId       = expenseData["UserId"] as? Int,
+                           expenseCategory     = expenseData["Category"] as? String{
                             
                                 oneTimeObject["Id"] = expenseId
                                 oneTimeObject["Name"] = expenseName
@@ -116,6 +117,7 @@ class Model: NSObject {
                                 oneTimeObject["CreatedAt"] = dateFormatter.dateFromString(expenseCreatedDate as String)!
                                 oneTimeObject["Deleted"] = expenseDeleted
                                 oneTimeObject["UserId"] = expenseUserId
+                                oneTimeObject["Category"] = expenseCategory
 
                                 if let expenseLocation = expenseData["Location"] as? NSString {
                                     oneTimeObject["Location"] = expenseLocation

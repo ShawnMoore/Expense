@@ -14,7 +14,7 @@ enum Category: String {
     case Meals = "Meals"
     case Other = "Other"
     case Personal = "Personal"
-    case Travel = "Travel"
+    case Transportation = "Transportation"
 }
 
 class OneTimeExpense: Expense {
@@ -31,10 +31,10 @@ class OneTimeExpense: Expense {
         super.init(forId: forID, name: name, date: date, deleted: deleted, createdAt: createdAt, userId: userId)
     }
     
-    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, location: String?, description: String?, photoURI: String?, userId: Int, tripId: Int?, lastSeen: NSDate?, updatedAt: NSDate?, category: Category)
+    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, location: String?, description: String?, photoURI: String?, userId: Int, tripId: Int?, lastSeen: NSDate?, updatedAt: NSDate?, category: String)
     {
         self.amount = amount
-        self.category = category
+        self.category = Category(rawValue: category)!
         self.photoURI = photoURI
         self.tripId = tripId
         super.init(forId: forID, name: name, date: date, location: location, description: description, deleted: deleted, lastSeen: lastSeen, createdAt: createdAt, updatedAt: updatedAt, userId: userId)
@@ -43,6 +43,7 @@ class OneTimeExpense: Expense {
     init(dict: Dictionary<String, Any>)
     {
         self.amount = dict["Amount"] as! Double
+        self.category = Category(rawValue: dict["Category"] as! String)!
         self.photoURI = dict["PhotoURI"] as? String
         self.tripId = dict["TripId"] as? Int
         
