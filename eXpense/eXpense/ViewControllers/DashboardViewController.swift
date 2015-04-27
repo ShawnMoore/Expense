@@ -14,6 +14,11 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     var model: Model?
     let prototypeCellIdentifier = "expense_cells"
     
+    private var dateFormatter: NSDateFormatter = NSDateFormatter()
+    private var dateFormatString = "MMM dd"
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     // MARK: Class Functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,13 +26,17 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         //retrieve the model from the AppDelegate
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         model = appDelegate.getModel()
+        
+        dateFormatter.dateFormat = dateFormatString
 
 //        model?.loadOneTimeExpensesFromURLString("http://dalemusser.com/test/json/test.json") {
 //            (object, error) -> Void in
 //            println("Success")
 //        }
         
-        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses")
+        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
+            self.tableView.reloadData()
+        })
         
         //Get the Navigation Bar from the Navigation Controller
         let navBar = self.navigationController!.navigationBar
@@ -58,37 +67,45 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: Table View Data Source
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 31
+        return model!.totalExpenses.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(prototypeCellIdentifier) as! DashboardTableViewCell
-        
-//        cell.textLabel?.text = "Row #\(indexPath.row)"
-//        cell.detailTextLabel?.text = "Subtitle #\(indexPath.row)"
+        let dataExpense = model!.totalExpenses[indexPath.row]
+
         cell.cellImage.contentMode = UIViewContentMode.Center
         
-        var image_to_use = indexPath.row % 7
+        cell.titleLabel.text = "\(dataExpense.name) - ID: \(dataExpense.id)"
         
-        switch image_to_use {
-        case 0:
-            cell.cellImage.image = UIImage(named: "MealIcon")
-        case 1:
-            cell.cellImage.image = UIImage(named: "TransportationIcon")
-        case 2:
-            cell.cellImage.image = UIImage(named: "LodgingIcon")
-        case 3:
-            cell.cellImage.image = UIImage(named: "EntertainmentIcon")
-        case 4:
-            cell.cellImage.image = UIImage(named: "OtherIcon2")
-        case 5:
-            cell.cellImage.image = UIImage(named: "PersonalIcon")
-        default:
-            cell.cellImage.image = UIImage(named: "TripIcon")
+        if let location = dataExpense.location {
+            cell.detailLabel.text = "\(dateFormatter.stringFromDate(dataExpense.date)) | \(location)"
+        } else {
+            cell.detailLabel.text = "\(dateFormatter.stringFromDate(dataExpense.date))"
         }
         
-        cell.titleLabel.text = "Row #\(indexPath.row)"
-        cell.detailLabel.text = "Subtitle #\(indexPath.row)"
+        if( dataExpense is TripExpense ) {
+            cell.cellImage.image = UIImage(named: "TripIcon")
+        } else if( dataExpense is OneTimeExpense ) {
+            
+            let oneTimeData: OneTimeExpense = dataExpense as! OneTimeExpense
+            
+            switch oneTimeData.category {
+            case Category.Entertainment:
+                cell.cellImage.image = UIImage(named: "EntertainmentIcon")
+            case Category.Lodging:
+                cell.cellImage.image = UIImage(named: "LodgingIcon")
+            case Category.Meals:
+                cell.cellImage.image = UIImage(named: "MealIcon")
+            case Category.Personal:
+                cell.cellImage.image = UIImage(named: "PersonalIcon")
+            case Category.Transportation:
+                cell.cellImage.image = UIImage(named: "TransportationIcon")
+            default:
+                cell.cellImage.image = UIImage(named: "OtherIcon3")
+            }
+            
+        }
         
         return cell
         

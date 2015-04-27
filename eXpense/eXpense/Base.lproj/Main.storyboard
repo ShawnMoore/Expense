@@ -753,7 +753,7 @@
                                                         <constraint firstAttribute="height" constant="31" id="EKe-cT-w3t"/>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="490" id="Ezf-Q3-wlV"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -822,6 +822,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="tableView" destination="999-oN-Ia6" id="bAe-qP-sUY"/>
                         <segue destination="kzy-9d-JYx" kind="show" id="QfV-9E-HNJ"/>
                     </connections>
                 </viewController>

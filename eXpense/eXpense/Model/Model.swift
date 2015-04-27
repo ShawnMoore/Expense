@@ -22,7 +22,7 @@ class Model: NSObject {
         dateFormatter.dateFormat = dateFormatString
     }
     
-    func loadAllLocalExpenses(oneTimeFilename: String, tripFilename: String) {
+    func loadAllLocalExpenses(oneTimeFilename: String, tripFilename: String, completionHandler: () -> Void) {
 
             loadTripExpensesFromLocalFile(tripFilename) {
                 (object, error) -> Void in
@@ -35,6 +35,8 @@ class Model: NSObject {
                         self.totalExpenses = self.totalExpenses + self.tripExpenses.values.array
                         
                         self.totalExpenses = sorted(self.totalExpenses) { $0.0.date.compare($0.1.date) == NSComparisonResult.OrderedDescending }
+                        
+                        completionHandler()
                     }
             }
     }
