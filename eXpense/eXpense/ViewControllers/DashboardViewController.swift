@@ -27,16 +27,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 //            println("Success")
 //        }
         
-//        model?.loadOneTimeExpensesFromLocalFile("oneTimeExpenses") {
-//            (object, error) -> Void in
-//            println("Success")
-//        }
-        
-//        model?.loadTripExpensesFromLocalFile("tripExpenses", completionHandler: {
-//            (object, error) -> Void in
-//            println("Success")
-//        })
-        
         model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses")
         
         //Get the Navigation Bar from the Navigation Controller
@@ -57,6 +47,10 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 65;
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -68,10 +62,33 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(prototypeCellIdentifier) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(prototypeCellIdentifier) as! DashboardTableViewCell
         
-        cell.textLabel?.text = "Row #\(indexPath.row)"
-        cell.detailTextLabel?.text = "Subtitle #\(indexPath.row)"
+//        cell.textLabel?.text = "Row #\(indexPath.row)"
+//        cell.detailTextLabel?.text = "Subtitle #\(indexPath.row)"
+        cell.cellImage.contentMode = UIViewContentMode.Center
+        
+        var image_to_use = indexPath.row % 7
+        
+        switch image_to_use {
+        case 0:
+            cell.cellImage.image = UIImage(named: "MealIcon")
+        case 1:
+            cell.cellImage.image = UIImage(named: "TransportationIcon")
+        case 2:
+            cell.cellImage.image = UIImage(named: "LodgingIcon")
+        case 3:
+            cell.cellImage.image = UIImage(named: "EntertainmentIcon")
+        case 4:
+            cell.cellImage.image = UIImage(named: "OtherIcon2")
+        case 5:
+            cell.cellImage.image = UIImage(named: "PersonalIcon")
+        default:
+            cell.cellImage.image = UIImage(named: "TripIcon")
+        }
+        
+        cell.titleLabel.text = "Row #\(indexPath.row)"
+        cell.detailLabel.text = "Subtitle #\(indexPath.row)"
         
         return cell
         

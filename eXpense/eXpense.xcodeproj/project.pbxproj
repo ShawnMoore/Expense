@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		290B81641AEC352000E6AEF5 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B81631AEC352000E6AEF5 /* DashboardTableViewCell.swift */; };
 		293F447C1A84073000A43234 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F447B1A84073000A43234 /* AppDelegate.swift */; };
 		293F44811A84073000A43234 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 293F447F1A84073000A43234 /* Main.storyboard */; };
 		293F44831A84073000A43234 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 293F44821A84073000A43234 /* Images.xcassets */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		290B81631AEC352000E6AEF5 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardTableViewCell.swift; path = Model/DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		293F44761A84073000A43234 /* eXpense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eXpense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		293F447A1A84073000A43234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		293F447B1A84073000A43234 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		290B81651AEC352800E6AEF5 /* Custom TableView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				290B81631AEC352000E6AEF5 /* DashboardTableViewCell.swift */,
+			);
+			name = "Custom TableView Cells";
+			sourceTree = "<group>";
+		};
 		293F446D1A84073000A43234 = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				293F447F1A84073000A43234 /* Main.storyboard */,
+				290B81651AEC352800E6AEF5 /* Custom TableView Cells */,
 				299E5E751A978572007A4A2E /* Model */,
 				293F44791A84073000A43234 /* Supporting Files */,
 				293F449D1A840EF700A43234 /* ViewControllers */,
@@ -309,6 +320,7 @@
 				295B83191AD8963B0032B9B4 /* OneTimeExpense.swift in Sources */,
 				293F44A51A840FC100A43234 /* LoginViewController.swift in Sources */,
 				C182E5531AEDA6CD00E509CC /* ReceiptViewController.swift in Sources */,
+				290B81641AEC352000E6AEF5 /* DashboardTableViewCell.swift in Sources */,
 				293F44A91A84109200A43234 /* DashboardViewController.swift in Sources */,
 				C1C83EE71AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift in Sources */,
 				293F44AD1A8412B300A43234 /* NewOneTimeViewController.swift in Sources */,
