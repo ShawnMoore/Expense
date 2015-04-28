@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -753,7 +753,7 @@
                                                         <constraint firstAttribute="height" constant="31" id="EKe-cT-w3t"/>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="490" id="Ezf-Q3-wlV"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -1053,13 +1053,13 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="INQ-bZ-sX5">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="175" id="INQ-bZ-sX5">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="INQ-bZ-sX5" id="TUH-5c-qT5">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFs-vJ-Suj">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFs-vJ-Suj">
                                                     <rect key="frame" x="18" y="60" width="564" height="30"/>
                                                     <state key="normal" title="Take a Photo of Your Receipt">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1084,7 +1084,7 @@
                                                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                                 </constraint>
                                                 <constraint firstItem="ZFs-vJ-Suj" firstAttribute="top" secondItem="TUH-5c-qT5" secondAttribute="topMargin" constant="52" id="cE8-xC-HX8">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="15"/>
                                                 </constraint>
                                                 <constraint firstItem="ZFs-vJ-Suj" firstAttribute="leading" secondItem="TUH-5c-qT5" secondAttribute="leadingMargin" constant="10" id="haE-3L-sXo"/>
                                                 <constraint firstItem="Tdd-9z-wXa" firstAttribute="top" secondItem="TUH-5c-qT5" secondAttribute="topMargin" constant="29" id="n4h-cJ-H47">
@@ -1522,50 +1522,70 @@
                         <viewControllerLayoutGuide type="bottom" id="GDp-Bd-x9v"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vKx-UE-OMP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AuZ-0M-5Kc">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMc-CF-RFm">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="64" width="600" height="936"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="400" id="6kO-h3-FcQ"/>
+                                    <constraint firstAttribute="height" constant="400" id="nDi-rj-nHQ"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="6kO-h3-FcQ"/>
+                                        <exclude reference="nDi-rj-nHQ"/>
+                                    </mask>
                                 </variation>
-                            </imageView>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="6kO-h3-FcQ"/>
+                                        <exclude reference="nDi-rj-nHQ"/>
+                                    </mask>
+                                </variation>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="GDp-Bd-x9v" firstAttribute="top" secondItem="AuZ-0M-5Kc" secondAttribute="bottom" constant="30" id="EuD-L8-zwR">
+                            <constraint firstItem="pMc-CF-RFm" firstAttribute="leading" secondItem="vKx-UE-OMP" secondAttribute="leading" constant="100" id="9GR-YB-M4I">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
-                            <constraint firstItem="AuZ-0M-5Kc" firstAttribute="top" secondItem="1Vo-y1-ab5" secondAttribute="bottom" constant="74" id="H6V-Ed-cAd">
+                            <constraint firstAttribute="centerY" secondItem="pMc-CF-RFm" secondAttribute="centerY" id="Hq8-Mu-6rI"/>
+                            <constraint firstAttribute="centerX" secondItem="pMc-CF-RFm" secondAttribute="centerX" id="c7a-Yi-r0J"/>
+                            <constraint firstItem="pMc-CF-RFm" firstAttribute="top" secondItem="vKx-UE-OMP" secondAttribute="top" constant="300" id="gxK-Jx-J54">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
-                            <constraint firstAttribute="trailingMargin" secondItem="AuZ-0M-5Kc" secondAttribute="trailing" constant="170" id="Rrw-mS-0gS">
-                                <variation key="heightClass=regular-widthClass=compact" constant="-20"/>
+                            <constraint firstAttribute="bottom" secondItem="pMc-CF-RFm" secondAttribute="bottom" constant="300" id="rL8-zT-KnY">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
-                            <constraint firstItem="AuZ-0M-5Kc" firstAttribute="leading" secondItem="vKx-UE-OMP" secondAttribute="leadingMargin" constant="91" id="suS-ql-nb0">
-                                <variation key="heightClass=regular-widthClass=compact" constant="-20"/>
+                            <constraint firstAttribute="trailing" secondItem="pMc-CF-RFm" secondAttribute="trailing" constant="100" id="um7-dH-Q5B">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="AuZ-0M-5Kc"/>
+                                <exclude reference="pMc-CF-RFm"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="H6V-Ed-cAd"/>
-                                <exclude reference="Rrw-mS-0gS"/>
-                                <exclude reference="suS-ql-nb0"/>
-                                <exclude reference="EuD-L8-zwR"/>
+                                <exclude reference="9GR-YB-M4I"/>
+                                <exclude reference="Hq8-Mu-6rI"/>
+                                <exclude reference="c7a-Yi-r0J"/>
+                                <exclude reference="gxK-Jx-J54"/>
+                                <exclude reference="rL8-zT-KnY"/>
+                                <exclude reference="um7-dH-Q5B"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="AuZ-0M-5Kc"/>
+                                <include reference="pMc-CF-RFm"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="H6V-Ed-cAd"/>
-                                <include reference="Rrw-mS-0gS"/>
-                                <include reference="suS-ql-nb0"/>
-                                <include reference="EuD-L8-zwR"/>
+                                <include reference="9GR-YB-M4I"/>
+                                <exclude reference="Hq8-Mu-6rI"/>
+                                <exclude reference="c7a-Yi-r0J"/>
+                                <include reference="gxK-Jx-J54"/>
+                                <include reference="rL8-zT-KnY"/>
+                                <include reference="um7-dH-Q5B"/>
                             </mask>
                         </variation>
                     </view>
@@ -1577,7 +1597,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="receiptImageView" destination="AuZ-0M-5Kc" id="3GB-mw-UO1"/>
+                        <outlet property="receiptScrollView" destination="pMc-CF-RFm" id="hno-jZ-Ga5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SCq-ff-O5W" userLabel="First Responder" sceneMemberID="firstResponder"/>

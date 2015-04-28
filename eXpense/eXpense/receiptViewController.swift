@@ -10,19 +10,100 @@ import UIKit
 import CoreData
 import MobileCoreServices
 
-class ReceiptViewController: UIViewController, UIPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+class ReceiptViewController: UIViewController, UIPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIScrollViewDelegate {
 
+    
+    @IBOutlet weak var receiptScrollView: UIScrollView!
+    
+    //get receipt image
     var receiptImage:UIImage?
-    var imageView: UIImageView!
-    var scrollView: UIScrollView!
-    var imagePicker: UIImagePickerController!
+    
+    //setup new camera
+    var imagePicker: UIImagePickerController?
     var previousViewController: UIViewController?
     
-    @IBOutlet weak var receiptImageView: UIImageView!
+    //initialize image view
+    var receiptImageView = UIImageView()
+
+    var minimumZoomScale:CGFloat = 1.0
+    var maximumZoomScale:CGFloat = 3.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        receiptScrollView.backgroundColor = UIColor.blackColor()
+        receiptScrollView.userInteractionEnabled = true
+        
+        receiptScrollView.delegate = self
+        receiptImageView.frame = CGRectMake(0, 0, receiptScrollView.frame.size.width, receiptScrollView.frame.size.height)
+        //receiptImageView.frame = CGRectMake(0, 0, receiptImage!.size.width, receiptImage!.size.height)
+        receiptScrollView.addSubview(receiptImageView)
+        receiptScrollView.contentSize = receiptImage!.size
+        
+        setUpScrollView()
+        
+    }
+    
+    func setUpScrollView() {
         receiptImageView.image = receiptImage
+        receiptImageView.contentMode = UIViewContentMode.Center
+        
+        //let scrollViewFrame = receiptScrollView.frame
+        let scaleWidth = receiptScrollView.frame.size.width / receiptScrollView.contentSize.width
+        let scaleHeight = receiptScrollView.frame.size.height / receiptScrollView.contentSize.height
+        let minScale = min(scaleHeight, scaleWidth)
+        
+        receiptScrollView.minimumZoomScale = minScale
+        receiptScrollView.maximumZoomScale = 1
+        receiptScrollView.zoomScale = minScale
+    }
+    
+    func centerScrollViewContents() {
+        let boundsSize = receiptScrollView.bounds.size
+        var contentsFrame = receiptImageView.frame
+        
+        if contentsFrame.size.width < boundsSize.width {
+            contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2
+        }
+        else {
+            contentsFrame.origin.x = 0
+        }
+        
+        if contentsFrame.size.height < boundsSize.height {
+            contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.width) / 2
+        }
+        else {
+            contentsFrame.origin.y = 0
+        }
+        
+        receiptImageView.frame = contentsFrame
+    }
+    
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        centerScrollViewContents()
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return receiptImageView
+    }
+    
+    override func viewDidLayoutSubviews() {
+        initScale()
+    }
+    
+    func initScale() {
+        let scrollViewFrameSize = receiptScrollView.frame.size
+        let imageSize = receiptImage!.size
+        let scaleWidth = scrollViewFrameSize.width / imageSize.width
+        let scaleHeight = scrollViewFrameSize.height / imageSize.height
+        
+        minimumZoomScale = min(scaleWidth, scaleHeight)
+        
+        receiptScrollView.minimumZoomScale = minimumZoomScale
+        receiptScrollView.maximumZoomScale = maximumZoomScale
+        
+        //scrollView.zoomScale = minimumZoomScale
+        receiptScrollView.setZoomScale(minimumZoomScale, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,7 +134,6 @@ class ReceiptViewController: UIViewController, UIPickerViewDelegate, UINavigatio
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! String
-        print(mediaType)
         
         //set image
         receiptImage = info[UIImagePickerControllerOriginalImage] as? UIImage

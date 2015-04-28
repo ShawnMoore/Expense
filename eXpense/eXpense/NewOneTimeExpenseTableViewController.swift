@@ -12,6 +12,7 @@ import MobileCoreServices
 
 class NewOneTimeExpenseTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
+    @IBOutlet weak var receiptLabel: UILabel!
     @IBOutlet weak var costTextField: UITextField!
     @IBOutlet weak var descriptionView: UITextView!
     @IBOutlet weak var recieptPhotoButton: UIButton!
@@ -31,6 +32,8 @@ class NewOneTimeExpenseTableViewController: UITableViewController, UIPickerViewD
         categoryPicker.delegate = self
         
         categoryPicker.selectRow(2, inComponent: 0, animated: false)
+        
+        receiptImageView.contentMode = .ScaleAspectFit
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
