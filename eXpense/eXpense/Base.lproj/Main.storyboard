@@ -19,9 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eXpenseBackground" translatesAutoresizingMaskIntoConstraints="NO" id="eQE-cP-dgi">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xn9-gm-l33">
                                 <rect key="frame" x="0.0" y="534" width="600" height="66"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -63,6 +60,9 @@
                                         <exclude reference="ZKD-Hg-Vo2"/>
                                     </mask>
                                 </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eXpenseBackground" translatesAutoresizingMaskIntoConstraints="NO" id="eQE-cP-dgi">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.14509803921568629" green="0.69803921568627447" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1281,7 +1281,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             <connections>
-                                                <outlet property="delegate" destination="uCm-Wc-KTA" id="9pE-iK-htn"/>
+                                                <outlet property="delegate" destination="cA8-T6-HUA" id="oUy-cT-e84"/>
                                             </connections>
                                         </textView>
                                     </subviews>
