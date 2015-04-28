@@ -33,6 +33,7 @@
 		44241A6F1AEDE370003C7DAF /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A6E1AEDE370003C7DAF /* DatePickerTableViewCell.swift */; };
 		44241A711AEDE40C003C7DAF /* NewOneTimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A701AEDE40C003C7DAF /* NewOneTimeTableViewController.swift */; };
 		44241A731AEDE9A4003C7DAF /* PhotoCaptureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A721AEDE9A4003C7DAF /* PhotoCaptureTableViewCell.swift */; };
+		44B8C0DB1AEF3197003D283C /* NewTripTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B8C0DA1AEF3197003D283C /* NewTripTableViewController.swift */; };
 		C19767AB1AC9FBD2007B4D85 /* newTripTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19767AA1AC9FBD2007B4D85 /* newTripTableViewController.swift */; };
 		C1C83EE71AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C83EE61AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -78,6 +79,7 @@
 		44241A6E1AEDE370003C7DAF /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerTableViewCell.swift; path = Model/DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		44241A701AEDE40C003C7DAF /* NewOneTimeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewOneTimeTableViewController.swift; path = ViewControllers/NewOneTimeTableViewController.swift; sourceTree = "<group>"; };
 		44241A721AEDE9A4003C7DAF /* PhotoCaptureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCaptureTableViewCell.swift; path = Model/PhotoCaptureTableViewCell.swift; sourceTree = "<group>"; };
+		44B8C0DA1AEF3197003D283C /* NewTripTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewTripTableViewController.swift; path = ViewControllers/NewTripTableViewController.swift; sourceTree = "<group>"; };
 		C19767AA1AC9FBD2007B4D85 /* newTripTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newTripTableViewController.swift; sourceTree = "<group>"; };
 		C1C83EE61AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOneTimeExpenseTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,6 +186,7 @@
 				293F44B01A84137700A43234 /* TripsViewController.swift */,
 				C1C83EE61AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift */,
 				44241A701AEDE40C003C7DAF /* NewOneTimeTableViewController.swift */,
+				44B8C0DA1AEF3197003D283C /* NewTripTableViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				299359871A97DF4D0091259A /* TransitionManager.swift in Sources */,
 				29AE1D401A990FFF003C6142 /* Authentication.swift in Sources */,
 				44241A731AEDE9A4003C7DAF /* PhotoCaptureTableViewCell.swift in Sources */,
+				44B8C0DB1AEF3197003D283C /* NewTripTableViewController.swift in Sources */,
 				44241A6B1AEDE2AA003C7DAF /* TextAreaTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
