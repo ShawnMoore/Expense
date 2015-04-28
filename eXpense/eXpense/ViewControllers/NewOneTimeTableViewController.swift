@@ -125,6 +125,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 cell?.detailTextLabel?.text = "NOT DONE YET"
             case 3:
                 cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? DatePickerTableViewCell
+                (cell as! DatePickerTableViewCell).location = indexPath
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
             }
