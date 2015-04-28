@@ -30,15 +30,15 @@ class ReceiptViewController: UIViewController, UIPickerViewDelegate, UINavigatio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        receiptScrollView.backgroundColor = UIColor.blackColor()
+
+        //receiptScrollView.backgroundColor = UIColor.blackColor()
         receiptScrollView.userInteractionEnabled = true
         
         receiptScrollView.delegate = self
-        receiptImageView.frame = CGRectMake(0, 0, receiptScrollView.frame.size.width, receiptScrollView.frame.size.height)
-        //receiptImageView.frame = CGRectMake(0, 0, receiptImage!.size.width, receiptImage!.size.height)
-        receiptScrollView.addSubview(receiptImageView)
+        receiptImageView.frame = CGRectMake(0, 0, receiptImage!.size.width, receiptImage!.size.height)
+        
         receiptScrollView.contentSize = receiptImage!.size
+        receiptScrollView.addSubview(receiptImageView)
         
         setUpScrollView()
         
@@ -70,7 +70,7 @@ class ReceiptViewController: UIViewController, UIPickerViewDelegate, UINavigatio
         }
         
         if contentsFrame.size.height < boundsSize.height {
-            contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.width) / 2
+            contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2
         }
         else {
             contentsFrame.origin.y = 0

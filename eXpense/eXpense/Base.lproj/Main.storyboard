@@ -1527,6 +1527,7 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMc-CF-RFm">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="400" id="6kO-h3-FcQ"/>
                                     <constraint firstAttribute="height" constant="400" id="nDi-rj-nHQ"/>
@@ -1629,9 +1630,9 @@
         <image name="eXpenseLogoGray" width="1004" height="273"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KbD-mm-Utt"/>
-        <segue reference="yKM-fV-2Cm"/>
-        <segue reference="kdt-Xn-gbr"/>
+        <segue reference="h8j-w9-YNM"/>
+        <segue reference="18Y-Cv-tx3"/>
+        <segue reference="Ke5-W9-vH6"/>
         <segue reference="3Nd-qh-I5o"/>
     </inferredMetricsTieBreakers>
 </document>

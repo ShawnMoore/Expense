@@ -96,7 +96,6 @@ class NewOneTimeExpenseTableViewController: UITableViewController, UIPickerViewD
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! String
-        print(mediaType)
         
         //set image
         receiptImage = info[UIImagePickerControllerOriginalImage] as? UIImage
