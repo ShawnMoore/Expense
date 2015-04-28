@@ -713,6 +713,14 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="81" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="999-oN-Ia6">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search" id="qSN-Qx-l9T">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="Gxr-qE-Nen" id="9JE-rS-2St"/>
+                                    </connections>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="expense_cells" rowHeight="65" id="1i5-c5-6Ly" customClass="DashboardTableViewCell" customModule="eXpense" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -823,12 +831,22 @@
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="searchDisplayController" destination="O0b-Oe-RJv" id="N8W-OE-BZl"/>
                         <outlet property="tableView" destination="999-oN-Ia6" id="bAe-qP-sUY"/>
                         <segue destination="aDd-Cr-JKl" kind="show" identifier="showTripDetail" id="LaN-Qo-Pse"/>
                         <segue destination="uCm-Wc-KTA" kind="show" identifier="showExpense" id="a76-9a-u6n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lnt-4Q-xCY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="O0b-Oe-RJv">
+                    <connections>
+                        <outlet property="delegate" destination="Gxr-qE-Nen" id="xBx-Hn-gwq"/>
+                        <outlet property="searchBar" destination="qSN-Qx-l9T" id="AWz-16-zVw"/>
+                        <outlet property="searchContentsController" destination="Gxr-qE-Nen" id="1sj-5p-Gsh"/>
+                        <outlet property="searchResultsDataSource" destination="Gxr-qE-Nen" id="fDn-ew-KwZ"/>
+                        <outlet property="searchResultsDelegate" destination="Gxr-qE-Nen" id="MmF-RP-RzE"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2597" y="363"/>
         </scene>
@@ -1346,6 +1364,6 @@
         <segue reference="Ke5-W9-vH6"/>
         <segue reference="h8j-w9-YNM"/>
         <segue reference="KbD-mm-Utt"/>
-        <segue reference="pwk-Aa-pg0"/>
+        <segue reference="a76-9a-u6n"/>
     </inferredMetricsTieBreakers>
 </document>

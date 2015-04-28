@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
     
     // MARK: Class Variables
     var model: Model?
@@ -19,6 +19,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     private let prototypeCellIdentifier = "expense_cells"
     private var selectedIndex: Int?
     private var sortedArray: Array<Expense> = Array<Expense>()
+    private var filteredArray: Array<Expense> = Array<Expense>()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -79,12 +80,23 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: Table View Data Source
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return sortedArray.count
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            return filteredArray.count
+        } else {
+            return sortedArray.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(prototypeCellIdentifier) as! DashboardTableViewCell
-        let dataExpense = self.sortedArray[indexPath.row]
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(prototypeCellIdentifier) as! DashboardTableViewCell
+        
+        var dataExpense: Expense!
+        
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            dataExpense = self.filteredArray[indexPath.row]
+        } else {
+            dataExpense = self.sortedArray[indexPath.row]
+        }
 
         cell.cellImage.contentMode = UIViewContentMode.Center
         
@@ -163,5 +175,35 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             (segue.destinationViewController as! TripsViewController).tripData = sortedArray[selectedIndex!] as? TripExpense
         }
     }
+    
+    func filterContentArray(searchString: String, categoryFilter: String = "Date") {
+        self.filteredArray = sortedArray.filter({ (expense: Expense) -> Bool in
+            if categoryFilter == "Date" {
+                var stringMatch = self.dateFormatter.stringFromDate(expense.date).rangeOfString(searchString)
+                
+                if stringMatch == nil && expense is TripExpense {
+                    
+                    if let endDate = (expense as! TripExpense).endDate {
+                        stringMatch = self.dateFormatter.stringFromDate(endDate).rangeOfString(searchString)
+                    }
+                }
+                
+                return (stringMatch != nil)
+            }
+            
+            return false
+        })
+    }
+    
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
+        filterContentArray(searchString, categoryFilter: "Date")
+        return true;
+    }
+    
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        filterContentArray(controller.searchBar.text, categoryFilter: "Date")
+        return true;
+    }
+    
     
 }
