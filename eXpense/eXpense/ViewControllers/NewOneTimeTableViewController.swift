@@ -113,8 +113,8 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 cell?.detailTextLabel?.text = Category.Other.rawValue
             case 2:
                 if categoryPickerOn {
-                    let catPickerCell = tableView.dequeueReusableCellWithIdentifier("categoryPickerCell", forIndexPath: indexPath) as? PickerViewTableViewCell
-                    cell = catPickerCell
+                    let categoryPickerCell = tableView.dequeueReusableCellWithIdentifier("categoryPickerCell", forIndexPath: indexPath) as? PickerViewTableViewCell
+                    cell = categoryPickerCell
                 } else {
                     let costCell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
                     
@@ -205,7 +205,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
 
         default:
             cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? UITableViewCell
-            cell?.textLabel?.text = "Say Hi"
+            cell?.textLabel?.text = ""
         }
         return cell!
     }
@@ -217,36 +217,20 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        
-        let categoryPath = [NSIndexPath(forRow: 2, inSection: 0)]
-        let datePath = [NSIndexPath(forRow: 3, inSection: 1)]
-        
-        if indexPath.section == 0 && indexPath.row == 1{
-            categoryPickerOn = !categoryPickerOn
-            
-            if categoryPickerOn {
-                tableView.beginUpdates()
-                tableView.insertRowsAtIndexPaths(categoryPath, withRowAnimation: .Fade)
-                tableView.endUpdates()
-                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
-            } else {
-                tableView.beginUpdates()
-                tableView.deleteRowsAtIndexPaths(categoryPath, withRowAnimation: .Fade)
-                tableView.endUpdates()
-            }
+
+        if(indexPath.section == 1 && indexPath.row == 0){
+            performSegueWithIdentifier("tripSelection", sender: self)
         }
-        
-        if indexPath.section == 1 && indexPath.row == 2 {
-            datePickerOn = !datePickerOn
-            
-            if datePickerOn {
+        else{
+            var (path, action) = getIndexPathOnGlobalBools(indexPath)
+            if(action == "insert"){
                 tableView.beginUpdates()
-                tableView.insertRowsAtIndexPaths(datePath, withRowAnimation: .Fade)
+                tableView.insertRowsAtIndexPaths([path], withRowAnimation: .Fade)
                 tableView.endUpdates()
-                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 1), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
-            } else {
+                tableView.scrollToRowAtIndexPath(path, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+            } else if(action == "delete") {
                 tableView.beginUpdates()
-                tableView.deleteRowsAtIndexPaths(datePath, withRowAnimation: .Fade)
+                tableView.deleteRowsAtIndexPaths([path], withRowAnimation: .Fade)
                 tableView.endUpdates()
             }
         }
@@ -297,6 +281,39 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             }
         }
     }
+    
+    
+    //MARK: Added Helper Functions
+    func getIndexPathOnGlobalBools(indexPath: NSIndexPath) -> (NSIndexPath, String){
+        
+        let insert = "insert"
+        let delete = "delete"
+        let categoryPath = NSIndexPath(forRow: 2, inSection: 0)
+        let datePath = NSIndexPath(forRow: 3, inSection: 1)
+        
+        if indexPath.section == 0 && indexPath.row == 1{
+            
+            categoryPickerOn = !categoryPickerOn
+            
+            if categoryPickerOn {
+                return (categoryPath, insert)
+            } else {
+                return (categoryPath, delete)
+            }
+        }
+        
+        if indexPath.section == 1 && indexPath.row == 2 {
+            datePickerOn = !datePickerOn
+            
+            if datePickerOn {
+                return (datePath, insert)
+            } else {
+                return (datePath, delete)
+            }
+        }
+        return(NSIndexPath(forRow: 0, inSection: 0), "Error")
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

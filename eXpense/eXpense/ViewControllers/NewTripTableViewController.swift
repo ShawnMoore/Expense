@@ -144,6 +144,7 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate {
     
     func textViewDidChange(textView: UITextView) {
         tableView.beginUpdates()
+        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         tableView.endUpdates()
     }
     
