@@ -11,8 +11,11 @@ import UIKit
 class TripsChoiceTableViewController: UITableViewController {
 
     var model:Model?
-    var trips:[TripExpense]?
+    private var trips:[TripExpense]?
+    
     var lastSelected: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+    var oneTimeExpense: OneTimeExpense?
+    
     private var dateFormatter: NSDateFormatter = NSDateFormatter()
     private var dateFormatString = "MMM dd"
 
@@ -27,7 +30,13 @@ class TripsChoiceTableViewController: UITableViewController {
         
         trips = model?.tripExpenses.values.array.sorted({ $0.0.date.compare($0.1.date) == NSComparisonResult.OrderedDescending })
         
-        tableView(self.tableView, cellForRowAtIndexPath:lastSelected).accessoryType = UITableViewCellAccessoryType.Checkmark
+        if oneTimeExpense != nil {
+            if oneTimeExpense?.tripId == nil {
+                tableView(self.tableView, cellForRowAtIndexPath:lastSelected).accessoryType = UITableViewCellAccessoryType.Checkmark
+            }
+        } else {
+            tableView(self.tableView, cellForRowAtIndexPath:lastSelected).accessoryType = UITableViewCellAccessoryType.Checkmark
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -71,6 +80,14 @@ class TripsChoiceTableViewController: UITableViewController {
         case 1:
             cell = tableView.dequeueReusableCellWithIdentifier("tripCell", forIndexPath: indexPath) as? UITableViewCell
             cell?.textLabel?.text = trips?[indexPath.row].name
+            
+            if oneTimeExpense != nil {
+                if trips?[indexPath.row].id == oneTimeExpense?.tripId {
+                    cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
+                    lastSelected = indexPath
+                }
+            }
+            
             if let startDate = trips?[indexPath.row].date{
                 var detailString = "\(dateFormatter.stringFromDate(startDate))"
                 if let endDate = trips?[indexPath.row].endDate {
@@ -94,6 +111,15 @@ class TripsChoiceTableViewController: UITableViewController {
         tableView.cellForRowAtIndexPath(lastSelected)?.accessoryType = UITableViewCellAccessoryType.None
         tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
         lastSelected = indexPath
+        
+        if oneTimeExpense != nil {
+            if indexPath.section == 0 {
+                oneTimeExpense?.tripId = nil
+            } else {
+                oneTimeExpense?.tripId = trips![indexPath.row].id
+            }
+        }
+        
     }
 
     /*

@@ -1,5 +1,19 @@
 [
   {
+  "Id": 0,
+  "Name": "Capstone Trip",
+  "StartDate": "2015-04-10T09:33:01.0000000+00:00",
+  "EndDate": null,
+  "Location": null,
+  "Description": null,
+  "LastSeen": null,
+  "CreatedAt": "2015-04-10T09:33:01.0000000+00:00",
+  "UpdatedAt": null,
+  "Deleted": false,
+  "IsComplete": true,
+  "UserId": 8
+  },
+  {
     "Id": 1,
     "Name": "Mizzou Day Trip",
     "StartDate": "2015-04-10T09:33:01.0000000+00:00",

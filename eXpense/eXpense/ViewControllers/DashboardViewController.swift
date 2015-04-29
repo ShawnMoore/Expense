@@ -158,13 +158,9 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         selectedIndex = indexPath.row
         
         if self.sortedArray[indexPath.row] is OneTimeExpense {
-            
             performSegueWithIdentifier("showExpense", sender: self)
-            
         } else if self.sortedArray[indexPath.row] is TripExpense {
-            
             performSegueWithIdentifier("showTripDetail", sender: self)
-            
         }
         
         tableView.deselectRowAtIndexPath(indexPath, animated: false)

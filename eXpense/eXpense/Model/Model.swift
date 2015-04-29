@@ -13,6 +13,47 @@ class Model: NSObject {
         get {
             var array: Array<Expense> = Array<Expense>()
             
+            var removeArray = Array<Int>()
+            
+            if (self.oneTimeExpenses.count != 0) && (self.tripExpenses.count != 0) {
+            
+                for index in 0...(self.oneTimeExpenses.count-1) {
+                    if self.oneTimeExpenses[index].tripId != nil {
+                        removeArray.append(index)
+                    }
+                }
+            }
+            
+            removeArray.sort({ $0 > $1 })
+            
+            for index in removeArray {
+                let value = self.oneTimeExpenses[index]
+                self.oneTimeExpenses.removeAtIndex(index)
+                
+                if let trip = self.tripExpenses[value.tripId!] {
+                    trip.oneTimeExpenses.append(value)
+                } else {
+                    oneTimeExpenses.append(value)
+                }
+            }
+            
+            /*if (self.oneTimeExpenses.count != 0) && (self.tripExpenses.count != 0) {
+            
+                for index in 0...(self.oneTimeExpenses.count-1) {
+                    if self.oneTimeExpenses[index].tripId != nil {
+                        let value = self.oneTimeExpenses[index]
+                        let tripId = value.tripId
+                        self.oneTimeExpenses.removeAtIndex(index)
+                        
+                        if let trip = self.tripExpenses[tripId!] {
+                            trip.oneTimeExpenses.append(value)
+                        } else {
+                            oneTimeExpenses.append(value)
+                        }
+                    }
+                }
+            }*/
+            
             array = array + self.oneTimeExpenses
             array = array + self.tripExpenses.values.array
             
@@ -100,9 +141,7 @@ class Model: NSObject {
     
     func parseOneTimeExpenses(jsonData: NSData, completionHandler: (NSObject, String?) -> Void) {
         var jsonError: NSError?
-        
-        var oneTimeObject: Dictionary<String, Any> = Dictionary<String, Any>()
-        
+    
         if let jsonResult = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: &jsonError) as? NSArray {
             if (jsonResult.count > 0) {
                 for expenseData in jsonResult {
@@ -114,6 +153,8 @@ class Model: NSObject {
                            expenseDeleted      = expenseData["Deleted"] as? Bool,
                            expenseUserId       = expenseData["UserId"] as? Int,
                            expenseCategory     = expenseData["Category"] as? String{
+                            
+                                var oneTimeObject: Dictionary<String, Any> = Dictionary<String, Any>()
                             
                                 oneTimeObject["Id"] = expenseId
                                 oneTimeObject["Name"] = expenseName

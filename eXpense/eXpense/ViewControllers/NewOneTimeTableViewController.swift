@@ -33,12 +33,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 67.0
         
-        if oneTime != nil {
-            println("One time Expense Id: \(oneTime!.id)")
-        } else {
-            println("Add new one")
-        }
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -256,8 +250,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "tripSelection" {
-            //FIXME: DEAL WITH IN THE MORNING
-            //(segue.destinationViewController as! TripsChoiceTableViewController)
+            (segue.destinationViewController as! TripsChoiceTableViewController).oneTimeExpense = oneTime
         }
     }
     
