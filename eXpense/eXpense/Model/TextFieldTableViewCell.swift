@@ -8,13 +8,20 @@
 
 import UIKit
 
+protocol TextFieldTableViewCellDelegate : class {
+    func textInTextFieldHasChanged(ChangedTo: String, at: String)
+}
+
 class TextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     @IBOutlet weak var cellTextField: UITextField!
+    var delegate: TextFieldTableViewCellDelegate?
+    var identifier: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        cellTextField.delegate = self
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -23,4 +30,19 @@ class TextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
         // Configure the view for the selected state
     }
 
+    @IBAction func textFieldHasChanged(sender: AnyObject) {
+        self.delegate?.textInTextFieldHasChanged(cellTextField.text, at: identifier!)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.delegate?.textInTextFieldHasChanged(cellTextField.text, at: identifier!)
+        cellTextField.resignFirstResponder()
+        return true
+    }
+    
+    func resignResponders() {
+        if cellTextField.isFirstResponder() {
+            cellTextField.resignFirstResponder()
+        }
+    }
 }

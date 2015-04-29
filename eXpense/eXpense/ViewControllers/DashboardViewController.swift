@@ -40,7 +40,14 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
             self.sortedArray = self.sortedArray + self.model!.totalExpenses
+            
             self.tableView.reloadData()
+            
+            if self.sortedArray.count == 0 {
+                self.tableView.tableHeaderView?.hidden = true
+            } else {
+                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+            }
         })
         
         //Get the Navigation Bar from the Navigation Controller
@@ -60,11 +67,13 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         navBar.tintColor = UIColor.whiteColor()
         
         self.navigationController?.setToolbarHidden(true, animated: false)
-        
+        self.navigationController?.toolbar.translucent = false
+        self.navigationController?.toolbar.barTintColor = UIColor(red: 37/255, green: 178/255, blue: 74/255, alpha: 1)
+        self.navigationController?.toolbar.tintColor = UIColor.whiteColor()
+
     }
     
-    override func viewDidAppear(animated: Bool) {
-        println("Tap Tap")
+    override func viewWillAppear(animated: Bool) {
         sortedArray = Array<Expense>() + model!.totalExpenses
         tableView.reloadData()
     }
@@ -146,15 +155,13 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
+        selectedIndex = indexPath.row
         
         if self.sortedArray[indexPath.row] is OneTimeExpense {
             
             performSegueWithIdentifier("showExpense", sender: self)
             
         } else if self.sortedArray[indexPath.row] is TripExpense {
-            
-            selectedIndex = indexPath.row
             
             performSegueWithIdentifier("showTripDetail", sender: self)
             
@@ -166,6 +173,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
     @IBAction func addNewExpense(sender: AnyObject) {
         
+        selectedIndex = nil
         performSegueWithIdentifier("showExpense", sender: self)
         
     }
@@ -173,6 +181,11 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showTripDetail" {
             (segue.destinationViewController as! TripsViewController).tripData = sortedArray[selectedIndex!] as? TripExpense
+        } else if segue.identifier == "showExpense" {
+            if let index = selectedIndex {
+                (segue.destinationViewController as! NewOneTimeTableViewController).oneTime = sortedArray[selectedIndex!] as? OneTimeExpense
+            }
+            
         }
     }
     

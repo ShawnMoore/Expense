@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -713,10 +713,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="81" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="999-oN-Ia6">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search" id="qSN-Qx-l9T">
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search" translucent="NO" id="qSN-Qx-l9T">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                     <connections>
                                         <outlet property="delegate" destination="Gxr-qE-Nen" id="9JE-rS-2St"/>
                                     </connections>
@@ -865,6 +865,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6ea-oc-Nve">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="GQq-B3-X6n">
+                                    <rect key="frame" x="0.0" y="64" width="600" height="55"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.1450980392" green="0.69803921570000005" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="expense_cells" rowHeight="65" id="EAx-lY-Fcl" customClass="DashboardTableViewCell" customModule="eXpense" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -991,24 +996,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="textFieldCell" id="Q8a-5J-Snx" customClass="TextFieldTableViewCell" customModule="eXpense" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="textFieldCell" id="Q8a-5J-Snx" customClass="TextFieldTableViewCell" customModule="eXpense" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Q8a-5J-Snx" id="es0-od-7Ec">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dCi-mr-28p">
-                                            <rect key="frame" x="8" y="8" width="584" height="27"/>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dCi-mr-28p">
+                                            <rect key="frame" x="8" y="0.0" width="584" height="43"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="43" id="ohh-wb-44l"/>
+                                            </constraints>
                                             <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="textFieldHasChanged:" destination="Q8a-5J-Snx" eventType="editingDidEnd" id="fEM-qh-9my"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="dCi-mr-28p" firstAttribute="top" secondItem="es0-od-7Ec" secondAttribute="top" id="Afr-eq-qkI"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="dCi-mr-28p" secondAttribute="trailing" id="ST7-ev-Idr"/>
                                         <constraint firstItem="dCi-mr-28p" firstAttribute="bottom" secondItem="es0-od-7Ec" secondAttribute="bottomMargin" id="XFQ-5i-gYW"/>
                                         <constraint firstItem="dCi-mr-28p" firstAttribute="top" secondItem="es0-od-7Ec" secondAttribute="topMargin" id="m8k-Qm-4Ie"/>
+                                        <constraint firstAttribute="bottom" secondItem="dCi-mr-28p" secondAttribute="bottom" id="pVt-4q-bNq"/>
                                         <constraint firstItem="dCi-mr-28p" firstAttribute="leading" secondItem="es0-od-7Ec" secondAttribute="leadingMargin" id="rJF-6x-1m5"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="XFQ-5i-gYW"/>
+                                            <exclude reference="m8k-Qm-4Ie"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="cellTextField" destination="dCi-mr-28p" id="oDK-xx-5he"/>
@@ -1118,6 +1137,9 @@
                                             <date key="date" timeIntervalSinceReferenceDate="451796997.697779">
                                                 <!--2015-04-27 03:09:57 +0000-->
                                             </date>
+                                            <connections>
+                                                <action selector="dateChanged:" destination="qPT-W4-KR2" eventType="valueChanged" id="xDl-hd-0Rd"/>
+                                            </connections>
                                         </datePicker>
                                     </subviews>
                                     <constraints>
@@ -1361,9 +1383,9 @@
         <image name="eXpenseLogoGray" width="1004" height="273"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ke5-W9-vH6"/>
         <segue reference="h8j-w9-YNM"/>
         <segue reference="KbD-mm-Utt"/>
-        <segue reference="a76-9a-u6n"/>
+        <segue reference="Ke5-W9-vH6"/>
+        <segue reference="pwk-Aa-pg0"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,14 +8,18 @@
 
 import UIKit
 
-class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate {
+class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, DatePickerTableViewCellDelegate, TextFieldTableViewCellDelegate {
     
-    var datePickerOn: Bool = false
-    var categoryPickerOn: Bool = false
+    private var editingModeOn: Bool = true
+    private var datePickerOn: Bool = false
+    private var categoryPickerOn: Bool = false
     
-    var expenseModel: OneTimeExpense?
+    private var dateFormatter: NSDateFormatter = NSDateFormatter()
+    private var dateFormatString = "MMMM dd, yyyy"
     
-    var model: Model?
+    var oneTime: OneTimeExpense?
+    
+    private var model: Model?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +28,16 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         
         model = appDelegate.getModel()
         
+        dateFormatter.dateFormat = dateFormatString
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 67.0
+        
+        if oneTime != nil {
+            println("One time Expense Id: \(oneTime!.id)")
+        } else {
+            println("Add new one")
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -84,7 +96,16 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             switch indexPath.row {
             case 0:
                 let purposeCell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
+                
+                purposeCell?.delegate = self
+                purposeCell?.identifier = "Purpose"
+                
                 purposeCell?.cellTextField.placeholder = "Purpose"
+                
+                if oneTime != nil {
+                    purposeCell?.cellTextField.text = oneTime!.name
+                }
+                
                 cell = purposeCell
             case 1:
                 cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
@@ -96,7 +117,16 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     cell = catPickerCell
                 } else {
                     let costCell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
+                    
+                    costCell?.delegate = self
+                    costCell?.identifier = "Cost"
+                    
                     costCell?.cellTextField.placeholder = "Cost"
+                    
+                    if oneTime != nil {
+                        costCell?.cellTextField.text = String(format:"%f", oneTime!.amount)
+                    }
+                    
                     cell = costCell
                 }
             case 3:
@@ -113,19 +143,42 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             case 0:
                 cell = tableView.dequeueReusableCellWithIdentifier("tripCell", forIndexPath: indexPath) as? UITableViewCell
                 cell?.textLabel?.text = "Trip:"
-                cell?.detailTextLabel?.text = "none"
+                cell?.detailTextLabel?.text = "None"
                 
             case 1:
                 let locationCell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
+                
+                locationCell?.delegate = self
+                locationCell?.identifier = "Location"
+                
                 locationCell?.cellTextField.placeholder = "Location"
+                
+                if oneTime != nil {
+                    if let location = oneTime?.location {
+                        locationCell?.cellTextField.text = location
+                    }
+                }
+                
                 cell = locationCell
             case 2:
                 cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
                 cell?.textLabel?.text = "Date:"
-                cell?.detailTextLabel?.text = "NOT DONE YET"
+                
+                if oneTime != nil {
+                    cell?.detailTextLabel?.text = dateFormatter.stringFromDate(oneTime!.date)
+                } else {
+                    cell?.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+                }
+                
             case 3:
                 cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? DatePickerTableViewCell
+                
+                if oneTime != nil {
+                    (cell as! DatePickerTableViewCell).datePicker.date = oneTime!.date
+                }
+    
                 (cell as! DatePickerTableViewCell).location = indexPath
+                (cell as! DatePickerTableViewCell).delegate = self
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
             }
@@ -135,6 +188,11 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             case 0:
                 let descriptionCell = tableView.dequeueReusableCellWithIdentifier("textAreaCell", forIndexPath: indexPath) as? TextAreaTableViewCell
                 descriptionCell?.textAreaLabel.text = "Description:"
+                
+                if oneTime != nil {
+                        descriptionCell?.textArea.text = oneTime?.expenseDescription
+                }
+                
                 cell = descriptionCell
                 
             case 1:
@@ -170,6 +228,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 tableView.beginUpdates()
                 tableView.insertRowsAtIndexPaths(categoryPath, withRowAnimation: .Fade)
                 tableView.endUpdates()
+                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
             } else {
                 tableView.beginUpdates()
                 tableView.deleteRowsAtIndexPaths(categoryPath, withRowAnimation: .Fade)
@@ -184,6 +243,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 tableView.beginUpdates()
                 tableView.insertRowsAtIndexPaths(datePath, withRowAnimation: .Fade)
                 tableView.endUpdates()
+                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 1), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
             } else {
                 tableView.beginUpdates()
                 tableView.deleteRowsAtIndexPaths(datePath, withRowAnimation: .Fade)
@@ -218,6 +278,24 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         tableView.endUpdates()
         
+        oneTime?.expenseDescription = textView.text
+    }
+    
+    func dateAndTimeHasChanged(ChangedTo: NSDate, at: NSIndexPath) {
+        oneTime?.date = ChangedTo
+        tableView.reloadData()
+    }
+    
+    func textInTextFieldHasChanged(ChangedTo: String, at: String) {
+        if at == "Purpose" {
+            oneTime?.name = ChangedTo
+        } else if at == "Cost" {
+            oneTime?.amount = (ChangedTo as NSString).doubleValue
+        } else if at == "Location" {
+            if !ChangedTo.isEmpty {
+                oneTime?.location = ChangedTo
+            }
+        }
     }
     /*
     // Override to support conditional editing of the table view.
