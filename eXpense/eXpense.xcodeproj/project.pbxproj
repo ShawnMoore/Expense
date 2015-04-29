@@ -33,6 +33,7 @@
 		44241A6F1AEDE370003C7DAF /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A6E1AEDE370003C7DAF /* DatePickerTableViewCell.swift */; };
 		44241A711AEDE40C003C7DAF /* NewOneTimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A701AEDE40C003C7DAF /* NewOneTimeTableViewController.swift */; };
 		44241A731AEDE9A4003C7DAF /* PhotoCaptureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A721AEDE9A4003C7DAF /* PhotoCaptureTableViewCell.swift */; };
+		444946BD1AF046C100FB542F /* TripsChoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444946BC1AF046C100FB542F /* TripsChoiceTableViewController.swift */; };
 		44B8C0DB1AEF3197003D283C /* NewTripTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B8C0DA1AEF3197003D283C /* NewTripTableViewController.swift */; };
 		C19767AB1AC9FBD2007B4D85 /* newTripTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19767AA1AC9FBD2007B4D85 /* newTripTableViewController.swift */; };
 		C1C83EE71AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C83EE61AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift */; };
@@ -79,6 +80,7 @@
 		44241A6E1AEDE370003C7DAF /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerTableViewCell.swift; path = Model/DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		44241A701AEDE40C003C7DAF /* NewOneTimeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewOneTimeTableViewController.swift; path = ViewControllers/NewOneTimeTableViewController.swift; sourceTree = "<group>"; };
 		44241A721AEDE9A4003C7DAF /* PhotoCaptureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCaptureTableViewCell.swift; path = Model/PhotoCaptureTableViewCell.swift; sourceTree = "<group>"; };
+		444946BC1AF046C100FB542F /* TripsChoiceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripsChoiceTableViewController.swift; path = ViewControllers/TripsChoiceTableViewController.swift; sourceTree = "<group>"; };
 		44B8C0DA1AEF3197003D283C /* NewTripTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewTripTableViewController.swift; path = ViewControllers/NewTripTableViewController.swift; sourceTree = "<group>"; };
 		C19767AA1AC9FBD2007B4D85 /* newTripTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newTripTableViewController.swift; sourceTree = "<group>"; };
 		C1C83EE61AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOneTimeExpenseTableViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				C1C83EE61AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift */,
 				44241A701AEDE40C003C7DAF /* NewOneTimeTableViewController.swift */,
 				44B8C0DA1AEF3197003D283C /* NewTripTableViewController.swift */,
+				444946BC1AF046C100FB542F /* TripsChoiceTableViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				C19767AB1AC9FBD2007B4D85 /* newTripTableViewController.swift in Sources */,
 				293F44B11A84137700A43234 /* TripsViewController.swift in Sources */,
 				293F44A11A840F8800A43234 /* LandingViewController.swift in Sources */,
+				444946BD1AF046C100FB542F /* TripsChoiceTableViewController.swift in Sources */,
 				295B831B1AD8C42A0032B9B4 /* TripExpense.swift in Sources */,
 				299E5E741A978566007A4A2E /* Model.swift in Sources */,
 				293F44A31A840FA700A43234 /* TouchIDLoginViewController.swift in Sources */,

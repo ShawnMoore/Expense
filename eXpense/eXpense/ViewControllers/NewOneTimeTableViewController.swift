@@ -159,17 +159,21 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        
-        var (path, action) = getIndexPathOnGlobalBools(indexPath)
-        if(action == "insert"){
-            tableView.beginUpdates()
-            tableView.insertRowsAtIndexPaths([path], withRowAnimation: .Fade)
-            tableView.endUpdates()
+        if(indexPath.section == 1 && indexPath.row == 0){
+            performSegueWithIdentifier("tripSelection", sender: self)
         }
-        else if(action == "delete"){
-            tableView.beginUpdates()
-            tableView.deleteRowsAtIndexPaths([path], withRowAnimation: .Fade)
-            tableView.endUpdates()
+        else{
+            var (path, action) = getIndexPathOnGlobalBools(indexPath)
+            if(action == "insert"){
+                tableView.beginUpdates()
+                tableView.insertRowsAtIndexPaths([path], withRowAnimation: .Fade)
+                tableView.endUpdates()
+            }
+            else if(action == "delete"){
+                tableView.beginUpdates()
+                tableView.deleteRowsAtIndexPaths([path], withRowAnimation: .Fade)
+                tableView.endUpdates()
+            }
         }
     }
     
@@ -211,6 +215,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         let datePath = NSIndexPath(forRow: 3, inSection: 1)
         
         if indexPath.section == 0 && indexPath.row == 1{
+            
             categoryPickerOn = !categoryPickerOn
             
             if categoryPickerOn {
