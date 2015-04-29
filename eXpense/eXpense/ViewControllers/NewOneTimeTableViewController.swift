@@ -46,6 +46,10 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         self.navigationController?.setToolbarHidden(true, animated: true)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -155,7 +159,16 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             case 0:
                 cell = tableView.dequeueReusableCellWithIdentifier("tripCell", forIndexPath: indexPath) as? UITableViewCell
                 cell?.textLabel?.text = "Trip:"
-                cell?.detailTextLabel?.text = "None"
+                if oneTime != nil {
+                    if oneTime!.tripId == nil {
+                        cell?.detailTextLabel?.text = "None"
+                    }
+                    else{
+                        cell?.detailTextLabel?.text = model?.tripExpenses[oneTime!.tripId!]!.name
+                    }
+                } else {
+                    cell?.detailTextLabel?.text = "None"
+                }
                 
             case 1:
                 let locationCell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
