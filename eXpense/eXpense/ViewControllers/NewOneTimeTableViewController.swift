@@ -110,10 +110,28 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             case 1:
                 cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
                 cell?.textLabel?.text = "Category:"
+                
                 cell?.detailTextLabel?.text = Category.Other.rawValue
+                
+                if oneTime != nil {
+                    cell?.detailTextLabel?.text = oneTime?.category.rawValue
+                }
+                
+                
             case 2:
                 if categoryPickerOn {
                     let categoryPickerCell = tableView.dequeueReusableCellWithIdentifier("categoryPickerCell", forIndexPath: indexPath) as? PickerViewTableViewCell
+                    
+                    categoryPickerCell?.Picker.selectRow(5, inComponent: 0, animated: false)
+                    
+                    if oneTime != nil {
+                        for i in 0...(Category.allValues.count-1) {
+                            if oneTime?.category.rawValue == Category.allValues[i].rawValue {
+                                categoryPickerCell?.Picker.selectRow(i, inComponent: 0, animated: false)
+                            }
+                        }
+                    }
+                    
                     cell = categoryPickerCell
                 } else {
                     let costCell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
@@ -227,7 +245,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 tableView.beginUpdates()
                 tableView.insertRowsAtIndexPaths([path], withRowAnimation: .Fade)
                 tableView.endUpdates()
-                tableView.scrollToRowAtIndexPath(path, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+                //tableView.scrollToRowAtIndexPath(path, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
             } else if(action == "delete") {
                 tableView.beginUpdates()
                 tableView.deleteRowsAtIndexPaths([path], withRowAnimation: .Fade)
@@ -236,7 +254,14 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "tripSelection" {
+            //FIXME: DEAL WITH IN THE MORNING
+            //(segue.destinationViewController as! TripsChoiceTableViewController)
+        }
+    }
     
+    //MARK: Delegates
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -244,22 +269,21 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         return Category.allValues.count
     }
     
-    //MARK: Delegates
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         var pickerData = Category.allValues
         return pickerData[row].rawValue
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let cell = tableView(tableView, cellForRowAtIndexPath: NSIndexPath(forRow: 1, inSection: 0))
-        print(Category.allValues[row].rawValue)
-        cell.detailTextLabel?.text = Category.allValues[row].rawValue
+        if oneTime != nil {
+            oneTime?.category = Category.allValues[row]
+        }
         tableView.reloadData()
     }
     
     func textViewDidChange(textView: UITextView) {
         tableView.beginUpdates()
-        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
         tableView.endUpdates()
         
         oneTime?.expenseDescription = textView.text

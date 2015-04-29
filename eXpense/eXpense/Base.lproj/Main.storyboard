@@ -1099,7 +1099,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GEe-Za-rQL">
-                                            <rect key="frame" x="8" y="-7" width="584" height="162"/>
+                                            <rect key="frame" x="8" y="-6" width="584" height="162"/>
                                             <connections>
                                                 <outlet property="dataSource" destination="uCm-Wc-KTA" id="a6A-dP-EIS"/>
                                                 <outlet property="delegate" destination="uCm-Wc-KTA" id="iqQ-fU-OHr"/>
