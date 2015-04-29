@@ -179,9 +179,11 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             (segue.destinationViewController as! TripsViewController).tripData = sortedArray[selectedIndex!] as? TripExpense
         } else if segue.identifier == "showExpense" {
             if let index = selectedIndex {
+                (segue.destinationViewController as! NewOneTimeTableViewController).newExpense = false
                 (segue.destinationViewController as! NewOneTimeTableViewController).oneTime = sortedArray[selectedIndex!] as? OneTimeExpense
+            } else {
+                (segue.destinationViewController as! NewOneTimeTableViewController).newExpense = true
             }
-            
         }
     }
     

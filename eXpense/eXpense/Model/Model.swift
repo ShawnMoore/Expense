@@ -37,23 +37,6 @@ class Model: NSObject {
                 }
             }
             
-            /*if (self.oneTimeExpenses.count != 0) && (self.tripExpenses.count != 0) {
-            
-                for index in 0...(self.oneTimeExpenses.count-1) {
-                    if self.oneTimeExpenses[index].tripId != nil {
-                        let value = self.oneTimeExpenses[index]
-                        let tripId = value.tripId
-                        self.oneTimeExpenses.removeAtIndex(index)
-                        
-                        if let trip = self.tripExpenses[tripId!] {
-                            trip.oneTimeExpenses.append(value)
-                        } else {
-                            oneTimeExpenses.append(value)
-                        }
-                    }
-                }
-            }*/
-            
             array = array + self.oneTimeExpenses
             array = array + self.tripExpenses.values.array
             
@@ -64,12 +47,18 @@ class Model: NSObject {
     var oneTimeExpenses: Array<OneTimeExpense> = Array<OneTimeExpense>()
     var tripExpenses: [Int: TripExpense] = [Int: TripExpense]()
     
+    static var userId: Int = -1
+    static var oneTimeIndex: Int = -1
+    static var tripIndex: Int = -1
+    
     private var dateFormatter: NSDateFormatter = NSDateFormatter()
     private var dateFormatString = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSzzzzz"
     
     override init() {
         dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = dateFormatString
+        
+        Model.userId = 1
     }
     
     func loadAllLocalExpenses(oneTimeFilename: String, tripFilename: String, completionHandler: () -> Void) {

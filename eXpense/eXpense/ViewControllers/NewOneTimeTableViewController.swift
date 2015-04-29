@@ -18,6 +18,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     private var dateFormatString = "MMMM dd, yyyy"
     
     var oneTime: OneTimeExpense?
+    var newExpense: Bool = true
     
     private var model: Model?
     
@@ -32,6 +33,10 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 67.0
+        
+        if newExpense {
+            oneTime = OneTimeExpense(forID: Model.oneTimeIndex--, name: "", amount: 0.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, category: "Other")
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -100,7 +105,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 
                 purposeCell?.cellTextField.placeholder = "Purpose"
                 
-                if oneTime != nil {
+                if !newExpense {
                     purposeCell?.cellTextField.text = oneTime!.name
                 }
                 
@@ -111,7 +116,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 
                 cell?.detailTextLabel?.text = Category.Other.rawValue
                 
-                if oneTime != nil {
+                if !newExpense {
                     cell?.detailTextLabel?.text = oneTime?.category.rawValue
                 }
                 
@@ -122,7 +127,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     
                     categoryPickerCell?.Picker.selectRow(5, inComponent: 0, animated: false)
                     
-                    if oneTime != nil {
+                    if !newExpense {
                         for i in 0...(Category.allValues.count-1) {
                             if oneTime?.category.rawValue == Category.allValues[i].rawValue {
                                 categoryPickerCell?.Picker.selectRow(i, inComponent: 0, animated: false)
@@ -139,7 +144,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     
                     costCell?.cellTextField.placeholder = "Cost"
                     
-                    if oneTime != nil {
+                    if !newExpense {
                         costCell?.cellTextField.text = String(format:"%f", oneTime!.amount)
                     }
                     
@@ -159,7 +164,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             case 0:
                 cell = tableView.dequeueReusableCellWithIdentifier("tripCell", forIndexPath: indexPath) as? UITableViewCell
                 cell?.textLabel?.text = "Trip:"
-                if oneTime != nil {
+                if !newExpense {
                     if oneTime!.tripId == nil {
                         cell?.detailTextLabel?.text = "None"
                     }
@@ -178,7 +183,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 
                 locationCell?.cellTextField.placeholder = "Location"
                 
-                if oneTime != nil {
+                if !newExpense {
                     if let location = oneTime?.location {
                         locationCell?.cellTextField.text = location
                     }
@@ -189,7 +194,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
                 cell?.textLabel?.text = "Date:"
                 
-                if oneTime != nil {
+                if !newExpense {
                     cell?.detailTextLabel?.text = dateFormatter.stringFromDate(oneTime!.date)
                 } else {
                     cell?.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
@@ -198,7 +203,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             case 3:
                 cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? DatePickerTableViewCell
                 
-                if oneTime != nil {
+                if !newExpense {
                     (cell as! DatePickerTableViewCell).datePicker.date = oneTime!.date
                 }
     
