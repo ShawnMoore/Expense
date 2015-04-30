@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
-=======
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
->>>>>>> reeWorking
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -1447,7 +1443,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="903"/>
                     <connections>
-                        <segue destination="cA8-T6-HUA" kind="show" identifier="newOneTimeToNewTrip" id="9mP-JV-fr8"/>
                         <segue destination="BwW-v6-9tq" kind="show" identifier="tripSelection" id="ddY-bK-K2M"/>
                         <segue destination="0y1-zc-j25" kind="show" identifier="showReceipt" id="o9I-3H-RZr"/>
                     </connections>
@@ -1506,8 +1501,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Trips" id="CQL-eB-vmJ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="XsG-pb-ex8"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="XsG-pb-ex8">
+                            <connections>
+                                <action selector="newTripCreation:" destination="BwW-v6-9tq" id="gLK-Eb-pgH"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="cA8-T6-HUA" kind="show" identifier="toNewTrip" id="1yh-Aq-L4K"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zdL-wb-hYb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

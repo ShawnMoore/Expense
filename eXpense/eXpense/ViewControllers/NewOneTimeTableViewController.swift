@@ -27,6 +27,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     var imagePicker: UIImagePickerController!
     
     private var model: Model?
+    private var responderIndex: NSIndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -218,13 +219,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 let locationCell = tableView.dequeueReusableCellWithIdentifier("LocationTextFieldCell", forIndexPath: indexPath) as? LocationTableViewCell
                 
                 locationCell?.delegate = self
-<<<<<<< HEAD
-=======
-                locationCell?.identifier = "Location"
-                
-                locationCell?.cellTextField.placeholder = "Location"
-                locationCell?.cellTextField.autocapitalizationType = UITextAutocapitalizationType.Sentences
->>>>>>> reeWorking
                 
                 if !newExpense {
                     if let location = oneTime?.location {
@@ -416,10 +410,13 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     override func viewDidAppear(animated: Bool) {
         if isFirstPhoto == 1 {
             tableView.reloadData()
+        }    
+    }
+    
+    func updateFirstResponder(identifier: String) {
+        if identifier == "Location" {
+            
         }
-        
-        
-        
     }
     
     //MARK: Added Helper Functions
@@ -452,6 +449,8 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
         return(NSIndexPath(forRow: 0, inSection: 0), "Error")
     }
+    
+    
     
     /*
     // Override to support conditional editing of the table view.
