@@ -10,6 +10,8 @@ import UIKit
 
 class TripsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     var model: Model?
     var tripData: TripExpense?
     
@@ -36,10 +38,18 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         oneTimeExpenses = Array<OneTimeExpense>() + tripData!.oneTimeExpenses
         oneTimeExpenses?.sort({ $0.date.compare($1.date) == NSComparisonResult.OrderedDescending })
-        
-//        self.navigationController!.navigationBar.translucent = false
-//        self.navigationController!.navigationBar.barTintColor = UIColor(red: 37/255, green: 178/255, blue: 74/255, alpha: 1)
 
+        self.navigationController?.setToolbarHidden(false, animated: false)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        oneTimeExpenses = Array<OneTimeExpense>() + tripData!.oneTimeExpenses
+        oneTimeExpenses?.sort({ $0.date.compare($1.date) == NSComparisonResult.OrderedDescending })
+        tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.setToolbarHidden(true, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -114,6 +124,12 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
             dateLabel?.text = dateString
         }
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showExpense" {
+            (segue.destinationViewController as! NewOneTimeTableViewController).newExpenseTripId = tripData?.id
+        }
     }
 
 }

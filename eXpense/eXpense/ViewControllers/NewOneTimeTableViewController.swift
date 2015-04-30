@@ -21,6 +21,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     var oneTime: OneTimeExpense?
     var newExpense: Bool = true
+    var newExpenseTripId: Int?
     
     var receiptImage:UIImage?
     var isFirstPhoto = 0
@@ -45,6 +46,10 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         
         if newExpense {
             oneTime = OneTimeExpense(forID: Model.oneTimeIndex--, name: "No Purpose Given", amount: 0.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, category: "Other")
+            
+            if let tripId = newExpenseTripId {
+                oneTime?.tripId = tripId
+            }
         }
         
         // Uncomment the following line to preserve selection between presentations

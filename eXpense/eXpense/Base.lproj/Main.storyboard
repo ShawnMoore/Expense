@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -914,7 +914,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fSb-g0-YT9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4582.5" y="183"/>
+            <point key="canvasLocation" x="4416" y="447.5"/>
         </scene>
         <!--Trips View Controller-->
         <scene sceneID="Qrb-ak-W9D">
@@ -1085,6 +1085,7 @@
                         <outlet property="dateLabel" destination="qOc-y4-SJt" id="dpk-02-hgp"/>
                         <outlet property="descriptionLabel" destination="3kJ-tt-etP" id="A7b-oJ-NDk"/>
                         <outlet property="locationLabel" destination="N2s-ni-MTq" id="RGD-7R-kFw"/>
+                        <outlet property="tableView" destination="6ea-oc-Nve" id="ozJ-uC-Fq8"/>
                         <segue destination="uCm-Wc-KTA" kind="show" identifier="showExpense" id="pwk-Aa-pg0"/>
                     </connections>
                 </viewController>
@@ -1674,7 +1675,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UNa-mA-XnM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4725" y="768"/>
+            <point key="canvasLocation" x="4416" y="1497.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9UW-Uk-HsP">
