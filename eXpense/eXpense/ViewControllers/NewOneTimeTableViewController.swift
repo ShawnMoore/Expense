@@ -234,7 +234,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     (cell as! DatePickerTableViewCell).datePicker.date = oneTime!.date
                 }
     
-                (cell as! DatePickerTableViewCell).location = indexPath
+                (cell as! DatePickerTableViewCell).identifier = "datePicker"
                 (cell as! DatePickerTableViewCell).delegate = self
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
@@ -277,7 +277,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
 
         if(indexPath.section == 1 && indexPath.row == 0){
             performSegueWithIdentifier("tripSelection", sender: self)
-            tableView.reloadData()
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 1)], withRowAnimation: UITableViewRowAnimation.None)
         }
         else{
             var (path, action) = getIndexPathOnGlobalBools(indexPath)
@@ -317,7 +317,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         if oneTime != nil {
             oneTime?.category = Category.allValues[row]
         }
-        tableView.reloadData()
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
     }
     
     func textViewDidChange(textView: UITextView) {
@@ -327,9 +327,9 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         oneTime?.expenseDescription = textView.text
     }
     
-    func dateAndTimeHasChanged(ChangedTo: NSDate, at: NSIndexPath) {
+    func dateAndTimeHasChanged(ChangedTo: NSDate, at: String) {
         oneTime?.date = ChangedTo
-        tableView.reloadData()
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 2, inSection: 1)], withRowAnimation: UITableViewRowAnimation.None)
     }
     
     func textInTextFieldHasChanged(ChangedTo: String, at: String) {
