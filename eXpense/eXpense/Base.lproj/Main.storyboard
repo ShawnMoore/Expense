@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cA8-T6-HUA">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -1001,6 +1001,11 @@
                             <constraint firstItem="6ea-oc-Nve" firstAttribute="top" secondItem="omD-OL-7wG" secondAttribute="top" id="xb5-mY-Inr"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Edit Trip" id="JhR-Co-Rug"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="IQ2-do-tKM"/>
+                        <barButtonItem title="Submit" id="eBG-Vv-aWN"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="3Wa-JD-a6h">
                         <barButtonItem key="backBarButtonItem" title=" " id="Sr3-h5-OiD"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="PDH-bc-T2y">
@@ -1009,7 +1014,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="dateLabel" destination="qOc-y4-SJt" id="dpk-02-hgp"/>
                         <outlet property="descriptionLabel" destination="3kJ-tt-etP" id="A7b-oJ-NDk"/>
@@ -1273,7 +1278,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="43" id="Uin-iH-dbh"/>
                                             </constraints>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                                         </textField>
@@ -1299,6 +1304,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="43" id="9i5-sa-baO"/>
                                             </constraints>
+                                            <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
@@ -1512,6 +1518,58 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PurposeTextFieldCell" id="dBP-Oc-L8F" customClass="PurposeTextFieldTableViewCell" customModule="eXpense" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dBP-Oc-L8F" id="O6H-Af-Jv8">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xom-Bs-j1J">
+                                            <rect key="frame" x="8" y="0.0" width="584" height="43"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="43" id="pfd-ze-WSr"/>
+                                            </constraints>
+                                            <color key="textColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="xom-Bs-j1J" firstAttribute="leading" secondItem="O6H-Af-Jv8" secondAttribute="leadingMargin" id="Kh5-I3-m9a"/>
+                                        <constraint firstItem="xom-Bs-j1J" firstAttribute="top" secondItem="O6H-Af-Jv8" secondAttribute="top" id="Uzi-Zw-rpi"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="xom-Bs-j1J" secondAttribute="trailing" id="ZZN-8E-zcp"/>
+                                        <constraint firstAttribute="bottom" secondItem="xom-Bs-j1J" secondAttribute="bottom" id="b1d-wN-n2r"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="purposeTextField" destination="xom-Bs-j1J" id="BtG-Zc-17i"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LocationTextFieldCell" id="HxE-G0-2WO" customClass="LocationTableViewCell" customModule="eXpense" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HxE-G0-2WO" id="dlo-gA-oiW">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="08T-cV-EbY">
+                                            <rect key="frame" x="8" y="0.0" width="584" height="43"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="43" id="021-WO-Iiv"/>
+                                            </constraints>
+                                            <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="08T-cV-EbY" firstAttribute="top" secondItem="dlo-gA-oiW" secondAttribute="top" id="2yF-Dt-4F2"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="08T-cV-EbY" secondAttribute="trailing" id="Ac8-Ng-3BJ"/>
+                                        <constraint firstItem="08T-cV-EbY" firstAttribute="leading" secondItem="dlo-gA-oiW" secondAttribute="leadingMargin" id="SfN-hn-0v7"/>
+                                        <constraint firstAttribute="bottom" secondItem="08T-cV-EbY" secondAttribute="bottom" id="kk9-y6-2Ot"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="locationTextField" destination="08T-cV-EbY" id="Uve-1e-uuH"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
