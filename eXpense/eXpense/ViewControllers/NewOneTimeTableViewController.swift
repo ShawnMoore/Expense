@@ -131,13 +131,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 let purposeCell = tableView.dequeueReusableCellWithIdentifier("PurposeTextFieldCell", forIndexPath: indexPath) as? PurposeTextFieldTableViewCell
                 
                 purposeCell?.delegate = self
-<<<<<<< HEAD
-                purposeCell?.identifier = "Purpose"
-                
-                purposeCell?.cellTextField.placeholder = "Purpose"
-                purposeCell?.cellTextField.autocapitalizationType = UITextAutocapitalizationType.Sentences
-=======
->>>>>>> newWorking
                 
                 if !newExpense {
                     purposeCell?.purposeTextField.text = oneTime!.name
@@ -174,16 +167,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     let costCell = tableView.dequeueReusableCellWithIdentifier("CostTextFieldCell", forIndexPath: indexPath) as? CostTextFieldTableViewCell
                     
                     costCell?.delegate = self
-<<<<<<< HEAD
-                    costCell?.identifier = "Cost"
-                    
-                    costCell?.cellTextField.placeholder = "Cost"
-                    costCell?.cellTextField.keyboardType = UIKeyboardType.DecimalPad
-                    
-                    let attributedString = NSMutableAttributedString(string: "$")
-                    costCell?.cellTextField.attributedText = attributedString
-=======
->>>>>>> newWorking
                     
                     if !newExpense {
                         costCell?.costTextField.text = String(format:"%.2f", oneTime!.amount)
@@ -192,16 +175,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     cell = costCell
                 }
             case 3:
-<<<<<<< HEAD
-                let costCell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
-                costCell?.cellTextField.placeholder = "Cost"
-                costCell?.cellTextField.keyboardType = UIKeyboardType.DecimalPad
-                
-                
-                
-                
-                
-=======
+
                 let costCell = tableView.dequeueReusableCellWithIdentifier("CostTextFieldCell", forIndexPath: indexPath) as? CostTextFieldTableViewCell
                 
                 costCell?.delegate = self
@@ -209,7 +183,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 if !newExpense {
                     costCell?.costTextField.text = String(format:"%.2f", oneTime!.amount)
                 }
->>>>>>> newWorking
                 
                 cell = costCell
             default:
