@@ -76,11 +76,11 @@ class CostTextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        self.delegate?.updateFirstResponder(costTextField, identifier: "Begin")
+        self.delegate?.updateFirstResponder(costTextField, identifier: "Cost_Begin")
         return true
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        self.delegate?.updateFirstResponder(costTextField, identifier: "_")
+        self.delegate?.updateFirstResponder(costTextField, identifier: "Cost_End")
     }
 }

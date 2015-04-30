@@ -28,7 +28,10 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     var imagePicker: UIImagePickerController!
     
     private var model: Model?
-    private var responderTextField: UITextField? = nil
+    private var responderPurposeTextField: UITextField? = nil
+    private var responderCostTextField: UITextField? = nil
+    private var responderLocationTextField: UITextField? = nil
+    private var responderTextView: UITextView? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,23 +66,22 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     override func viewWillDisappear(animated: Bool) {
         
-        if responderTextField != nil {
-            
-            switch responderTextField!.placeholder! {
-                case "Purpose":
-                    oneTime?.name = responderTextField!.text
-                case "$0.00":
-                    oneTime?.amount = (responderTextField!.text as NSString).doubleValue
-                case "Location":
-                    oneTime?.location = responderTextField!.text
-                default:
-                    println("Error")
-            }
-            
-            if responderTextField!.isFirstResponder() {
-                responderTextField!.resignFirstResponder()
-            }
-            
+        if responderPurposeTextField != nil {
+            oneTime?.name = responderPurposeTextField!.text
+            responderPurposeTextField?.resignFirstResponder()
+            responderPurposeTextField = nil
+        }
+        
+        if responderCostTextField != nil {
+            oneTime?.amount = (responderCostTextField!.text as NSString).doubleValue
+            responderCostTextField?.resignFirstResponder()
+            responderCostTextField = nil
+        }
+        
+        if responderLocationTextField != nil {
+            oneTime?.location = responderLocationTextField!.text
+            responderLocationTextField?.resignFirstResponder()
+            responderLocationTextField = nil
         }
         
         if let controllers = (self.navigationController?.viewControllers as? [UIViewController]) {
@@ -137,7 +139,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             return 1
         }
     }
-    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell?
@@ -297,13 +298,27 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         return UITableViewAutomaticDimension
     }
 
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
-        if let textField = responderTextField {
+        if let textField = responderPurposeTextField {
             textField.resignFirstResponder()
-            responderTextField = nil
+            responderPurposeTextField = nil
+        }
+        
+        if let textField = responderCostTextField {
+            textField.resignFirstResponder()
+            responderCostTextField = nil
+        }
+        
+        if let textField = responderLocationTextField {
+            textField.resignFirstResponder()
+            responderLocationTextField = nil
+        }
+        
+        if let textView = responderTextView {
+            textView.resignFirstResponder()
+            responderTextView = nil
         }
 
         if(indexPath.section == 1 && indexPath.row == 0){
@@ -428,17 +443,58 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     }
     
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
-        
+        self.responderTextView = textView
         return true
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        self.responderTextView = nil
     }
 
     func updateFirstResponder(textField: UITextField, identifier: String) {
+        
+        if identifier == "Purpose_Begin" {
+            oneTime?.name = textField.text
+            self.responderPurposeTextField = textField
+        } else if identifier == "Purpose_End" {
+            oneTime?.name = textField.text
+            self.responderPurposeTextField = nil
+        }
+        
+        if identifier == "Cost_Begin" {
+            oneTime?.amount = (textField.text as NSString).doubleValue
+            self.responderCostTextField = textField
+        } else if identifier == "Cost_End" {
+            oneTime?.amount = (textField.text as NSString).doubleValue
+            self.responderCostTextField = nil
+        }
+        
+        if identifier == "Location_Begin" {
+            oneTime?.location = textField.text
+            self.responderLocationTextField = textField
+        } else if identifier == "Location_End" {
+            oneTime?.location = textField.text
+            self.responderLocationTextField = nil
+        }
+        
+        
+        /*switch textField.placeholder! {
+            case "Purpose":
+                oneTime?.name = textField.text
+            case "$0.00":
+                oneTime?.amount = (textField.text as NSString).doubleValue
+            case "Location":
+                oneTime?.location = textField.text
+            default:
+                println("Error")
+        }
+        
         switch identifier {
             case "Begin":
                 self.responderTextField = textField
             default:
                 self.responderTextField = nil
-        }
+        }*/
         
     }
     
