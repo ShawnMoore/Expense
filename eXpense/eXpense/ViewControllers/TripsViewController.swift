@@ -14,6 +14,9 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
     var tripData: TripExpense?
     
     private let prototypeCellIdentifier = "expense_cells"
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     private var dateFormatter: NSDateFormatter = NSDateFormatter()
     private var dateFormatString = "MMM dd"
@@ -28,7 +31,7 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         dateFormatter.dateFormat = dateFormatString
         
         self.navigationItem.title = tripData!.name
-        
+        displayTripInfo()
 //        self.navigationController!.navigationBar.translucent = false
 //        self.navigationController!.navigationBar.barTintColor = UIColor(red: 37/255, green: 178/255, blue: 74/255, alpha: 1)
 
@@ -87,6 +90,26 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBAction func addNewExpense(sender: AnyObject) {
         performSegueWithIdentifier("showExpense", sender: self)
+    }
+    
+    //MARK: Created Functions
+    func displayTripInfo(){
+        if let location = tripData?.location{
+            locationLabel.text = "Location: \(location)"
+        }
+        if let description = tripData?.expenseDescription{
+            descriptionLabel.text = "Description: \(description)"
+        }
+        if let startDate = tripData?.date{
+            var dateString = "Date: \(dateFormatter.stringFromDate(startDate))"
+            if let endDate = tripData?.endDate {
+                dateString += " - \(dateFormatter.stringFromDate(endDate))"
+            } else {
+                dateString += " - On Going"
+            }
+            dateLabel?.text = dateString
+        }
+        
     }
 
 }

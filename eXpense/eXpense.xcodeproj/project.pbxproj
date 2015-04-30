@@ -27,6 +27,8 @@
 		299359871A97DF4D0091259A /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299359861A97DF4D0091259A /* TransitionManager.swift */; };
 		299E5E741A978566007A4A2E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E5E731A978566007A4A2E /* Model.swift */; };
 		29AE1D401A990FFF003C6142 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AE1D3F1A990FFF003C6142 /* Authentication.swift */; };
+		29CEE3621AF1C9DF003F2500 /* PurposeTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEE3611AF1C9DF003F2500 /* PurposeTextFieldTableViewCell.swift */; };
+		29CEE3641AF1D317003F2500 /* CostTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEE3631AF1D317003F2500 /* CostTextFieldTableViewCell.swift */; };
 		44241A691AEDE224003C7DAF /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A681AEDE224003C7DAF /* TextFieldTableViewCell.swift */; };
 		44241A6B1AEDE2AA003C7DAF /* TextAreaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A6A1AEDE2AA003C7DAF /* TextAreaTableViewCell.swift */; };
 		44241A6D1AEDE303003C7DAF /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44241A6C1AEDE303003C7DAF /* PickerViewTableViewCell.swift */; };
@@ -75,6 +77,8 @@
 		299359861A97DF4D0091259A /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		299E5E731A978566007A4A2E /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = Model/Model.swift; sourceTree = "<group>"; };
 		29AE1D3F1A990FFF003C6142 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authentication.swift; path = Model/Authentication.swift; sourceTree = "<group>"; };
+		29CEE3611AF1C9DF003F2500 /* PurposeTextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PurposeTextFieldTableViewCell.swift; path = Model/PurposeTextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		29CEE3631AF1D317003F2500 /* CostTextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CostTextFieldTableViewCell.swift; path = Model/CostTextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		44241A681AEDE224003C7DAF /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextFieldTableViewCell.swift; path = Model/TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		44241A6A1AEDE2AA003C7DAF /* TextAreaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextAreaTableViewCell.swift; path = Model/TextAreaTableViewCell.swift; sourceTree = "<group>"; };
 		44241A6C1AEDE303003C7DAF /* PickerViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PickerViewTableViewCell.swift; path = Model/PickerViewTableViewCell.swift; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 			children = (
 				290B81631AEC352000E6AEF5 /* DashboardTableViewCell.swift */,
 				44241A681AEDE224003C7DAF /* TextFieldTableViewCell.swift */,
+				29CEE3611AF1C9DF003F2500 /* PurposeTextFieldTableViewCell.swift */,
+				29CEE3631AF1D317003F2500 /* CostTextFieldTableViewCell.swift */,
 				44241A6A1AEDE2AA003C7DAF /* TextAreaTableViewCell.swift */,
 				44241A6C1AEDE303003C7DAF /* PickerViewTableViewCell.swift */,
 				44241A6E1AEDE370003C7DAF /* DatePickerTableViewCell.swift */,
@@ -341,9 +347,11 @@
 				295B83191AD8963B0032B9B4 /* OneTimeExpense.swift in Sources */,
 				293F44A51A840FC100A43234 /* LoginViewController.swift in Sources */,
 				290B81641AEC352000E6AEF5 /* DashboardTableViewCell.swift in Sources */,
+				29CEE3621AF1C9DF003F2500 /* PurposeTextFieldTableViewCell.swift in Sources */,
 				293F44A91A84109200A43234 /* DashboardViewController.swift in Sources */,
 				44241A6F1AEDE370003C7DAF /* DatePickerTableViewCell.swift in Sources */,
 				C1C83EE71AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift in Sources */,
+				29CEE3641AF1D317003F2500 /* CostTextFieldTableViewCell.swift in Sources */,
 				44241A711AEDE40C003C7DAF /* NewOneTimeTableViewController.swift in Sources */,
 				C19767AB1AC9FBD2007B4D85 /* newTripTableViewController.swift in Sources */,
 				293F44B11A84137700A43234 /* TripsViewController.swift in Sources */,
