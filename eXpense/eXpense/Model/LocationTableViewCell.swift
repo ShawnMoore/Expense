@@ -36,4 +36,9 @@ class LocationTableViewCell: UITableViewCell, UITextFieldDelegate {
             locationTextField.resignFirstResponder()
         }
     }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        self.delegate?.updateFirstResponder("Location")
+        return true
+    }
 }

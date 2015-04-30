@@ -21,6 +21,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     var newExpense: Bool = true
     
     private var model: Model?
+    private var responderIndex: NSIndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -344,6 +345,11 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
     }
     
+    func updateFirstResponder(identifier: String) {
+        if identifier == "Location" {
+            
+        }
+    }
     
     //MARK: Added Helper Functions
     func getIndexPathOnGlobalBools(indexPath: NSIndexPath) -> (NSIndexPath, String){
@@ -375,6 +381,8 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
         return(NSIndexPath(forRow: 0, inSection: 0), "Error")
     }
+    
+    
     
     /*
     // Override to support conditional editing of the table view.
