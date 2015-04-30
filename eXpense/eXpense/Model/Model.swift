@@ -47,6 +47,8 @@ class Model: NSObject {
     var oneTimeExpenses: Array<OneTimeExpense> = Array<OneTimeExpense>()
     var tripExpenses: [Int: TripExpense] = [Int: TripExpense]()
     
+    static var imageDictionary: [String: UIImage!] = ["Entertainment": UIImage(named: "EntertainmentIcon"), "Lodging": UIImage(named: "LodgingIcon"), "Meals": UIImage(named: "MealIcon"), "Other": UIImage(named: "OtherIcon3"), "Personal": UIImage(named: "PersonalIcon"), "Transportation" : UIImage(named: "TransportationIcon")]
+    
     static var userId: Int = -1
     static var oneTimeIndex: Int = -1
     static var tripIndex: Int = -1

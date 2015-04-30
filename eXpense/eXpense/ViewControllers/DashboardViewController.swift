@@ -128,21 +128,23 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             
             switch oneTimeData.category {
             case Category.Entertainment:
-                cell.cellImage.image = UIImage(named: "EntertainmentIcon")
+                cell.cellImage.image = Model.imageDictionary["Entertainment"]
             case Category.Lodging:
-                cell.cellImage.image = UIImage(named: "LodgingIcon")
+                cell.cellImage.image = Model.imageDictionary["Lodging"]
             case Category.Meals:
-                cell.cellImage.image = UIImage(named: "MealIcon")
+                cell.cellImage.image = Model.imageDictionary["Meals"]
             case Category.Personal:
-                cell.cellImage.image = UIImage(named: "PersonalIcon")
+                cell.cellImage.image = Model.imageDictionary["Personal"]
             case Category.Transportation:
-                cell.cellImage.image = UIImage(named: "TransportationIcon")
+                cell.cellImage.image = Model.imageDictionary["Transportation"]
             default:
-                cell.cellImage.image = UIImage(named: "OtherIcon3")
+                cell.cellImage.image = Model.imageDictionary["Other"]
             }
             
             if let location = oneTimeData.location {
-                detailString += " | \(location)"
+                if count(location) != 0 {
+                    detailString += " | \(location)"
+                }
             }
             
         }
