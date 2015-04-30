@@ -132,6 +132,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 purposeCell?.identifier = "Purpose"
                 
                 purposeCell?.cellTextField.placeholder = "Purpose"
+                purposeCell?.cellTextField.autocapitalizationType = UITextAutocapitalizationType.Sentences
                 
                 if !newExpense {
                     purposeCell?.cellTextField.text = oneTime!.name
@@ -171,6 +172,10 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     costCell?.identifier = "Cost"
                     
                     costCell?.cellTextField.placeholder = "Cost"
+                    costCell?.cellTextField.keyboardType = UIKeyboardType.DecimalPad
+                    
+                    let attributedString = NSMutableAttributedString(string: "$")
+                    costCell?.cellTextField.attributedText = attributedString
                     
                     if !newExpense {
                         costCell?.cellTextField.text = String(format:"%.2f", oneTime!.amount)
@@ -181,6 +186,13 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             case 3:
                 let costCell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
                 costCell?.cellTextField.placeholder = "Cost"
+                costCell?.cellTextField.keyboardType = UIKeyboardType.DecimalPad
+                
+                
+                
+                
+                
+                
                 cell = costCell
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
@@ -210,6 +222,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 locationCell?.identifier = "Location"
                 
                 locationCell?.cellTextField.placeholder = "Location"
+                locationCell?.cellTextField.autocapitalizationType = UITextAutocapitalizationType.Sentences
                 
                 if !newExpense {
                     if let location = oneTime?.location {
