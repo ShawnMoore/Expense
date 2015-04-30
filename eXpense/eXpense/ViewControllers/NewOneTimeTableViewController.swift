@@ -48,10 +48,32 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     }
     
     override func viewWillDisappear(animated: Bool) {
+        
+        if let controllers = (self.navigationController?.viewControllers as? [UIViewController]) {
+            if !contains(controllers, self) {
+                
+                var cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! TextFieldTableViewCell)
+                oneTime?.name = cell.cellTextField.text
+                cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! TextFieldTableViewCell)
+                oneTime?.amount = (cell.cellTextField.text as NSString).doubleValue
+                cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 1)) as! TextFieldTableViewCell)
+                oneTime?.location = cell.cellTextField.text
+                
+                if newExpense {
+                    if oneTime?.tripId == nil {
+                        model?.oneTimeExpenses.append(self.oneTime!)
+                    } else {
+                        model?.tripExpenses[self.oneTime!.tripId!]?.oneTimeExpenses.append(self.oneTime!)
+                    }
+                }
+            }
+        }
+        
         self.navigationController?.setToolbarHidden(true, animated: true)
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(false)
         tableView.reloadData()
     }
     
@@ -116,7 +138,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 
                 cell?.detailTextLabel?.text = Category.Other.rawValue
                 
-                if !newExpense {
+                if oneTime != nil {
                     cell?.detailTextLabel?.text = oneTime?.category.rawValue
                 }
                 
@@ -127,7 +149,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     
                     categoryPickerCell?.Picker.selectRow(5, inComponent: 0, animated: false)
                     
-                    if !newExpense {
+                    if oneTime != nil {
                         for i in 0...(Category.allValues.count-1) {
                             if oneTime?.category.rawValue == Category.allValues[i].rawValue {
                                 categoryPickerCell?.Picker.selectRow(i, inComponent: 0, animated: false)
@@ -145,7 +167,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     costCell?.cellTextField.placeholder = "Cost"
                     
                     if !newExpense {
-                        costCell?.cellTextField.text = String(format:"%f", oneTime!.amount)
+                        costCell?.cellTextField.text = String(format:"%.2f", oneTime!.amount)
                     }
                     
                     cell = costCell
@@ -164,7 +186,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             case 0:
                 cell = tableView.dequeueReusableCellWithIdentifier("tripCell", forIndexPath: indexPath) as? UITableViewCell
                 cell?.textLabel?.text = "Trip:"
-                if !newExpense {
+                if oneTime != nil {
                     if oneTime!.tripId == nil {
                         cell?.detailTextLabel?.text = "None"
                     }
@@ -194,7 +216,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
                 cell?.textLabel?.text = "Date:"
                 
-                if !newExpense {
+                if oneTime != nil {
                     cell?.detailTextLabel?.text = dateFormatter.stringFromDate(oneTime!.date)
                 } else {
                     cell?.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
@@ -250,6 +272,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
 
         if(indexPath.section == 1 && indexPath.row == 0){
             performSegueWithIdentifier("tripSelection", sender: self)
+            tableView.reloadData()
         }
         else{
             var (path, action) = getIndexPathOnGlobalBools(indexPath)
@@ -257,7 +280,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 tableView.beginUpdates()
                 tableView.insertRowsAtIndexPaths([path], withRowAnimation: .Fade)
                 tableView.endUpdates()
-                //tableView.scrollToRowAtIndexPath(path, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+                tableView.scrollToRowAtIndexPath(path, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
             } else if(action == "delete") {
                 tableView.beginUpdates()
                 tableView.deleteRowsAtIndexPaths([path], withRowAnimation: .Fade)
@@ -294,7 +317,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     func textViewDidChange(textView: UITextView) {
         tableView.beginUpdates()
-        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
         tableView.endUpdates()
         
         oneTime?.expenseDescription = textView.text
