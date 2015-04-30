@@ -35,7 +35,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         tableView.estimatedRowHeight = 67.0
         
         if newExpense {
-            oneTime = OneTimeExpense(forID: Model.oneTimeIndex--, name: "", amount: 0.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, category: "Other")
+            oneTime = OneTimeExpense(forID: Model.oneTimeIndex--, name: "No Purpose Given", amount: 0.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, category: "Other")
         }
         
         // Uncomment the following line to preserve selection between presentations
@@ -56,7 +56,13 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 
                 cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! PurposeTextFieldTableViewCell)
                 oneTime?.name = (cell as! PurposeTextFieldTableViewCell).purposeTextField.text
-                cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! CostTextFieldTableViewCell)
+                
+                if categoryPickerOn {
+                    cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! CostTextFieldTableViewCell)
+                } else {
+                    cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! CostTextFieldTableViewCell)
+                }
+                
                 oneTime?.amount = ((cell as! CostTextFieldTableViewCell).costTextField.text as NSString).doubleValue
                 cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 1)) as! LocationTableViewCell)
                 oneTime?.location = (cell as! LocationTableViewCell).locationTextField.text
@@ -228,7 +234,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     (cell as! DatePickerTableViewCell).datePicker.date = oneTime!.date
                 }
     
-                (cell as! DatePickerTableViewCell).location = indexPath
+                (cell as! DatePickerTableViewCell).identifier = "datePicker"
                 (cell as! DatePickerTableViewCell).delegate = self
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
@@ -271,7 +277,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
 
         if(indexPath.section == 1 && indexPath.row == 0){
             performSegueWithIdentifier("tripSelection", sender: self)
-            tableView.reloadData()
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 1)], withRowAnimation: UITableViewRowAnimation.None)
         }
         else{
             var (path, action) = getIndexPathOnGlobalBools(indexPath)
@@ -311,7 +317,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         if oneTime != nil {
             oneTime?.category = Category.allValues[row]
         }
-        tableView.reloadData()
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
     }
     
     func textViewDidChange(textView: UITextView) {
@@ -321,9 +327,9 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         oneTime?.expenseDescription = textView.text
     }
     
-    func dateAndTimeHasChanged(ChangedTo: NSDate, at: NSIndexPath) {
+    func dateAndTimeHasChanged(ChangedTo: NSDate, at: String) {
         oneTime?.date = ChangedTo
-        tableView.reloadData()
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 2, inSection: 1)], withRowAnimation: UITableViewRowAnimation.None)
     }
     
     func textInTextFieldHasChanged(ChangedTo: String, at: String) {

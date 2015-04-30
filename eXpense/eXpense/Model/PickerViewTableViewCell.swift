@@ -11,6 +11,7 @@ import UIKit
 class PickerViewTableViewCell: UITableViewCell {
 
     @IBOutlet weak var Picker: UIPickerView!
+    var identifier: String!
     
     override func awakeFromNib() {
         super.awakeFromNib()

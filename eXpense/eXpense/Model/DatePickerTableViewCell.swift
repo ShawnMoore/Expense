@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DatePickerTableViewCellDelegate : class {
-    func dateAndTimeHasChanged(ChangedTo: NSDate, at: NSIndexPath);
+    func dateAndTimeHasChanged(ChangedTo: NSDate, at: String);
 }
 
 class DatePickerTableViewCell: UITableViewCell {
@@ -17,7 +17,7 @@ class DatePickerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var datePicker: UIDatePicker!
     var delegate: DatePickerTableViewCellDelegate?
-    var location: NSIndexPath?
+    var identifier: String!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +31,6 @@ class DatePickerTableViewCell: UITableViewCell {
     }
     
     @IBAction func dateChanged(sender: AnyObject) {
-        self.delegate?.dateAndTimeHasChanged(datePicker!.date, at: location!)
+        self.delegate?.dateAndTimeHasChanged(datePicker!.date, at: identifier)
     }
 }

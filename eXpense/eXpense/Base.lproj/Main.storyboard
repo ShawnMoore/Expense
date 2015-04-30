@@ -1030,7 +1030,7 @@
         <scene sceneID="lCs-H1-351">
             <objects>
                 <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="uCm-Wc-KTA" customClass="NewOneTimeTableViewController" customModule="eXpense" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="QIt-aj-XxK">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="QIt-aj-XxK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="903"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
@@ -1254,7 +1254,7 @@
                                             </constraints>
                                             <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -1280,7 +1280,7 @@
                                             </constraints>
                                             <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad" enablesReturnKeyAutomatically="YES"/>
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -1306,7 +1306,7 @@
                                             </constraints>
                                             <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                         </textField>
                                     </subviews>
                                     <constraints>
