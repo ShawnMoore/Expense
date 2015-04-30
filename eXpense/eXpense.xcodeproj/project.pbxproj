@@ -39,7 +39,6 @@
 		444946BD1AF046C100FB542F /* TripsChoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444946BC1AF046C100FB542F /* TripsChoiceTableViewController.swift */; };
 		44B8C0DB1AEF3197003D283C /* NewTripTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B8C0DA1AEF3197003D283C /* NewTripTableViewController.swift */; };
 		C19767AB1AC9FBD2007B4D85 /* newTripTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19767AA1AC9FBD2007B4D85 /* newTripTableViewController.swift */; };
-		C1C83EE71AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C83EE61AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift */; };
 		C1EAB3711AF1C9700040C543 /* ReceiptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EAB3701AF1C9700040C543 /* ReceiptViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,7 +89,6 @@
 		444946BC1AF046C100FB542F /* TripsChoiceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripsChoiceTableViewController.swift; path = ViewControllers/TripsChoiceTableViewController.swift; sourceTree = "<group>"; };
 		44B8C0DA1AEF3197003D283C /* NewTripTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewTripTableViewController.swift; path = ViewControllers/NewTripTableViewController.swift; sourceTree = "<group>"; };
 		C19767AA1AC9FBD2007B4D85 /* newTripTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newTripTableViewController.swift; sourceTree = "<group>"; };
-		C1C83EE61AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOneTimeExpenseTableViewController.swift; sourceTree = "<group>"; };
 		C1EAB3701AF1C9700040C543 /* ReceiptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,7 +195,6 @@
 				293F44A61A840FEB00A43234 /* SignUpViewController.swift */,
 				293F44A81A84109200A43234 /* DashboardViewController.swift */,
 				293F44B01A84137700A43234 /* TripsViewController.swift */,
-				C1C83EE61AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift */,
 				44241A701AEDE40C003C7DAF /* NewOneTimeTableViewController.swift */,
 				44B8C0DA1AEF3197003D283C /* NewTripTableViewController.swift */,
 				444946BC1AF046C100FB542F /* TripsChoiceTableViewController.swift */,
@@ -353,7 +350,6 @@
 				29CEE3621AF1C9DF003F2500 /* PurposeTextFieldTableViewCell.swift in Sources */,
 				293F44A91A84109200A43234 /* DashboardViewController.swift in Sources */,
 				44241A6F1AEDE370003C7DAF /* DatePickerTableViewCell.swift in Sources */,
-				C1C83EE71AB37C000049DF64 /* NewOneTimeExpenseTableViewController.swift in Sources */,
 				29CEE3641AF1D317003F2500 /* CostTextFieldTableViewCell.swift in Sources */,
 				44241A711AEDE40C003C7DAF /* NewOneTimeTableViewController.swift in Sources */,
 				C19767AB1AC9FBD2007B4D85 /* newTripTableViewController.swift in Sources */,
