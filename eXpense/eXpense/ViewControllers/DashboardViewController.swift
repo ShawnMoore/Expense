@@ -169,6 +169,25 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
     }
     
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            sortedArray[indexPath.row].deleted = true
+            if sortedArray[indexPath.row] is TripExpense{
+                var OTEList = model?.tripExpenses[sortedArray[indexPath.row].id]?.oneTimeExpenses
+                for oneTime in OTEList!{
+                    oneTime.deleted = true
+                    println(oneTime.deleted)
+                }
+            }
+            sortedArray.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+    }
+    
     @IBAction func addNewExpense(sender: AnyObject) {
         
         selectedIndex = nil
