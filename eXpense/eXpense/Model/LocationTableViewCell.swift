@@ -38,11 +38,11 @@ class LocationTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        self.delegate?.updateFirstResponder(locationTextField, identifier: "Begin")
+        self.delegate?.updateFirstResponder(locationTextField, identifier: "Location_Begin")
         return true
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        self.delegate?.updateFirstResponder(locationTextField, identifier: "_")
+        self.delegate?.updateFirstResponder(locationTextField, identifier: "Location_End")
     }
 }

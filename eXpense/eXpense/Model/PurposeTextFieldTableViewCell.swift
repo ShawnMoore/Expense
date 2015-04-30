@@ -38,12 +38,12 @@ class PurposeTextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        self.delegate?.updateFirstResponder(purposeTextField, identifier: "Begin")
+        self.delegate?.updateFirstResponder(purposeTextField, identifier: "Purpose_Begin")
         return true
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        self.delegate?.updateFirstResponder(purposeTextField, identifier: "_")
+        self.delegate?.updateFirstResponder(purposeTextField, identifier: "Purpose_End")
     }
     
 
