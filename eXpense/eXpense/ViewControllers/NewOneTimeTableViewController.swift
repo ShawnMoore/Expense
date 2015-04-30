@@ -31,6 +31,8 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = oneTime?.name
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         model = appDelegate.getModel()
@@ -314,7 +316,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             let destViewController = segue.destinationViewController as! ReceiptViewController
             destViewController.receiptImage = receiptImage
             destViewController.previousViewController = self
-            navigationItem.title = nil
         }
     }
     
@@ -403,11 +404,13 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
     }
     
-    //reload Data
     override func viewDidAppear(animated: Bool) {
         if isFirstPhoto == 1 {
             tableView.reloadData()
         }
+        
+        
+        
     }
     
     //MARK: Added Helper Functions
