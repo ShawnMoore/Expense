@@ -52,12 +52,14 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         if let controllers = (self.navigationController?.viewControllers as? [UIViewController]) {
             if !contains(controllers, self) {
                 
-                var cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! TextFieldTableViewCell)
-                oneTime?.name = cell.cellTextField.text
-                cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! TextFieldTableViewCell)
-                oneTime?.amount = (cell.cellTextField.text as NSString).doubleValue
+                var cell: UITableViewCell!
+                
+                cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! PurposeTextFieldTableViewCell)
+                oneTime?.name = (cell as! PurposeTextFieldTableViewCell).purposeTextField.text
+                cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! CostTextFieldTableViewCell)
+                oneTime?.amount = ((cell as! CostTextFieldTableViewCell).costTextField.text as NSString).doubleValue
                 cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 1)) as! TextFieldTableViewCell)
-                oneTime?.location = cell.cellTextField.text
+                oneTime?.location = (cell as! TextFieldTableViewCell).cellTextField.text
                 
                 if newExpense {
                     if oneTime?.tripId == nil {
@@ -120,15 +122,12 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         case 0:
             switch indexPath.row {
             case 0:
-                let purposeCell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
+                let purposeCell = tableView.dequeueReusableCellWithIdentifier("PurposeTextFieldCell", forIndexPath: indexPath) as? PurposeTextFieldTableViewCell
                 
                 purposeCell?.delegate = self
-                purposeCell?.identifier = "Purpose"
-                
-                purposeCell?.cellTextField.placeholder = "Purpose"
                 
                 if !newExpense {
-                    purposeCell?.cellTextField.text = oneTime!.name
+                    purposeCell?.purposeTextField.text = oneTime!.name
                 }
                 
                 cell = purposeCell
@@ -159,22 +158,25 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     
                     cell = categoryPickerCell
                 } else {
-                    let costCell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
+                    let costCell = tableView.dequeueReusableCellWithIdentifier("CostTextFieldCell", forIndexPath: indexPath) as? CostTextFieldTableViewCell
                     
                     costCell?.delegate = self
-                    costCell?.identifier = "Cost"
-                    
-                    costCell?.cellTextField.placeholder = "Cost"
                     
                     if !newExpense {
-                        costCell?.cellTextField.text = String(format:"%.2f", oneTime!.amount)
+                        costCell?.costTextField.text = String(format:"%.2f", oneTime!.amount)
                     }
                     
                     cell = costCell
                 }
             case 3:
-                let costCell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
-                costCell?.cellTextField.placeholder = "Cost"
+                let costCell = tableView.dequeueReusableCellWithIdentifier("CostTextFieldCell", forIndexPath: indexPath) as? CostTextFieldTableViewCell
+                
+                costCell?.delegate = self
+                
+                if !newExpense {
+                    costCell?.costTextField.text = String(format:"%.2f", oneTime!.amount)
+                }
+                
                 cell = costCell
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
