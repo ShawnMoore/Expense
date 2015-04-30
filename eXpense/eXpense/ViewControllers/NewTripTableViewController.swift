@@ -11,7 +11,10 @@ import UIKit
 class NewTripTableViewController: UITableViewController, UITextViewDelegate, DatePickerTableViewCellDelegate {
 
     var startDatePickerOn: Bool = false
-    var endDatePickerOn : Bool = false
+    var endDatePickerOn: Bool = false
+    
+    private var dateFormatter: NSDateFormatter = NSDateFormatter()
+    private var dateFormatString = "MMMM dd, yyyy"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +22,7 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 67.0
 
+        dateFormatter.dateFormat = dateFormatString
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -200,7 +204,7 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
     
     func dateAndTimeHasChanged(ChangedTo: NSDate, at: String) {
         if at == "Start" {
-            println("Start Value Changed")
+            println("Start Value")
         } else if at == "End" {
             println("End Value")
         }
