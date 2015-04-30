@@ -17,7 +17,6 @@ class PurposeTextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
         super.awakeFromNib()
         // Initialization code
         purposeTextField.delegate = self
-        purposeTextField.placeholder = "Purpose"
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

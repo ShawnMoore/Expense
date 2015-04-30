@@ -58,8 +58,8 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 oneTime?.name = (cell as! PurposeTextFieldTableViewCell).purposeTextField.text
                 cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! CostTextFieldTableViewCell)
                 oneTime?.amount = ((cell as! CostTextFieldTableViewCell).costTextField.text as NSString).doubleValue
-                cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 1)) as! TextFieldTableViewCell)
-                oneTime?.location = (cell as! TextFieldTableViewCell).cellTextField.text
+                cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 1)) as! LocationTableViewCell)
+                oneTime?.location = (cell as! LocationTableViewCell).locationTextField.text
                 
                 if newExpense {
                     if oneTime?.tripId == nil {
@@ -200,16 +200,13 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 }
                 
             case 1:
-                let locationCell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
+                let locationCell = tableView.dequeueReusableCellWithIdentifier("LocationTextFieldCell", forIndexPath: indexPath) as? LocationTableViewCell
                 
                 locationCell?.delegate = self
-                locationCell?.identifier = "Location"
-                
-                locationCell?.cellTextField.placeholder = "Location"
                 
                 if !newExpense {
                     if let location = oneTime?.location {
-                        locationCell?.cellTextField.text = location
+                        locationCell?.locationTextField.text = location
                     }
                 }
                 

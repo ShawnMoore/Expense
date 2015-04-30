@@ -1,5 +1,5 @@
 //
-//  CostTextFieldTableViewCell.swift
+//  LocationTableViewCell.swift
 //  eXpense
 //
 //  Created by Shawn Moore on 4/29/15.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-class CostTextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
+class LocationTableViewCell: UITableViewCell, UITextFieldDelegate {
 
-    @IBOutlet weak var costTextField: UITextField!
+    @IBOutlet weak var locationTextField: UITextField!
     var delegate: TextFieldTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        costTextField.delegate = self
+        locationTextField.delegate = self
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -26,14 +26,14 @@ class CostTextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.delegate?.textInTextFieldHasChanged("", at: "Cost")
-        costTextField.resignFirstResponder()
+        self.delegate?.textInTextFieldHasChanged("", at: "Location")
+        locationTextField.resignFirstResponder()
         return true
     }
     
     func resignResponders() {
-        if costTextField.isFirstResponder() {
-            costTextField.resignFirstResponder()
+        if locationTextField.isFirstResponder() {
+            locationTextField.resignFirstResponder()
         }
     }
 }
