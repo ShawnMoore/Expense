@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewTripTableViewController: UITableViewController, UITextViewDelegate {
+class NewTripTableViewController: UITableViewController, UITextViewDelegate, DatePickerTableViewCellDelegate {
 
     var startDatePickerOn: Bool = false
     var endDatePickerOn : Bool = false
@@ -93,6 +93,8 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate {
             case 1:
                 if(startDatePickerOn){
                     cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? DatePickerTableViewCell
+                    (cell as! DatePickerTableViewCell).delegate = self
+                    (cell as! DatePickerTableViewCell).identifier = "Start"
                 }else{
                     cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
                     cell?.textLabel?.text = "End Date:"
@@ -105,10 +107,14 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate {
                     cell?.detailTextLabel?.text = "NOT DONE YET"
                 }else if(endDatePickerOn){
                     cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? DatePickerTableViewCell
+                    (cell as! DatePickerTableViewCell).delegate = self
+                    (cell as! DatePickerTableViewCell).identifier = "End"
                 }
             case 3:
                 if(endDatePickerOn){
                     cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? DatePickerTableViewCell
+                    (cell as! DatePickerTableViewCell).delegate = self
+                    (cell as! DatePickerTableViewCell).identifier = "End"
                 }
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
@@ -190,6 +196,14 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate {
             }
         }
         return(NSIndexPath(forRow: 0, inSection: 0), "Error")
+    }
+    
+    func dateAndTimeHasChanged(ChangedTo: NSDate, at: String) {
+        if at == "Start" {
+            println("Start Value Changed")
+        } else if at == "End" {
+            println("End Value")
+        }
     }
     /*
     // Override to support conditional editing of the table view.

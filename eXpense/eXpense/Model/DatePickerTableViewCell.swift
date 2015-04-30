@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DatePickerTableViewCellDelegate : class {
-    func dateAndTimeHasChanged(ChangedTo: NSDate, at: String);
+    func dateAndTimeHasChanged(ChangedTo: NSDate, at: String)
 }
 
 class DatePickerTableViewCell: UITableViewCell {
