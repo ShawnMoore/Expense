@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewTripTableViewController: UITableViewController, UITextViewDelegate, DatePickerTableViewCellDelegate {
+class NewTripTableViewController: UITableViewController, UITextViewDelegate, DatePickerTableViewCellDelegate/*, TextFieldTableViewCellDelegate*/ {
 
     var startDatePickerOn: Bool = false
     var endDatePickerOn: Bool = false

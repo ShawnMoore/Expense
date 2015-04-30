@@ -427,6 +427,10 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
     }
     
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        
+        return true
+    }
 
     func updateFirstResponder(textField: UITextField, identifier: String) {
         switch identifier {
