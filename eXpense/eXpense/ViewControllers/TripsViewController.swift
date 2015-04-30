@@ -13,6 +13,7 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
     var model: Model?
     var tripData: TripExpense?
     
+    private var oneTimeExpenses: Array<OneTimeExpense>?
     private let prototypeCellIdentifier = "expense_cells"
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -32,6 +33,10 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         self.navigationItem.title = tripData!.name
         displayTripInfo()
+        
+        oneTimeExpenses = Array<OneTimeExpense>() + tripData!.oneTimeExpenses
+        oneTimeExpenses?.sort({ $0.date.compare($1.date) == NSComparisonResult.OrderedDescending })
+        
 //        self.navigationController!.navigationBar.translucent = false
 //        self.navigationController!.navigationBar.barTintColor = UIColor(red: 37/255, green: 178/255, blue: 74/255, alpha: 1)
 
@@ -56,8 +61,7 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(prototypeCellIdentifier) as! DashboardTableViewCell
-        let oneTimeExpense = tripData!.oneTimeExpenses[indexPath.row]
-        
+        let oneTimeExpense = oneTimeExpenses![indexPath.row]
         cell.cellImage.contentMode = UIViewContentMode.Center
         
         cell.titleLabel.text = "\(oneTimeExpense.name) - ID: \(oneTimeExpense.id)"
