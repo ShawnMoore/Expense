@@ -26,7 +26,7 @@ class PurposeTextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.delegate?.textInTextFieldHasChanged("", at: "Purpose")
+        self.delegate?.textInTextFieldHasChanged(textField.text, at: "Purpose")
         purposeTextField.resignFirstResponder()
         return true
     }
@@ -35,6 +35,15 @@ class PurposeTextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
         if purposeTextField.isFirstResponder() {
             purposeTextField.resignFirstResponder()
         }
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        self.delegate?.updateFirstResponder(purposeTextField, identifier: "Begin")
+        return true
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        self.delegate?.updateFirstResponder(purposeTextField, identifier: "_")
     }
     
 

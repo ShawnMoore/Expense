@@ -26,7 +26,7 @@ class CostTextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.delegate?.textInTextFieldHasChanged("", at: "Cost")
+        self.delegate?.textInTextFieldHasChanged(textField.text, at: "Cost")
         costTextField.resignFirstResponder()
         return true
     }
@@ -35,5 +35,14 @@ class CostTextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
         if costTextField.isFirstResponder() {
             costTextField.resignFirstResponder()
         }
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        self.delegate?.updateFirstResponder(costTextField, identifier: "Begin")
+        return true
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        self.delegate?.updateFirstResponder(costTextField, identifier: "_")
     }
 }

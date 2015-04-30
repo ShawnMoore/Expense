@@ -10,7 +10,7 @@ import UIKit
 
 protocol TextFieldTableViewCellDelegate : class {
     func textInTextFieldHasChanged(ChangedTo: String, at: String)
-    func updateFirstResponder(identifier: String)
+    func updateFirstResponder(textField: UITextField, identifier: String)
 }
 
 class TextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {

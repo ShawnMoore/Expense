@@ -26,7 +26,7 @@ class LocationTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.delegate?.textInTextFieldHasChanged("", at: "Location")
+        self.delegate?.textInTextFieldHasChanged(textField.text, at: "Location")
         locationTextField.resignFirstResponder()
         return true
     }
@@ -38,7 +38,11 @@ class LocationTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        self.delegate?.updateFirstResponder("Location")
+        self.delegate?.updateFirstResponder(locationTextField, identifier: "Begin")
         return true
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        self.delegate?.updateFirstResponder(locationTextField, identifier: "_")
     }
 }

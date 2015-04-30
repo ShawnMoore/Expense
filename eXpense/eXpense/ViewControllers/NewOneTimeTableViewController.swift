@@ -21,7 +21,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     var newExpense: Bool = true
     
     private var model: Model?
-    private var responderIndex: NSIndexPath?
+    private var responderTextField: UITextField? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,23 +50,27 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     override func viewWillDisappear(animated: Bool) {
         
+        if responderTextField != nil {
+            
+            switch responderTextField!.placeholder! {
+                case "Purpose":
+                    oneTime?.name = responderTextField!.text
+                case "Cost":
+                    oneTime?.amount = (responderTextField!.text as NSString).doubleValue
+                case "Location":
+                    oneTime?.location = responderTextField!.text
+                default:
+                    println("Error")
+            }
+            
+            if responderTextField!.isFirstResponder() {
+                responderTextField!.resignFirstResponder()
+            }
+            
+        }
+        
         if let controllers = (self.navigationController?.viewControllers as? [UIViewController]) {
             if !contains(controllers, self) {
-                
-                var cell: UITableViewCell!
-                
-                cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! PurposeTextFieldTableViewCell)
-                oneTime?.name = (cell as! PurposeTextFieldTableViewCell).purposeTextField.text
-                
-                if categoryPickerOn {
-                    cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! CostTextFieldTableViewCell)
-                } else {
-                    cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) as! CostTextFieldTableViewCell)
-                }
-                
-                oneTime?.amount = ((cell as! CostTextFieldTableViewCell).costTextField.text as NSString).doubleValue
-                cell = (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 1)) as! LocationTableViewCell)
-                oneTime?.location = (cell as! LocationTableViewCell).locationTextField.text
                 
                 if newExpense {
                     if oneTime?.tripId == nil {
@@ -345,10 +349,14 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
     }
     
-    func updateFirstResponder(identifier: String) {
-        if identifier == "Location" {
-            
+    func updateFirstResponder(textField: UITextField, identifier: String) {
+        switch identifier {
+            case "Begin":
+                self.responderTextField = textField
+            default:
+                self.responderTextField = nil
         }
+        
     }
     
     //MARK: Added Helper Functions
