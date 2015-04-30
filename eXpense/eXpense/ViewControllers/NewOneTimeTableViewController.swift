@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import CoreData
+import MobileCoreServices
 
-class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, DatePickerTableViewCellDelegate, TextFieldTableViewCellDelegate {
+class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, DatePickerTableViewCellDelegate, TextFieldTableViewCellDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     private var editingModeOn: Bool = true
     private var datePickerOn: Bool = false
@@ -19,6 +21,10 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     var oneTime: OneTimeExpense?
     var newExpense: Bool = true
+    
+    var receiptImage:UIImage?
+    var isFirstPhoto = 0
+    var imagePicker: UIImagePickerController!
     
     private var model: Model?
     
@@ -249,6 +255,13 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 
             case 1:
                 let photoCell = tableView.dequeueReusableCellWithIdentifier("photoCaptureCell", forIndexPath: indexPath) as? PhotoCaptureTableViewCell
+                
+                if isFirstPhoto == 1 {
+                    photoCell?.receiptImageView.image = receiptImage
+                    photoCell?.receiptImageView.contentMode = .ScaleAspectFit
+                    photoCell?.takePhotoButton.setTitle("", forState: UIControlState.Normal)
+                }
+                
                 cell = photoCell
                 
             default:
@@ -293,6 +306,53 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         if segue.identifier == "tripSelection" {
             (segue.destinationViewController as! TripsChoiceTableViewController).oneTimeExpense = oneTime
         }
+        if segue.identifier == "showReceipt" {
+            let destViewController = segue.destinationViewController as! ReceiptViewController
+            destViewController.receiptImage = receiptImage
+            destViewController.previousViewController = self
+            navigationItem.title = nil
+        }
+    }
+    
+    @IBAction func takeReceiptPhoto(sender: AnyObject) {
+        if isFirstPhoto == 0 {
+            //camera detected
+            if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
+                var picker = UIImagePickerController()
+                picker.delegate = self
+                picker.sourceType = UIImagePickerControllerSourceType.Camera
+                var mediaTypes: Array<AnyObject> = [kUTTypeImage]
+                picker.mediaTypes = mediaTypes
+                picker.allowsEditing = false
+                self.presentViewController(picker, animated: true, completion: nil)
+            }
+                
+                //no camera detected
+            else{
+                var alert = UIAlertController(title: "No Camera", message: "Your device must have a camera to take a picture of your reciepts", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
+        else if isFirstPhoto == 1 {
+            performSegueWithIdentifier("showReceipt", sender: self)
+        }
+        
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        let mediaType = info[UIImagePickerControllerMediaType] as! String
+        
+        //set image
+        receiptImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        isFirstPhoto = 1
+        
+        //dismiss camera view
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        
+        //dismiss camera view
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     //MARK: Delegates
@@ -339,6 +399,12 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
     }
     
+    //reload Data
+    override func viewDidAppear(animated: Bool) {
+        if isFirstPhoto == 1 {
+            tableView.reloadData()
+        }
+    }
     
     //MARK: Added Helper Functions
     func getIndexPathOnGlobalBools(indexPath: NSIndexPath) -> (NSIndexPath, String){
