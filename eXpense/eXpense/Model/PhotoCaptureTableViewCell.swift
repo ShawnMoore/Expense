@@ -10,7 +10,10 @@ import UIKit
 
 class PhotoCaptureTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var RecieptImage: UIImageView!
+    
+    @IBOutlet weak var receiptImageView: UIImageView!
+    @IBOutlet weak var takePhotoButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

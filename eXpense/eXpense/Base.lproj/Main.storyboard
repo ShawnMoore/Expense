@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+=======
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+>>>>>>> reeWorking
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -850,6 +854,72 @@
             </objects>
             <point key="canvasLocation" x="2597" y="363"/>
         </scene>
+        <!--Receipt View Controller-->
+        <scene sceneID="GM4-EX-Ddf">
+            <objects>
+                <viewController id="0y1-zc-j25" customClass="ReceiptViewController" customModule="eXpense" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1GH-qO-JfK"/>
+                        <viewControllerLayoutGuide type="bottom" id="BRa-v7-hLc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UqJ-be-6X5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="806"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2tW-el-k5p">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="2tW-el-k5p" secondAttribute="trailing" constant="16" id="2PW-XJ-pN4">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="2tW-el-k5p" firstAttribute="top" secondItem="UqJ-be-6X5" secondAttribute="top" id="75x-nK-3xx"/>
+                            <constraint firstAttribute="bottom" secondItem="2tW-el-k5p" secondAttribute="bottom" id="T4G-cc-Co1"/>
+                            <constraint firstItem="2tW-el-k5p" firstAttribute="leading" secondItem="UqJ-be-6X5" secondAttribute="leading" constant="-16" id="hnC-Ng-g05">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="2tW-el-k5p"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="2PW-XJ-pN4"/>
+                                <exclude reference="75x-nK-3xx"/>
+                                <exclude reference="T4G-cc-Co1"/>
+                                <exclude reference="hnC-Ng-g05"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="2tW-el-k5p"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="2PW-XJ-pN4"/>
+                                <include reference="75x-nK-3xx"/>
+                                <include reference="T4G-cc-Co1"/>
+                                <include reference="hnC-Ng-g05"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="Re8-Dz-ASV">
+                        <barButtonItem key="rightBarButtonItem" title="Retake" id="WAk-6S-RIf">
+                            <connections>
+                                <action selector="retakePhoto:" destination="0y1-zc-j25" id="18w-Vn-F7m"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="receiptScrollView" destination="2tW-el-k5p" id="Z2h-9W-Oal"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fSb-g0-YT9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4582.5" y="183"/>
+        </scene>
         <!--Trips View Controller-->
         <scene sceneID="Qrb-ak-W9D">
             <objects>
@@ -1031,7 +1101,11 @@
             <objects>
                 <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="uCm-Wc-KTA" customClass="NewOneTimeTableViewController" customModule="eXpense" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="QIt-aj-XxK">
+<<<<<<< HEAD
                         <rect key="frame" x="0.0" y="0.0" width="600" height="903"/>
+=======
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="806"/>
+>>>>>>> reeWorking
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
@@ -1219,12 +1293,30 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4cZ-Kx-97n">
                                             <rect key="frame" x="8" y="8" width="584" height="27"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="27" id="ZAy-S8-PBb">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="250"/>
+                                                </constraint>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="ZAy-S8-PBb"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="ZAy-S8-PBb"/>
+                                                </mask>
+                                            </variation>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mxa-dt-Rbe">
                                             <rect key="frame" x="8" y="8" width="584" height="27"/>
                                             <state key="normal" title="Take a Photo of the Reciept">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="takeReceiptPhoto:" destination="uCm-Wc-KTA" eventType="touchUpInside" id="seV-hD-pxt"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -1239,7 +1331,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="RecieptImage" destination="4cZ-Kx-97n" id="1p1-oQ-nUx"/>
+                                    <outlet property="receiptImageView" destination="4cZ-Kx-97n" id="kgF-XJ-M3L"/>
+                                    <outlet property="takePhotoButton" destination="mxa-dt-Rbe" id="q7S-Ok-GhM"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PurposeTextFieldCell" id="Udf-DR-JdW" customClass="PurposeTextFieldTableViewCell" customModule="eXpense" customModuleProvider="target">
@@ -1247,14 +1340,22 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Udf-DR-JdW" id="u94-IY-DX6">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+<<<<<<< HEAD
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Purpose" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Tf2-sO-Hyy">
+=======
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Purpose" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tf2-sO-Hyy">
+>>>>>>> reeWorking
                                             <rect key="frame" x="8" y="0.0" width="584" height="43"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="43" id="r0O-GY-S0Z"/>
                                             </constraints>
                                             <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
+<<<<<<< HEAD
                                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+=======
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+>>>>>>> reeWorking
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -1273,14 +1374,22 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l7R-CM-lMg" id="UkM-IX-qHv">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+<<<<<<< HEAD
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Cost" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dEC-sZ-kRD">
+=======
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dEC-sZ-kRD">
+>>>>>>> reeWorking
                                             <rect key="frame" x="8" y="0.0" width="584" height="43"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="43" id="Uin-iH-dbh"/>
                                             </constraints>
                                             <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
+<<<<<<< HEAD
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad" enablesReturnKeyAutomatically="YES"/>
+=======
+                                            <textInputTraits key="textInputTraits" keyboardType="decimalPad" enablesReturnKeyAutomatically="YES"/>
+>>>>>>> reeWorking
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -1340,6 +1449,7 @@
                     <connections>
                         <segue destination="cA8-T6-HUA" kind="show" identifier="newOneTimeToNewTrip" id="9mP-JV-fr8"/>
                         <segue destination="BwW-v6-9tq" kind="show" identifier="tripSelection" id="ddY-bK-K2M"/>
+                        <segue destination="0y1-zc-j25" kind="show" identifier="showReceipt" id="o9I-3H-RZr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KjM-qo-Slx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1582,7 +1692,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UNa-mA-XnM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4273" y="789.5"/>
+            <point key="canvasLocation" x="4725" y="768"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9UW-Uk-HsP">
