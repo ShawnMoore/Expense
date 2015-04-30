@@ -295,6 +295,11 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        
+        if let textField = responderTextField {
+            textField.resignFirstResponder()
+            responderTextField = nil
+        }
 
         if(indexPath.section == 1 && indexPath.row == 0){
             performSegueWithIdentifier("tripSelection", sender: self)
@@ -306,7 +311,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 tableView.beginUpdates()
                 tableView.insertRowsAtIndexPaths([path], withRowAnimation: .Fade)
                 tableView.endUpdates()
-                tableView.scrollToRowAtIndexPath(path, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+                tableView.scrollToRowAtIndexPath(path, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
             } else if(action == "delete") {
                 tableView.beginUpdates()
                 tableView.deleteRowsAtIndexPaths([path], withRowAnimation: .Fade)
