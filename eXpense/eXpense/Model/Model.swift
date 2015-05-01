@@ -13,29 +13,7 @@ class Model: NSObject {
         get {
             var array: Array<Expense> = Array<Expense>()
             
-            var removeArray = Array<Int>()
-            
-            if (self.oneTimeExpenses.count != 0) && (self.tripExpenses.count != 0) {
-            
-                for index in 0...(self.oneTimeExpenses.count-1) {
-                    if self.oneTimeExpenses[index].tripId != nil {
-                        removeArray.append(index)
-                    }
-                }
-            }
-            
-            removeArray.sort({ $0 > $1 })
-            
-            for index in removeArray {
-                let value = self.oneTimeExpenses[index]
-                self.oneTimeExpenses.removeAtIndex(index)
-                
-                if let trip = self.tripExpenses[value.tripId!] {
-                    trip.oneTimeExpenses.append(value)
-                } else {
-                    oneTimeExpenses.append(value)
-                }
-            }
+            updateModel()
             
             array = array + self.oneTimeExpenses
             array = array + self.tripExpenses.values.array
@@ -61,6 +39,32 @@ class Model: NSObject {
         dateFormatter.dateFormat = dateFormatString
         
         Model.userId = 1
+    }
+    
+    func updateModel() {
+        var removeArray = Array<Int>()
+        
+        if (self.oneTimeExpenses.count != 0) && (self.tripExpenses.count != 0) {
+            
+            for index in 0...(self.oneTimeExpenses.count-1) {
+                if self.oneTimeExpenses[index].tripId != nil {
+                    removeArray.append(index)
+                }
+            }
+        }
+        
+        removeArray.sort({ $0 > $1 })
+        
+        for index in removeArray {
+            let value = self.oneTimeExpenses[index]
+            self.oneTimeExpenses.removeAtIndex(index)
+            
+            if let trip = self.tripExpenses[value.tripId!] {
+                trip.oneTimeExpenses.append(value)
+            } else {
+                oneTimeExpenses.append(value)
+            }
+        }
     }
     
     func loadAllLocalExpenses(oneTimeFilename: String, tripFilename: String, completionHandler: () -> Void) {

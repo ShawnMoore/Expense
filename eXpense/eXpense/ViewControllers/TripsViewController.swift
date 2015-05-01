@@ -45,6 +45,7 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     override func viewWillAppear(animated: Bool) {
+        model?.updateModel()
         oneTimeExpenses = Array<OneTimeExpense>() + tripData!.oneTimeExpenses
         oneTimeExpenses?.sort({ $0.date.compare($1.date) == NSComparisonResult.OrderedDescending })
         tableView.reloadData()

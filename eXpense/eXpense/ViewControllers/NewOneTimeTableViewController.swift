@@ -95,6 +95,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     if oneTime?.tripId == nil {
                         model?.oneTimeExpenses.append(self.oneTime!)
                     } else {
+//                        model?.tripExpenses[self.oneTime!.tripId!]?.oneTimeExpenses.remo
                         model?.tripExpenses[self.oneTime!.tripId!]?.oneTimeExpenses.append(self.oneTime!)
                     }
                 }
