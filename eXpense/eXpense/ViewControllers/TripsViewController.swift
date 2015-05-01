@@ -17,6 +17,7 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     private var oneTimeExpenses: Array<OneTimeExpense>?
     private let prototypeCellIdentifier = "expense_cells"
+    private var selectedIndex: Int?
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -102,7 +103,15 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedIndex = indexPath.row
+        performSegueWithIdentifier("showExpense", sender: self)
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
+    
+    
     @IBAction func addNewExpense(sender: AnyObject) {
+        selectedIndex = nil
         performSegueWithIdentifier("showExpense", sender: self)
     }
     
@@ -128,7 +137,14 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showExpense" {
-            (segue.destinationViewController as! NewOneTimeTableViewController).newExpenseTripId = tripData?.id
+            if selectedIndex == nil{
+                (segue.destinationViewController as! NewOneTimeTableViewController).newExpense = true
+                (segue.destinationViewController as! NewOneTimeTableViewController).newExpenseTripId = tripData?.id
+            }
+            else{
+                (segue.destinationViewController as! NewOneTimeTableViewController).newExpense = false
+                (segue.destinationViewController as! NewOneTimeTableViewController).oneTime = oneTimeExpenses![selectedIndex!]
+            }
         }
     }
 
