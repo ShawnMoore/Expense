@@ -11,6 +11,14 @@ import CoreData
 import MobileCoreServices
 
 class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, DatePickerTableViewCellDelegate, TextFieldTableViewCellDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    //MARK: Variables
+    var oneTime: OneTimeExpense?
+    var newExpense: Bool = true
+    var newExpenseTripId: Int?
+    
+    var receiptImage:UIImage?
+    var isFirstPhoto = 0
+    var imagePicker: UIImagePickerController!
     
     private var editingModeOn: Bool = true
     private var datePickerOn: Bool = false
@@ -20,20 +28,12 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     private var dateFormatString = "MMMM dd, yyyy"
     private let costFormatter = NSNumberFormatter()
     
-    var oneTime: OneTimeExpense?
-    var newExpense: Bool = true
-    var newExpenseTripId: Int?
-    
-    var receiptImage:UIImage?
-    var isFirstPhoto = 0
-    var imagePicker: UIImagePickerController!
-    
     private var model: Model?
     private var responderPurposeTextField: UITextField? = nil
     private var responderCostTextField: UITextField? = nil
     private var responderLocationTextField: UITextField? = nil
     private var responderTextView: UITextView? = nil
-    
+    //MARK: View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,6 +58,11 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
         
         self.navigationController?.setToolbarHidden(false, animated: false)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(false)
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -99,39 +104,23 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         self.navigationController?.setToolbarHidden(true, animated: true)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(false)
-        tableView.reloadData()
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Table view data source
+    // MARK: - Table View Functions
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section{
         case 0:
-            if(categoryPickerOn){
-                return 4
-            }
-            else{
-                return 3
-            }
+            return (categoryPickerOn ? 4 : 3)
         case 1:
-            if(datePickerOn){
-                return 4
-            }
-            else{
-                return 3
-            }
+            return (datePickerOn ? 4 : 3)
         case 2:
             return 2
         default:
@@ -292,10 +281,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
         return cell!
     }
-    
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
@@ -339,17 +324,58 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "tripSelection" {
-            (segue.destinationViewController as! TripsChoiceTableViewController).oneTimeExpense = oneTime
-        }
-        if segue.identifier == "showReceipt" {
-            let destViewController = segue.destinationViewController as! ReceiptViewController
-            destViewController.receiptImage = receiptImage
-            destViewController.previousViewController = self
-        }
+    //MARK: Picker View Functions
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
     }
     
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return Category.allValues.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        var pickerData = Category.allValues
+        return pickerData[row].rawValue
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if oneTime != nil {
+            oneTime?.category = Category.allValues[row]
+        }
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+    }
+    
+    //MARK: Text View Functions
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        self.responderTextView = textView
+        return true
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        
+        oneTime?.expenseDescription = textView.text
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        self.responderTextView = nil
+    }
+    
+    //MARK: Image Picker Functions
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        let mediaType = info[UIImagePickerControllerMediaType] as! String
+        
+        //set image
+        receiptImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        isFirstPhoto = 1
+        
+        //dismiss camera view
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+
+    //MARK: IBAction Function
     @IBAction func takeReceiptPhoto(sender: AnyObject) {
         if isFirstPhoto == 0 {
             //camera detected
@@ -376,48 +402,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        let mediaType = info[UIImagePickerControllerMediaType] as! String
-        
-        //set image
-        receiptImage = info[UIImagePickerControllerOriginalImage] as? UIImage
-        isFirstPhoto = 1
-        
-        //dismiss camera view
-        picker.dismissViewControllerAnimated(true, completion: nil)
-        
-        //dismiss camera view
-        picker.dismissViewControllerAnimated(true, completion: nil)
-        
-    }
-    
-    //MARK: Delegates
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return Category.allValues.count
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        var pickerData = Category.allValues
-        return pickerData[row].rawValue
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if oneTime != nil {
-            oneTime?.category = Category.allValues[row]
-        }
-        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
-    }
-    
-    func textViewDidChange(textView: UITextView) {
-        tableView.beginUpdates()
-        tableView.endUpdates()
-        
-        oneTime?.expenseDescription = textView.text
-    }
-    
+    //MARK: Additional Delegate Functions
     func dateAndTimeHasChanged(ChangedTo: NSDate, at: String) {
         oneTime?.date = ChangedTo
         tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 2, inSection: 1)], withRowAnimation: UITableViewRowAnimation.None)
@@ -445,21 +430,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 oneTime?.location = ChangedTo
             }
         }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        if isFirstPhoto == 1 {
-            tableView.reloadData()
-        }
-    }
-    
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
-        self.responderTextView = textView
-        return true
-    }
-    
-    func textViewDidEndEditing(textView: UITextView) {
-        self.responderTextView = nil
     }
     
     func updateFirstResponder(textField: UITextField, identifier: String) {
@@ -493,7 +463,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     oneTime?.amount = 0.00
                 }
             }
-                
             else {
                 oneTime?.amount = 0.00
             }
@@ -510,7 +479,19 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         
     }
     
-    //MARK: Added Helper Functions
+    //MARK: Prepare for Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "tripSelection" {
+            (segue.destinationViewController as! TripsChoiceTableViewController).oneTimeExpense = oneTime
+        }
+        if segue.identifier == "showReceipt" {
+            let destViewController = segue.destinationViewController as! ReceiptViewController
+            destViewController.receiptImage = receiptImage
+            destViewController.previousViewController = self
+        }
+    }
+    
+    //MARK: Utility Functions
     func getIndexPathOnGlobalBools(indexPath: NSIndexPath) -> (NSIndexPath, String){
         
         let insert = "insert"
