@@ -27,7 +27,12 @@ class CostTextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
         case "0","1","2","3","4","5","6","7","8","9":
             costString += string
             formatCurrency(string: costString)
-       
+            
+        //clear textField on backspace
+        case "":
+            costString = ""
+            costTextField.text = "$0.00"
+            
         default:
             var array = Array(string)
             var costStringArray = Array(costString)
@@ -51,8 +56,7 @@ class CostTextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
         let formatter = NSNumberFormatter()
         formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
         formatter.locale = NSLocale(localeIdentifier: "en_US")
-        
-        var numberFromField = (NSString(string: costString).doubleValue)/100
+        var numberFromField = (NSString(string: costString).doubleValue) / 100
         
         costTextField.text = formatter.stringFromNumber(numberFromField)
     }

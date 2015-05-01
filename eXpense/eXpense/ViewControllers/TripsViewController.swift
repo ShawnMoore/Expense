@@ -9,21 +9,23 @@
 import UIKit
 
 class TripsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    //MARK: Variables
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     var model: Model?
     var tripData: TripExpense?
     
     private var oneTimeExpenses: Array<OneTimeExpense>?
     private let prototypeCellIdentifier = "expense_cells"
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    private var selectedIndex: Int?
     
     private var dateFormatter: NSDateFormatter = NSDateFormatter()
     private var dateFormatString = "MMM dd"
     
+    //MARK: View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,6 +59,7 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: Table View Functions
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -74,7 +77,11 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         let oneTimeExpense = oneTimeExpenses![indexPath.row]
         cell.cellImage.contentMode = UIViewContentMode.Center
         
-        cell.titleLabel.text = "\(oneTimeExpense.name) - ID: \(oneTimeExpense.id)"
+        if oneTimeExpense.name.isEmpty {
+            cell.titleLabel.text = "No Purpose Given - ID: \(oneTimeExpense.id)"
+        } else {
+            cell.titleLabel.text = "\(oneTimeExpense.name) - ID: \(oneTimeExpense.id)"
+        }
         
         var detailString = dateFormatter.stringFromDate(oneTimeExpense.date)
         
@@ -102,11 +109,33 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedIndex = indexPath.row
+        performSegueWithIdentifier("showExpense", sender: self)
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
+    
+    //IBAction Functinos
     @IBAction func addNewExpense(sender: AnyObject) {
+        selectedIndex = nil
         performSegueWithIdentifier("showExpense", sender: self)
     }
     
-    //MARK: Created Functions
+    //MARK: Prepare For Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showExpense" {
+            if selectedIndex == nil{
+                (segue.destinationViewController as! NewOneTimeTableViewController).newExpense = true
+                (segue.destinationViewController as! NewOneTimeTableViewController).newExpenseTripId = tripData?.id
+            }
+            else{
+                (segue.destinationViewController as! NewOneTimeTableViewController).newExpense = false
+                (segue.destinationViewController as! NewOneTimeTableViewController).oneTime = oneTimeExpenses![selectedIndex!]
+            }
+        }
+    }
+    
+    //MARK: Utility Functions
     func displayTripInfo(){
         if let location = tripData?.location{
             locationLabel.text = "Location: \(location)"
@@ -124,12 +153,6 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
             dateLabel?.text = dateString
         }
         
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showExpense" {
-            (segue.destinationViewController as! NewOneTimeTableViewController).newExpenseTripId = tripData?.id
-        }
     }
 
 }

@@ -19,7 +19,7 @@ class TripsChoiceTableViewController: UITableViewController {
     private var dateFormatter: NSDateFormatter = NSDateFormatter()
     private var dateFormatString = "MMM dd"
 
-
+    //MARK: View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,15 +37,17 @@ class TripsChoiceTableViewController: UITableViewController {
         } else {
             tableView(self.tableView, cellForRowAtIndexPath:lastSelected).accessoryType = UITableViewCellAccessoryType.Checkmark
         }
+
     }
     
     override func viewWillAppear(animated: Bool) {
         trips = model?.tripExpenses.values.array.sorted({ $0.0.date.compare($0.1.date) == NSComparisonResult.OrderedDescending })
         tableView.reloadData()
     }
-
-    // MARK: - Table view data source
-
+    override func viewDidDisappear(animated: Bool) {
+        tableView.cellForRowAtIndexPath(lastSelected)?.accessoryType = UITableViewCellAccessoryType.None
+    }
+    // MARK: - Table View Functions
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
@@ -56,10 +58,7 @@ class TripsChoiceTableViewController: UITableViewController {
             case 0:
                 return 1
             case 1:
-                if trips != nil {
-                    return trips!.count
-                }
-                return 0
+                return (trips != nil ? trips!.count : 0)
             default:
                 return 0
         }
@@ -107,62 +106,21 @@ class TripsChoiceTableViewController: UITableViewController {
         lastSelected = indexPath
         
         if oneTimeExpense != nil {
-            if indexPath.section == 0 {
-                oneTimeExpense?.tripId = nil
-            } else {
-                oneTimeExpense?.tripId = trips![indexPath.row].id
-            }
+            oneTimeExpense?.tripId = (indexPath.section == 0 ? nil : trips![indexPath.row].id)
         }
         
     }
 
-    
+    //MARK: IBAction
     @IBAction func newTripCreation(sender: AnyObject) {
         performSegueWithIdentifier("toNewTrip", sender: self)
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toNewTrip" {
+            (segue.destinationViewController as! NewTripTableViewController).oneTimeExpense = oneTimeExpense
+        }
     }
-    */
+
 
 }

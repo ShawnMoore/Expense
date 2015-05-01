@@ -19,6 +19,8 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
     var trip: TripExpense?
     var newTrip: Bool = true
     
+    var oneTimeExpense: OneTimeExpense? = nil
+    
     private var model: Model?
     private var responderPurposeTextField: UITextField? = nil
     private var responderLocationTextField: UITextField? = nil
@@ -59,7 +61,20 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
             responderLocationTextField = nil
         }
         
-        model?.tripExpenses[trip!.id] = trip
+        var selectedId: Int? = nil
+        
+        if trip != nil {
+            if !trip!.name.isEmpty {
+                model?.tripExpenses[trip!.id] = trip
+                selectedId = trip!.id
+            } else {
+                selectedId = nil
+            }
+        }
+        
+        if selectedId != nil {
+            oneTimeExpense?.tripId = selectedId
+        }
         
         self.navigationController?.setToolbarHidden(true, animated: true)
     }
@@ -148,11 +163,11 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
                         if let endDate = trip?.endDate {
                             cell?.detailTextLabel?.text = dateFormatter.stringFromDate(endDate)
                         } else {
-                            cell?.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+                            cell?.detailTextLabel?.text = "Not Yet Set"
                         }
                         
                     } else {
-                        cell?.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+                        cell?.detailTextLabel?.text = "Not Yet Set"
                     }
                 }
             case 2:

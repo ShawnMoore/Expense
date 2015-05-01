@@ -109,7 +109,11 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
         cell.cellImage.contentMode = UIViewContentMode.Center
         
-        cell.titleLabel.text = "\(dataExpense.name) - ID: \(dataExpense.id)"
+        if dataExpense.name.isEmpty {
+            cell.titleLabel.text = "No Purpose Given - ID: \(dataExpense.id)"
+        } else {
+            cell.titleLabel.text = "\(dataExpense.name) - ID: \(dataExpense.id)"
+        }
         
         var detailString = dateFormatter.stringFromDate(dataExpense.date)
         
@@ -167,6 +171,25 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            sortedArray[indexPath.row].deleted = true
+            if sortedArray[indexPath.row] is TripExpense{
+                var OTEList = model?.tripExpenses[sortedArray[indexPath.row].id]?.oneTimeExpenses
+                for oneTime in OTEList!{
+                    oneTime.deleted = true
+                    println(oneTime.deleted)
+                }
+            }
+            sortedArray.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
     }
     
     @IBAction func addNewExpense(sender: AnyObject) {
