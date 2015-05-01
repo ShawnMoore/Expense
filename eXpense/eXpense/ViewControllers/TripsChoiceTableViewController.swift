@@ -19,7 +19,7 @@ class TripsChoiceTableViewController: UITableViewController {
     private var dateFormatter: NSDateFormatter = NSDateFormatter()
     private var dateFormatString = "MMM dd"
 
-
+    //MARK: View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,8 +45,7 @@ class TripsChoiceTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
+    // MARK: - Table View Functions
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
@@ -57,10 +56,7 @@ class TripsChoiceTableViewController: UITableViewController {
             case 0:
                 return 1
             case 1:
-                if trips != nil {
-                    return trips!.count
-                }
-                return 0
+                return (trips != nil ? trips!.count : 0)
             default:
                 return 0
         }
@@ -108,16 +104,12 @@ class TripsChoiceTableViewController: UITableViewController {
         lastSelected = indexPath
         
         if oneTimeExpense != nil {
-            if indexPath.section == 0 {
-                oneTimeExpense?.tripId = nil
-            } else {
-                oneTimeExpense?.tripId = trips![indexPath.row].id
-            }
+            oneTimeExpense?.tripId = (indexPath.section == 0 ? nil : trips![indexPath.row].id)
         }
         
     }
 
-    
+    //MARK: IBAction
     @IBAction func newTripCreation(sender: AnyObject) {
         performSegueWithIdentifier("toNewTrip", sender: self)
     }
