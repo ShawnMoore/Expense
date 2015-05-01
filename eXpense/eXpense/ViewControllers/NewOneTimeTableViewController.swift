@@ -129,115 +129,39 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         case 0:
             switch indexPath.row {
             case 0:
-                let purposeCell = tableView.dequeueReusableCellWithIdentifier("PurposeTextFieldCell", forIndexPath: indexPath) as? PurposeTextFieldTableViewCell
-                
-                purposeCell?.delegate = self
-                
-                if !newExpense {
-                    purposeCell?.purposeTextField.text = oneTime!.name
-                }
-                
-                cell = purposeCell
+                cell = tableView.dequeueReusableCellWithIdentifier("PurposeTextFieldCell", forIndexPath: indexPath) as? UITableViewCell
+                cell = createPurposeCell(cell!)
             case 1:
                 cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
-                cell?.textLabel?.text = "Category:"
-                
-                cell?.detailTextLabel?.text = Category.Other.rawValue
-                
-                if oneTime != nil {
-                    cell?.detailTextLabel?.text = oneTime?.category.rawValue
-                }
-                
-                
+                cell = createCategoryCell(cell!)
             case 2:
                 if categoryPickerOn {
-                    let categoryPickerCell = tableView.dequeueReusableCellWithIdentifier("categoryPickerCell", forIndexPath: indexPath) as? PickerViewTableViewCell
-                    
-                    categoryPickerCell?.Picker.selectRow(5, inComponent: 0, animated: false)
-                    
-                    if oneTime != nil {
-                        for i in 0...(Category.allValues.count-1) {
-                            if oneTime?.category.rawValue == Category.allValues[i].rawValue {
-                                categoryPickerCell?.Picker.selectRow(i, inComponent: 0, animated: false)
-                            }
-                        }
-                    }
-                    
-                    cell = categoryPickerCell
+                    cell = tableView.dequeueReusableCellWithIdentifier("categoryPickerCell", forIndexPath: indexPath) as? UITableViewCell
+                    cell = createCategoryPickerCell(cell!)
                 } else {
-                    let costCell = tableView.dequeueReusableCellWithIdentifier("CostTextFieldCell", forIndexPath: indexPath) as? CostTextFieldTableViewCell
-                    
-                    costCell?.delegate = self
-                    
-                    if !newExpense {
-                        costCell?.costTextField.text = costFormatter.stringFromNumber(oneTime!.amount)
-                    }
-                    
-                    cell = costCell
+                    cell = tableView.dequeueReusableCellWithIdentifier("CostTextFieldCell", forIndexPath: indexPath) as? UITableViewCell
+                    cell = createCostCell(cell!)
                 }
             case 3:
-
-                let costCell = tableView.dequeueReusableCellWithIdentifier("CostTextFieldCell", forIndexPath: indexPath) as? CostTextFieldTableViewCell
-                
-                costCell?.delegate = self
-                
-                if !newExpense {
-                    costCell?.costTextField.text = costFormatter.stringFromNumber(oneTime!.amount)
-                }
-                
-                cell = costCell
+                cell = tableView.dequeueReusableCellWithIdentifier("CostTextFieldCell", forIndexPath: indexPath) as? UITableViewCell
+                cell = createCostCell(cell!)
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
             }
-            
         case 1:
-            
             switch indexPath.row {
             case 0:
                 cell = tableView.dequeueReusableCellWithIdentifier("tripCell", forIndexPath: indexPath) as? UITableViewCell
-                cell?.textLabel?.text = "Trip:"
-                if oneTime != nil {
-                    if oneTime!.tripId == nil {
-                        cell?.detailTextLabel?.text = "None"
-                    }
-                    else{
-                        cell?.detailTextLabel?.text = model?.tripExpenses[oneTime!.tripId!]!.name
-                    }
-                } else {
-                    cell?.detailTextLabel?.text = "None"
-                }
-                
+                cell = createTripCell(cell!)
             case 1:
-                let locationCell = tableView.dequeueReusableCellWithIdentifier("LocationTextFieldCell", forIndexPath: indexPath) as? LocationTableViewCell
-                
-                locationCell?.delegate = self
-                
-                if !newExpense {
-                    if let location = oneTime?.location {
-                        locationCell?.locationTextField.text = location
-                    }
-                }
-                
-                cell = locationCell
+                cell = tableView.dequeueReusableCellWithIdentifier("LocationTextFieldCell", forIndexPath: indexPath) as? UITableViewCell
+                createLocationCell(cell!)
             case 2:
                 cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
-                cell?.textLabel?.text = "Date:"
-                
-                if oneTime != nil {
-                    cell?.detailTextLabel?.text = dateFormatter.stringFromDate(oneTime!.date)
-                } else {
-                    cell?.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
-                }
-                
+                cell = createDateCell(cell!)
             case 3:
                 cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? DatePickerTableViewCell
-                
-                if !newExpense {
-                    (cell as! DatePickerTableViewCell).datePicker.date = oneTime!.date
-                }
-    
-                (cell as! DatePickerTableViewCell).identifier = "datePicker"
-                (cell as! DatePickerTableViewCell).delegate = self
+                cell = createDatePickerCell(cell!)
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
             }
@@ -245,25 +169,12 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         case 2:
             switch indexPath.row {
             case 0:
-                let descriptionCell = tableView.dequeueReusableCellWithIdentifier("textAreaCell", forIndexPath: indexPath) as? TextAreaTableViewCell
-                descriptionCell?.textAreaLabel.text = "Description:"
-                
-                if oneTime != nil {
-                        descriptionCell?.textArea.text = oneTime?.expenseDescription
-                }
-                
-                cell = descriptionCell
+                cell = tableView.dequeueReusableCellWithIdentifier("textAreaCell", forIndexPath: indexPath) as? UITableViewCell
+                cell = createDescriptionCell(cell!)
                 
             case 1:
-                let photoCell = tableView.dequeueReusableCellWithIdentifier("photoCaptureCell", forIndexPath: indexPath) as? PhotoCaptureTableViewCell
-                
-                if isFirstPhoto == 1 {
-                    photoCell?.receiptImageView.image = receiptImage
-                    photoCell?.receiptImageView.contentMode = .ScaleAspectFit
-                    photoCell?.takePhotoButton.setTitle("", forState: UIControlState.Normal)
-                }
-                
-                cell = photoCell
+                cell = tableView.dequeueReusableCellWithIdentifier("photoCaptureCell", forIndexPath: indexPath) as? UITableViewCell
+                cell = createPhotoCell(cell!)
                 
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
@@ -515,4 +426,109 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         return(NSIndexPath(forRow: 0, inSection: 0), "Error")
     }
     
+    func createPurposeCell(cell: UITableViewCell) -> (UITableViewCell){
+        let purposeCell = cell as? PurposeTextFieldTableViewCell
+        purposeCell?.delegate = self
+        if !newExpense {
+            purposeCell?.purposeTextField.text = oneTime!.name
+        }
+        return purposeCell!
+    }
+    
+    func createCategoryCell(cell: UITableViewCell) -> (UITableViewCell){
+        cell.textLabel?.text = "Category:"
+        cell.detailTextLabel?.text = Category.Other.rawValue
+        
+        if oneTime != nil {
+            cell.detailTextLabel?.text = oneTime?.category.rawValue
+        }
+        return cell
+    }
+
+    func createCategoryPickerCell(cell: UITableViewCell) -> (UITableViewCell){
+        let categoryPickerCell = cell as? PickerViewTableViewCell
+        categoryPickerCell?.Picker.selectRow(5, inComponent: 0, animated: false)
+        if oneTime != nil {
+            for i in 0...(Category.allValues.count-1) {
+                if oneTime?.category.rawValue == Category.allValues[i].rawValue {
+                    categoryPickerCell?.Picker.selectRow(i, inComponent: 0, animated: false)
+                }
+            }
+        }
+        return categoryPickerCell!
+    }
+    
+    func createCostCell(cell: UITableViewCell) -> (UITableViewCell){
+        let costCell = cell as? CostTextFieldTableViewCell
+        costCell?.delegate = self
+        if !newExpense {
+            costCell?.costTextField.text = costFormatter.stringFromNumber(oneTime!.amount)
+        }
+        return costCell!
+    }
+    
+    func createTripCell(cell: UITableViewCell) -> (UITableViewCell){
+        cell.textLabel?.text = "Trip:"
+        if oneTime != nil {
+            if oneTime!.tripId == nil {
+                cell.detailTextLabel?.text = "None"
+            }
+            else{
+                cell.detailTextLabel?.text = model?.tripExpenses[oneTime!.tripId!]!.name
+            }
+        } else {
+            cell.detailTextLabel?.text = "None"
+        }
+        return cell
+    }
+    
+    func createLocationCell(cell: UITableViewCell) -> (UITableViewCell){
+        let locationCell = cell as? LocationTableViewCell
+        locationCell?.delegate = self
+        if !newExpense {
+            if let location = oneTime?.location {
+                locationCell?.locationTextField.text = location
+            }
+        }
+        return locationCell!
+    }
+    
+    func createDateCell(cell: UITableViewCell) -> (UITableViewCell){
+        cell.textLabel?.text = "Date:"
+        if oneTime != nil {
+            cell.detailTextLabel?.text = dateFormatter.stringFromDate(oneTime!.date)
+        } else {
+            cell.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+        }
+        return cell
+    }
+    
+    func createDatePickerCell(cell: UITableViewCell) -> (UITableViewCell){
+        let datePickerCell = cell as? DatePickerTableViewCell
+        if !newExpense {
+            datePickerCell?.datePicker.date = oneTime!.date
+        }
+        datePickerCell?.identifier = "datePicker"
+        datePickerCell?.delegate = self
+        return datePickerCell!
+    }
+    
+    func createDescriptionCell(cell: UITableViewCell) -> (UITableViewCell){
+        let descriptionCell = cell as? TextAreaTableViewCell
+        descriptionCell?.textAreaLabel.text = "Description:"
+        if oneTime != nil {
+            descriptionCell?.textArea.text = oneTime?.expenseDescription
+        }
+        return descriptionCell!
+    }
+    
+    func createPhotoCell(cell: UITableViewCell) -> (UITableViewCell){
+        let photoCell = cell as? PhotoCaptureTableViewCell
+        if isFirstPhoto == 1 {
+            photoCell?.receiptImageView.image = receiptImage
+            photoCell?.receiptImageView.contentMode = .ScaleAspectFit
+            photoCell?.takePhotoButton.setTitle("", forState: UIControlState.Normal)
+        }
+        return photoCell!
+    }
 }
