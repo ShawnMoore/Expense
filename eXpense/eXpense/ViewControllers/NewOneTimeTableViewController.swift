@@ -18,6 +18,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     private var dateFormatter: NSDateFormatter = NSDateFormatter()
     private var dateFormatString = "MMMM dd, yyyy"
+    private let costFormatter = NSNumberFormatter()
     
     var oneTime: OneTimeExpense?
     var newExpense: Bool = true
@@ -38,33 +39,23 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         
         self.title = oneTime?.name
         
-        //if editing a previous cost without a purpose, clear purpose field
-        if oneTime?.name == "No Purpose Given" {
-            oneTime!.name = ""
-        }
-        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         model = appDelegate.getModel()
         
         dateFormatter.dateFormat = dateFormatString
-        
+        costFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        costFormatter.locale = NSLocale(localeIdentifier: "en_US")
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 67.0
         
         if newExpense {
-            oneTime = OneTimeExpense(forID: Model.oneTimeIndex--, name: "No Purpose Given", amount: 0.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, category: "Other")
+            oneTime = OneTimeExpense(forID: Model.oneTimeIndex--, name: "", amount: 0.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, category: "Other")
             
             if let tripId = newExpenseTripId {
                 oneTime?.tripId = tripId
             }
         }
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         self.navigationController?.setToolbarHidden(false, animated: false)
     }
@@ -78,10 +69,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             oneTime?.name = responderPurposeTextField!.text
             responderPurposeTextField?.resignFirstResponder()
             responderPurposeTextField = nil
-        }
-
-        if oneTime?.name == "" {
-            oneTime!.name = "No Purpose Given"
         }
         
         if responderCostTextField != nil {
@@ -200,10 +187,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     costCell?.delegate = self
                     
                     if !newExpense {
-                        let formatter = NSNumberFormatter()
-                        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-                        formatter.locale = NSLocale(localeIdentifier: "en_US")
-                        costCell?.costTextField.text = formatter.stringFromNumber(oneTime!.amount)
+                        costCell?.costTextField.text = costFormatter.stringFromNumber(oneTime!.amount)
                     }
                     
                     cell = costCell
@@ -215,10 +199,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 costCell?.delegate = self
                 
                 if !newExpense {
-                    let formatter = NSNumberFormatter()
-                    formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-                    formatter.locale = NSLocale(localeIdentifier: "en_US")
-                    costCell?.costTextField.text = formatter.stringFromNumber(oneTime!.amount)
+                    costCell?.costTextField.text = costFormatter.stringFromNumber(oneTime!.amount)
                 }
                 
                 cell = costCell
@@ -527,25 +508,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             self.responderLocationTextField = nil
         }
         
-        
-        /*switch textField.placeholder! {
-            case "Purpose":
-                oneTime?.name = textField.text
-            case "$0.00":
-                oneTime?.amount = (textField.text as NSString).doubleValue
-            case "Location":
-                oneTime?.location = textField.text
-            default:
-                println("Error")
-        }
-        
-        switch identifier {
-            case "Begin":
-                self.responderTextField = textField
-            default:
-                self.responderTextField = nil
-        }*/
-        
     }
     
     //MARK: Added Helper Functions
@@ -578,52 +540,5 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
         return(NSIndexPath(forRow: 0, inSection: 0), "Error")
     }
-    
-    
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return NO if you do not want the specified item to be editable.
-    return true
-    }
-    */
-    
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle == .Delete {
-    // Delete the row from the data source
-    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-    } else if editingStyle == .Insert {
-    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-    }
-    */
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return NO if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    }
-    */
     
 }

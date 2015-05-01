@@ -75,7 +75,11 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         let oneTimeExpense = oneTimeExpenses![indexPath.row]
         cell.cellImage.contentMode = UIViewContentMode.Center
         
-        cell.titleLabel.text = "\(oneTimeExpense.name) - ID: \(oneTimeExpense.id)"
+        if oneTimeExpense.name.isEmpty {
+            cell.titleLabel.text = "No Purpose Given - ID: \(oneTimeExpense.id)"
+        } else {
+            cell.titleLabel.text = "\(oneTimeExpense.name) - ID: \(oneTimeExpense.id)"
+        }
         
         var detailString = dateFormatter.stringFromDate(oneTimeExpense.date)
         

@@ -109,7 +109,11 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
         cell.cellImage.contentMode = UIViewContentMode.Center
         
-        cell.titleLabel.text = "\(dataExpense.name) - ID: \(dataExpense.id)"
+        if dataExpense.name.isEmpty {
+            cell.titleLabel.text = "No Purpose Given - ID: \(dataExpense.id)"
+        } else {
+            cell.titleLabel.text = "\(dataExpense.name) - ID: \(dataExpense.id)"
+        }
         
         var detailString = dateFormatter.stringFromDate(dataExpense.date)
         
