@@ -66,6 +66,9 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     override func viewWillDisappear(animated: Bool) {
         
+        categoryPickerOn = false
+        datePickerOn = false
+        
         if responderPurposeTextField != nil {
             oneTime?.name = responderPurposeTextField!.text
             responderPurposeTextField?.resignFirstResponder()
