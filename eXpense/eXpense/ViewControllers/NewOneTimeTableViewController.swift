@@ -38,6 +38,11 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         
         self.title = oneTime?.name
         
+        //if editing a previous cost without a purpose, clear purpose field
+        if oneTime?.name == "No Purpose Given" {
+            oneTime!.name = ""
+        }
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         model = appDelegate.getModel()
@@ -73,6 +78,10 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             oneTime?.name = responderPurposeTextField!.text
             responderPurposeTextField?.resignFirstResponder()
             responderPurposeTextField = nil
+        }
+
+        if oneTime?.name == "" {
+            oneTime!.name = "No Purpose Given"
         }
         
         if responderCostTextField != nil {
@@ -191,7 +200,10 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                     costCell?.delegate = self
                     
                     if !newExpense {
-                        costCell?.costTextField.text = String(format:"%.2f", oneTime!.amount)
+                        let formatter = NSNumberFormatter()
+                        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+                        formatter.locale = NSLocale(localeIdentifier: "en_US")
+                        costCell?.costTextField.text = formatter.stringFromNumber(oneTime!.amount)
                     }
                     
                     cell = costCell
@@ -203,7 +215,10 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 costCell?.delegate = self
                 
                 if !newExpense {
-                    costCell?.costTextField.text = String(format:"%.2f", oneTime!.amount)
+                    let formatter = NSNumberFormatter()
+                    formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+                    formatter.locale = NSLocale(localeIdentifier: "en_US")
+                    costCell?.costTextField.text = formatter.stringFromNumber(oneTime!.amount)
                 }
                 
                 cell = costCell
@@ -431,7 +446,19 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         if at == "Purpose" {
             oneTime?.name = ChangedTo
         } else if at == "Cost" {
-            oneTime?.amount = (ChangedTo as NSString).doubleValue
+            var removeDollarSign = ChangedTo as NSString
+            var checkDollar = removeDollarSign as String
+            if checkDollar[checkDollar.startIndex] == "$" {
+                removeDollarSign = removeDollarSign.substringFromIndex(1)
+            }
+            removeDollarSign = removeDollarSign.stringByReplacingOccurrencesOfString(",", withString: "")
+            
+            if removeDollarSign != "" {
+                oneTime?.amount = (removeDollarSign).doubleValue
+            }
+            else {
+                oneTime?.amount = 0.00
+            }
         } else if at == "Location" {
             if !ChangedTo.isEmpty {
                 oneTime?.location = ChangedTo
@@ -453,7 +480,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     func textViewDidEndEditing(textView: UITextView) {
         self.responderTextView = nil
     }
-
+    
     func updateFirstResponder(textField: UITextField, identifier: String) {
         
         if identifier == "Purpose_Begin" {
@@ -465,10 +492,30 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
         
         if identifier == "Cost_Begin" {
-            oneTime?.amount = (textField.text as NSString).doubleValue
+            if textField.text != "" {
+                oneTime?.amount = (textField.text as NSString).doubleValue
+            }
             self.responderCostTextField = textField
         } else if identifier == "Cost_End" {
-            oneTime?.amount = (textField.text as NSString).doubleValue
+            if textField.text != "" {
+                var removeDollarSign = textField.text as NSString
+                var checkDollar = removeDollarSign as String
+                if checkDollar[checkDollar.startIndex] == "$" {
+                    removeDollarSign = removeDollarSign.substringFromIndex(1)
+                }
+                removeDollarSign = removeDollarSign.stringByReplacingOccurrencesOfString(",", withString: "")
+                
+                if removeDollarSign != "" {
+                    oneTime?.amount = removeDollarSign.doubleValue
+                }
+                else {
+                    oneTime?.amount = 0.00
+                }
+            }
+                
+            else {
+                oneTime?.amount = 0.00
+            }
             self.responderCostTextField = nil
         }
         
