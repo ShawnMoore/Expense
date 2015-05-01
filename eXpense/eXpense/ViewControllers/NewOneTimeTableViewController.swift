@@ -55,12 +55,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             }
         }
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
         self.navigationController?.setToolbarHidden(false, animated: false)
     }
     
@@ -103,11 +97,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(false)
         tableView.reloadData()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Table view data source
@@ -396,6 +385,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
+    
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return Category.allValues.count
     }
@@ -477,25 +467,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             self.responderLocationTextField = nil
         }
         
-        
-        /*switch textField.placeholder! {
-            case "Purpose":
-                oneTime?.name = textField.text
-            case "$0.00":
-                oneTime?.amount = (textField.text as NSString).doubleValue
-            case "Location":
-                oneTime?.location = textField.text
-            default:
-                println("Error")
-        }
-        
-        switch identifier {
-            case "Begin":
-                self.responderTextField = textField
-            default:
-                self.responderTextField = nil
-        }*/
-        
     }
     
     //MARK: Added Helper Functions
@@ -528,52 +499,5 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
         return(NSIndexPath(forRow: 0, inSection: 0), "Error")
     }
-    
-    
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return NO if you do not want the specified item to be editable.
-    return true
-    }
-    */
-    
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle == .Delete {
-    // Delete the row from the data source
-    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-    } else if editingStyle == .Insert {
-    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-    }
-    */
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return NO if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    }
-    */
     
 }

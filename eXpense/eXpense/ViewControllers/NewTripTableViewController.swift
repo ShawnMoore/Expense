@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewTripTableViewController: UITableViewController, UITextViewDelegate, DatePickerTableViewCellDelegate/*, TextFieldTableViewCellDelegate*/ {
+class NewTripTableViewController: UITableViewController, UITextViewDelegate, DatePickerTableViewCellDelegate, TextFieldTableViewCellDelegate {
 
     var startDatePickerOn: Bool = false
     var endDatePickerOn: Bool = false
@@ -16,28 +16,57 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
     private var dateFormatter: NSDateFormatter = NSDateFormatter()
     private var dateFormatString = "MMMM dd, yyyy"
     
+    var trip: TripExpense?
+    var newTrip: Bool = true
+    
+    private var model: Model?
+    private var responderPurposeTextField: UITextField? = nil
+    private var responderLocationTextField: UITextField? = nil
+    private var responderTextView: UITextView? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 67.0
+        self.title = trip?.name
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        model = appDelegate.getModel()
 
         dateFormatter.dateFormat = dateFormatString
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 67.0
+        
+        if newTrip {
+            trip = TripExpense(forName: "", id: Model.tripIndex--, startDate: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, isComplete: false)
+        }
+        
+        self.navigationController?.setToolbarHidden(false, animated: false)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        
+        if responderPurposeTextField != nil {
+            trip?.name = responderPurposeTextField!.text
+            responderPurposeTextField?.resignFirstResponder()
+            responderPurposeTextField = nil
+        }
+        
+        if responderLocationTextField != nil {
+            trip?.location = responderLocationTextField!.text
+            responderLocationTextField?.resignFirstResponder()
+            responderLocationTextField = nil
+        }
+        
+        model?.tripExpenses[trip!.id] = trip
+        
+        self.navigationController?.setToolbarHidden(true, animated: true)
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(false)
         tableView.reloadData()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
@@ -77,10 +106,11 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
             switch indexPath.row {
             case 0:
                 let nameCell = tableView.dequeueReusableCellWithIdentifier("PurposeTextFieldCell", forIndexPath: indexPath) as? PurposeTextFieldTableViewCell
-                nameCell?.purposeTextField.placeholder = "Name"
+                nameCell?.delegate = self
                 cell = nameCell
             case 1:
                 let locationCell = tableView.dequeueReusableCellWithIdentifier("LocationTextFieldCell", forIndexPath: indexPath) as? LocationTableViewCell
+                locationCell?.delegate = self
                 cell = locationCell
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
@@ -92,31 +122,67 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
             case 0:
                 cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
                 cell?.textLabel?.text = "Start Date:"
-                cell?.detailTextLabel?.text = "NOT DONE YET"
+                
+                if trip != nil {
+                    cell?.detailTextLabel?.text = dateFormatter.stringFromDate(trip!.date)
+                } else {
+                    cell?.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+                }
                 
             case 1:
                 if(startDatePickerOn){
                     cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? DatePickerTableViewCell
+                    
+                    if !newTrip {
+                        (cell as! DatePickerTableViewCell).datePicker.date = trip!.date
+                    }
+                    
                     (cell as! DatePickerTableViewCell).delegate = self
                     (cell as! DatePickerTableViewCell).identifier = "Start"
                 }else{
                     cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
                     cell?.textLabel?.text = "End Date:"
-                    cell?.detailTextLabel?.text = "NOT DONE YET"
+                    
+                    if trip != nil {
+                        
+                        if let endDate = trip?.endDate {
+                            cell?.detailTextLabel?.text = dateFormatter.stringFromDate(endDate)
+                        } else {
+                            cell?.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+                        }
+                        
+                    } else {
+                        cell?.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+                    }
                 }
             case 2:
                 if(startDatePickerOn){
                     cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
                     cell?.textLabel?.text = "End Date:"
-                    cell?.detailTextLabel?.text = "NOT DONE YET"
+                    
+                    if trip != nil {
+                        cell?.detailTextLabel?.text = dateFormatter.stringFromDate(trip!.endDate!)
+                    } else {
+                        cell?.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+                    }
                 }else if(endDatePickerOn){
                     cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? DatePickerTableViewCell
+                    
+                    if !newTrip {
+                        (cell as! DatePickerTableViewCell).datePicker.date = trip!.date
+                    }
+                    
                     (cell as! DatePickerTableViewCell).delegate = self
                     (cell as! DatePickerTableViewCell).identifier = "End"
                 }
             case 3:
                 if(endDatePickerOn){
                     cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? DatePickerTableViewCell
+                    
+                    if !newTrip {
+                        (cell as! DatePickerTableViewCell).datePicker.date = trip!.date
+                    }
+                    
                     (cell as! DatePickerTableViewCell).delegate = self
                     (cell as! DatePickerTableViewCell).identifier = "End"
                 }
@@ -127,6 +193,11 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
         case 2:
             let descriptionCell = tableView.dequeueReusableCellWithIdentifier("textAreaCell", forIndexPath: indexPath) as? TextAreaTableViewCell
             descriptionCell?.textAreaLabel.text = "Description:"
+            
+            if trip != nil {
+                descriptionCell?.textArea.text = trip?.expenseDescription
+            }
+            
             cell = descriptionCell
         default:
             cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? UITableViewCell
@@ -138,11 +209,27 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
        
+        if let textField = responderPurposeTextField {
+            textField.resignFirstResponder()
+            responderPurposeTextField = nil
+        }
+        
+        if let textField = responderLocationTextField {
+            textField.resignFirstResponder()
+            responderLocationTextField = nil
+        }
+        
+        if let textView = responderTextView {
+            textView.resignFirstResponder()
+            responderTextView = nil
+        }
+        
         var (path, action) = getIndexPathOnGlobalBools(indexPath)
         if(action == "insert"){
             tableView.beginUpdates()
             tableView.insertRowsAtIndexPaths([path], withRowAnimation: .Fade)
             tableView.endUpdates()
+            tableView.scrollToRowAtIndexPath(path, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         }
         else if(action == "delete"){
             tableView.beginUpdates()
@@ -158,8 +245,18 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
     
     func textViewDidChange(textView: UITextView) {
         tableView.beginUpdates()
-        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         tableView.endUpdates()
+        
+        trip?.expenseDescription = textView.text
+    }
+    
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        self.responderTextView = textView
+        return true
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        self.responderTextView = nil
     }
     
     func getIndexPathOnGlobalBools(indexPath: NSIndexPath) -> (NSIndexPath, String){
@@ -204,54 +301,47 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
     
     func dateAndTimeHasChanged(ChangedTo: NSDate, at: String) {
         if at == "Start" {
-            println("Start Value")
+            trip?.date = ChangedTo
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 1)], withRowAnimation: UITableViewRowAnimation.None)
         } else if at == "End" {
-            println("End Value")
+            trip?.endDate = ChangedTo
+            
+            if startDatePickerOn {
+                tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 2, inSection: 1)], withRowAnimation: UITableViewRowAnimation.None)
+            } else {
+                tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 1)], withRowAnimation: UITableViewRowAnimation.None)
+            }
+            
         }
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
+    
+    func textInTextFieldHasChanged(ChangedTo: String, at: String) {
+        if at == "Purpose" {
+            trip?.name = ChangedTo
+        } else if at == "Location" {
+            if !ChangedTo.isEmpty {
+                trip?.location = ChangedTo
+            }
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    func updateFirstResponder(textField: UITextField, identifier: String) {
+        
+        if identifier == "Purpose_Begin" {
+            trip?.name = textField.text
+            self.responderPurposeTextField = textField
+        } else if identifier == "Purpose_End" {
+            trip?.name = textField.text
+            self.responderPurposeTextField = nil
+        }
+        
+        if identifier == "Location_Begin" {
+            trip?.location = textField.text
+            self.responderLocationTextField = textField
+        } else if identifier == "Location_End" {
+            trip?.location = textField.text
+            self.responderLocationTextField = nil
+        }
+        
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

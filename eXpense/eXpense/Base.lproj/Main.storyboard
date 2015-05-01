@@ -1708,9 +1708,9 @@
         <image name="eXpenseLogoGray" width="1004" height="273"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Ke5-W9-vH6"/>
         <segue reference="h8j-w9-YNM"/>
         <segue reference="KbD-mm-Utt"/>
-        <segue reference="Ke5-W9-vH6"/>
         <segue reference="pwk-Aa-pg0"/>
     </inferredMetricsTieBreakers>
 </document>
