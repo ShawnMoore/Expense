@@ -44,7 +44,7 @@ class Model: NSObject {
     func updateModel() {
         var removeArray = Array<Int>()
         
-        if (self.oneTimeExpenses.count != 0) && (self.tripExpenses.count != 0) {
+        if (self.oneTimeExpenses.count != 0) {
             
             for index in 0...(self.oneTimeExpenses.count-1) {
                 if self.oneTimeExpenses[index].tripId != nil {
@@ -63,6 +63,35 @@ class Model: NSObject {
                 trip.oneTimeExpenses.append(value)
             } else {
                 oneTimeExpenses.append(value)
+            }
+        }
+        
+        if (self.tripExpenses.count != 0) {
+            
+            for index in 0...(self.tripExpenses.count-1) {
+                
+                if (self.tripExpenses[index] != nil) {
+                    
+                    if(self.tripExpenses[index]!.oneTimeExpenses.count != 0) {
+                        let id = self.tripExpenses[index]!.id
+                        
+                        let amount = self.tripExpenses[index]!.oneTimeExpenses.count-1
+                        
+                        for j_index in 0...(amount) {
+                            if (self.tripExpenses[index]!.oneTimeExpenses[j_index].tripId != id) {
+                                let value = self.tripExpenses[index]!.oneTimeExpenses[j_index]
+                                
+                                self.tripExpenses[index]!.oneTimeExpenses.removeAtIndex(j_index)
+                                
+                                if (value.tripId == nil) {
+                                    self.oneTimeExpenses.append(value)
+                                } else {
+                                    self.tripExpenses[value.tripId!]?.oneTimeExpenses.append(value)
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
