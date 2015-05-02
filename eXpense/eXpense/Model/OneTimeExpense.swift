@@ -25,6 +25,7 @@ class OneTimeExpense: Expense {
     var amount: Double
     var category: Category
     var photoURI: String?
+    var photoOrientation: Int?
     var tripId: Int?
     
     init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, userId: Int, category: String)

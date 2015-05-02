@@ -17,6 +17,7 @@ class ReceiptViewController: UIViewController, UIPickerViewDelegate, UINavigatio
     
     //get receipt image
     var receiptImage:UIImage?
+    var receiptImageOrient: Int?
     
     //setup new camera
     var imagePicker: UIImagePickerController?
@@ -137,6 +138,7 @@ class ReceiptViewController: UIViewController, UIPickerViewDelegate, UINavigatio
         //set image
         receiptImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         (previousViewController as! NewOneTimeTableViewController).receiptImage = receiptImage
+        (previousViewController as! NewOneTimeTableViewController).receiptImageOrient = receiptImage?.imageOrientation.rawValue
         
         //set current view to updated image
         receiptImageView.image = receiptImage
