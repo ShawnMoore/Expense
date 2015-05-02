@@ -156,7 +156,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 cell = createTripCell(cell!)
             case 1:
                 cell = tableView.dequeueReusableCellWithIdentifier("LocationTextFieldCell", forIndexPath: indexPath) as? UITableViewCell
-                createLocationCell(cell!)
+                cell = createLocationCell(cell!)
             case 2:
                 cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
                 cell = createDateCell(cell!)

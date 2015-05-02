@@ -9,23 +9,24 @@
 import UIKit
 
 class NewTripTableViewController: UITableViewController, UITextViewDelegate, DatePickerTableViewCellDelegate, TextFieldTableViewCellDelegate {
-
-    var startDatePickerOn: Bool = false
-    var endDatePickerOn: Bool = false
+    //MARK: Variables
+    private var startDatePickerOn: Bool = false
+    private var endDatePickerOn: Bool = false
     
     private var dateFormatter: NSDateFormatter = NSDateFormatter()
     private var dateFormatString = "MMMM dd, yyyy"
-    
-    var trip: TripExpense?
-    var newTrip: Bool = true
-    
-    var oneTimeExpense: OneTimeExpense? = nil
     
     private var model: Model?
     private var responderPurposeTextField: UITextField? = nil
     private var responderLocationTextField: UITextField? = nil
     private var responderTextView: UITextView? = nil
     
+    var trip: TripExpense?
+    var newTrip: Bool = true
+    
+    var oneTimeExpense: OneTimeExpense? = nil
+    
+    //MARK: View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,6 +46,11 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
         }
         
         self.navigationController?.setToolbarHidden(false, animated: false)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(false)
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -79,12 +85,7 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
         self.navigationController?.setToolbarHidden(true, animated: true)
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(false)
-        tableView.reloadData()
-    }
-
-    // MARK: - Table view data source
+    //MARK: Table View Functions
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
@@ -111,7 +112,6 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
             return 1
         }
     }
-
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell?
@@ -146,87 +146,39 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
             switch indexPath.row {
             case 0:
                 cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
-                cell?.textLabel?.text = "Start Date:"
-                
-                if trip != nil {
-                    cell?.detailTextLabel?.text = dateFormatter.stringFromDate(trip!.date)
-                } else {
-                    cell?.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
-                }
+                cell = createStartDateCell(cell!)
                 
             case 1:
                 if(startDatePickerOn){
-                    cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? DatePickerTableViewCell
-                    
-                    if !newTrip {
-                        (cell as! DatePickerTableViewCell).datePicker.date = trip!.date
-                    }
-                    
-                    (cell as! DatePickerTableViewCell).delegate = self
-                    (cell as! DatePickerTableViewCell).identifier = "Start"
+                    cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? UITableViewCell
+                    cell = createDatePicker(cell!, identifier: "Start")
                 }else{
                     cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
-                    cell?.textLabel?.text = "End Date:"
-                    
-                    if trip != nil {
-                        
-                        if let endDate = trip?.endDate {
-                            cell?.detailTextLabel?.text = dateFormatter.stringFromDate(endDate)
-                        } else {
-                            cell?.detailTextLabel?.text = "Not Yet Set"
-                        }
-                        
-                    } else {
-                        cell?.detailTextLabel?.text = "Not Yet Set"
-                    }
+                    cell = createEndDateCell(cell!)
                 }
             case 2:
                 if(startDatePickerOn){
                     cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
-                    cell?.textLabel?.text = "End Date:"
-                    
-                    if trip != nil {
-                        cell?.detailTextLabel?.text = dateFormatter.stringFromDate(trip!.endDate!)
-                    } else {
-                        cell?.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
-                    }
+                    cell = createEndDateCell(cell!)
                 }else if(endDatePickerOn){
-                    cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? DatePickerTableViewCell
-                    
-                    if !newTrip {
-                        (cell as! DatePickerTableViewCell).datePicker.date = trip!.date
-                    }
-                    
-                    (cell as! DatePickerTableViewCell).delegate = self
-                    (cell as! DatePickerTableViewCell).identifier = "End"
+                    cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? UITableViewCell
+                    cell = createDatePicker(cell!, identifier: "End")
                 }
             case 3:
                 if(endDatePickerOn){
-                    cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? DatePickerTableViewCell
-                    
-                    if !newTrip {
-                        (cell as! DatePickerTableViewCell).datePicker.date = trip!.date
-                    }
-                    
-                    (cell as! DatePickerTableViewCell).delegate = self
-                    (cell as! DatePickerTableViewCell).identifier = "End"
+                    cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? UITableViewCell
+                    cell = createDatePicker(cell!, identifier: "End")
                 }
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
             }
             
         case 2:
-            let descriptionCell = tableView.dequeueReusableCellWithIdentifier("textAreaCell", forIndexPath: indexPath) as? TextAreaTableViewCell
-            descriptionCell?.textAreaLabel.text = "Description:"
-            
-            if trip != nil {
-                descriptionCell?.textArea.text = trip?.expenseDescription
-            }
-            
-            cell = descriptionCell
+            cell = tableView.dequeueReusableCellWithIdentifier("textAreaCell", forIndexPath: indexPath) as? UITableViewCell
+            cell = createDescriptionCell(cell!)
         default:
             cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? UITableViewCell
-            cell?.textLabel?.text = "Say Hi"
+            cell?.textLabel?.text = ""
         }
         return cell!
     }
@@ -263,9 +215,11 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
         }
         
     }
-
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+    
+    //MARK: Text View Functions
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        self.responderTextView = textView
+        return true
     }
     
     func textViewDidChange(textView: UITextView) {
@@ -275,55 +229,11 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
         trip?.expenseDescription = textView.text
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
-        self.responderTextView = textView
-        return true
-    }
-    
     func textViewDidEndEditing(textView: UITextView) {
         self.responderTextView = nil
     }
     
-    func getIndexPathOnGlobalBools(indexPath: NSIndexPath) -> (NSIndexPath, String){
-        
-        let startDatePath = NSIndexPath(forRow: 1, inSection: 1)
-        let endDatePath1 = NSIndexPath(forRow: 2, inSection: 1)
-        let endDatePath2 = NSIndexPath(forRow: 3, inSection: 1)
-        let insert = "insert"
-        let delete = "delete"
-        
-        if indexPath.section == 1 && indexPath.row == 0{
-            startDatePickerOn = !startDatePickerOn
-            
-            if startDatePickerOn {
-                return (startDatePath, insert)
-            } else {
-                return (startDatePath, delete)
-            }
-        }
-        else if indexPath.section == 1 && indexPath.row == 1{
-            
-            if !startDatePickerOn {
-                endDatePickerOn = !endDatePickerOn
-                if endDatePickerOn  {
-                    return (endDatePath1, insert)
-                }else{
-                    return (endDatePath1, delete)
-                }
-            }
-        }
-        else if indexPath.section == 1 && indexPath.row == 2{
-            endDatePickerOn = !endDatePickerOn
-            
-            if endDatePickerOn {
-                return (endDatePath2, insert)
-            } else {
-                return (endDatePath2, delete)
-            }
-        }
-        return(NSIndexPath(forRow: 0, inSection: 0), "Error")
-    }
-    
+    //MARK: Additional Delegate Functions
     func dateAndTimeHasChanged(ChangedTo: NSDate, at: String) {
         if at == "Start" {
             trip?.date = ChangedTo
@@ -368,5 +278,94 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
             self.responderLocationTextField = nil
         }
         
+    }
+
+    
+    //MARK: Utility Functions
+    func getIndexPathOnGlobalBools(indexPath: NSIndexPath) -> (NSIndexPath, String){
+        
+        let startDatePath = NSIndexPath(forRow: 1, inSection: 1)
+        let endDatePath1 = NSIndexPath(forRow: 2, inSection: 1)
+        let endDatePath2 = NSIndexPath(forRow: 3, inSection: 1)
+        let insert = "insert"
+        let delete = "delete"
+        
+        if indexPath.section == 1 && indexPath.row == 0{
+            startDatePickerOn = !startDatePickerOn
+            
+            if startDatePickerOn {
+                return (startDatePath, insert)
+            } else {
+                return (startDatePath, delete)
+            }
+        }
+        else if indexPath.section == 1 && indexPath.row == 1{
+            
+            if !startDatePickerOn {
+                endDatePickerOn = !endDatePickerOn
+                if endDatePickerOn  {
+                    return (endDatePath1, insert)
+                }else{
+                    return (endDatePath1, delete)
+                }
+            }
+        }
+        else if indexPath.section == 1 && indexPath.row == 2{
+            endDatePickerOn = !endDatePickerOn
+            
+            if endDatePickerOn {
+                return (endDatePath2, insert)
+            } else {
+                return (endDatePath2, delete)
+            }
+        }
+        return(NSIndexPath(forRow: 0, inSection: 0), "Error")
+    }
+    
+    func createStartDateCell(cell: UITableViewCell) -> (UITableViewCell){
+        cell.textLabel?.text = "Start Date:"
+        if trip != nil {
+            cell.detailTextLabel?.text = dateFormatter.stringFromDate(trip!.date)
+        } else {
+            cell.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+        }
+        return cell
+    }
+    
+    func createDatePicker(cell: UITableViewCell, identifier: String) -> (UITableViewCell){
+        let datePickerCell = cell as? DatePickerTableViewCell
+        
+        if !newTrip {
+            datePickerCell?.datePicker.date = trip!.date
+        }
+        datePickerCell?.delegate = self
+        datePickerCell?.identifier = identifier
+        return datePickerCell!
+    }
+    
+    func createEndDateCell(cell: UITableViewCell) -> (UITableViewCell){
+        cell.textLabel?.text = "End Date:"
+        
+        if trip != nil {
+            
+            if let endDate = trip?.endDate {
+                cell.detailTextLabel?.text = dateFormatter.stringFromDate(endDate)
+            } else {
+                cell.detailTextLabel?.text = "Not Yet Set"
+            }
+            
+        } else {
+            cell.detailTextLabel?.text = "Not Yet Set"
+        }
+        return cell
+    }
+    
+    func createDescriptionCell(cell: UITableViewCell) -> (UITableViewCell){
+        let descriptionCell = cell as? TextAreaTableViewCell
+        descriptionCell?.textAreaLabel.text = "Description:"
+        if trip != nil {
+            descriptionCell?.textArea.text = trip?.expenseDescription
+        }
+        return descriptionCell!
     }
 }
