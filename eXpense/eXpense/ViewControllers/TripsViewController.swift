@@ -46,8 +46,11 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         model?.updateModel()
         oneTimeExpenses = Array<OneTimeExpense>() + tripData!.oneTimeExpenses
         oneTimeExpenses?.sort({ $0.date.compare($1.date) == NSComparisonResult.OrderedDescending })
+        
         tableView.reloadData()
         
+        self.navigationItem.title = tripData!.name
+        displayTripInfo()
         self.navigationController?.setToolbarHidden(false, animated: false)
     }
     
