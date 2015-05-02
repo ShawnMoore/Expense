@@ -122,10 +122,20 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
             case 0:
                 let nameCell = tableView.dequeueReusableCellWithIdentifier("PurposeTextFieldCell", forIndexPath: indexPath) as? PurposeTextFieldTableViewCell
                 nameCell?.delegate = self
+                
+                if trip != nil {
+                    nameCell?.purposeTextField.text = trip?.name
+                }
+                
                 cell = nameCell
             case 1:
                 let locationCell = tableView.dequeueReusableCellWithIdentifier("LocationTextFieldCell", forIndexPath: indexPath) as? LocationTableViewCell
                 locationCell?.delegate = self
+                
+                if trip != nil {
+                    locationCell?.locationTextField.text = trip?.location
+                }
+                
                 cell = locationCell
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
