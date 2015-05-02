@@ -40,8 +40,6 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         oneTimeExpenses = Array<OneTimeExpense>() + tripData!.oneTimeExpenses
         oneTimeExpenses?.sort({ $0.date.compare($1.date) == NSComparisonResult.OrderedDescending })
-
-        self.navigationController?.setToolbarHidden(false, animated: false)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -49,15 +47,12 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         oneTimeExpenses = Array<OneTimeExpense>() + tripData!.oneTimeExpenses
         oneTimeExpenses?.sort({ $0.date.compare($1.date) == NSComparisonResult.OrderedDescending })
         tableView.reloadData()
+        
+        self.navigationController?.setToolbarHidden(false, animated: false)
     }
     
     override func viewWillDisappear(animated: Bool) {
         self.navigationController?.setToolbarHidden(true, animated: false)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     //MARK: Table View Functions
@@ -122,6 +117,10 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         performSegueWithIdentifier("showExpense", sender: self)
     }
     
+    @IBAction func editExistingTrip(sender: AnyObject) {
+        performSegueWithIdentifier("editExistingTrip", sender: self)
+    }
+    
     //MARK: Prepare For Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showExpense" {
@@ -133,6 +132,9 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
                 (segue.destinationViewController as! NewOneTimeTableViewController).newExpense = false
                 (segue.destinationViewController as! NewOneTimeTableViewController).oneTime = oneTimeExpenses![selectedIndex!]
             }
+        } else if segue.identifier == "editExistingTrip" {
+            (segue.destinationViewController as! NewTripTableViewController).newTrip = false
+            (segue.destinationViewController as! NewTripTableViewController).trip = tripData
         }
     }
     
