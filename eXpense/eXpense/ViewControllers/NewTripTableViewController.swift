@@ -81,8 +81,6 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
         if selectedId != nil {
             oneTimeExpense?.tripId = selectedId
         }
-        
-        self.navigationController?.setToolbarHidden(true, animated: true)
     }
 
     //MARK: Table View Functions

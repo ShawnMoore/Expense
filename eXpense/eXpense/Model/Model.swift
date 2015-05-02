@@ -66,18 +66,33 @@ class Model: NSObject {
             }
         }
         
+        removeArray = Array<Int>()
+        
+        if (self.oneTimeExpenses.count != 0) {
+            
+            for index in 0...(self.oneTimeExpenses.count-1) {
+                if self.oneTimeExpenses[index].deleted == true {
+                    removeArray.append(index)
+                }
+            }
+        }
+        
+        removeArray.sort({ $0 > $1 })
+        
+        for index in removeArray {
+            self.oneTimeExpenses.removeAtIndex(index)
+        }
+        
         if (self.tripExpenses.count != 0) {
             
-            for index in 0...(self.tripExpenses.count-1) {
+            for index in self.tripExpenses.keys.array {
                 
                 if (self.tripExpenses[index] != nil) {
                     
                     if(self.tripExpenses[index]!.oneTimeExpenses.count != 0) {
                         let id = self.tripExpenses[index]!.id
                         
-                        let amount = self.tripExpenses[index]!.oneTimeExpenses.count-1
-                        
-                        for j_index in 0...(amount) {
+                        for j_index in 0...(self.tripExpenses[index]!.oneTimeExpenses.count-1) {
                             if (self.tripExpenses[index]!.oneTimeExpenses[j_index].tripId != id) {
                                 let value = self.tripExpenses[index]!.oneTimeExpenses[j_index]
                                 
@@ -91,6 +106,14 @@ class Model: NSObject {
                             }
                         }
                     }
+                }
+            }
+        }
+        
+        if (self.tripExpenses.count != 0) {
+            for index in self.tripExpenses.keys.array {
+                if self.tripExpenses[index]!.deleted == true {
+                    self.tripExpenses[index] = nil
                 }
             }
         }
