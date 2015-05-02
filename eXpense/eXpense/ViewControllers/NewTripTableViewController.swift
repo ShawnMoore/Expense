@@ -120,7 +120,7 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
         case 0:
             switch indexPath.row {
             case 0:
-                let nameCell = tableView.dequeueReusableCellWithIdentifier("PurposeTextFieldCell", forIndexPath: indexPath) as? PurposeTextFieldTableViewCell
+                cell =  tableView.dequeueReusableCellWithIdentifier("PurposeTextFieldCell", forIndexPath: indexPath) as? UITableViewCell
                 nameCell?.delegate = self
                 
                 if trip != nil {
@@ -129,14 +129,8 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
                 
                 cell = nameCell
             case 1:
-                let locationCell = tableView.dequeueReusableCellWithIdentifier("LocationTextFieldCell", forIndexPath: indexPath) as? LocationTableViewCell
-                locationCell?.delegate = self
-                
-                if trip != nil {
-                    locationCell?.locationTextField.text = trip?.location
-                }
-                
-                cell = locationCell
+                cell = tableView.dequeueReusableCellWithIdentifier("LocationTextFieldCell", forIndexPath: indexPath) as? UITableViewCell
+                cell = createLocationCell(cell!)
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
             }
@@ -322,6 +316,24 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
         return(NSIndexPath(forRow: 0, inSection: 0), "Error")
     }
     
+    func createNameCell(cell: UITableViewCell) -> UITableViewCell{
+        let nameCell = cell as? PurposeTextFieldTableViewCell
+        nameCell?.delegate = self
+        if trip != nil {
+            nameCell?.purposeTextField.text = trip?.name
+        }
+        return nameCell!
+    }
+    
+    func createLocationCell(cell: UITableViewCell) -> UITableViewCell{
+        let locationCell = cell as? LocationTableViewCell
+        locationCell?.delegate = self
+        if trip != nil {
+            locationCell?.locationTextField.text = trip?.location
+        }
+        return locationCell!
+    }
+    
     func createStartDateCell(cell: UITableViewCell) -> (UITableViewCell){
         cell.textLabel?.text = "Start Date:"
         if trip != nil {
@@ -334,7 +346,6 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
     
     func createDatePicker(cell: UITableViewCell, identifier: String) -> (UITableViewCell){
         let datePickerCell = cell as? DatePickerTableViewCell
-        
         if !newTrip {
             datePickerCell?.datePicker.date = trip!.date
         }
@@ -345,15 +356,12 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
     
     func createEndDateCell(cell: UITableViewCell) -> (UITableViewCell){
         cell.textLabel?.text = "End Date:"
-        
         if trip != nil {
-            
             if let endDate = trip?.endDate {
                 cell.detailTextLabel?.text = dateFormatter.stringFromDate(endDate)
             } else {
                 cell.detailTextLabel?.text = "Not Yet Set"
             }
-            
         } else {
             cell.detailTextLabel?.text = "Not Yet Set"
         }
