@@ -18,20 +18,19 @@ class CostTextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
         super.awakeFromNib()
         // Initialization code
         costTextField.delegate = self
+        
+        print(costString)
+        
     }
 
     //Currency Formatting
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
         switch string {
             
         case "0","1","2","3","4","5","6","7","8","9":
             costString += string
             formatCurrency(string: costString)
-            
-        //clear textField on backspace
-        case "":
-            costString = ""
-            costTextField.text = "$0.00"
             
         default:
             var array = Array(string)
@@ -47,6 +46,8 @@ class CostTextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
                 
                 formatCurrency(string: costString)
             }
+            print(costString)
+            print(" ")
         }
         
         return false

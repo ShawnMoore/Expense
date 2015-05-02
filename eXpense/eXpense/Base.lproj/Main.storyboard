@@ -1096,7 +1096,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wfx-XM-AaF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2656.5" y="1224.75"/>
+            <point key="canvasLocation" x="2584.5" y="1110.75"/>
         </scene>
         <!--New Expense-->
         <scene sceneID="lCs-H1-351">
@@ -1435,7 +1435,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KjM-qo-Slx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3508" y="-233.5"/>
+            <point key="canvasLocation" x="3567" y="-377.625"/>
         </scene>
         <!--Trips-->
         <scene sceneID="wun-DJ-xCs">
@@ -1499,7 +1499,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zdL-wb-hYb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3508" y="721.5"/>
+            <point key="canvasLocation" x="3567" y="523.125"/>
         </scene>
         <!--New Trip-->
         <scene sceneID="ChN-Ib-CM5">
@@ -1685,7 +1685,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UNa-mA-XnM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3657" y="1518.75"/>
+            <point key="canvasLocation" x="3657" y="1452.375"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9UW-Uk-HsP">
@@ -1715,9 +1715,9 @@
         <image name="eXpenseLogoGray" width="1004" height="273"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KbD-mm-Utt"/>
-        <segue reference="h8j-w9-YNM"/>
         <segue reference="Ke5-W9-vH6"/>
+        <segue reference="h8j-w9-YNM"/>
+        <segue reference="KbD-mm-Utt"/>
         <segue reference="ksb-I5-gZo"/>
         <segue reference="pwk-Aa-pg0"/>
     </inferredMetricsTieBreakers>

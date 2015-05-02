@@ -500,6 +500,11 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         if !newExpense {
             costCell?.costTextField.text = costFormatter.stringFromNumber(oneTime!.amount)
         }
+        if oneTime!.amount != 0 {
+            var tempAmount = String(format:"%.0f", oneTime!.amount * 100)
+            costCell?.costString = "\(tempAmount)"
+        }
+        print(costCell?.costString)
         return costCell!
     }
     
