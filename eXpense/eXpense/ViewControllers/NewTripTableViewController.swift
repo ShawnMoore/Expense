@@ -121,13 +121,7 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
             switch indexPath.row {
             case 0:
                 cell =  tableView.dequeueReusableCellWithIdentifier("PurposeTextFieldCell", forIndexPath: indexPath) as? UITableViewCell
-                nameCell?.delegate = self
-                
-                if trip != nil {
-                    nameCell?.purposeTextField.text = trip?.name
-                }
-                
-                cell = nameCell
+                cell = createNameCell(cell!)
             case 1:
                 cell = tableView.dequeueReusableCellWithIdentifier("LocationTextFieldCell", forIndexPath: indexPath) as? UITableViewCell
                 cell = createLocationCell(cell!)
