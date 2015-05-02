@@ -15,8 +15,9 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     var oneTime: OneTimeExpense?
     var newExpense: Bool = true
     var newExpenseTripId: Int?
-    
+
     var receiptImage:UIImage?
+    var receiptImageOrient: Int?
     var isFirstPhoto = 0
     var imagePicker: UIImagePickerController!
     
@@ -62,7 +63,35 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(false)
+        
+        //if photo is stored, assign it to receiptImage
+        if isFirstPhoto == 0 && (oneTime?.photoURI != "" && oneTime?.photoURI != nil) {
+            let decodedData = NSData(base64EncodedString: oneTime!.photoURI!, options: NSDataBase64DecodingOptions(rawValue: 0))
+            if decodedData != nil {
+                var decodedimage = UIImage(data: decodedData!)
+                print("orientation: ")
+                print(decodedimage!.imageOrientation.rawValue)
+                print(" ")
+                receiptImage = decodedimage
+                receiptImageOrient = oneTime?.photoOrientation
+                isFirstPhoto = 1
+            }
+        }
+        
         tableView.reloadData()
+        
+        tableView.setNeedsLayout()
+        tableView.layoutIfNeeded()
+    }
+   
+    //encode receiptImage in viewDIDdisappear to save some time
+    override func viewDidDisappear(animated: Bool) {
+        if receiptImage != nil && receiptImage != "" {
+            var imageData = UIImagePNGRepresentation(receiptImage)
+            let base64String = imageData.base64EncodedStringWithOptions(.allZeros)
+            oneTime?.photoURI = base64String
+            oneTime?.photoOrientation = receiptImageOrient
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -270,9 +299,9 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     //MARK: Image Picker Functions
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! String
-        
         //set image
         receiptImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        receiptImageOrient = receiptImage?.imageOrientation.rawValue
         isFirstPhoto = 1
         
         //dismiss camera view
@@ -282,7 +311,11 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
 
     //MARK: IBAction Function
     @IBAction func takeReceiptPhoto(sender: AnyObject) {
-        if isFirstPhoto == 0 {
+        if isFirstPhoto == 0 && (oneTime?.photoURI != "" && oneTime?.photoURI != nil){
+            performSegueWithIdentifier("showReceipt", sender: self)
+        }
+            
+        else if isFirstPhoto == 0 {
             //camera detected
             if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
                 var picker = UIImagePickerController()
@@ -301,7 +334,8 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 self.presentViewController(alert, animated: true, completion: nil)
             }
         }
-        else if isFirstPhoto == 1 {
+
+        else {
             performSegueWithIdentifier("showReceipt", sender: self)
         }
         
@@ -391,6 +425,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         if segue.identifier == "showReceipt" {
             let destViewController = segue.destinationViewController as! ReceiptViewController
             destViewController.receiptImage = receiptImage
+            destViewController.receiptImageOrient = receiptImageOrient
             destViewController.previousViewController = self
         }
     }
@@ -524,10 +559,26 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     func createPhotoCell(cell: UITableViewCell) -> (UITableViewCell){
         let photoCell = cell as? PhotoCaptureTableViewCell
-        if isFirstPhoto == 1 {
+        if isFirstPhoto == 0 && (oneTime?.photoURI != "" && oneTime?.photoURI != nil) {
+            photoCell?.takePhotoButton.setTitle("", forState: UIControlState.Normal)
+            photoCell?.receiptImageView.image = receiptImage
+            photoCell?.receiptImageView.contentMode = .ScaleAspectFit
+        }
+        else if isFirstPhoto == 1 {
             photoCell?.receiptImageView.image = receiptImage
             photoCell?.receiptImageView.contentMode = .ScaleAspectFit
             photoCell?.takePhotoButton.setTitle("", forState: UIControlState.Normal)
+            
+            //rotate portrait back from landscape after encoding
+            if receiptImageOrient == 3 {
+                if receiptImage?.imageOrientation.rawValue == 0 {
+                    var rotateImage = UIImage(CGImage: receiptImage?.CGImage, scale: receiptImage!.scale, orientation: UIImageOrientation.Right)
+                    receiptImage = rotateImage
+                }
+            }
+        }
+        else {
+            photoCell?.takePhotoButton.setTitle("Take a Photo of the Receipt", forState: UIControlState.Normal)
         }
         return photoCell!
     }
