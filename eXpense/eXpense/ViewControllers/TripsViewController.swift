@@ -64,7 +64,7 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tripData!.oneTimeExpenses.count
+        return oneTimeExpenses!.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -113,8 +113,21 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         performSegueWithIdentifier("showExpense", sender: self)
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
+    //MARK: Deleting Functions
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
     
-    //IBAction Functinos
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            oneTimeExpenses?[indexPath.row].deleted = true
+            oneTimeExpenses?.removeAtIndex(indexPath.row)
+            model?.updateModel()
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+    }
+    
+    //MARK: IBAction Functinos
     @IBAction func addNewExpense(sender: AnyObject) {
         selectedIndex = nil
         performSegueWithIdentifier("showExpense", sender: self)
@@ -140,7 +153,7 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
             (segue.destinationViewController as! NewTripTableViewController).trip = tripData
         }
     }
-    
+
     //MARK: Utility Functions
     func displayTripInfo(){
         if let location = tripData?.location{
