@@ -93,15 +93,20 @@ class Model: NSObject {
                         let id = self.tripExpenses[index]!.id
                         
                         for j_index in 0...(self.tripExpenses[index]!.oneTimeExpenses.count-1) {
-                            if (self.tripExpenses[index]!.oneTimeExpenses[j_index].tripId != id) {
-                                let value = self.tripExpenses[index]!.oneTimeExpenses[j_index]
-                                
-                                self.tripExpenses[index]!.oneTimeExpenses.removeAtIndex(j_index)
-                                
-                                if (value.tripId == nil) {
-                                    self.oneTimeExpenses.append(value)
-                                } else {
-                                    self.tripExpenses[value.tripId!]?.oneTimeExpenses.append(value)
+                            
+                            if self.tripExpenses[index]!.oneTimeExpenses[j_index].deleted == true {
+                                 self.tripExpenses[index]!.oneTimeExpenses.removeAtIndex(j_index)
+                            } else {
+                                if (self.tripExpenses[index]!.oneTimeExpenses[j_index].tripId != id) {
+                                    let value = self.tripExpenses[index]!.oneTimeExpenses[j_index]
+                                    
+                                    self.tripExpenses[index]!.oneTimeExpenses.removeAtIndex(j_index)
+                                    
+                                    if (value.tripId == nil) {
+                                        self.oneTimeExpenses.append(value)
+                                    } else {
+                                        self.tripExpenses[value.tripId!]?.oneTimeExpenses.append(value)
+                                    }
                                 }
                             }
                         }
