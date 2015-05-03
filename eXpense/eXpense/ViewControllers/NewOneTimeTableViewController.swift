@@ -49,14 +49,13 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         tableView.estimatedRowHeight = 67.0
         
         if newExpense {
-            oneTime = OneTimeExpense(forID: Model.oneTimeIndex--, name: "", amount: 0.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, category: "Other", isApproved: false)
+            oneTime = OneTimeExpense(forID: Model.oneTimeIndex--, name: "", amount: 0.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, category: "Other")
             
             if let tripId = newExpenseTripId {
                 oneTime?.tripId = tripId
             }
         }
         
-        self.navigationController?.setToolbarHidden(false, animated: false)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -68,6 +67,12 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             } else {
                 self.title = "Purpose is Required"
             }
+        }
+        if(oneTime!.isApproved != nil){
+            self.navigationController?.setToolbarHidden(true, animated: false)
+        }
+        else {
+            self.navigationController?.setToolbarHidden(false, animated: false)   
         }
         
         //if photo is stored, assign it to receiptImage
@@ -503,6 +508,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         if !newExpense {
             purposeCell?.purposeTextField.text = oneTime!.name
         }
+        editableCheck(cell)
         return purposeCell!
     }
     
@@ -513,6 +519,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         if oneTime != nil {
             cell.detailTextLabel?.text = oneTime?.category.rawValue
         }
+        editableCheck(cell)
         return cell
     }
 
@@ -526,6 +533,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 }
             }
         }
+        editableCheck(cell)
         return categoryPickerCell!
     }
     
@@ -539,6 +547,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             var tempAmount = String(format:"%.0f", oneTime!.amount * 100)
             costCell?.costString = "\(tempAmount)"
         }
+        editableCheck(cell)
         return costCell!
     }
     
@@ -554,6 +563,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         } else {
             cell.detailTextLabel?.text = "None"
         }
+        editableCheck(cell)
         return cell
     }
     
@@ -565,6 +575,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 locationCell?.locationTextField.text = location
             }
         }
+        editableCheck(cell)
         return locationCell!
     }
     
@@ -575,6 +586,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         } else {
             cell.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
         }
+        editableCheck(cell)
         return cell
     }
     
@@ -585,6 +597,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
         datePickerCell?.identifier = "datePicker"
         datePickerCell?.delegate = self
+        editableCheck(cell)
         return datePickerCell!
     }
     
@@ -594,6 +607,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         if oneTime != nil {
             descriptionCell?.textArea.text = oneTime?.expenseDescription
         }
+        editableCheck(cell)
         return descriptionCell!
     }
     
@@ -620,9 +634,17 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         else {
             photoCell?.takePhotoButton.setTitle("Take a Photo of the Receipt", forState: UIControlState.Normal)
         }
+        editableCheck(cell)
         return photoCell!
     }
     
+    func editableCheck(cell: UITableViewCell){
+        if oneTime!.isApproved != nil && oneTime!.isApproved!{
+            cell.userInteractionEnabled = false
+        } else {
+            cell.userInteractionEnabled = true
+        }
+    }
     
     @IBAction func Submit(sender: AnyObject) {
         submissionCheck()

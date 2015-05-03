@@ -42,9 +42,9 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
         tableView.estimatedRowHeight = 67.0
         
         if newTrip {
-            trip = TripExpense(forName: "", id: Model.tripIndex--, startDate: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, isComplete: false, isApproved: false)
+            trip = TripExpense(forName: "", id: Model.tripIndex--, startDate: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, isComplete: false)
         }
-        
+        editableCheck()
         self.navigationController?.setToolbarHidden(false, animated: false)
     }
     
@@ -384,5 +384,13 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
             descriptionCell?.textArea.text = trip?.expenseDescription
         }
         return descriptionCell!
+    }
+    
+    func editableCheck(){
+        if trip!.isApproved != nil && trip!.isApproved!{
+            tableView.userInteractionEnabled = false
+        } else {
+            tableView.userInteractionEnabled = true
+        }
     }
 }
