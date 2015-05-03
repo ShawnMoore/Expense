@@ -69,9 +69,9 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             let decodedData = NSData(base64EncodedString: oneTime!.photoURI!, options: NSDataBase64DecodingOptions(rawValue: 0))
             if decodedData != nil {
                 var decodedimage = UIImage(data: decodedData!)
-                print("orientation: ")
-                print(decodedimage!.imageOrientation.rawValue)
-                print(" ")
+                //print("orientation: ")
+                //print(decodedimage!.imageOrientation.rawValue)
+                //print(" ")
                 receiptImage = decodedimage
                 receiptImageOrient = oneTime?.photoOrientation
                 isFirstPhoto = 1
@@ -504,7 +504,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             var tempAmount = String(format:"%.0f", oneTime!.amount * 100)
             costCell?.costString = "\(tempAmount)"
         }
-        print(costCell?.costString)
         return costCell!
     }
     
@@ -588,4 +587,23 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
         return photoCell!
     }
+    
+    
+    @IBAction func Submit(sender: AnyObject) {
+        submissionCheck()
+    }
+    //MARK: Submission Functions
+    func submissionCheck(){
+        var nameString = oneTime?.name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        var locationString = oneTime?.location?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        if let nameIsEmpty = nameString?.isEmpty,
+            locationIsEmpty = locationString?.isEmpty{
+                if(!nameIsEmpty && !locationIsEmpty && oneTime?.amount > 0.00){
+                    return
+                }
+        }
+        var alert = UIAlertView(title: "Invalid Submission", message: "Please make sure you have entered in a purpose, location, and amount.", delegate: self, cancelButtonTitle: "Okay")
+        alert.show()
+    }
+
 }

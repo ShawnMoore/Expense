@@ -171,7 +171,48 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
             dateLabel?.text = dateString
         }
-        
     }
-
+    
+    @IBAction func submit(sender: AnyObject) {
+        if tripSubmissionCheck(){
+            oneTimeExpensesSubmissionCheck()
+        }
+    }
+    //MARK: Submission Functions
+    func tripSubmissionCheck()-> Bool{
+        var nameString = tripData?.name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        var locationString = tripData?.location?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        if let nameIsEmpty = nameString?.isEmpty,
+            locationIsEmpty = locationString?.isEmpty{
+                if(!nameIsEmpty && !locationIsEmpty && tripData?.endDate != nil){
+                    return true
+                }
+        }
+        var alert = UIAlertView(title: "Invalid Trip Submission", message: "Please make sure you have entered in a trip name, location, and end date.", delegate: self, cancelButtonTitle: "Okay")
+        alert.show()
+        return false
+    }
+    
+    func oneTimeExpensesSubmissionCheck() -> Bool{
+        var i = 0;
+        var alertMessage = ""
+        for expense in oneTimeExpenses!{
+            var nameString = expense.name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            var locationString = expense.location?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            if count(nameString) == 0{
+                alertMessage = "Please make sure you have entered in a purpose."
+            }else if (locationString?.isEmpty == nil) || locationString!.isEmpty {
+                alertMessage = "Please make sure you have entered in a location."
+            }else if expense.amount <= 0.00 {
+                alertMessage = "Please make sure you have entered in an amount."
+            }
+            if alertMessage != "" {
+                var alert = UIAlertView(title: "Row \(i): Invalid Expense", message: alertMessage, delegate: self, cancelButtonTitle: "Okay")
+                alert.show()
+                return false
+            }
+            i++
+        }
+        return true
+    }
 }
