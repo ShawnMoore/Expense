@@ -30,16 +30,9 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
 
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
         model = appDelegate.getModel()
         
         dateFormatter.dateFormat = dateFormatString
-        
-        self.navigationItem.title = tripData!.name
-        displayTripInfo()
-        
-        oneTimeExpenses = Array<OneTimeExpense>() + tripData!.oneTimeExpenses
-        oneTimeExpenses?.sort({ $0.date.compare($1.date) == NSComparisonResult.OrderedDescending })
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -49,7 +42,12 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         tableView.reloadData()
         
-        self.navigationItem.title = tripData!.name
+        if tripData!.name.isEmpty{
+            self.navigationItem.title = "Trip Name is Required"
+        } else{
+            self.navigationItem.title = tripData!.name
+        }
+
         displayTripInfo()
         self.navigationController?.setToolbarHidden(false, animated: false)
     }
