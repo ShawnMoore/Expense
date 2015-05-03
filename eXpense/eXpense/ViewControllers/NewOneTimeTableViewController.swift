@@ -77,16 +77,10 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         
         //if photo is stored, assign it to receiptImage
         if isFirstPhoto == 0 && (oneTime?.photoURI != "" && oneTime?.photoURI != nil) {
-            print("WORKING1")
             var url = NSURL(string: oneTime!.photoURI!)
-            print("WORKING2")
-            print(url)
             let decodedData = NSData(contentsOfURL: url!)
-            print("WORKING3")
             if decodedData != nil {
-                print("WORKING4")
                 var decodedImage = UIImage(data: decodedData!)
-                print("DECODED IMAGE:")
                 print(decodedImage)
                 receiptImage = decodedImage
                 receiptImageOrient = oneTime?.photoOrientation
