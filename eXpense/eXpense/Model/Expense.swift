@@ -8,6 +8,14 @@
 
 import UIKit
 
+enum Changed {
+    case NotChanged
+    case NewOneTime
+    case ChangedOneTime
+    case NewTrip
+    case ChangedTrip
+}
+
 class Expense: NSObject {
     
     var id: Int
@@ -21,6 +29,7 @@ class Expense: NSObject {
     var updatedAt: NSDate?
     var userId: Int
     var isApproved: Bool?
+    var isChanged: Changed
     
     init(forId: Int, name: String, date: NSDate, deleted: Bool, createdAt: NSDate, userId: Int) {
         self.id = forId
@@ -34,6 +43,7 @@ class Expense: NSObject {
         self.updatedAt = nil
         self.userId = userId
         self.isApproved = nil
+        self.isChanged = Changed.NotChanged
     }
     
     init(forId: Int, name: String, date: NSDate, location: String?, description: String?, deleted: Bool, lastSeen: NSDate?, createdAt: NSDate, updatedAt: NSDate?, userId: Int, isApproved: Bool?) {
@@ -48,6 +58,7 @@ class Expense: NSObject {
         self.updatedAt = updatedAt
         self.userId = userId
         self.isApproved = isApproved
+        self.isChanged = Changed.NotChanged
     }
     
     init(expense: Expense) {
@@ -62,6 +73,7 @@ class Expense: NSObject {
         self.updatedAt = expense.updatedAt
         self.userId = expense.userId
         self.isApproved = expense.isApproved
+        self.isChanged = Changed.NotChanged
     }
     
 }
