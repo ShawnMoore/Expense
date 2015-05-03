@@ -49,14 +49,13 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         tableView.estimatedRowHeight = 67.0
         
         if newExpense {
-            oneTime = OneTimeExpense(forID: Model.oneTimeIndex--, name: "", amount: 0.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, category: "Other", isApproved: false)
+            oneTime = OneTimeExpense(forID: Model.oneTimeIndex--, name: "", amount: 0.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, category: "Other")
             
             if let tripId = newExpenseTripId {
                 oneTime?.tripId = tripId
             }
         }
         
-        self.navigationController?.setToolbarHidden(false, animated: false)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -74,13 +73,21 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 }
             }
         }
+        if(oneTime!.isApproved != nil){
+            self.navigationController?.setToolbarHidden(true, animated: false)
+        }
+        else {
+            self.navigationController?.setToolbarHidden(false, animated: false)   
+        }
         
         //if photo is stored, assign it to receiptImage
         if isFirstPhoto == 0 && (oneTime?.photoURI != "" && oneTime?.photoURI != nil) {
-            let decodedData = NSData(base64EncodedString: oneTime!.photoURI!, options: NSDataBase64DecodingOptions(rawValue: 0))
+            var url = NSURL(string: oneTime!.photoURI!)
+            let decodedData = NSData(contentsOfURL: url!)
             if decodedData != nil {
-                var decodedimage = UIImage(data: decodedData!)
-                receiptImage = decodedimage
+                var decodedImage = UIImage(data: decodedData!)
+                print(decodedImage)
+                receiptImage = decodedImage
                 receiptImageOrient = oneTime?.photoOrientation
                 isFirstPhoto = 1
             }
@@ -96,10 +103,31 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     override func viewDidDisappear(animated: Bool) {
         if receiptImage != nil && receiptImage != "" {
             var imageData = UIImagePNGRepresentation(receiptImage)
-            let base64String = imageData.base64EncodedStringWithOptions(.allZeros)
-            oneTime?.photoURI = base64String
+            var imageByteArray = getArrayOfBytesFromImage(imageData)
+            
+            //let base64String = imageData.base64EncodedStringWithOptions(.allZeros)
+            oneTime?.photoArray = imageByteArray
             oneTime?.photoOrientation = receiptImageOrient
         }
+    }
+    
+    func getArrayOfBytesFromImage(imageData:NSData) -> NSMutableArray
+    {
+        let count = imageData.length / sizeof(UInt8)
+        
+        //create array
+        var bytes = [UInt8](count: count, repeatedValue: 0)
+        
+        //bytes->array
+        imageData.getBytes(&bytes, length:count * sizeof(UInt8))
+        
+        var byteArray:NSMutableArray = NSMutableArray()
+        
+        for (var i = 0; i < count; i++) {
+            byteArray.addObject(NSNumber(unsignedChar: bytes[i]))
+        }
+        
+        return byteArray
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -320,7 +348,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
 
     //MARK: IBAction Function
     @IBAction func takeReceiptPhoto(sender: AnyObject) {
-        if isFirstPhoto == 0 && (oneTime?.photoURI != "" && oneTime?.photoURI != nil){
+        if isFirstPhoto == 0 && (oneTime?.photoArray != "" && oneTime?.photoArray != nil){
             performSegueWithIdentifier("showReceipt", sender: self)
         }
             
@@ -338,7 +366,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 
                 //no camera detected
             else{
-                var alert = UIAlertController(title: "No Camera", message: "Your device must have a camera to take a picture of your reciepts", preferredStyle: UIAlertControllerStyle.Alert)
+                var alert = UIAlertController(title: "No Camera", message: "Your device must have a camera to take a picture of your receipts", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             }
@@ -479,6 +507,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         if !newExpense {
             purposeCell?.purposeTextField.text = oneTime!.name
         }
+        editableCheck(cell)
         return purposeCell!
     }
     
@@ -489,6 +518,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         if oneTime != nil {
             cell.detailTextLabel?.text = oneTime?.category.rawValue
         }
+        editableCheck(cell)
         return cell
     }
 
@@ -502,6 +532,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 }
             }
         }
+        editableCheck(cell)
         return categoryPickerCell!
     }
     
@@ -515,6 +546,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             var tempAmount = String(format:"%.0f", oneTime!.amount * 100)
             costCell?.costString = "\(tempAmount)"
         }
+        editableCheck(cell)
         return costCell!
     }
     
@@ -530,6 +562,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         } else {
             cell.detailTextLabel?.text = "None"
         }
+        editableCheck(cell)
         return cell
     }
     
@@ -541,6 +574,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 locationCell?.locationTextField.text = location
             }
         }
+        editableCheck(cell)
         return locationCell!
     }
     
@@ -551,6 +585,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         } else {
             cell.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
         }
+        editableCheck(cell)
         return cell
     }
     
@@ -561,6 +596,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         }
         datePickerCell?.identifier = "datePicker"
         datePickerCell?.delegate = self
+        editableCheck(cell)
         return datePickerCell!
     }
     
@@ -570,12 +606,13 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         if oneTime != nil {
             descriptionCell?.textArea.text = oneTime?.expenseDescription
         }
+        editableCheck(cell)
         return descriptionCell!
     }
     
     func createPhotoCell(cell: UITableViewCell) -> (UITableViewCell){
         let photoCell = cell as? PhotoCaptureTableViewCell
-        if isFirstPhoto == 0 && (oneTime?.photoURI != "" && oneTime?.photoURI != nil) {
+        if isFirstPhoto == 0 && (oneTime?.photoArray != "" && oneTime?.photoArray != nil) {
             photoCell?.takePhotoButton.setTitle("", forState: UIControlState.Normal)
             photoCell?.receiptImageView.image = receiptImage
             photoCell?.receiptImageView.contentMode = .ScaleAspectFit
@@ -596,9 +633,17 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         else {
             photoCell?.takePhotoButton.setTitle("Take a Photo of the Receipt", forState: UIControlState.Normal)
         }
+        editableCheck(cell)
         return photoCell!
     }
     
+    func editableCheck(cell: UITableViewCell){
+        if oneTime!.isApproved != nil && oneTime!.isApproved!{
+            cell.userInteractionEnabled = false
+        } else {
+            cell.userInteractionEnabled = true
+        }
+    }
     
     @IBAction func Submit(sender: AnyObject) {
         submissionCheck()

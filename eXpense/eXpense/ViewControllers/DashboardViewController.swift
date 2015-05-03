@@ -32,8 +32,9 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         model = appDelegate.getModel()
         
         dateFormatter.dateFormat = dateFormatString
-        
-//        model?.loadAllOnlineExpense("http://www.json-generator.com/api/json/get/ceUfRkomiG?indent=2", TripURL: "http://www.json-generator.com/api/json/get/bVpzBEgYFu?indent=2", completionHandler: {
+//        //http://www.json-generator.com/api/json/get/ceUfRkomiG?indent=2
+//        //"http://www.json-generator.com/api/json/get/bVpzBEgYFu?indent=2"
+//        model?.loadAllOnlineExpense("http://expense-backend.azurewebsites.net/api/expenses/", TripURL:"http://expense-backend.azurewebsites.net/api/trips/", completionHandler: {
 //            self.sortedArray = self.sortedArray + self.model!.totalExpenses
 //            
 //            self.tableView.reloadData()
@@ -60,7 +61,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             }
         })
 
-        
+    
+
         //Get the Navigation Bar from the Navigation Controller
         let navBar = self.navigationController!.navigationBar
         

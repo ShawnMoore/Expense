@@ -20,9 +20,9 @@ class Expense: NSObject {
     var createdAt: NSDate
     var updatedAt: NSDate?
     var userId: Int
-    var isApproved: Bool
+    var isApproved: Bool?
     
-    init(forId: Int, name: String, date: NSDate, deleted: Bool, createdAt: NSDate, userId: Int, isApproved: Bool) {
+    init(forId: Int, name: String, date: NSDate, deleted: Bool, createdAt: NSDate, userId: Int) {
         self.id = forId
         self.name = name
         self.date = date
@@ -33,10 +33,10 @@ class Expense: NSObject {
         self.createdAt = createdAt
         self.updatedAt = nil
         self.userId = userId
-        self.isApproved = isApproved
+        self.isApproved = nil
     }
     
-    init(forId: Int, name: String, date: NSDate, location: String?, description: String?, deleted: Bool, lastSeen: NSDate?, createdAt: NSDate, updatedAt: NSDate?, userId: Int, isApproved: Bool) {
+    init(forId: Int, name: String, date: NSDate, location: String?, description: String?, deleted: Bool, lastSeen: NSDate?, createdAt: NSDate, updatedAt: NSDate?, userId: Int, isApproved: Bool?) {
         self.id = forId
         self.name = name
         self.date = date
