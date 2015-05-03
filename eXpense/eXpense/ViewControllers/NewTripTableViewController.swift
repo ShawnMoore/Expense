@@ -239,6 +239,7 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
     func textInTextFieldHasChanged(ChangedTo: String, at: String) {
         if at == "Purpose" {
             trip?.name = ChangedTo
+            self.title = ChangedTo
         } else if at == "Location" {
             if !ChangedTo.isEmpty {
                 trip?.location = ChangedTo
@@ -250,9 +251,11 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
         
         if identifier == "Purpose_Begin" {
             trip?.name = textField.text
+            self.title = textField.text
             self.responderPurposeTextField = textField
         } else if identifier == "Purpose_End" {
             trip?.name = textField.text
+            self.title = textField.text
             self.responderPurposeTextField = nil
         }
         

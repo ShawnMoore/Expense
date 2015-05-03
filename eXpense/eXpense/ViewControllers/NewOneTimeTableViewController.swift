@@ -38,8 +38,6 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = oneTime?.name
-        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         model = appDelegate.getModel()
@@ -64,14 +62,19 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(false)
         
+        if oneTime != nil {
+            if !oneTime!.name.isEmpty {
+                self.title = oneTime?.name
+            } else {
+                self.title = "Purpose is Required"
+            }
+        }
+        
         //if photo is stored, assign it to receiptImage
         if isFirstPhoto == 0 && (oneTime?.photoURI != "" && oneTime?.photoURI != nil) {
             let decodedData = NSData(base64EncodedString: oneTime!.photoURI!, options: NSDataBase64DecodingOptions(rawValue: 0))
             if decodedData != nil {
                 var decodedimage = UIImage(data: decodedData!)
-                //print("orientation: ")
-                //print(decodedimage!.imageOrientation.rawValue)
-                //print(" ")
                 receiptImage = decodedimage
                 receiptImageOrient = oneTime?.photoOrientation
                 isFirstPhoto = 1
@@ -351,6 +354,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     func textInTextFieldHasChanged(ChangedTo: String, at: String) {
         if at == "Purpose" {
             oneTime?.name = ChangedTo
+            self.title = ChangedTo
         } else if at == "Cost" {
             var removeDollarSign = ChangedTo as NSString
             var checkDollar = removeDollarSign as String
@@ -376,9 +380,11 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         
         if identifier == "Purpose_Begin" {
             oneTime?.name = textField.text
+            self.title = textField.text
             self.responderPurposeTextField = textField
         } else if identifier == "Purpose_End" {
             oneTime?.name = textField.text
+            self.title = textField.text
             self.responderPurposeTextField = nil
         }
         
