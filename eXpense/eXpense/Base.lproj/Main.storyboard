@@ -1368,8 +1368,8 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l7R-CM-lMg" id="UkM-IX-qHv">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dEC-sZ-kRD">
-                                            <rect key="frame" x="8" y="0.0" width="584" height="43"/>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$0.00" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dEC-sZ-kRD">
+                                            <rect key="frame" x="57" y="0.0" width="535" height="43"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="43" id="Uin-iH-dbh"/>
                                             </constraints>
@@ -1377,13 +1377,27 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         </textField>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cost:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMn-J7-4JE">
+                                            <rect key="frame" x="8" y="11" width="41" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="dEC-sZ-kRD" firstAttribute="leading" secondItem="UkM-IX-qHv" secondAttribute="leadingMargin" id="4AA-GW-azM"/>
+                                        <constraint firstAttribute="centerY" secondItem="gMn-J7-4JE" secondAttribute="centerY" id="63t-gL-kwa"/>
                                         <constraint firstItem="dEC-sZ-kRD" firstAttribute="top" secondItem="UkM-IX-qHv" secondAttribute="top" id="I9y-0V-bsD"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="dEC-sZ-kRD" secondAttribute="trailing" id="Lai-DZ-p4b"/>
+                                        <constraint firstItem="dEC-sZ-kRD" firstAttribute="leading" secondItem="gMn-J7-4JE" secondAttribute="trailing" constant="8" id="OGF-Go-rad"/>
                                         <constraint firstAttribute="bottom" secondItem="dEC-sZ-kRD" secondAttribute="bottom" id="V0J-FW-OW4"/>
+                                        <constraint firstItem="gMn-J7-4JE" firstAttribute="leading" secondItem="UkM-IX-qHv" secondAttribute="leadingMargin" id="p3P-KU-ScK"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="4AA-GW-azM"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="costTextField" destination="dEC-sZ-kRD" id="TiR-ZP-0od"/>
@@ -1441,7 +1455,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KjM-qo-Slx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3567" y="-377.625"/>
+            <point key="canvasLocation" x="3567" y="-378"/>
         </scene>
         <!--Trips-->
         <scene sceneID="wun-DJ-xCs">

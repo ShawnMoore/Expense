@@ -32,25 +32,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         model = appDelegate.getModel()
         
         dateFormatter.dateFormat = dateFormatString
-
-//        model?.loadOneTimeExpensesFromURLString("http://dalemusser.com/test/json/test.json") {
-//            (object, error) -> Void in
-//            println("Success")
-//        }
         
-        model?.loadAllOnlineExpense("http://www.json-generator.com/api/json/get/ceUfRkomiG?indent=2", TripURL: "http://www.json-generator.com/api/json/get/bVpzBEgYFu?indent=2", completionHandler: {
-            self.sortedArray = self.sortedArray + self.model!.totalExpenses
-            
-            self.tableView.reloadData()
-            
-            if self.sortedArray.count == 0 {
-                self.tableView.tableHeaderView?.hidden = true
-            } else {
-                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
-            }
-        })
-        
-//        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
+//        model?.loadAllOnlineExpense("http://www.json-generator.com/api/json/get/ceUfRkomiG?indent=2", TripURL: "http://www.json-generator.com/api/json/get/bVpzBEgYFu?indent=2", completionHandler: {
 //            self.sortedArray = self.sortedArray + self.model!.totalExpenses
 //            
 //            self.tableView.reloadData()
@@ -61,6 +44,18 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 //                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
 //            }
 //        })
+        
+        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
+            self.sortedArray = self.sortedArray + self.model!.totalExpenses
+            
+            self.tableView.reloadData()
+            
+            if self.sortedArray.count == 0 {
+                self.tableView.tableHeaderView?.hidden = true
+            } else {
+                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+            }
+        })
         
         //Get the Navigation Bar from the Navigation Controller
         let navBar = self.navigationController!.navigationBar

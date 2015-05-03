@@ -11,7 +11,8 @@
   "UpdatedAt": null,
   "Deleted": false,
   "IsComplete": true,
-  "UserId": 1
+  "UserId": 1,
+  "IsApproved": false
   },
   {
     "Id": 1,
@@ -25,7 +26,8 @@
     "UpdatedAt": null,
     "Deleted": false,
     "IsComplete": true,
-    "UserId": 1
+    "UserId": 1,
+    "IsApproved": false
   },
   {
   "Id": 2,
@@ -39,7 +41,8 @@
   "UpdatedAt": null,
   "Deleted": false,
   "IsComplete": true,
-  "UserId": 1
+  "UserId": 1,
+  "IsApproved": false
   },
   {
   "Id": 3,
@@ -53,7 +56,8 @@
   "UpdatedAt": null,
   "Deleted": false,
   "IsComplete": true,
-  "UserId": 1
+  "UserId": 1,
+  "IsApproved": false
   },
   {
   "Id": 4,
@@ -67,7 +71,8 @@
   "UpdatedAt": null,
   "Deleted": false,
   "IsComplete": true,
-  "UserId": 1
+  "UserId": 1,
+  "IsApproved": false
   },
   {
   "Id": 5,
@@ -81,7 +86,8 @@
   "UpdatedAt": null,
   "Deleted": false,
   "IsComplete": true,
-  "UserId": 1
+  "UserId": 1,
+  "IsApproved": false
   },
   {
   "Id": 6,
@@ -95,20 +101,22 @@
   "UpdatedAt": null,
   "Deleted": false,
   "IsComplete": true,
-  "UserId": 1
- },
- {
- "Id": 7,
- "Name": "Megan's Trip",
- "StartDate": "2015-05-24T09:33:01.0000000+00:00",
- "EndDate": "2015-05-25T09:33:01.0000000+00:00",
- "Location": "C1212",
- "Description": "I want to see this work correctly so i'm just going to type a till I decide that we are good",
- "LastSeen": null,
- "CreatedAt": "2015-04-10T09:33:01.0000000+00:00",
- "UpdatedAt": null,
- "Deleted": false,
- "IsComplete": true,
- "UserId": 1
- }
+  "UserId": 1,
+  "IsApproved": false
+  },
+  {
+  "Id": 7,
+  "Name": "Megan's Trip",
+  "StartDate": "2015-05-24T09:33:01.0000000+00:00",
+  "EndDate": "2015-05-25T09:33:01.0000000+00:00",
+  "Location": "C1212",
+  "Description": "I want to see this work correctly so i'm just going to type a till I decide that we are good",
+  "LastSeen": null,
+  "CreatedAt": "2015-04-10T09:33:01.0000000+00:00",
+  "UpdatedAt": null,
+  "Deleted": false,
+  "IsComplete": true,
+  "UserId": 1,
+  "IsApproved": false
+  }
 ]
