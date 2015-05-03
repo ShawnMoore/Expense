@@ -131,15 +131,28 @@ class Model: NSObject {
     
     func loadAllLocalExpenses(oneTimeFilename: String, tripFilename: String, completionHandler: () -> Void) {
 
-            loadTripExpensesFromLocalFile(tripFilename) {
+        loadTripExpensesFromLocalFile(tripFilename) {
+            (object, error) -> Void in
+            
+            self.loadOneTimeExpensesFromLocalFile(oneTimeFilename) {
                 (object, error) -> Void in
                 
-                    self.loadOneTimeExpensesFromLocalFile(oneTimeFilename) {
-                        (object, error) -> Void in
-                        
-                            completionHandler()
-                    }
+                    completionHandler()
             }
+        }
+    }
+    
+    func loadAllOnlineExpense(OneTimeURL: String, TripURL: String, completionHandler: () -> Void) {
+        
+        loadTripExpensesFromURLString(TripURL) {
+            (object, error) -> Void in
+            
+            self.loadOneTimeExpensesFromURLString(OneTimeURL) {
+                (object, error) -> Void in
+                
+                completionHandler()
+            }
+        }
     }
     
     func loadOneTimeExpensesFromURLString(fromURLString: String, completionHandler: (NSObject, String?) -> Void) {
