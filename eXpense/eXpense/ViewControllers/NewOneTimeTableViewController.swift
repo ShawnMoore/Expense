@@ -49,7 +49,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         tableView.estimatedRowHeight = 67.0
         
         if newExpense {
-            oneTime = OneTimeExpense(forID: Model.oneTimeIndex--, name: "", amount: 0.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, category: "Other")
+            oneTime = OneTimeExpense(forID: Model.oneTimeIndex--, name: "", amount: 0.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, category: "Other", isApproved: false)
             
             if let tripId = newExpenseTripId {
                 oneTime?.tripId = tripId

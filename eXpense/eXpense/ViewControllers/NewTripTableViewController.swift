@@ -42,7 +42,7 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
         tableView.estimatedRowHeight = 67.0
         
         if newTrip {
-            trip = TripExpense(forName: "", id: Model.tripIndex--, startDate: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, isComplete: false)
+            trip = TripExpense(forName: "", id: Model.tripIndex--, startDate: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, isComplete: false, isApproved: false)
         }
         
         self.navigationController?.setToolbarHidden(false, animated: false)

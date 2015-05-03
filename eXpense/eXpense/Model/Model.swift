@@ -225,7 +225,8 @@ class Model: NSObject {
                                 expenseDate         = expenseData["Date"] as? NSString,
                                 expenseCreatedDate  = expenseData["CreatedAt"] as? NSString,
                                 expenseUserId       = expenseData["UserId"] as? Int,
-                                expenseCategory     = expenseData["Category"] as? String{
+                                expenseCategory     = expenseData["Category"] as? String,
+                                expenseIsApproved   = expenseData["IsApproved"] as? Bool{
                                     
                                     var oneTimeObject: Dictionary<String, Any> = Dictionary<String, Any>()
                                     
@@ -237,6 +238,7 @@ class Model: NSObject {
                                     oneTimeObject["Deleted"] = expenseDeleted
                                     oneTimeObject["UserId"] = expenseUserId
                                     oneTimeObject["Category"] = expenseCategory
+                                    oneTimeObject["IsApproved"] = expenseIsApproved
                                     
                                     if let expenseLocation = expenseData["Location"] as? NSString {
                                         oneTimeObject["Location"] = expenseLocation
@@ -355,7 +357,8 @@ class Model: NSObject {
                                 tripStartDate = tripData["StartDate"] as? NSString,
                                 tripCreatedAt = tripData["CreatedAt"] as? NSString,
                                 tripUserId = tripData["UserId"] as? Int,
-                                tripIsComplete = tripData["IsComplete"] as? Bool {
+                                tripIsComplete = tripData["IsComplete"] as? Bool,
+                                tripIsApproved = tripData["IsApproved"] as? Bool{
                                     
                                     tripObject["Id"] = tripId
                                     tripObject["Name"] = tripName
@@ -364,6 +367,7 @@ class Model: NSObject {
                                     tripObject["Deleted"] = tripDeleted
                                     tripObject["UserId"] = tripUserId
                                     tripObject["IsComplete"] = tripIsComplete
+                                    tripObject["IsComplete"] = tripIsApproved
                                     
                                     if let tripEndDate = tripData["EndDate"] as? NSString {
                                         tripObject["EndDate"] = dateFormatter.dateFromString(tripEndDate as String)
