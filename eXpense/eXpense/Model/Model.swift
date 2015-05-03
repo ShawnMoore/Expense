@@ -32,7 +32,7 @@ class Model: NSObject {
     static var tripIndex: Int = -1
     
     private var dateFormatter: NSDateFormatter = NSDateFormatter()
-    private var dateFormatString = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSzzzzz"
+    private var dateFormatString = "yyyy-MM-dd"
     
     override init() {
         dateFormatter = NSDateFormatter()
@@ -232,10 +232,11 @@ class Model: NSObject {
     func loadOneTimeExpensesFromURLString(fromURLString: String, completionHandler: (NSObject, String?) -> Void) {
         oneTimeExpenses = Array<OneTimeExpense>()
         if let url = NSURL(string: fromURLString) {
-            let urlRequest = NSMutableURLRequest(URL: url)
-            let session = NSURLSession.sharedSession()
-            let task = session.dataTaskWithRequest(urlRequest, completionHandler: {
-                (data, response, error) -> Void in
+            let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
+            urlRequest.HTTPMethod = "GET"
+            let queue = NSOperationQueue()
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
+                (response, data, error) -> Void in
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue(), {
                         completionHandler(self, error.localizedDescription)
@@ -244,8 +245,6 @@ class Model: NSObject {
                     self.parseOneTimeExpenses(data, completionHandler: completionHandler)
                 }
             })
-            
-            task.resume()
         } else {
             dispatch_async(dispatch_get_main_queue(), {
                 completionHandler(self, "Invalid URL")
@@ -294,19 +293,20 @@ class Model: NSObject {
                             if let expenseId           = expenseData["Id"] as? Int,
                                 expenseName         = expenseData["Name"] as? NSString,
                                 expenseAmount       = expenseData["Amount"] as? Double,
-                                expenseDate         = expenseData["Date"] as? NSString,
-                                expenseCreatedDate  = expenseData["CreatedAt"] as? NSString,
+                                expenseDate         = expenseData["Date"] as? String,
+                                expenseCreatedDate  = expenseData["CreatedAt"] as? String,
                                 expenseUserId       = expenseData["UserId"] as? Int,
                                 expenseCategory     = expenseData["Category"] as? String,
                                 expenseIsApproved   = expenseData["IsApproved"] as? Bool{
                                     
                                     var oneTimeObject: Dictionary<String, Any> = Dictionary<String, Any>()
-                                    
+                                    var arrayExpenseCreatedDate = split(expenseCreatedDate) {$0 == "T"}
+                                    var arrayExpenseDate = split(expenseCreatedDate) {$0 == "T"}
                                     oneTimeObject["Id"] = expenseId
                                     oneTimeObject["Name"] = expenseName
                                     oneTimeObject["Amount"] = expenseAmount
-                                    oneTimeObject["Date"] = dateFormatter.dateFromString(expenseDate as String)!
-                                    oneTimeObject["CreatedAt"] = dateFormatter.dateFromString(expenseCreatedDate as String)!
+                                    oneTimeObject["Date"] = dateFormatter.dateFromString(arrayExpenseDate[0])!
+                                    oneTimeObject["CreatedAt"] = dateFormatter.dateFromString(arrayExpenseCreatedDate[0])!
                                     oneTimeObject["Deleted"] = expenseDeleted
                                     oneTimeObject["UserId"] = expenseUserId
                                     oneTimeObject["Category"] = expenseCategory
@@ -321,11 +321,13 @@ class Model: NSObject {
                                     if let expensePhotoURI = expenseData["PhotoURI"] as? NSString {
                                         oneTimeObject["PhotoURI"] = expensePhotoURI
                                     }
-                                    if let expenseLastSeen = expenseData["LastSeen"] as? NSString {
-                                        oneTimeObject["LastSeen"] = dateFormatter.dateFromString(expenseLastSeen as String)!
+                                    if let expenseLastSeen = expenseData["LastSeen"] as? String {
+                                        var arrayExpenseLastSeen = split(expenseLastSeen) {$0 == "T"}
+                                        oneTimeObject["LastSeen"] = dateFormatter.dateFromString(arrayExpenseLastSeen[0])!
                                     }
-                                    if let expenseUpdatedAt = expenseData["UpdatedAt"] as? NSString {
-                                        oneTimeObject["UpdatedAt"] = dateFormatter.dateFromString(expenseUpdatedAt as String)!
+                                    if let expenseUpdatedAt = expenseData["UpdatedAt"] as? String {
+                                        var arrayExpenseUpdatedAt = split(expenseUpdatedAt) {$0 == "T"}
+                                        oneTimeObject["UpdatedAt"] = dateFormatter.dateFromString(arrayExpenseUpdatedAt[0])!
                                     }
                                     
                                     if let expenseTripId = expenseData["TripId"] as? Int {
@@ -363,10 +365,11 @@ class Model: NSObject {
     func loadTripExpensesFromURLString(fromURLString: String, completionHandler: (NSObject, String?) -> Void) {
         tripExpenses = [Int: TripExpense]()
         if let url = NSURL(string: fromURLString) {
-            let urlRequest = NSMutableURLRequest(URL: url)
-            let session = NSURLSession.sharedSession()
-            let task = session.dataTaskWithRequest(urlRequest, completionHandler: {
-                (data, response, error) -> Void in
+            let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
+            urlRequest.HTTPMethod = "GET"
+            let queue = NSOperationQueue()
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
+                (response, data, error) -> Void in
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue(), {
                         completionHandler(self, error.localizedDescription)
@@ -375,8 +378,6 @@ class Model: NSObject {
                     self.parseTripExpenses(data, completionHandler: completionHandler)
                 }
             })
-            
-            task.resume()
         } else {
             dispatch_async(dispatch_get_main_queue(), {
                 completionHandler(self, "Invalid URL")
@@ -426,20 +427,20 @@ class Model: NSObject {
                         if tripDeleted == false{
                             if let tripId = tripData["Id"] as? Int,
                                 tripName = tripData["Name"] as? NSString,
-                                tripStartDate = tripData["StartDate"] as? NSString,
-                                tripCreatedAt = tripData["CreatedAt"] as? NSString,
+                                tripStartDate = tripData["StartDate"] as? String,
+                                tripCreatedAt = tripData["CreatedAt"] as? String,
                                 tripUserId = tripData["UserId"] as? Int,
-                                tripIsComplete = tripData["IsComplete"] as? Bool,
-                                tripIsApproved = tripData["IsApproved"] as? Bool{
-                                    
+                                tripIsComplete = tripData["IsComplete"] as? Bool{
+                                    var arrayTripCreatedDate = split(tripCreatedAt) {$0 == "T"}
+                                    var arrayTripStartDate = split(tripStartDate) {$0 == "T"}
                                     tripObject["Id"] = tripId
                                     tripObject["Name"] = tripName
-                                    tripObject["StartDate"] = dateFormatter.dateFromString(tripStartDate as String)!
-                                    tripObject["CreatedAt"] = dateFormatter.dateFromString(tripCreatedAt as String)!
+                                    tripObject["StartDate"] = dateFormatter.dateFromString(arrayTripStartDate[0])!
+                                    tripObject["CreatedAt"] = dateFormatter.dateFromString(arrayTripCreatedDate[0])!
                                     tripObject["Deleted"] = tripDeleted
                                     tripObject["UserId"] = tripUserId
                                     tripObject["IsComplete"] = tripIsComplete
-                                    tripObject["IsApproved"] = tripIsApproved
+
                                     
                                     if let tripEndDate = tripData["EndDate"] as? NSString {
                                         tripObject["EndDate"] = dateFormatter.dateFromString(tripEndDate as String)
@@ -453,12 +454,18 @@ class Model: NSObject {
                                         tripObject["Description"] = tripDescription
                                     }
                                     
-                                    if let tripLastSeen = tripData["LastSeen"] as? NSString {
-                                        tripObject["LastSeen"] = dateFormatter.dateFromString(tripLastSeen as String)
+                                    if let tripLastSeen = tripData["LastSeen"] as? String {
+                                        var arrayTripLastSeen = split(tripLastSeen) {$0 == "T"}
+                                        tripObject["LastSeen"] = dateFormatter.dateFromString(arrayTripLastSeen[0])
                                     }
                                     
-                                    if let tripUpdatedAt = tripData["UpdatedAt"] as? NSString {
-                                        tripObject["UpdatedAt"] = dateFormatter.dateFromString(tripUpdatedAt as String)
+                                    if let tripUpdatedAt = tripData["UpdatedAt"] as? String {
+                                        var arrayTripUpdatedAt = split(tripUpdatedAt) {$0 == "T"}
+                                        tripObject["UpdatedAt"] = dateFormatter.dateFromString(arrayTripUpdatedAt[0])
+                                    }
+                                    
+                                    if let tripIsApproved = tripData["IsApproved"] as? Bool{
+                                        tripObject["IsApproved"] = tripIsApproved
                                     }
                                     
                                     tripExpenses[tripId] = (TripExpense(dict: tripObject))

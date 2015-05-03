@@ -32,8 +32,9 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         model = appDelegate.getModel()
         
         dateFormatter.dateFormat = dateFormatString
-        
-//        model?.loadAllOnlineExpense("http://www.json-generator.com/api/json/get/ceUfRkomiG?indent=2", TripURL: "http://www.json-generator.com/api/json/get/bVpzBEgYFu?indent=2", completionHandler: {
+//        //http://www.json-generator.com/api/json/get/ceUfRkomiG?indent=2
+//        //"http://www.json-generator.com/api/json/get/bVpzBEgYFu?indent=2"
+//        model?.loadAllOnlineExpense("http://expense-backend.azurewebsites.net/api/expenses/", TripURL:"http://expense-backend.azurewebsites.net/api/trips/", completionHandler: {
 //            self.sortedArray = self.sortedArray + self.model!.totalExpenses
 //            
 //            self.tableView.reloadData()
@@ -44,7 +45,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 //                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
 //            }
 //        })
-        
 //        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
 //            self.sortedArray = self.sortedArray + self.model!.totalExpenses
 //            
@@ -56,7 +56,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 //                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
 //            }
 //        })
-        
+    
 //        var expense = OneTimeExpense(forID: -1, name: "Test", amount: 1.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: 1, category: "Other", isApproved: true)
 //        
 //        model?.addOneTimeExpense(expense)
