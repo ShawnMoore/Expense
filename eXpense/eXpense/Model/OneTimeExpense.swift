@@ -28,20 +28,20 @@ class OneTimeExpense: Expense {
     var photoOrientation: Int?
     var tripId: Int?
     
-    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, userId: Int, category: String)
+    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, userId: Int, category: String, isApproved: Bool)
     {
         self.amount = amount
         self.category = Category(rawValue: category)!
-        super.init(forId: forID, name: name, date: date, deleted: deleted, createdAt: createdAt, userId: userId)
+        super.init(forId: forID, name: name, date: date, deleted: deleted, createdAt: createdAt, userId: userId, isApproved: isApproved)
     }
     
-    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, location: String?, description: String?, photoURI: String?, userId: Int, tripId: Int?, lastSeen: NSDate?, updatedAt: NSDate?, category: String)
+    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, location: String?, description: String?, photoURI: String?, userId: Int, tripId: Int?, lastSeen: NSDate?, updatedAt: NSDate?, category: String, isApproved: Bool)
     {
         self.amount = amount
         self.category = Category(rawValue: category)!
         self.photoURI = photoURI
         self.tripId = tripId
-        super.init(forId: forID, name: name, date: date, location: location, description: description, deleted: deleted, lastSeen: lastSeen, createdAt: createdAt, updatedAt: updatedAt, userId: userId)
+        super.init(forId: forID, name: name, date: date, location: location, description: description, deleted: deleted, lastSeen: lastSeen, createdAt: createdAt, updatedAt: updatedAt, userId: userId, isApproved: isApproved)
     }
     
     init(dict: Dictionary<String, Any>)
@@ -51,6 +51,6 @@ class OneTimeExpense: Expense {
         self.photoURI = dict["PhotoURI"] as? String
         self.tripId = dict["TripId"] as? Int
         
-        super.init(forId: (dict["Id"] as! Int), name: (dict["Name"] as! String), date: (dict["Date"] as! NSDate), location: (dict["Location"] as? String), description: (dict["Description"] as? String), deleted: (dict["Deleted"] as! Bool), lastSeen: (dict["LastSeen"] as? NSDate), createdAt: (dict["CreatedAt"] as! NSDate), updatedAt: (dict["UpdatedAt"] as? NSDate), userId: (dict["UserId"] as! Int))
+        super.init(forId: (dict["Id"] as! Int), name: (dict["Name"] as! String), date: (dict["Date"] as! NSDate), location: (dict["Location"] as? String), description: (dict["Description"] as? String), deleted: (dict["Deleted"] as! Bool), lastSeen: (dict["LastSeen"] as? NSDate), createdAt: (dict["CreatedAt"] as! NSDate), updatedAt: (dict["UpdatedAt"] as? NSDate), userId: (dict["UserId"] as! Int), isApproved: (dict["IsApproved"] as! Bool))
     }
 }

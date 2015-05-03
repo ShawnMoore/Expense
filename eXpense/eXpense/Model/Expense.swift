@@ -20,8 +20,9 @@ class Expense: NSObject {
     var createdAt: NSDate
     var updatedAt: NSDate?
     var userId: Int
+    var isApproved: Bool
     
-    init(forId: Int, name: String, date: NSDate, deleted: Bool, createdAt: NSDate, userId: Int) {
+    init(forId: Int, name: String, date: NSDate, deleted: Bool, createdAt: NSDate, userId: Int, isApproved: Bool) {
         self.id = forId
         self.name = name
         self.date = date
@@ -32,9 +33,10 @@ class Expense: NSObject {
         self.createdAt = createdAt
         self.updatedAt = nil
         self.userId = userId
+        self.isApproved = isApproved
     }
     
-    init(forId: Int, name: String, date: NSDate, location: String?, description: String?, deleted: Bool, lastSeen: NSDate?, createdAt: NSDate, updatedAt: NSDate?, userId: Int) {
+    init(forId: Int, name: String, date: NSDate, location: String?, description: String?, deleted: Bool, lastSeen: NSDate?, createdAt: NSDate, updatedAt: NSDate?, userId: Int, isApproved: Bool) {
         self.id = forId
         self.name = name
         self.date = date
@@ -45,5 +47,16 @@ class Expense: NSObject {
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.userId = userId
+        self.id = forId
+        self.name = name
+        self.date = date
+        self.location = nil
+        self.expenseDescription = nil
+        self.deleted = deleted
+        self.lastSeen = nil
+        self.createdAt = createdAt
+        self.updatedAt = nil
+        self.userId = userId
+        self.isApproved = isApproved
     }
 }
