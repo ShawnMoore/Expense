@@ -72,7 +72,11 @@ class TripsChoiceTableViewController: UITableViewController {
             cell?.textLabel?.text = "None"
         case 1:
             cell = tableView.dequeueReusableCellWithIdentifier("tripCell", forIndexPath: indexPath) as? UITableViewCell
-            cell?.textLabel?.text = trips?[indexPath.row].name
+            if (trips?[indexPath.row].name.isEmpty == nil) || trips![indexPath.row].name.isEmpty{
+                cell?.textLabel?.text = "Trip Name is Required"
+            }else{
+                cell?.textLabel?.text = trips?[indexPath.row].name
+            }
             
             if oneTimeExpense != nil {
                 if trips?[indexPath.row].id == oneTimeExpense?.tripId {
