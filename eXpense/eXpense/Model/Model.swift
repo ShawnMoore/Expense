@@ -408,7 +408,7 @@ class Model: NSObject {
                                     tripObject["Deleted"] = tripDeleted
                                     tripObject["UserId"] = tripUserId
                                     tripObject["IsComplete"] = tripIsComplete
-                                    tripObject["IsComplete"] = tripIsApproved
+                                    tripObject["IsApproved"] = tripIsApproved
                                     
                                     if let tripEndDate = tripData["EndDate"] as? NSString {
                                         tripObject["EndDate"] = dateFormatter.dateFromString(tripEndDate as String)

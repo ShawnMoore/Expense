@@ -50,8 +50,8 @@ class Expense: NSObject {
         self.id = forId
         self.name = name
         self.date = date
-        self.location = nil
-        self.expenseDescription = nil
+        self.location = location
+        self.expenseDescription = description
         self.deleted = deleted
         self.lastSeen = nil
         self.createdAt = createdAt
