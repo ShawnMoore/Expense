@@ -137,7 +137,7 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
             case 1:
                 if(startDatePickerOn){
                     cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? UITableViewCell
-                    cell = createDatePicker(cell!, identifier: "Start")
+                    cell = createStartDatePicker(cell!)
                 }else{
                     cell = tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as? UITableViewCell
                     cell = createEndDateCell(cell!)
@@ -148,12 +148,12 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
                     cell = createEndDateCell(cell!)
                 }else if(endDatePickerOn){
                     cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? UITableViewCell
-                    cell = createDatePicker(cell!, identifier: "End")
+                    cell = createEndDatePicker(cell!)
                 }
             case 3:
                 if(endDatePickerOn){
                     cell = tableView.dequeueReusableCellWithIdentifier("datePickerCell", forIndexPath: indexPath) as? UITableViewCell
-                    cell = createDatePicker(cell!, identifier: "End")
+                    cell = createEndDatePicker(cell!)
                 }
             default:
                 cell = tableView.dequeueReusableCellWithIdentifier("textFieldCell", forIndexPath: indexPath) as? TextFieldTableViewCell
@@ -339,13 +339,25 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
         return cell
     }
     
-    func createDatePicker(cell: UITableViewCell, identifier: String) -> (UITableViewCell){
+    func createStartDatePicker(cell: UITableViewCell) -> (UITableViewCell){
         let datePickerCell = cell as? DatePickerTableViewCell
         if !newTrip {
             datePickerCell?.datePicker.date = trip!.date
         }
         datePickerCell?.delegate = self
-        datePickerCell?.identifier = identifier
+        datePickerCell?.identifier = "Start"
+        return datePickerCell!
+    }
+    
+    func createEndDatePicker(cell: UITableViewCell) -> (UITableViewCell){
+        let datePickerCell = cell as? DatePickerTableViewCell
+        if trip!.endDate == nil {
+            datePickerCell?.datePicker.date = trip!.date
+        } else {
+            datePickerCell?.datePicker.date = trip!.endDate!
+        }
+        datePickerCell?.delegate = self
+        datePickerCell?.identifier = "End"
         return datePickerCell!
     }
     
