@@ -35,4 +35,12 @@ class TripExpense: Expense {
         
         super.init(forId: (dict["Id"] as! Int), name: (dict["Name"] as! String), date: (dict["StartDate"] as! NSDate), location: (dict["Location"] as? String), description: (dict["Description"] as? String), deleted: (dict["Deleted"] as! Bool), lastSeen: (dict["LastSeen"] as? NSDate), createdAt: (dict["CreatedAt"] as! NSDate), updatedAt: (dict["UpdatedAt"] as? NSDate), userId: (dict["UserId"] as! Int), isApproved: (dict["IsApproved"] as! Bool))
     }
+    
+    init(trip: TripExpense)
+    {
+        self.endDate = trip.endDate
+        self.isComplete = trip.isComplete
+        
+        super.init(forId: trip.id, name: trip.name, date: trip.date, location: trip.location, description: trip.expenseDescription, deleted: trip.deleted, lastSeen: trip.lastSeen, createdAt: trip.createdAt, updatedAt: trip.updatedAt, userId: trip.userId, isApproved: trip.isApproved)
+    }
 }
