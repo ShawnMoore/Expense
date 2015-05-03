@@ -191,7 +191,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                 var OTEList = model?.tripExpenses[sortedArray[indexPath.row].id]?.oneTimeExpenses
                 for oneTime in OTEList!{
                     oneTime.deleted = true
-                    println(oneTime.deleted)
                 }
             }
             sortedArray.removeAtIndex(indexPath.row)
