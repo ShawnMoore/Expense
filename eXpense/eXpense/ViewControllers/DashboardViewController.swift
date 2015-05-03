@@ -45,17 +45,27 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 //            }
 //        })
         
-        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
-            self.sortedArray = self.sortedArray + self.model!.totalExpenses
-            
-            self.tableView.reloadData()
-            
-            if self.sortedArray.count == 0 {
-                self.tableView.tableHeaderView?.hidden = true
-            } else {
-                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
-            }
-        })
+//        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
+//            self.sortedArray = self.sortedArray + self.model!.totalExpenses
+//            
+//            self.tableView.reloadData()
+//            
+//            if self.sortedArray.count == 0 {
+//                self.tableView.tableHeaderView?.hidden = true
+//            } else {
+//                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+//            }
+//        })
+        
+//        var expense = OneTimeExpense(forID: -1, name: "Test", amount: 1.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: 1, category: "Other", isApproved: true)
+//        
+//        model?.addOneTimeExpense(expense)
+//        
+//        expense.name = "Test Version 2"
+//        
+//        expense = model!.updateOneTimeExpense(expense)!
+//        
+//        model?.deleteOneTimeExpense(expense)
         
         //Get the Navigation Bar from the Navigation Controller
         let navBar = self.navigationController!.navigationBar

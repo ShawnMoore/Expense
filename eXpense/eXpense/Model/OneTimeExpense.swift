@@ -53,4 +53,12 @@ class OneTimeExpense: Expense {
         
         super.init(forId: (dict["Id"] as! Int), name: (dict["Name"] as! String), date: (dict["Date"] as! NSDate), location: (dict["Location"] as? String), description: (dict["Description"] as? String), deleted: (dict["Deleted"] as! Bool), lastSeen: (dict["LastSeen"] as? NSDate), createdAt: (dict["CreatedAt"] as! NSDate), updatedAt: (dict["UpdatedAt"] as? NSDate), userId: (dict["UserId"] as! Int), isApproved: (dict["IsApproved"] as! Bool))
     }
+    
+    init(ote: OneTimeExpense) {
+        self.amount = ote.amount
+        self.category = ote.category
+        self.photoURI = ote.photoURI
+        self.tripId = ote.tripId
+        super.init(forId: ote.id, name: ote.name, date: ote.date, location: ote.location, description: ote.description, deleted: ote.deleted, lastSeen: ote.lastSeen, createdAt: ote.createdAt, updatedAt: ote.updatedAt, userId: ote.userId, isApproved: ote.isApproved)
+    }
 }

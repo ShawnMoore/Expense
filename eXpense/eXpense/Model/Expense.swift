@@ -47,16 +47,21 @@ class Expense: NSObject {
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.userId = userId
-        self.id = forId
-        self.name = name
-        self.date = date
-        self.location = location
-        self.expenseDescription = description
-        self.deleted = deleted
-        self.lastSeen = nil
-        self.createdAt = createdAt
-        self.updatedAt = nil
-        self.userId = userId
         self.isApproved = isApproved
     }
+    
+    init(expense: Expense) {
+        self.id = expense.id
+        self.name = expense.name
+        self.date = expense.date
+        self.location = expense.location
+        self.expenseDescription = expense.expenseDescription
+        self.deleted = expense.deleted
+        self.lastSeen = expense.lastSeen
+        self.createdAt = expense.createdAt
+        self.updatedAt = expense.updatedAt
+        self.userId = expense.userId
+        self.isApproved = expense.isApproved
+    }
+    
 }
