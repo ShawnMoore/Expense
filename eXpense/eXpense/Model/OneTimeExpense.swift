@@ -29,14 +29,14 @@ class OneTimeExpense: Expense {
     var photoOrientation: Int?
     var tripId: Int?
     
-    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, userId: Int, category: String, isApproved: Bool)
+    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, userId: Int, category: String)
     {
         self.amount = amount
         self.category = Category(rawValue: category)!
-        super.init(forId: forID, name: name, date: date, deleted: deleted, createdAt: createdAt, userId: userId, isApproved: isApproved)
+        super.init(forId: forID, name: name, date: date, deleted: deleted, createdAt: createdAt, userId: userId)
     }
     
-    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, location: String?, description: String?, photoURI: String?, userId: Int, tripId: Int?, lastSeen: NSDate?, updatedAt: NSDate?, category: String, isApproved: Bool)
+    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, location: String?, description: String?, photoURI: String?, userId: Int, tripId: Int?, lastSeen: NSDate?, updatedAt: NSDate?, category: String, isApproved: Bool?)
     {
         self.amount = amount
         self.category = Category(rawValue: category)!
