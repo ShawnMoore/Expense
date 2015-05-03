@@ -45,27 +45,21 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 //            }
 //        })
         
-//        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
-//            self.sortedArray = self.sortedArray + self.model!.totalExpenses
-//            
-//            self.tableView.reloadData()
-//            
-//            if self.sortedArray.count == 0 {
-//                self.tableView.tableHeaderView?.hidden = true
-//            } else {
-//                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
-//            }
-//        })
-        
-//        var expense = OneTimeExpense(forID: -1, name: "Test", amount: 1.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: 1, category: "Other", isApproved: true)
-//        
-//        model?.addOneTimeExpense(expense)
-//        
-//        expense.name = "Test Version 2"
-//        
-//        expense = model!.updateOneTimeExpense(expense)!
-//        
-//        model?.deleteOneTimeExpense(expense)
+        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
+            self.sortedArray = Array<Expense>()
+            
+            self.sortedArray = self.sortedArray + self.model!.totalExpenses
+            
+            
+                self.tableView.reloadData()
+            
+            if self.sortedArray.count == 0 {
+                self.tableView.tableHeaderView?.hidden = true
+            } else {
+                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+            }
+        })
+
         
         //Get the Navigation Bar from the Navigation Controller
         let navBar = self.navigationController!.navigationBar
@@ -87,12 +81,17 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         self.navigationController?.toolbar.translucent = false
         self.navigationController?.toolbar.barTintColor = UIColor(red: 37/255, green: 178/255, blue: 74/255, alpha: 1)
         self.navigationController?.toolbar.tintColor = UIColor.whiteColor()
-
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
+        model?.updateModel()
         sortedArray = Array<Expense>() + model!.totalExpenses
-        tableView.reloadData()
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+        })
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -256,5 +255,4 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         filterContentArray(controller.searchBar.text, categoryFilter: "Date")
         return true;
     }
-    
 }

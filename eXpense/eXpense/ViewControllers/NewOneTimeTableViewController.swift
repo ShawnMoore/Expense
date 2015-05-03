@@ -66,7 +66,12 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
             if !oneTime!.name.isEmpty {
                 self.title = oneTime?.name
             } else {
-                self.title = "Purpose is Required"
+                
+                if newExpense {
+                    self.title = "New Expense"
+                } else {
+                    self.title = "Purpose is Required"
+                }
             }
         }
         
