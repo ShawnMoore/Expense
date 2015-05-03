@@ -46,8 +46,6 @@ class CostTextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
                 
                 formatCurrency(string: costString)
             }
-            print(costString)
-            print(" ")
         }
         
         return false
