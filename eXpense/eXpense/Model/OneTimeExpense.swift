@@ -25,6 +25,7 @@ class OneTimeExpense: Expense {
     var amount: Double
     var category: Category
     var photoURI: String?
+    var photoArray: NSMutableArray?
     var photoOrientation: Int?
     var tripId: Int?
     

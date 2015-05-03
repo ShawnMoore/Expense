@@ -72,10 +72,18 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         
         //if photo is stored, assign it to receiptImage
         if isFirstPhoto == 0 && (oneTime?.photoURI != "" && oneTime?.photoURI != nil) {
-            let decodedData = NSData(base64EncodedString: oneTime!.photoURI!, options: NSDataBase64DecodingOptions(rawValue: 0))
+            print("WORKING1")
+            var url = NSURL(string: oneTime!.photoURI!)
+            print("WORKING2")
+            print(url)
+            let decodedData = NSData(contentsOfURL: url!)
+            print("WORKING3")
             if decodedData != nil {
-                var decodedimage = UIImage(data: decodedData!)
-                receiptImage = decodedimage
+                print("WORKING4")
+                var decodedImage = UIImage(data: decodedData!)
+                print("DECODED IMAGE:")
+                print(decodedImage)
+                receiptImage = decodedImage
                 receiptImageOrient = oneTime?.photoOrientation
                 isFirstPhoto = 1
             }
@@ -91,10 +99,31 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     override func viewDidDisappear(animated: Bool) {
         if receiptImage != nil && receiptImage != "" {
             var imageData = UIImagePNGRepresentation(receiptImage)
-            let base64String = imageData.base64EncodedStringWithOptions(.allZeros)
-            oneTime?.photoURI = base64String
+            var imageByteArray = getArrayOfBytesFromImage(imageData)
+            
+            //let base64String = imageData.base64EncodedStringWithOptions(.allZeros)
+            oneTime?.photoArray = imageByteArray
             oneTime?.photoOrientation = receiptImageOrient
         }
+    }
+    
+    func getArrayOfBytesFromImage(imageData:NSData) -> NSMutableArray
+    {
+        let count = imageData.length / sizeof(UInt8)
+        
+        //create array
+        var bytes = [UInt8](count: count, repeatedValue: 0)
+        
+        //bytes->array
+        imageData.getBytes(&bytes, length:count * sizeof(UInt8))
+        
+        var byteArray:NSMutableArray = NSMutableArray()
+        
+        for (var i = 0; i < count; i++) {
+            byteArray.addObject(NSNumber(unsignedChar: bytes[i]))
+        }
+        
+        return byteArray
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -315,7 +344,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
 
     //MARK: IBAction Function
     @IBAction func takeReceiptPhoto(sender: AnyObject) {
-        if isFirstPhoto == 0 && (oneTime?.photoURI != "" && oneTime?.photoURI != nil){
+        if isFirstPhoto == 0 && (oneTime?.photoArray != "" && oneTime?.photoArray != nil){
             performSegueWithIdentifier("showReceipt", sender: self)
         }
             
@@ -333,7 +362,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 
                 //no camera detected
             else{
-                var alert = UIAlertController(title: "No Camera", message: "Your device must have a camera to take a picture of your reciepts", preferredStyle: UIAlertControllerStyle.Alert)
+                var alert = UIAlertController(title: "No Camera", message: "Your device must have a camera to take a picture of your receipts", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             }
@@ -570,7 +599,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     
     func createPhotoCell(cell: UITableViewCell) -> (UITableViewCell){
         let photoCell = cell as? PhotoCaptureTableViewCell
-        if isFirstPhoto == 0 && (oneTime?.photoURI != "" && oneTime?.photoURI != nil) {
+        if isFirstPhoto == 0 && (oneTime?.photoArray != "" && oneTime?.photoArray != nil) {
             photoCell?.takePhotoButton.setTitle("", forState: UIControlState.Normal)
             photoCell?.receiptImageView.image = receiptImage
             photoCell?.receiptImageView.contentMode = .ScaleAspectFit
