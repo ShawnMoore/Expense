@@ -206,12 +206,12 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
             }else if expense.amount <= 0.00 {
                 alertMessage = "Please make sure you have entered in an amount."
             }
+            i++
             if alertMessage != "" {
                 var alert = UIAlertView(title: "Row \(i): Invalid Expense", message: alertMessage, delegate: self, cancelButtonTitle: "Okay")
                 alert.show()
                 return false
             }
-            i++
         }
         return true
     }
