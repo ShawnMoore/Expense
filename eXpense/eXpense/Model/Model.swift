@@ -129,6 +129,8 @@ class Model: NSObject {
         }
     }
     
+    //func updateTrip
+    
     func loadAllLocalExpenses(oneTimeFilename: String, tripFilename: String, completionHandler: () -> Void) {
 
         loadTripExpensesFromLocalFile(tripFilename) {
