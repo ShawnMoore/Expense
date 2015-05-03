@@ -92,21 +92,26 @@ class Model: NSObject {
                     if(self.tripExpenses[index]!.oneTimeExpenses.count != 0) {
                         let id = self.tripExpenses[index]!.id
                         
-                        for j_index in 0...(self.tripExpenses[index]!.oneTimeExpenses.count-1) {
-                            
-                            if self.tripExpenses[index]!.oneTimeExpenses[j_index].deleted == true {
-                                 self.tripExpenses[index]!.oneTimeExpenses.removeAtIndex(j_index)
+                        var self_index = 0
+                        
+                        //If your reading this, I am so so sorry....We dont know why this works....just dont touch it
+                        //For god sakes....DONT TOUCH IT
+                        for ote in self.tripExpenses[index]!.oneTimeExpenses {
+                            if self.tripExpenses[index]!.oneTimeExpenses[self_index].deleted == true {
+                                 self.tripExpenses[index]!.oneTimeExpenses.removeAtIndex(self_index)
                             } else {
-                                if (self.tripExpenses[index]!.oneTimeExpenses[j_index].tripId != id) {
-                                    let value = self.tripExpenses[index]!.oneTimeExpenses[j_index]
-                                    
-                                    self.tripExpenses[index]!.oneTimeExpenses.removeAtIndex(j_index)
-                                    
+                                if (self.tripExpenses[index]!.oneTimeExpenses[self_index].tripId != id) {
+                                    let value = self.tripExpenses[index]!.oneTimeExpenses[self_index]
+
+                                    self.tripExpenses[index]!.oneTimeExpenses.removeAtIndex(self_index)
+
                                     if (value.tripId == nil) {
                                         self.oneTimeExpenses.append(value)
                                     } else {
                                         self.tripExpenses[value.tripId!]?.oneTimeExpenses.append(value)
                                     }
+                                } else {
+                                    self_index++
                                 }
                             }
                         }
