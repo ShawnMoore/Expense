@@ -300,12 +300,14 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
             }
         }
         else if indexPath.section == 1 && indexPath.row == 2{
-            endDatePickerOn = !endDatePickerOn
+            if(startDatePickerOn){
+                endDatePickerOn = !endDatePickerOn
             
-            if endDatePickerOn {
-                return (endDatePath2, insert)
-            } else {
-                return (endDatePath2, delete)
+                if endDatePickerOn {
+                    return (endDatePath2, insert)
+                } else {
+                    return (endDatePath2, delete)
+                }
             }
         }
         return(NSIndexPath(forRow: 0, inSection: 0), "Error")
