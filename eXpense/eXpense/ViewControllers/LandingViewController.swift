@@ -20,6 +20,7 @@ class LandingViewController: UIViewController {
         
         authModel = appDelegate.getAuthenticationModel()
 
+        authModel?.deleteBearer()
         // Do any additional setup after loading the view.
     }
 

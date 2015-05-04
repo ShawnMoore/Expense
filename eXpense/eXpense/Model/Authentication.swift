@@ -37,6 +37,83 @@ class Authentication: NSObject {
     //MARK: Self Error Codes
     let errUnknown = -1                         //Unknown error
     
+    func prettyPrintRegister(name: String, email: String, password: String, companyName: String) -> String {
+        var registerString = "{"
+        registerString += "\"Name\": \"\(name)\","
+        registerString += "\"Email\": \"\(email)\","
+        registerString += "\"Password\": \"\(password)\","
+        registerString += "\"ConfirmPassword\": \"\(password)\","
+        registerString += "\"CompanyName\": \"\(companyName)\""
+        
+        registerString += "}"
+        
+        println("\(registerString)\n\n\n")
+        
+        return registerString
+    }
+    
+    
+    func postNewUser(name: String, email: String, password: String, companyName: String) {
+        if let url = NSURL(string: "https://expense-backend.azurewebsites.net/api/account/register/") {
+            let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
+            
+            urlRequest.HTTPMethod = "POST"
+            
+            let body = prettyPrintRegister(name, email: email, password: password, companyName: companyName).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+            
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.HTTPBody = body
+            
+            var jsonError: NSError?
+            var response: NSURLResponse?
+            
+            var data = NSURLConnection.sendSynchronousRequest(urlRequest, returningResponse: &response, error: &jsonError) as NSData?
+            
+            let html = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            
+            println("Response: \(html)\n\n")
+        }
+    }
+    
+    func setBearerToken(email: String, password: String) {
+        if let url = NSURL(string: "https://expense-backend.azurewebsites.net/token") {
+            let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
+            
+            urlRequest.HTTPMethod = "POST"
+            
+            var body = "grant_type=password&username=\(email)&password=\(password)"
+            
+            body = body.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+            
+            let NSbody = body.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+            
+            urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+            urlRequest.HTTPBody = NSbody
+            
+            var jsonError: NSError?
+            var response: NSURLResponse?
+            
+            var data = NSURLConnection.sendSynchronousRequest(urlRequest, returningResponse: &response, error: &jsonError) as NSData?
+
+            let html = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            
+            println("Response: \(html)\n\n")
+
+            if data!.length > 0  && jsonError == nil{
+                let html = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                
+                var jsonError: NSError?
+                
+                if let jsonResult = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: &jsonError) as? NSDictionary {
+                    if let token = jsonResult["access_token"] as? String {
+                        self.insertBearer(token)
+                    }
+                }
+            }
+        }
+    }
+    
+    
     //MARK: Keychain Functions
     /**
         Retrieves the Username from the Device's Keychain
@@ -447,21 +524,14 @@ class Authentication: NSObject {
     */
     func authenticate(username: String, password: String) -> Bool
     {
-        var results: Bool = false
+        self.setBearerToken(username, password: password)
         
-        let correctUsername = "ShawnMoore"
-        let correctPassword = "password1"
+        let (bearer, statusCode) = retrieveBearer()
         
-        results = ((correctUsername == username) && (correctPassword == password)) ? true : false
-        
-        if results == true
-        {
-            correctLogin(username, password: password)
+        if bearer == nil {
+            return false
         } else {
-            deleteUsername()
-            deletePassword()
+            return true
         }
-        
-        return results
     }
 }

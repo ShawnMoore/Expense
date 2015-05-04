@@ -10,6 +10,8 @@ import UIKit
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
 
+    var authModel: Authentication?
+    
     var activeField: UITextField? = nil;
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -31,6 +33,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        authModel = appDelegate.getAuthenticationModel()
+        
         registerForKeyboardNotifications()
         scrollView.keyboardDismissMode = .Interactive
         
@@ -56,6 +62,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(textField: UITextField) {
         activeField = nil
         scrollView.scrollEnabled = false
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        activeField?.resignFirstResponder()
+        return true
     }
     
     func registerForKeyboardNotifications() {
@@ -109,4 +120,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 
     }    
     
+    @IBAction func createAccount(sender: AnyObject) {
+        
+        
+        authModel?.postNewUser(nameTextField.text, email: emailTextField.text, password: passwordTextField.text, companyName: confirmTextField.text)
+    
+        //Error Message here on back
+        self.performSegueWithIdentifier("backToLanding", sender: self)
+    
+    }
 }

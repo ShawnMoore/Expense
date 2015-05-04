@@ -47,17 +47,17 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 //        model?.putOneTimeExpense(ote)
         
 
-        model?.loadAllOnlineExpense("http://expense-backend.azurewebsites.net/api/expenses/", TripURL:"http://expense-backend.azurewebsites.net/api/trips/", completionHandler: {
-            self.sortedArray = self.sortedArray + self.model!.totalExpenses
-            
-            self.tableView.reloadData()
-            
-            if self.sortedArray.count == 0 {
-                self.tableView.tableHeaderView?.hidden = true
-            } else {
-                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
-            }
-        })
+//        model?.loadAllOnlineExpense("http://expense-backend.azurewebsites.net/api/expenses/", TripURL:"http://expense-backend.azurewebsites.net/api/trips/", completionHandler: {
+//            self.sortedArray = self.sortedArray + self.model!.totalExpenses
+//            
+//            self.tableView.reloadData()
+//            
+//            if self.sortedArray.count == 0 {
+//                self.tableView.tableHeaderView?.hidden = true
+//            } else {
+//                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+//            }
+//        })
 //
 //        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
 //            self.sortedArray = Array<Expense>()

@@ -40,6 +40,8 @@ class Model: NSObject {
     private var longDateFormatter: NSDateFormatter = NSDateFormatter()
     private var longDateFormatString = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"
     
+    var bearer: String = ""
+    
     override init() {
         dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = dateFormatString
@@ -150,6 +152,26 @@ class Model: NSObject {
         }
     }
 
+    func refreshBearerToken(token: String) {
+        bearer = token
+        
+        if let url = NSURL(string: "http://expense-backend.azurewebsites.net/api/account/userinfo") {
+            let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
+            urlRequest.HTTPMethod = "GET"
+            
+            urlRequest.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+            
+            var response: NSURLResponse?
+            
+            var data = NSURLConnection.sendSynchronousRequest(urlRequest, returningResponse: &response, error: nil) as NSData?
+            
+            let html = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            
+            println("\(html)")
+        }
+
+    }
+    
     func loadAllLocalExpenses(oneTimeFilename: String, tripFilename: String, completionHandler: () -> Void) {
 
         loadTripExpensesFromLocalFile(tripFilename) {
@@ -557,7 +579,7 @@ class Model: NSObject {
             
         })
     }
-
+    
     func refreshNetworkModel() {
         
         for (key, trip) in self.tripExpenses {

@@ -31,7 +31,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         model = appDelegate.getModel()
         authModel = appDelegate.getAuthenticationModel()
-
+        
         emailTextField.layer.borderWidth = 1.0
         emailTextField.layer.borderColor = UIColor.whiteColor().CGColor
         emailTextField.layer.cornerRadius = 5.0
@@ -65,6 +65,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         if boolResults!
         {
+            let (token, statusCode) = authModel!.retrieveBearer()
+            model?.refreshBearerToken(token as! String)
             performSegueWithIdentifier("loginToDashboard", sender: self)
         }
         else
