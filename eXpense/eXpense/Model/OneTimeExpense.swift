@@ -35,7 +35,7 @@ class OneTimeExpense: Expense {
         self.amount = amount
         self.category = Category(rawValue: category)!
         self.isSubmitted = isSubmitted
-        
+
         super.init(forId: forID, name: name, date: date, deleted: deleted, createdAt: createdAt, userId: userId)
     }
     

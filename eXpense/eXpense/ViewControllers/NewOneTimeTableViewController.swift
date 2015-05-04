@@ -111,31 +111,10 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     override func viewDidDisappear(animated: Bool) {
         if receiptImage != nil && receiptImage != "" {
             var imageData = UIImagePNGRepresentation(receiptImage)
-            var imageByteArray = getArrayOfBytesFromImage(imageData)
-            
             //let base64String = imageData.base64EncodedStringWithOptions(.allZeros)
-            oneTime?.photoArray = imageByteArray
+            oneTime?.photoArray = getArrayOfBytesFromImage(imageData)
             oneTime?.photoOrientation = receiptImageOrient
         }
-    }
-    
-    func getArrayOfBytesFromImage(imageData:NSData) -> NSMutableArray
-    {
-        let count = imageData.length / sizeof(UInt8)
-        
-        //create array
-        var bytes = [UInt8](count: count, repeatedValue: 0)
-        
-        //bytes->array
-        imageData.getBytes(&bytes, length:count * sizeof(UInt8))
-        
-        var byteArray:NSMutableArray = NSMutableArray()
-        
-        for (var i = 0; i < count; i++) {
-            byteArray.addObject(NSNumber(unsignedChar: bytes[i]))
-        }
-        
-        return byteArray
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -651,6 +630,25 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         } else {
             cell.userInteractionEnabled = true
         }
+    }
+    
+    func getArrayOfBytesFromImage(imageData:NSData) -> NSMutableArray
+    {
+        let count = imageData.length / sizeof(UInt8)
+        
+        //create array
+        var bytes = [UInt8](count: count, repeatedValue: 0)
+        
+        //bytes->array
+        imageData.getBytes(&bytes, length:count * sizeof(UInt8))
+        
+        var byteArray:NSMutableArray = NSMutableArray()
+        
+        for (var i = 0; i < count; i++) {
+            byteArray.addObject(NSNumber(unsignedChar: bytes[i]))
+        }
+        
+        return byteArray
     }
     
     @IBAction func Submit(sender: AnyObject) {
