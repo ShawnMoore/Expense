@@ -19,10 +19,13 @@ class LandingViewController: UIViewController {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         authModel = appDelegate.getAuthenticationModel()
-
+        //isConnectedToNetwork()
         // Do any additional setup after loading the view.
     }
 
+    override func viewDidAppear(animated: Bool) {
+        isConnectedToNetwork()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -62,6 +65,34 @@ class LandingViewController: UIViewController {
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
+    }
+    
+    func isConnectedToNetwork(){
+        
+        var status:Bool = false
+        let url = NSURL(string: "http://google.com/")
+        let request = NSMutableURLRequest(URL: url!)
+        request.HTTPMethod = "HEAD"
+        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData
+        request.timeoutInterval = 10.0
+        
+        var response: NSURLResponse?
+        
+        var data = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: nil) as NSData?
+        
+        if let httpResponse = response as? NSHTTPURLResponse {
+            if httpResponse.statusCode == 200 {
+                status = true
+            }
+        }
+        if !status {
+            var alert = UIAlertController(title: "No Data Connection", message: "You must be connected to the Internet. Please, connect and reopen eXpense.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+                exit(0)
+            }))
+            presentViewController(alert, animated: true, completion: nil)
+            //exit(0)
+        }
     }
     
 }
