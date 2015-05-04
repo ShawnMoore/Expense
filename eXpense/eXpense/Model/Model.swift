@@ -523,7 +523,7 @@ class Model: NSObject {
         }
     }
     
-    func putTripExpense(trip: TripExpense) {
+    func putTripExpense(trip: TripExpense, completionHandler: (id: Int?) -> Void) {
         if let url = NSURL(string: "http://expense-backend.azurewebsites.net/api/trips/\(trip.id)") {
             let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
             
@@ -546,12 +546,63 @@ class Model: NSObject {
     
     func deleteTripExpense(trip: TripExpense) {
         trip.deleted = true
-        putTripExpense(trip)
+        putTripExpense(trip, completionHandler: {(id) -> Void in
+            
+        })
     }
     
     func submitTripExpense(trip: TripExpense) {
         trip.isComplete = true
-        putTripExpense(trip)
+        putTripExpense(trip, completionHandler: {(id) -> Void in
+            
+        })
     }
 
+    func refreshNetworkModel() {
+        
+        for (key, trip) in self.tripExpenses {
+            
+            self.refreshOneTimeNetworkArray(trip.oneTimeExpenses, tripId: nil)
+            
+            if trip.isChanged == Changed.NewTrip {
+                postTripExpense(trip, completionHandler: {(id) -> Void in
+                    self.refreshOneTimeNetworkArray(trip.oneTimeExpenses, tripId: id)
+                })
+            } else if trip.isChanged == Changed.ChangedTrip {
+                putTripExpense(trip, completionHandler: {(id) -> Void in
+                    self.refreshOneTimeNetworkArray(trip.oneTimeExpenses, tripId: trip.id)
+                })
+            }
+            
+            
+        }
+        
+        refreshOneTimeNetworkArray(self.oneTimeExpenses, tripId: nil)
+        
+        for ote in self.removeOTE {
+            deleteOneTimeExpense(ote)
+        }
+        
+        for trip in self.removeTrip {
+            deleteTripExpense(trip)
+        }
+    }
+    
+    func refreshOneTimeNetworkArray(array: [OneTimeExpense], tripId: Int?) {
+        for ote in array {
+            
+            if tripId != nil {
+                ote.tripId = tripId
+            }
+            
+            if ote.isChanged == Changed.NewOneTime {
+                postOneTimeExpense(ote, completionHandler: { (id) -> Void in
+                
+                })
+            } else if ote.isChanged == Changed.ChangedOneTime {
+                putOneTimeExpense(ote)
+            }
+            
+        }
+    }
 }
