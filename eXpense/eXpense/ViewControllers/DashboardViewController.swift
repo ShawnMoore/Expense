@@ -32,8 +32,16 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         model = appDelegate.getModel()
         
         dateFormatter.dateFormat = dateFormatString
-//        //http://www.json-generator.com/api/json/get/ceUfRkomiG?indent=2
-//        //"http://www.json-generator.com/api/json/get/bVpzBEgYFu?indent=2"
+        
+        var trip = TripExpense(forName: "Test Trip", id: -1, startDate: NSDate(), createdAt: NSDate(), deleted: false, userId: 3, isComplete: false)
+//        model?.putTripExpense(trip)
+        model?.postTripExpense(trip, completionHandler: {
+        
+        })
+//        var ote = OneTimeExpense(forID: 20, name: "MEGAN IS THE BEST IN THE WHOLE WORLD", amount: 200.00, date: NSDate(), createdAt: NSDate(), deleted: false, location: "EBN", description: "SHAWN AND DUNCAN AND REE AND BRIAN ARE PRETTY COOL AS WELL", photoURI: nil, userId: 3, tripId: nil, lastSeen: nil, updatedAt: NSDate(), category: "Other", isApproved: nil)
+//        model?.putOneTimeExpense(ote)
+        
+//        
 //        model?.loadAllOnlineExpense("http://expense-backend.azurewebsites.net/api/expenses/", TripURL:"http://expense-backend.azurewebsites.net/api/trips/", completionHandler: {
 //            self.sortedArray = self.sortedArray + self.model!.totalExpenses
 //            
@@ -45,20 +53,20 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 //                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
 //            }
 //        })
-        
-        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
-            self.sortedArray = Array<Expense>()
-            
-            self.sortedArray = self.sortedArray + self.model!.totalExpenses
-            
-            self.tableView.reloadData()
-            
-            if self.sortedArray.count == 0 {
-                self.tableView.tableHeaderView?.hidden = true
-            } else {
-                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
-            }
-        })
+//
+//        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
+//            self.sortedArray = Array<Expense>()
+//            
+//            self.sortedArray = self.sortedArray + self.model!.totalExpenses
+//            
+//            self.tableView.reloadData()
+//            
+//            if self.sortedArray.count == 0 {
+//                self.tableView.tableHeaderView?.hidden = true
+//            } else {
+//                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+//            }
+//        })
 
     
 

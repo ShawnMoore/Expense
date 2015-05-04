@@ -43,4 +43,50 @@ class TripExpense: Expense {
         
         super.init(forId: trip.id, name: trip.name, date: trip.date, location: trip.location, description: trip.expenseDescription, deleted: trip.deleted, lastSeen: trip.lastSeen, createdAt: trip.createdAt, updatedAt: trip.updatedAt, userId: trip.userId, isApproved: trip.isApproved)
     }
+    
+    func prettyPrint(httpMethod: String, formatter: NSDateFormatter) -> String{
+        var tripString = "{"
+        
+        if httpMethod == "PUT" {
+            tripString += "\"Id\": \(self.id),"
+        }
+        
+        tripString += "\"Name\": \"\(self.name)\","
+        tripString += "\"StartDate\": \"\(formatter.stringFromDate(self.date))\","
+        
+        if let endDate = self.endDate {
+            tripString += "\"EndDate\": \"\(formatter.stringFromDate(endDate))\","
+        }
+        
+        if let location = self.location {
+            tripString += "\"Location\":\" \(location)\","
+        }
+        
+        if let description = self.expenseDescription {
+            tripString += "\"Description\": \"\(description)\","
+        }
+        
+        tripString += "\"UserId\": \(self.userId),"
+        
+        if let lastSeen = self.lastSeen {
+            tripString += "\"LastSeen\": \"\(formatter.stringFromDate(lastSeen))\","
+        }
+        
+        tripString += "\"CreatedAt\": \"\(formatter.stringFromDate(self.createdAt))\","
+        
+        if let updatedAt = self.updatedAt {
+            tripString += "\"UpdateAt\": \"\(formatter.stringFromDate(updatedAt))\","
+        }
+        
+        tripString += "\"Deleted\": \(self.deleted),"
+        
+        tripString += "\"IsComplete\": \(self.isComplete)"
+        
+        tripString += "}"
+        
+        println("\(tripString)\n\n\n")
+        
+        return tripString
+        
+    }
 }

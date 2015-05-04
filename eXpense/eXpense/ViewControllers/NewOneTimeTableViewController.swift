@@ -42,6 +42,8 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         
         model = appDelegate.getModel()
         
+        model?.updateModel()
+        
         dateFormatter.dateFormat = dateFormatString
         costFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
         costFormatter.locale = NSLocale(localeIdentifier: "en_US")

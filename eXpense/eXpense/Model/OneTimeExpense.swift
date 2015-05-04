@@ -62,4 +62,53 @@ class OneTimeExpense: Expense {
         self.tripId = ote.tripId
         super.init(forId: ote.id, name: ote.name, date: ote.date, location: ote.location, description: ote.description, deleted: ote.deleted, lastSeen: ote.lastSeen, createdAt: ote.createdAt, updatedAt: ote.updatedAt, userId: ote.userId, isApproved: ote.isApproved)
     }
+    
+    func prettyPrint(httpMethod: String, formatter: NSDateFormatter) -> String{
+        var OTEString = "{"
+        
+        if httpMethod == "PUT" {
+            OTEString += "\"Id\": \(self.id),"
+        }
+        
+        OTEString += "\"Name\": \"\(self.name)\","
+        OTEString += "\"Amount\": \(self.amount),"
+        OTEString += "\"Date\": \"\(formatter.stringFromDate(self.date))\","
+        
+        if let location = self.location {
+            OTEString += "\"Location\":\" \(location)\","
+        }
+        
+        if let description = self.expenseDescription {
+            OTEString += "\"Description\": \"\(description)\","
+        }
+        
+        OTEString += "\"UserId\": \(self.userId),"
+        
+        if let tripId = self.tripId {
+            OTEString += "\"TripId\": \"\(tripId)\","
+        }
+        
+        if let lastSeen = self.lastSeen {
+            OTEString += "\"LastSeen\": \"\(formatter.stringFromDate(lastSeen))\","
+        }
+        
+        OTEString += "\"CreatedAt\": \"\(formatter.stringFromDate(self.createdAt))\","
+        
+        if let updatedAt = self.updatedAt {
+            OTEString += "\"UpdateAt\": \"\(formatter.stringFromDate(updatedAt))\","
+        }
+        
+        OTEString += "\"Deleted\": \(self.deleted),"
+        
+        if let isApproved = self.isApproved {
+            OTEString += "\"IsApproved\": \(isApproved),"
+        }
+        
+        OTEString += "\"Category\": \"\(self.category.rawValue)\""
+        
+        OTEString += "}"
+        
+        return OTEString
+
+    }
 }

@@ -37,9 +37,15 @@ class Model: NSObject {
     private var dateFormatter: NSDateFormatter = NSDateFormatter()
     private var dateFormatString = "yyyy-MM-dd"
     
+    private var longDateFormatter: NSDateFormatter = NSDateFormatter()
+    private var longDateFormatString = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"
+    
     override init() {
         dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = dateFormatString
+        
+        longDateFormatter = NSDateFormatter()
+        longDateFormatter.dateFormat = longDateFormatString
         
         //FIXME: FIXXXXXX HARD CODED
         Model.userId = 1
@@ -173,7 +179,7 @@ class Model: NSObject {
     func loadOneTimeExpensesFromURLString(fromURLString: String, completionHandler: (NSObject, String?) -> Void) {
         oneTimeExpenses = Array<OneTimeExpense>()
         if let url = NSURL(string: fromURLString) {
-            let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
+            let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
             urlRequest.HTTPMethod = "GET"
             let queue = NSOperationQueue()
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
@@ -306,7 +312,7 @@ class Model: NSObject {
     func loadTripExpensesFromURLString(fromURLString: String, completionHandler: (NSObject, String?) -> Void) {
         tripExpenses = [Int: TripExpense]()
         if let url = NSURL(string: fromURLString) {
-            let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
+            let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
             urlRequest.HTTPMethod = "GET"
             let queue = NSOperationQueue()
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
@@ -429,5 +435,125 @@ class Model: NSObject {
         }
     }
 
-
+    func postOneTimeExpense(oneTimeExpense: OneTimeExpense) {
+        if let url = NSURL(string: "http://expense-backend.azurewebsites.net/api/expenses/") {
+            let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
+            
+            urlRequest.HTTPMethod = "POST"
+            
+            let body = oneTimeExpense.prettyPrint("POST", formatter: longDateFormatter).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+            
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.HTTPBody = body
+            
+            let queue = NSOperationQueue()
+            
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
+                (response, data, error) -> Void in
+                
+                if data.length > 0  && error == nil{
+                    let html = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    println("html = \(html)")
+                } else if data.length == 0  && error == nil{
+                    println("Bitch Please")
+                } else {
+                    println("Error happened = \(error)")
+                }
+            })
+            
+        }
+    }
+    
+    func putOneTimeExpense(oneTimeExpense: OneTimeExpense) {
+        if let url = NSURL(string: "http://expense-backend.azurewebsites.net/api/expenses/\(oneTimeExpense.id)") {
+            let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
+            
+            urlRequest.HTTPMethod = "PUT"
+            
+            let body = oneTimeExpense.prettyPrint("PUT", formatter: longDateFormatter).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+            
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.HTTPBody = body
+            
+            let queue = NSOperationQueue()
+            
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
+                (response, data, error) -> Void in
+                
+                if data.length > 0  && error == nil{
+                    let html = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    println("html = \(html)")
+                } else if data.length == 0  && error == nil{
+                    println("Bitch Please")
+                } else {
+                    println("Error happened = \(error)")
+                }
+            })
+            
+        }
+    }
+    
+    func postTripExpense(trip: TripExpense, completionHandler: (id: Int?) -> Void) {
+        if let url = NSURL(string: "http://expense-backend.azurewebsites.net/api/trips/") {
+            let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
+            
+            urlRequest.HTTPMethod = "POST"
+            
+            let body = trip.prettyPrint("POST", formatter: longDateFormatter).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+            
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.HTTPBody = body
+            
+            let queue = NSOperationQueue()
+            
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
+                (response, data, error) -> Void in
+                
+                if data.length > 0  && error == nil{
+                    let html = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    println("html = \(html)")
+                    
+                    
+                    completionHandler(id: 3)
+                    return
+                } else if data.length == 0  && error == nil{
+                    println("Bitch Please")
+                } else {
+                    println("Error happened = \(error)")
+                }
+                
+                completionHandler(id: nil)
+                return
+            })
+        }
+    }
+    
+    func putTripExpense(trip: TripExpense) {
+        if let url = NSURL(string: "http://expense-backend.azurewebsites.net/api/trips/\(trip.id)") {
+            let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
+            
+            urlRequest.HTTPMethod = "PUT"
+            
+            let body = trip.prettyPrint("PUT", formatter: longDateFormatter).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+            
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.HTTPBody = body
+            
+            let queue = NSOperationQueue()
+            
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
+                (response, data, error) -> Void in
+                
+                if data.length > 0  && error == nil{
+                    let html = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    println("html = \(html)")
+                } else if data.length == 0  && error == nil{
+                    println("Bitch Please")
+                } else {
+                    println("Error happened = \(error)")
+                }
+            })
+            
+        }
+    }
 }
