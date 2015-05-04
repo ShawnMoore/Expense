@@ -281,4 +281,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         filterContentArray(controller.searchBar.text, categoryFilter: "Date")
         return true;
     }
+    
+    @IBAction func unwindSequeToDash(sender: UIStoryboardSegue) {
+        
+    }
 }

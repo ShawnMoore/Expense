@@ -114,6 +114,8 @@ class OneTimeExpense: Expense {
         
         OTEString += "\"Category\": \"\(self.category.rawValue)\""
         
+        OTEString += "\"IsSubmitted\": \"\(self.isSubmitted)\""
+        
         OTEString += "}"
         
         return OTEString

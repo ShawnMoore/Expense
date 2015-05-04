@@ -28,6 +28,8 @@ class Model: NSObject {
     var removeOTE: Array<OneTimeExpense> = Array<OneTimeExpense>()
     var removeTrip: Array<TripExpense> = Array<TripExpense>()
     
+    var submitTrip: Array<TripExpense> = Array<TripExpense>()
+    
     static var imageDictionary: [String: UIImage!] = ["Entertainment": UIImage(named: "EntertainmentIcon"), "Lodging": UIImage(named: "LodgingIcon"), "Meals": UIImage(named: "MealIcon"), "Other": UIImage(named: "OtherIcon3"), "Personal": UIImage(named: "PersonalIcon"), "Transportation" : UIImage(named: "TransportationIcon")]
     
     static var userId: Int = -1
@@ -54,6 +56,8 @@ class Model: NSObject {
         
         removeOTE = Array<OneTimeExpense>()
         removeTrip = Array<TripExpense>()
+        
+        submitTrip = Array<TripExpense>()
     }
     
     func updateModel() {
@@ -503,6 +507,14 @@ class Model: NSObject {
             
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
                 (response, data, error) -> Void in
+                if data.length > 0  && error == nil{
+                    let html = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    println("html = \(html)")
+                } else if data.length == 0  && error == nil{
+                    println("Bitch Please")
+                } else {
+                    println("Error happened = \(error)")
+                }
             })
             
         }
@@ -592,6 +604,14 @@ class Model: NSObject {
     }
     
     func refreshNetworkModel() {
+        
+        for trip in self.submitTrip {
+            for ote in trip.oneTimeExpenses {
+                self.submitOneTimeExpense(ote)
+            }
+            
+            self.submitTripExpense(trip)
+        }
         
         for (key, trip) in self.tripExpenses {
             

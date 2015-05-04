@@ -654,6 +654,11 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     @IBAction func Submit(sender: AnyObject) {
         if submissionCheck() { //can submit
             
+            if oneTime?.isChanged == Changed.NotChanged {
+                oneTime?.isChanged = Changed.ChangedOneTime
+            }
+            
+            oneTime?.isSubmitted = true
         }
     }
     //MARK: Submission Functions

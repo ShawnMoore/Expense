@@ -1096,11 +1096,13 @@
                         <outlet property="tableView" destination="6ea-oc-Nve" id="ozJ-uC-Fq8"/>
                         <segue destination="uCm-Wc-KTA" kind="show" identifier="showExpense" id="pwk-Aa-pg0"/>
                         <segue destination="cA8-T6-HUA" kind="show" identifier="editExistingTrip" id="ksb-I5-gZo"/>
+                        <segue destination="oe6-Hp-zJX" kind="unwind" identifier="toDash" unwindAction="unwindSequeToDash:" id="8oO-Rc-bPP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wfx-XM-AaF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="oe6-Hp-zJX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2597" y="1308"/>
+            <point key="canvasLocation" x="2597" y="1120"/>
         </scene>
         <!--New Expense-->
         <scene sceneID="lCs-H1-351">

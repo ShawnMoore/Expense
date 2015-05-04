@@ -178,7 +178,11 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBAction func submit(sender: AnyObject) {
         if tripSubmissionCheck(){
-            oneTimeExpensesSubmissionCheck()
+            if oneTimeExpensesSubmissionCheck(){
+    
+                model?.submitTrip.append(tripData!)
+                performSegueWithIdentifier("toDash", sender: self)
+            }
         }
     }
     //MARK: Submission Functions
