@@ -325,10 +325,10 @@ class Model: NSObject {
                     }
 
                 }
-                dispatch_async(dispatch_get_main_queue(), {
-                    completionHandler(self, nil)
-                })
             }
+            dispatch_async(dispatch_get_main_queue(), {
+                completionHandler(self, nil)
+            })
             
         } else {
             if let unwrappedError = jsonError {
@@ -454,10 +454,10 @@ class Model: NSObject {
                         }
                     }
                 }
-                dispatch_async(dispatch_get_main_queue(), {
-                    completionHandler(self, nil)
-                })
             }
+            dispatch_async(dispatch_get_main_queue(), {
+                completionHandler(self, nil)
+            })
             
         } else {
             if let unwrappedError = jsonError {
