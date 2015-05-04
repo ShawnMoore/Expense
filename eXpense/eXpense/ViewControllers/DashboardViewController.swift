@@ -51,8 +51,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             
             self.sortedArray = self.sortedArray + self.model!.totalExpenses
             
-            
-                self.tableView.reloadData()
+            self.tableView.reloadData()
             
             if self.sortedArray.count == 0 {
                 self.tableView.tableHeaderView?.hidden = true
@@ -197,11 +196,25 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            
             sortedArray[indexPath.row].deleted = true
-            if sortedArray[indexPath.row] is TripExpense{
+            
+            if sortedArray[indexPath.row] is TripExpense {
+                if sortedArray[indexPath.row].isChanged != Changed.NewTrip {
+                    model?.removeTrip.append(sortedArray[indexPath.row].id)
+                }
+                
                 var OTEList = model?.tripExpenses[sortedArray[indexPath.row].id]?.oneTimeExpenses
                 for oneTime in OTEList!{
                     oneTime.deleted = true
+                    
+                    if oneTime.isChanged != Changed.NewOneTime {
+                        model?.removeOTE.append(oneTime.id)
+                    }
+                }
+            } else if sortedArray[indexPath.row] is OneTimeExpense {
+                if sortedArray[indexPath.row].isChanged != Changed.NewOneTime {
+                    model?.removeOTE.append(sortedArray[indexPath.row].id)
                 }
             }
             sortedArray.removeAtIndex(indexPath.row)
