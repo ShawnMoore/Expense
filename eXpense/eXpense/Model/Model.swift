@@ -437,7 +437,7 @@ class Model: NSObject {
         }
     }
 
-    func postOneTimeExpense(oneTimeExpense: OneTimeExpense) {
+    func postOneTimeExpense(oneTimeExpense: OneTimeExpense, completionHandler: (id: Int?) -> Void) {
         if let url = NSURL(string: "http://expense-backend.azurewebsites.net/api/expenses/") {
             let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
             
