@@ -119,6 +119,11 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             oneTimeExpenses?[indexPath.row].deleted = true
+            
+            if oneTimeExpenses?[indexPath.row].isChanged != Changed.NewOneTime {
+                model?.removeOTE.append(oneTimeExpenses![indexPath.row].id)
+            }
+            
             oneTimeExpenses?.removeAtIndex(indexPath.row)
             model?.updateModel()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)

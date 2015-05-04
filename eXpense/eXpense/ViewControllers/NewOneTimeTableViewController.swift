@@ -51,8 +51,14 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
         if newExpense {
             oneTime = OneTimeExpense(forID: Model.oneTimeIndex--, name: "", amount: 0.0, date: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, category: "Other")
             
+            oneTime?.isChanged = Changed.NewOneTime
+            
             if let tripId = newExpenseTripId {
                 oneTime?.tripId = tripId
+            }
+        } else {
+            if oneTime?.isChanged != Changed.NewOneTime {
+                oneTime?.isChanged = Changed.ChangedOneTime
             }
         }
         

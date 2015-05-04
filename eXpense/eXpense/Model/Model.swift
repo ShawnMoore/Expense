@@ -25,6 +25,9 @@ class Model: NSObject {
     var oneTimeExpenses: Array<OneTimeExpense> = Array<OneTimeExpense>()
     var tripExpenses: [Int: TripExpense] = [Int: TripExpense]()
     
+    var removeOTE: Array<Int> = Array<Int>()
+    var removeTrip: Array<Int> = Array<Int>()
+    
     static var imageDictionary: [String: UIImage!] = ["Entertainment": UIImage(named: "EntertainmentIcon"), "Lodging": UIImage(named: "LodgingIcon"), "Meals": UIImage(named: "MealIcon"), "Other": UIImage(named: "OtherIcon3"), "Personal": UIImage(named: "PersonalIcon"), "Transportation" : UIImage(named: "TransportationIcon")]
     
     static var userId: Int = -1
@@ -38,7 +41,14 @@ class Model: NSObject {
         dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = dateFormatString
         
+        //FIXME: FIXXXXXX HARD CODED
         Model.userId = 1
+        
+        oneTimeExpenses = Array<OneTimeExpense>()
+        tripExpenses = [Int: TripExpense]()
+        
+        removeOTE = Array<Int>()
+        removeTrip = Array<Int>()
     }
     
     func updateModel() {
@@ -134,75 +144,6 @@ class Model: NSObject {
         }
     }
 
-    func addOneTimeExpense(ote: OneTimeExpense) {
-        if ote.tripId == nil {
-            self.oneTimeExpenses.append(ote)
-        } else {
-            self.tripExpenses[ote.tripId!]?.oneTimeExpenses.append(ote)
-        }
-    }
-    
-    func updateOneTimeExpense(ote: OneTimeExpense) -> OneTimeExpense? {
-        var location = -1
-        var copyOTE: OneTimeExpense = OneTimeExpense(ote: ote)
-        
-        //One time expense not part of a trip
-        if copyOTE.tripId == nil {
-            for i in (0...self.oneTimeExpenses.count-1) {
-                if self.oneTimeExpenses[i].id == ote.id {
-                    location = i
-                }
-            }
-
-            if location < 0 {
-                return nil
-            } else {
-                self.oneTimeExpenses[location] = copyOTE
-                return copyOTE
-            }
-        } else { //One time expense is part of a trip
-            if self.tripExpenses[copyOTE.tripId!] == nil {
-                return nil
-            } else {
-                if self.tripExpenses[copyOTE.tripId!]!.oneTimeExpenses.count == 0 {
-                    return nil
-                } else {
-                    for i in (0...self.tripExpenses[copyOTE.tripId!]!.oneTimeExpenses.count-1) {
-                        if self.tripExpenses[copyOTE.tripId!]!.oneTimeExpenses[i].id == copyOTE.id {
-                            location = i
-                        }
-                    }
-                    
-                    if location < 0 {
-                        return nil
-                    } else {
-                        self.oneTimeExpenses[location] = copyOTE
-                        return copyOTE
-                    }
-                }
-            }
-        }
-    }
-
-    func deleteOneTimeExpense(ote: OneTimeExpense)->OneTimeExpense? {
-        var copyOTE: OneTimeExpense = OneTimeExpense(ote: ote)
-        copyOTE.deleted = true
-        var secondCopyOTE = updateOneTimeExpense(copyOTE)
-        return secondCopyOTE
-    }
-    
-    func addTripExpense(trip: TripExpense) {
-        
-    }
-    
-    func updateTripExpense(trip: TripExpense) {
-        
-    }
-    
-    func deleteTripExpense(trip: TripExpense) {
-        
-    }
-    
     func loadAllLocalExpenses(oneTimeFilename: String, tripFilename: String, completionHandler: () -> Void) {
 
         loadTripExpensesFromLocalFile(tripFilename) {

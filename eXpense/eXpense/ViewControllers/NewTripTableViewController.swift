@@ -43,6 +43,12 @@ class NewTripTableViewController: UITableViewController, UITextViewDelegate, Dat
         
         if newTrip {
             trip = TripExpense(forName: "", id: Model.tripIndex--, startDate: NSDate(), createdAt: NSDate(), deleted: false, userId: Model.userId, isComplete: false)
+            
+            trip?.isChanged = Changed.NewTrip
+        } else {
+            if trip?.isChanged != Changed.NewTrip {
+                trip?.isChanged = Changed.ChangedTrip
+            }
         }
         editableCheck()
         self.navigationController?.setToolbarHidden(false, animated: false)
