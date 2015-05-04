@@ -438,7 +438,7 @@ class Model: NSObject {
     }
 
     func postOneTimeExpense(oneTimeExpense: OneTimeExpense, completionHandler: (id: Int?) -> Void) {
-        if let url = NSURL(string: "http://expense-backend.azurewebsites.net/api/expenses/") {
+        if let url = NSURL(string: "https://expense-backend.azurewebsites.net/api/expenses/") {
             let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
             
             urlRequest.HTTPMethod = "POST"
@@ -458,7 +458,7 @@ class Model: NSObject {
     }
     
     func putOneTimeExpense(oneTimeExpense: OneTimeExpense) {
-        if let url = NSURL(string: "http://expense-backend.azurewebsites.net/api/expenses/\(oneTimeExpense.id)") {
+        if let url = NSURL(string: "https://expense-backend.azurewebsites.net/api/expenses/\(oneTimeExpense.id)") {
             let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
             
             urlRequest.HTTPMethod = "PUT"
@@ -488,7 +488,7 @@ class Model: NSObject {
     }
     
     func postTripExpense(trip: TripExpense, completionHandler: (id: Int?) -> Void) {
-        if let url = NSURL(string: "http://expense-backend.azurewebsites.net/api/trips/") {
+        if let url = NSURL(string: "https://expense-backend.azurewebsites.net/api/trips/") {
             let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
             
             urlRequest.HTTPMethod = "POST"
@@ -524,7 +524,7 @@ class Model: NSObject {
     }
     
     func putTripExpense(trip: TripExpense, completionHandler: (id: Int?) -> Void) {
-        if let url = NSURL(string: "http://expense-backend.azurewebsites.net/api/trips/\(trip.id)") {
+        if let url = NSURL(string: "https://expense-backend.azurewebsites.net/api/trips/\(trip.id)") {
             let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
             
             urlRequest.HTTPMethod = "PUT"
