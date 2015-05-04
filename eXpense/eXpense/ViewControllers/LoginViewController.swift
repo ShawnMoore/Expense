@@ -67,6 +67,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         {
             let (token, statusCode) = authModel!.retrieveBearer()
             model?.refreshBearerToken(token as! String)
+            authModel?.insertUsername(emailTextField.text)
+            authModel?.insertPassword(passwordTextField.text)
             performSegueWithIdentifier("loginToDashboard", sender: self)
         }
         else

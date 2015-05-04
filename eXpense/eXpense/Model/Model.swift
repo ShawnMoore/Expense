@@ -49,9 +49,6 @@ class Model: NSObject {
         longDateFormatter = NSDateFormatter()
         longDateFormatter.dateFormat = longDateFormatString
         
-        //FIXME: FIXXXXXX HARD CODED
-        Model.userId = 1
-        
         oneTimeExpenses = Array<OneTimeExpense>()
         tripExpenses = [Int: TripExpense]()
         
@@ -167,7 +164,13 @@ class Model: NSObject {
             
             let html = NSString(data: data!, encoding: NSUTF8StringEncoding)
             
-            println("\(html)")
+            var jsonError: NSError?
+            
+            if let jsonResult = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: &jsonError) as? NSDictionary {
+                if let id = jsonResult["Id"] as? Int {
+                    Model.userId = id
+                }
+            }
         }
 
     }
@@ -203,9 +206,12 @@ class Model: NSObject {
         if let url = NSURL(string: fromURLString) {
             let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
             urlRequest.HTTPMethod = "GET"
+            urlRequest.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
             let queue = NSOperationQueue()
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
                 (response, data, error) -> Void in
+                let html = NSString(data: data, encoding: NSUTF8StringEncoding)
+                println("html = \(html)")
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue(), {
                         completionHandler(self, error.localizedDescription)
@@ -338,9 +344,12 @@ class Model: NSObject {
         if let url = NSURL(string: fromURLString) {
             let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
             urlRequest.HTTPMethod = "GET"
+            urlRequest.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
             let queue = NSOperationQueue()
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
                 (response, data, error) -> Void in
+                let html = NSString(data: data, encoding: NSUTF8StringEncoding)
+                println("html = \(html)")
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue(), {
                         completionHandler(self, error.localizedDescription)
@@ -468,6 +477,7 @@ class Model: NSObject {
             let body = oneTimeExpense.prettyPrint("POST", formatter: longDateFormatter).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
             urlRequest.HTTPBody = body
             
             let queue = NSOperationQueue()
@@ -488,6 +498,7 @@ class Model: NSObject {
             let body = oneTimeExpense.prettyPrint("PUT", formatter: longDateFormatter).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
             urlRequest.HTTPBody = body
             
             let queue = NSOperationQueue()
@@ -518,6 +529,7 @@ class Model: NSObject {
             let body = trip.prettyPrint("POST", formatter: longDateFormatter).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
             urlRequest.HTTPBody = body
             
             let queue = NSOperationQueue()
@@ -554,6 +566,7 @@ class Model: NSObject {
             let body = trip.prettyPrint("PUT", formatter: longDateFormatter).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
             urlRequest.HTTPBody = body
             
             let queue = NSOperationQueue()

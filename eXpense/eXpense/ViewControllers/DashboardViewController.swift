@@ -34,46 +34,17 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         dateFormatter.dateFormat = dateFormatString
         
-        //model?.deleteOneTimeExpense(19)
-        
-//        var trip = TripExpense(forName: "Test Trip", id: -1, startDate: NSDate(), createdAt: NSDate(), deleted: false, userId: 3, isComplete: false)
-//        model?.putTripExpense(trip)
-//        model?.postTripExpense(trip, completionHandler: { id -> Void in
-//            println(id)
-//        })
-//        var ote = OneTimeExpense(forID: 22, name: "Deleted", amount: 200.00, date: NSDate(), createdAt: NSDate(), deleted: true, location: "EBN", description: "SHAWN AND DUNCAN AND REE AND BRIAN ARE PRETTY COOL AS WELL", photoURI: nil, userId: 3, tripId: nil, lastSeen: nil, updatedAt: NSDate(), category: "Other", isApproved: nil)
-//        ote.deleted = false
-//        
-//        model?.putOneTimeExpense(ote)
-        
-
-//        model?.loadAllOnlineExpense("http://expense-backend.azurewebsites.net/api/expenses/", TripURL:"http://expense-backend.azurewebsites.net/api/trips/", completionHandler: {
-//            self.sortedArray = self.sortedArray + self.model!.totalExpenses
-//            
-//            self.tableView.reloadData()
-//            
-//            if self.sortedArray.count == 0 {
-//                self.tableView.tableHeaderView?.hidden = true
-//            } else {
-//                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
-//            }
-//        })
-//
-//        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
-//            self.sortedArray = Array<Expense>()
-//            
-//            self.sortedArray = self.sortedArray + self.model!.totalExpenses
-//            
-//            self.tableView.reloadData()
-//            
-//            if self.sortedArray.count == 0 {
-//                self.tableView.tableHeaderView?.hidden = true
-//            } else {
-//                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
-//            }
-//        })
-
-    
+        model?.loadAllOnlineExpense("http://expense-backend.azurewebsites.net/api/expenses/", TripURL:"http://expense-backend.azurewebsites.net/api/trips/", completionHandler: {
+            self.sortedArray = self.sortedArray + self.model!.totalExpenses
+            
+            self.tableView.reloadData()
+            
+            if self.sortedArray.count == 0 {
+                self.tableView.tableHeaderView?.hidden = true
+            } else {
+                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+            }
+        })
 
         //Get the Navigation Bar from the Navigation Controller
         let navBar = self.navigationController!.navigationBar
