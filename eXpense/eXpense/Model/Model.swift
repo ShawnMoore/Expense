@@ -513,8 +513,14 @@ class Model: NSObject {
                     let html = NSString(data: data, encoding: NSUTF8StringEncoding)
                     println("html = \(html)")
                     
+                    var htmlString = html as! String
                     
-                    completionHandler(id: 3)
+                    htmlString = htmlString.componentsSeparatedByString(",")[0]
+                    
+                    htmlString = htmlString.componentsSeparatedByString(":")[1]
+                    
+                    completionHandler(id: htmlString.toInt())
+        
                     return
                 } else if data.length == 0  && error == nil{
                     println("Bitch Please")

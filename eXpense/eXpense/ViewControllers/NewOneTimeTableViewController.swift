@@ -81,7 +81,7 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
                 }
             }
         }
-        if(oneTime!.isApproved != nil){
+        if(oneTime!.isApproved != nil && oneTime!.isApproved!){
             self.navigationController?.setToolbarHidden(true, animated: false)
         }
         else {

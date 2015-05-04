@@ -35,13 +35,13 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         var trip = TripExpense(forName: "Test Trip", id: -1, startDate: NSDate(), createdAt: NSDate(), deleted: false, userId: 3, isComplete: false)
 //        model?.putTripExpense(trip)
-        model?.postTripExpense(trip, completionHandler: {
-        
+        model?.postTripExpense(trip, completionHandler: { id -> Void in
+            println(id)
         })
 //        var ote = OneTimeExpense(forID: 20, name: "MEGAN IS THE BEST IN THE WHOLE WORLD", amount: 200.00, date: NSDate(), createdAt: NSDate(), deleted: false, location: "EBN", description: "SHAWN AND DUNCAN AND REE AND BRIAN ARE PRETTY COOL AS WELL", photoURI: nil, userId: 3, tripId: nil, lastSeen: nil, updatedAt: NSDate(), category: "Other", isApproved: nil)
 //        model?.putOneTimeExpense(ote)
         
-//        
+//
 //        model?.loadAllOnlineExpense("http://expense-backend.azurewebsites.net/api/expenses/", TripURL:"http://expense-backend.azurewebsites.net/api/trips/", completionHandler: {
 //            self.sortedArray = self.sortedArray + self.model!.totalExpenses
 //            
