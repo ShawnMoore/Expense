@@ -452,15 +452,6 @@ class Model: NSObject {
             
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
                 (response, data, error) -> Void in
-                
-                if data.length > 0  && error == nil{
-                    let html = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    println("html = \(html)")
-                } else if data.length == 0  && error == nil{
-                    println("Bitch Please")
-                } else {
-                    println("Error happened = \(error)")
-                }
             })
             
         }
@@ -481,15 +472,6 @@ class Model: NSObject {
             
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
                 (response, data, error) -> Void in
-                
-                if data.length > 0  && error == nil{
-                    let html = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    println("html = \(html)")
-                } else if data.length == 0  && error == nil{
-                    println("Bitch Please")
-                } else {
-                    println("Error happened = \(error)")
-                }
             })
             
         }
@@ -523,7 +505,6 @@ class Model: NSObject {
                 
                 if data.length > 0  && error == nil{
                     let html = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    println("html = \(html)")
                     
                     var htmlString = html as! String
                     
@@ -534,10 +515,6 @@ class Model: NSObject {
                     completionHandler(id: htmlString.toInt())
         
                     return
-                } else if data.length == 0  && error == nil{
-                    println("Bitch Please")
-                } else {
-                    println("Error happened = \(error)")
                 }
                 
                 completionHandler(id: nil)
@@ -562,14 +539,6 @@ class Model: NSObject {
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
                 (response, data, error) -> Void in
                 
-                if data.length > 0  && error == nil{
-                    let html = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    println("html = \(html)")
-                } else if data.length == 0  && error == nil{
-                    println("Bitch Please")
-                } else {
-                    println("Error happened = \(error)")
-                }
             })
             
         }
