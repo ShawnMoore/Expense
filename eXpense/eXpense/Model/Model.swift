@@ -25,8 +25,8 @@ class Model: NSObject {
     var oneTimeExpenses: Array<OneTimeExpense> = Array<OneTimeExpense>()
     var tripExpenses: [Int: TripExpense] = [Int: TripExpense]()
     
-    var removeOTE: Array<Int> = Array<Int>()
-    var removeTrip: Array<Int> = Array<Int>()
+    var removeOTE: Array<OneTimeExpense> = Array<OneTimeExpense>()
+    var removeTrip: Array<TripExpense> = Array<TripExpense>()
     
     static var imageDictionary: [String: UIImage!] = ["Entertainment": UIImage(named: "EntertainmentIcon"), "Lodging": UIImage(named: "LodgingIcon"), "Meals": UIImage(named: "MealIcon"), "Other": UIImage(named: "OtherIcon3"), "Personal": UIImage(named: "PersonalIcon"), "Transportation" : UIImage(named: "TransportationIcon")]
     
@@ -53,8 +53,8 @@ class Model: NSObject {
         oneTimeExpenses = Array<OneTimeExpense>()
         tripExpenses = [Int: TripExpense]()
         
-        removeOTE = Array<Int>()
-        removeTrip = Array<Int>()
+        removeOTE = Array<OneTimeExpense>()
+        removeTrip = Array<TripExpense>()
     }
     
     func updateModel() {
@@ -493,6 +493,11 @@ class Model: NSObject {
         }
     }
     
+    func deleteOneTimeExpense(oneTimeExpense: OneTimeExpense) {
+        oneTimeExpense.deleted = true
+        putOneTimeExpense(oneTimeExpense)
+    }
+    
     func postTripExpense(trip: TripExpense, completionHandler: (id: Int?) -> Void) {
         if let url = NSURL(string: "http://expense-backend.azurewebsites.net/api/trips/") {
             let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
@@ -561,5 +566,10 @@ class Model: NSObject {
             })
             
         }
+    }
+    
+    func deleteTripExpense(trip: TripExpense) {
+        trip.deleted = true
+        putTripExpense(trip)
     }
 }

@@ -34,15 +34,19 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         dateFormatter.dateFormat = dateFormatString
         
+        //model?.deleteOneTimeExpense(19)
+        
 //        var trip = TripExpense(forName: "Test Trip", id: -1, startDate: NSDate(), createdAt: NSDate(), deleted: false, userId: 3, isComplete: false)
 //        model?.putTripExpense(trip)
 //        model?.postTripExpense(trip, completionHandler: { id -> Void in
 //            println(id)
 //        })
-//        var ote = OneTimeExpense(forID: 20, name: "MEGAN IS THE BEST IN THE WHOLE WORLD", amount: 200.00, date: NSDate(), createdAt: NSDate(), deleted: false, location: "EBN", description: "SHAWN AND DUNCAN AND REE AND BRIAN ARE PRETTY COOL AS WELL", photoURI: nil, userId: 3, tripId: nil, lastSeen: nil, updatedAt: NSDate(), category: "Other", isApproved: nil)
+//        var ote = OneTimeExpense(forID: 22, name: "Deleted", amount: 200.00, date: NSDate(), createdAt: NSDate(), deleted: true, location: "EBN", description: "SHAWN AND DUNCAN AND REE AND BRIAN ARE PRETTY COOL AS WELL", photoURI: nil, userId: 3, tripId: nil, lastSeen: nil, updatedAt: NSDate(), category: "Other", isApproved: nil)
+//        ote.deleted = false
+//        
 //        model?.putOneTimeExpense(ote)
         
-//
+
         model?.loadAllOnlineExpense("http://expense-backend.azurewebsites.net/api/expenses/", TripURL:"http://expense-backend.azurewebsites.net/api/trips/", completionHandler: {
             self.sortedArray = self.sortedArray + self.model!.totalExpenses
             
@@ -228,7 +232,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             
             if sortedArray[indexPath.row] is TripExpense {
                 if sortedArray[indexPath.row].isChanged != Changed.NewTrip {
-                    model?.removeTrip.append(sortedArray[indexPath.row].id)
+                    model?.removeTrip.append(sortedArray[indexPath.row] as! TripExpense)
                 }
                 
                 var OTEList = model?.tripExpenses[sortedArray[indexPath.row].id]?.oneTimeExpenses
@@ -236,12 +240,12 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                     oneTime.deleted = true
                     
                     if oneTime.isChanged != Changed.NewOneTime {
-                        model?.removeOTE.append(oneTime.id)
+                        model?.removeOTE.append(oneTime)
                     }
                 }
             } else if sortedArray[indexPath.row] is OneTimeExpense {
                 if sortedArray[indexPath.row].isChanged != Changed.NewOneTime {
-                    model?.removeOTE.append(sortedArray[indexPath.row].id)
+                    model?.removeOTE.append(sortedArray[indexPath.row] as! OneTimeExpense)
                 }
             }
             sortedArray.removeAtIndex(indexPath.row)

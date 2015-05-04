@@ -121,7 +121,7 @@ class TripsViewController: UIViewController, UITableViewDataSource, UITableViewD
             oneTimeExpenses?[indexPath.row].deleted = true
             
             if oneTimeExpenses?[indexPath.row].isChanged != Changed.NewOneTime {
-                model?.removeOTE.append(oneTimeExpenses![indexPath.row].id)
+                model?.removeOTE.append(oneTimeExpenses![indexPath.row])
             }
             
             oneTimeExpenses?.removeAtIndex(indexPath.row)
