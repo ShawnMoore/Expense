@@ -131,9 +131,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func createAccount(sender: AnyObject) {
         
+        if passwordCheck() {
+            authModel?.postNewUser(nameTextField.text, email: emailTextField.text, password: passwordTextField.text, companyName: confirmTextField.text)
+        }
         
-        authModel?.postNewUser(nameTextField.text, email: emailTextField.text, password: passwordTextField.text, companyName: confirmTextField.text)
-    
         //Error Message here on back
         self.performSegueWithIdentifier("backToLanding", sender: self)
     
