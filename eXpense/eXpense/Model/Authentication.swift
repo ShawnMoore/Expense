@@ -47,8 +47,6 @@ class Authentication: NSObject {
         
         registerString += "}"
         
-        println("\(registerString)\n\n\n")
-        
         return registerString
     }
     
@@ -70,8 +68,6 @@ class Authentication: NSObject {
             var data = NSURLConnection.sendSynchronousRequest(urlRequest, returningResponse: &response, error: &jsonError) as NSData?
             
             let html = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            
-            println("Response: \(html)\n\n")
         }
     }
     
@@ -96,8 +92,6 @@ class Authentication: NSObject {
             var data = NSURLConnection.sendSynchronousRequest(urlRequest, returningResponse: &response, error: &jsonError) as NSData?
 
             let html = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            
-            println("Response: \(html)\n\n")
 
             if data!.length > 0  && jsonError == nil{
                 let html = NSString(data: data!, encoding: NSUTF8StringEncoding)

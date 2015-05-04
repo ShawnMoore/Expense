@@ -84,8 +84,6 @@ class TripExpense: Expense {
         
         tripString += "}"
         
-        println("\(tripString)\n\n\n")
-        
         return tripString
         
     }

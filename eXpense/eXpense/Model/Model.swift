@@ -211,7 +211,6 @@ class Model: NSObject {
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
                 (response, data, error) -> Void in
                 let html = NSString(data: data, encoding: NSUTF8StringEncoding)
-                println("html = \(html)")
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue(), {
                         completionHandler(self, error.localizedDescription)
@@ -349,7 +348,6 @@ class Model: NSObject {
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {
                 (response, data, error) -> Void in
                 let html = NSString(data: data, encoding: NSUTF8StringEncoding)
-                println("html = \(html)")
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue(), {
                         completionHandler(self, error.localizedDescription)

@@ -52,7 +52,7 @@ class TouchIDLoginViewController: UIViewController {
                         } else {
                             
                             if evalPolicyError?.code == LAError.UserCancel.rawValue {
-                                println("Canceled by user")
+                                //println("Canceled by user")
                                 dispatch_async(dispatch_get_main_queue(), {
                                     self.performSegueWithIdentifier("backToLanding", sender: self)
                                 })

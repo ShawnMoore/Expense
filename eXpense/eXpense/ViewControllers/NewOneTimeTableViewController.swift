@@ -652,20 +652,23 @@ class NewOneTimeTableViewController: UITableViewController, UIPickerViewDataSour
     }
     
     @IBAction func Submit(sender: AnyObject) {
-        submissionCheck()
+        if submissionCheck() { //can submit
+            
+        }
     }
     //MARK: Submission Functions
-    func submissionCheck(){
+    func submissionCheck()->Bool{
         var nameString = oneTime?.name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         var locationString = oneTime?.location?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         if let nameIsEmpty = nameString?.isEmpty,
             locationIsEmpty = locationString?.isEmpty{
                 if(!nameIsEmpty && !locationIsEmpty && oneTime?.amount > 0.00){
-                    return
+                    return true
                 }
         }
         var alert = UIAlertView(title: "Invalid Submission", message: "Please make sure you have entered in a purpose, location, and amount.", delegate: self, cancelButtonTitle: "Okay")
         alert.show()
+        return false
     }
 
 }
