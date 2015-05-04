@@ -28,20 +28,25 @@ class OneTimeExpense: Expense {
     var photoArray: NSMutableArray?
     var photoOrientation: Int?
     var tripId: Int?
+    var isSubmitted: Bool
     
-    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, userId: Int, category: String)
+    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, userId: Int, category: String, isSubmitted: Bool)
     {
         self.amount = amount
         self.category = Category(rawValue: category)!
+        self.isSubmitted = isSubmitted
+        
         super.init(forId: forID, name: name, date: date, deleted: deleted, createdAt: createdAt, userId: userId)
     }
     
-    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, location: String?, description: String?, photoURI: String?, userId: Int, tripId: Int?, lastSeen: NSDate?, updatedAt: NSDate?, category: String, isApproved: Bool?)
+    init(forID: Int, name: String, amount: Double, date: NSDate, createdAt: NSDate, deleted: Bool, location: String?, description: String?, photoURI: String?, userId: Int, tripId: Int?, lastSeen: NSDate?, updatedAt: NSDate?, category: String, isApproved: Bool?, isSubmitted: Bool)
     {
         self.amount = amount
         self.category = Category(rawValue: category)!
         self.photoURI = photoURI
         self.tripId = tripId
+        self.isSubmitted = isSubmitted
+        
         super.init(forId: forID, name: name, date: date, location: location, description: description, deleted: deleted, lastSeen: lastSeen, createdAt: createdAt, updatedAt: updatedAt, userId: userId, isApproved: isApproved)
     }
     
@@ -51,6 +56,7 @@ class OneTimeExpense: Expense {
         self.category = Category(rawValue: dict["Category"] as! String)!
         self.photoURI = dict["PhotoURI"] as? String
         self.tripId = dict["TripId"] as? Int
+        self.isSubmitted = dict["IsSubmitted"] as! Bool
         
         super.init(forId: (dict["Id"] as! Int), name: (dict["Name"] as! String), date: (dict["Date"] as! NSDate), location: (dict["Location"] as? String), description: (dict["Description"] as? String), deleted: (dict["Deleted"] as! Bool), lastSeen: (dict["LastSeen"] as? NSDate), createdAt: (dict["CreatedAt"] as! NSDate), updatedAt: (dict["UpdatedAt"] as? NSDate), userId: (dict["UserId"] as! Int), isApproved: (dict["IsApproved"] as! Bool))
     }
@@ -60,6 +66,8 @@ class OneTimeExpense: Expense {
         self.category = ote.category
         self.photoURI = ote.photoURI
         self.tripId = ote.tripId
+        self.isSubmitted = ote.isSubmitted
+        
         super.init(forId: ote.id, name: ote.name, date: ote.date, location: ote.location, description: ote.description, deleted: ote.deleted, lastSeen: ote.lastSeen, createdAt: ote.createdAt, updatedAt: ote.updatedAt, userId: ote.userId, isApproved: ote.isApproved)
     }
     

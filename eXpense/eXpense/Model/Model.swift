@@ -244,7 +244,8 @@ class Model: NSObject {
                                 expenseCreatedDate  = expenseData["CreatedAt"] as? String,
                                 expenseUserId       = expenseData["UserId"] as? Int,
                                 expenseCategory     = expenseData["Category"] as? String,
-                                expenseIsApproved   = expenseData["IsApproved"] as? Bool{
+                                expenseIsApproved   = expenseData["IsApproved"] as? Bool,
+                                expenseIsSubmitted  = expenseData["IsSubmitted"] as? Bool{
                                     
                                     var oneTimeObject: Dictionary<String, Any> = Dictionary<String, Any>()
                                     var arrayExpenseCreatedDate = split(expenseCreatedDate) {$0 == "T"}
@@ -258,6 +259,7 @@ class Model: NSObject {
                                     oneTimeObject["UserId"] = expenseUserId
                                     oneTimeObject["Category"] = expenseCategory
                                     oneTimeObject["IsApproved"] = expenseIsApproved
+                                    oneTimeObject["IsSubmitted"] = expenseIsSubmitted
                                     
                                     if let expenseLocation = expenseData["Location"] as? NSString {
                                         oneTimeObject["Location"] = expenseLocation
@@ -498,6 +500,11 @@ class Model: NSObject {
         putOneTimeExpense(oneTimeExpense)
     }
     
+    func submitOneTimeExpense(oneTimeExpense: OneTimeExpense) {
+        oneTimeExpense.isSubmitted = true
+        putOneTimeExpense(oneTimeExpense)
+    }
+    
     func postTripExpense(trip: TripExpense, completionHandler: (id: Int?) -> Void) {
         if let url = NSURL(string: "http://expense-backend.azurewebsites.net/api/trips/") {
             let urlRequest = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15.0)
@@ -572,4 +579,10 @@ class Model: NSObject {
         trip.deleted = true
         putTripExpense(trip)
     }
+    
+    func submitTripExpense(trip: TripExpense) {
+        trip.isComplete = true
+        putTripExpense(trip)
+    }
+
 }
