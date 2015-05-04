@@ -121,7 +121,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     func passwordCheck()-> Bool{
-        if count(passwordTextField.text) < 8){
+        if (count(passwordTextField.text) < 8){
             var alert = UIAlertView(title: "Invalid Password", message: "Passwords must be 8 characters long and include at least one character and number value.", delegate: self, cancelButtonTitle: "Okay")
             alert.show()
             return false
