@@ -18,6 +18,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
     private let prototypeCellIdentifier = "expense_cells"
     private var selectedIndex: Int?
+    private var filteredBool: Bool = false
     private var sortedArray: Array<Expense> = Array<Expense>()
     private var filteredArray: Array<Expense> = Array<Expense>()
     
@@ -33,26 +34,26 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         dateFormatter.dateFormat = dateFormatString
         
-        var trip = TripExpense(forName: "Test Trip", id: -1, startDate: NSDate(), createdAt: NSDate(), deleted: false, userId: 3, isComplete: false)
+//        var trip = TripExpense(forName: "Test Trip", id: -1, startDate: NSDate(), createdAt: NSDate(), deleted: false, userId: 3, isComplete: false)
 //        model?.putTripExpense(trip)
-        model?.postTripExpense(trip, completionHandler: { id -> Void in
-            println(id)
-        })
+//        model?.postTripExpense(trip, completionHandler: { id -> Void in
+//            println(id)
+//        })
 //        var ote = OneTimeExpense(forID: 20, name: "MEGAN IS THE BEST IN THE WHOLE WORLD", amount: 200.00, date: NSDate(), createdAt: NSDate(), deleted: false, location: "EBN", description: "SHAWN AND DUNCAN AND REE AND BRIAN ARE PRETTY COOL AS WELL", photoURI: nil, userId: 3, tripId: nil, lastSeen: nil, updatedAt: NSDate(), category: "Other", isApproved: nil)
 //        model?.putOneTimeExpense(ote)
         
 //
-//        model?.loadAllOnlineExpense("http://expense-backend.azurewebsites.net/api/expenses/", TripURL:"http://expense-backend.azurewebsites.net/api/trips/", completionHandler: {
-//            self.sortedArray = self.sortedArray + self.model!.totalExpenses
-//            
-//            self.tableView.reloadData()
-//            
-//            if self.sortedArray.count == 0 {
-//                self.tableView.tableHeaderView?.hidden = true
-//            } else {
-//                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
-//            }
-//        })
+        model?.loadAllOnlineExpense("http://expense-backend.azurewebsites.net/api/expenses/", TripURL:"http://expense-backend.azurewebsites.net/api/trips/", completionHandler: {
+            self.sortedArray = self.sortedArray + self.model!.totalExpenses
+            
+            self.tableView.reloadData()
+            
+            if self.sortedArray.count == 0 {
+                self.tableView.tableHeaderView?.hidden = true
+            } else {
+                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+            }
+        })
 //
 //        model?.loadAllLocalExpenses("oneTimeExpenses", tripFilename: "tripExpenses", completionHandler: {
 //            self.sortedArray = Array<Expense>()
@@ -100,6 +101,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
+            self.filteredBool = false
         })
     }
     
@@ -188,10 +190,22 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         selectedIndex = indexPath.row
         
-        if self.sortedArray[indexPath.row] is OneTimeExpense {
-            performSegueWithIdentifier("showExpense", sender: self)
-        } else if self.sortedArray[indexPath.row] is TripExpense {
-            performSegueWithIdentifier("showTripDetail", sender: self)
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            filteredBool = true
+            
+            if self.filteredArray[indexPath.row] is OneTimeExpense {
+                performSegueWithIdentifier("showExpense", sender: self)
+            } else if self.filteredArray[indexPath.row] is TripExpense {
+                performSegueWithIdentifier("showTripDetail", sender: self)
+            }
+        } else {
+            filteredBool = false
+            
+            if self.sortedArray[indexPath.row] is OneTimeExpense {
+                performSegueWithIdentifier("showExpense", sender: self)
+            } else if self.sortedArray[indexPath.row] is TripExpense {
+                performSegueWithIdentifier("showTripDetail", sender: self)
+            }
         }
         
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
@@ -199,11 +213,16 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+        
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            return false
+        } else {
+            return true
+        }
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) && (tableView != self.searchDisplayController!.searchResultsTableView) {
             
             sortedArray[indexPath.row].deleted = true
             
@@ -239,11 +258,20 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showTripDetail" {
-            (segue.destinationViewController as! TripsViewController).tripData = sortedArray[selectedIndex!] as? TripExpense
+            if filteredBool == true {
+                (segue.destinationViewController as! TripsViewController).tripData = filteredArray[selectedIndex!] as? TripExpense
+            } else {
+                (segue.destinationViewController as! TripsViewController).tripData = sortedArray[selectedIndex!] as? TripExpense
+            }
         } else if segue.identifier == "showExpense" {
             if let index = selectedIndex {
                 (segue.destinationViewController as! NewOneTimeTableViewController).newExpense = false
-                (segue.destinationViewController as! NewOneTimeTableViewController).oneTime = sortedArray[selectedIndex!] as? OneTimeExpense
+                
+                if filteredBool == true {
+                    (segue.destinationViewController as! NewOneTimeTableViewController).oneTime = filteredArray[selectedIndex!] as? OneTimeExpense
+                } else {
+                    (segue.destinationViewController as! NewOneTimeTableViewController).oneTime = sortedArray[selectedIndex!] as? OneTimeExpense
+                }
             } else {
                 (segue.destinationViewController as! NewOneTimeTableViewController).newExpense = true
             }
